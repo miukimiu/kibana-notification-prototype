@@ -1,10 +1,9 @@
 module.exports = {
-  pathPrefix: '/gatsby-eui-starter',
+  pathPrefix: '/kibana-8-nav',
   siteMetadata: {
-    title: 'Gatsby EUI Starter',
-    description:
-      'Start building Kibana protoypes quickly with the Gatsby EUI Starter',
-    author: '@daveyholler',
+    title: 'Kibana 8 Nav',
+    description: 'Prototype for the 8.0 version of Kibana navigation',
+    author: '@cchaos',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
