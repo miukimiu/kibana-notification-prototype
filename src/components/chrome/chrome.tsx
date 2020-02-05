@@ -8,10 +8,6 @@
 import React from 'react';
 
 // @ts-ignore
-import moon from './assets/moon.svg';
-// @ts-ignore
-import sun from './assets/sun.svg';
-// @ts-ignore
 import { hamburger } from './assets/hamburger';
 
 import {
@@ -35,8 +31,15 @@ import {
   EuiShowFor,
 } from '@elastic/eui';
 
-// @ts-ignor
+// @ts-ignore
 import { EuiNavDrawer } from '../nav_drawer';
+
+// @ts-ignore
+import HeaderUpdates from '../header/header_updates';
+// @ts-ignore
+import HeaderSpacesMenu from '../header/header_spaces_menu';
+// @ts-ignore
+import HeaderUserMenu from '../header/header_user_menu';
 
 import { TopLinks } from '../navigation_links/top_links';
 import { SolutionLinks } from '../navigation_links/solution_links';
@@ -80,7 +83,7 @@ export default class Chrome extends React.Component<any, any> {
     return (
       <EuiHeaderLogo
         iconType="logoKibana"
-        href="/#/chrome/nav-drawer"
+        href="/#"
         aria-label="Goes to home"
       />
     );
@@ -116,42 +119,39 @@ export default class Chrome extends React.Component<any, any> {
   setNavDrawerRef = (ref: any) => (this.navDrawerRef = ref);
 
   render() {
-    const themeIcon = this.state.isDarkTheme ? sun : moon;
-
-    console.log(ExploreLinks);
     return (
       <div>
         <ThemeContext.Provider value={this.state.theme}>
           <div>
             <EuiHeader className="chrHeader">
               <EuiHeaderSection grow={false}>
-                <EuiShowFor sizes={['xs', 's']}>
-                  <EuiHeaderSectionItem border="right">
-                    {this.renderMenuTrigger()}
-                  </EuiHeaderSectionItem>
-                </EuiShowFor>
-                <EuiHeaderSectionItem border="right">
-                  {this.renderLogo()}
+                <EuiHeaderSectionItem border="none">
+                  {this.renderMenuTrigger()}
                 </EuiHeaderSectionItem>
-                <EuiHeaderSectionItem border="right">
-                  {/* <HeaderSpacesMenu /> */}
+                <EuiHeaderSectionItem border="none">
+                  {this.renderLogo()}
                 </EuiHeaderSectionItem>
               </EuiHeaderSection>
 
               {this.renderBreadcrumbs()}
 
               <EuiHeaderSection side="right">
-                <EuiHeaderSectionItem className="chrHeader__themeSection">
-                  <EuiButton
-                    size="s"
-                    iconType={themeIcon}
-                    onClick={() => this.handleChangeTheme()}
-                    isLoading={this.state.themeIsLoading}>
-                    Switch Theme
-                  </EuiButton>
+                <EuiHeaderSectionItem border="none">
+                  <HeaderUpdates />
+                </EuiHeaderSectionItem>
+                <EuiHeaderSectionItem border="none">
+                  <HeaderSpacesMenu />
+                </EuiHeaderSectionItem>
+                <EuiHeaderSectionItem border="none">
+                  <HeaderUserMenu
+                    isDarkTheme={this.state.isDarkTheme}
+                    handleChangeTheme={() => this.handleChangeTheme()}
+                    themeIsLoading={this.state.themeIsLoading}
+                  />
                 </EuiHeaderSectionItem>
               </EuiHeaderSection>
             </EuiHeader>
+
             <EuiNavDrawer ref={this.setNavDrawerRef}>
               <EuiNavDrawerGroup listItems={TopLinks} />
               <EuiHorizontalRule margin="none" />

@@ -1,7 +1,7 @@
 // Nav drawer. Global application navigation.
 
 .euiNavDrawer {
-  width: $euiNavDrawerWidthCollapsed;
+  width: 0;
   height: calc(100% - #{$euiNavDrawerTopPosition});
   position: fixed;
   left: 0;
