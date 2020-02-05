@@ -1,41 +1,16 @@
 import React from 'react';
-import {
-  EuiPage,
-  EuiPageBody,
-  EuiPageContent,
-  EuiPageContentBody,
-  EuiPageContentHeader,
-  EuiPageContentHeaderSection,
-  EuiPageHeader,
-  EuiPageHeaderSection,
-  EuiText,
-  EuiTitle,
-} from '@elastic/eui';
+import { EuiPage, EuiImage } from '@elastic/eui';
+
+import home_img from './assets/Home.png';
+import { EuiFlexGroup } from '@elastic/eui';
+import { EuiFlexItem } from '@elastic/eui';
 
 export default () => (
-  <EuiPage restrictWidth>
-    <EuiPageBody>
-      <EuiPageHeader>
-        <EuiPageHeaderSection>
-          <EuiTitle size="l">
-            <h1>Kibana 8.0 Navigation Prototype</h1>
-          </EuiTitle>
-        </EuiPageHeaderSection>
-      </EuiPageHeader>
-      <EuiPageContent>
-        <EuiPageContentHeader>
-          <EuiPageContentHeaderSection>
-            <EuiTitle>
-              <h2>Hello</h2>
-            </EuiTitle>
-          </EuiPageContentHeaderSection>
-        </EuiPageContentHeader>
-        <EuiPageContentBody>
-          <EuiText>
-            <p>World</p>
-          </EuiText>
-        </EuiPageContentBody>
-      </EuiPageContent>
-    </EuiPageBody>
+  <EuiPage>
+    <EuiFlexGroup justifyContent="center">
+      <EuiFlexItem grow={false}>
+        <img width={1175} src={home_img} />
+      </EuiFlexItem>
+    </EuiFlexGroup>
   </EuiPage>
 );

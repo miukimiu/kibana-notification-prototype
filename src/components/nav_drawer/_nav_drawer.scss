@@ -1,6 +1,7 @@
 // Nav drawer. Global application navigation.
 
 .euiNavDrawer {
+  @include euiBottomShadowMedium;
   width: 0;
   height: calc(100% - #{$euiNavDrawerTopPosition});
   position: fixed;
@@ -9,7 +10,7 @@
   overflow: hidden;
   z-index: $euiZHeader;
   background: $euiHeaderBackgroundColor;
-  box-shadow: $euiNavDrawerSideShadow;
+  // box-shadow: $euiNavDrawerSideShadow;
   transition: width $euiAnimSpeedExtraFast $euiAnimSlightResistance;
   display: flex;
 

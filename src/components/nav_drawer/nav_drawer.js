@@ -21,7 +21,7 @@ export class EuiNavDrawer extends Component {
     this.expandButtonRef;
 
     this.state = {
-      isLocked: props.isLocked,
+      // isLocked: props.isLocked,
       isCollapsed: !props.isLocked,
       flyoutIsCollapsed: true,
       outsideClickDisabled: true,
@@ -56,16 +56,16 @@ export class EuiNavDrawer extends Component {
   };
 
   sideNavLockClicked = () => {
-    if (this.state.isLocked) {
+    if (this.props.isLocked) {
       window.removeEventListener('resize', this.functionToCallOnWindowResize);
     } else {
       window.addEventListener('resize', this.functionToCallOnWindowResize);
     }
 
-    this.returnOnIsLockedUpdate(!this.state.isLocked);
+    this.returnOnIsLockedUpdate(!this.props.isLocked);
 
     this.setState({
-      isLocked: !this.state.isLocked,
+      isLocked: !this.props.isLocked,
       isCollapsed: false,
       outsideClickDisabled: true,
     });
@@ -74,17 +74,11 @@ export class EuiNavDrawer extends Component {
   // Although not used in `src/`, this method is available to and used in `src-docs/`
   // for implementation-specific nav menu toggling via `ref` reference
   toggleOpen = () => {
-    this.setState(
-      ({ isCollapsed }) => ({
-        isCollapsed: !isCollapsed,
-      }),
-      () => {
-        this.setState(({ isCollapsed }) => ({
-          outsideClickDisabled: isCollapsed,
-          toolTipsEnabled: isCollapsed,
-        }));
-      }
-    );
+    this.setState(({ isCollapsed }) => ({
+      isCollapsed: !isCollapsed,
+      outsideClickDisabled: !isCollapsed,
+      toolTipsEnabled: !isCollapsed,
+    }));
   };
 
   collapseButtonClick = () => {
@@ -173,7 +167,7 @@ export class EuiNavDrawer extends Component {
         flyoutIsCollapsed: true,
         navFlyoutTitle: null,
         navFlyoutContent: null,
-        toolTipsEnabled: this.state.isLocked ? false : true,
+        toolTipsEnabled: this.props.isLocked ? false : true,
         focusReturnRef: null,
       },
       () => {
@@ -195,7 +189,7 @@ export class EuiNavDrawer extends Component {
   };
 
   closeBoth = () => {
-    if (!this.state.isLocked) this.collapseDrawer();
+    if (!this.props.isLocked) this.collapseDrawer();
     this.collapseFlyout(false);
   };
 
@@ -256,7 +250,7 @@ export class EuiNavDrawer extends Component {
       {
         'euiNavDrawer-isCollapsed': this.state.isCollapsed,
         'euiNavDrawer-isExpanded': !this.state.isCollapsed,
-        'euiNavDrawer-isLocked': this.state.isLocked,
+        'euiNavDrawer-isLocked': this.props.isLocked,
         'euiNavDrawer-flyoutIsCollapsed': this.state.flyoutIsCollapsed,
         'euiNavDrawer-flyoutIsExpanded': !this.state.flyoutIsCollapsed,
       },
@@ -304,13 +298,13 @@ export class EuiNavDrawer extends Component {
                   className: 'euiNavDrawer__expandButtonLockAction',
                   color: 'text',
                   onClick: this.sideNavLockClicked,
-                  iconType: this.state.isLocked ? 'lock' : 'lockOpen',
+                  iconType: this.props.isLocked ? 'lock' : 'lockOpen',
                   iconSize: 's',
                   'aria-label': sideNavLockAriaLabel,
-                  title: this.state.isLocked
+                  title: this.props.isLocked
                     ? sideNavLockExpanded
                     : sideNavLockCollapsed,
-                  'aria-pressed': this.state.isLocked ? true : false,
+                  'aria-pressed': this.props.isLocked ? true : false,
                 }}
                 onClick={this.collapseButtonClick}
                 data-test-subj={

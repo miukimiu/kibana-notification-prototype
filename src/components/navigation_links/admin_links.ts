@@ -41,4 +41,9 @@ export const AdminLinks = [
       ],
     },
   },
+  {
+    label: 'Dock navigation',
+    // href: '/#/chrome/nav-drawer',
+    iconType: 'lockOpen',
+  },
 ];

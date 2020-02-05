@@ -24,15 +24,13 @@ import {
   EuiHeaderBreadcrumbs,
   EuiHeaderLogo,
   EuiIcon,
-  // @ts-ignore
-  EuiNavDrawerGroup,
   EuiHorizontalRule,
   // @ts-ignore
   EuiShowFor,
 } from '@elastic/eui';
 
 // @ts-ignore
-import { EuiNavDrawer } from '../nav_drawer';
+import { EuiNavDrawer, EuiNavDrawerGroup } from '../nav_drawer';
 
 // @ts-ignore
 import HeaderUpdates from '../header/header_updates';
@@ -44,7 +42,7 @@ import HeaderUserMenu from '../header/header_user_menu';
 import { TopLinks } from '../navigation_links/top_links';
 import { SolutionLinks } from '../navigation_links/solution_links';
 import { ExploreLinks } from '../navigation_links/explore_links';
-import { AdminLinks } from '../navigation_links/admin_links';
+// import { AdminLinks } from '../navigation_links/admin_links';
 
 export const ThemeContext = React.createContext('dark');
 
@@ -61,6 +59,7 @@ export default class Chrome extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
+      navIsDocked: JSON.parse(localStorage.getItem('navIsDocked') || 'false'),
       theme: this.initialTheme,
       themeIsLoading: false,
     };
@@ -75,6 +74,17 @@ export default class Chrome extends React.Component<any, any> {
       () => {
         localStorage.setItem('theme', this.state.theme);
         window.location.reload();
+      }
+    );
+  };
+
+  handleNavDocking = () => {
+    this.setState(
+      {
+        navIsDocked: !this.state.navIsDocked,
+      },
+      () => {
+        localStorage.setItem('navIsDocked', this.state.navIsDocked);
       }
     );
   };
@@ -102,7 +112,7 @@ export default class Chrome extends React.Component<any, any> {
   renderBreadcrumbs() {
     const breadcrumbs = [
       {
-        text: 'Home',
+        text: 'Kibana',
         href: '#',
         onClick: (e: { preventDefault: () => void }) => {
           e.preventDefault();
@@ -119,15 +129,29 @@ export default class Chrome extends React.Component<any, any> {
   setNavDrawerRef = (ref: any) => (this.navDrawerRef = ref);
 
   render() {
+    const AdminLinks = [
+      {
+        label: 'Admin',
+        iconType: 'managementApp',
+      },
+      {
+        label: `${this.state.navIsDocked ? 'Undock' : 'Dock'} navigation`,
+        onClick: this.handleNavDocking,
+        iconType: this.state.navIsDocked ? 'lock' : 'lockOpen',
+      },
+    ];
+
     return (
       <div>
         <ThemeContext.Provider value={this.state.theme}>
           <div>
             <EuiHeader className="chrHeader">
               <EuiHeaderSection grow={false}>
-                <EuiHeaderSectionItem border="none">
-                  {this.renderMenuTrigger()}
-                </EuiHeaderSectionItem>
+                {!this.state.navIsDocked && (
+                  <EuiHeaderSectionItem border="none">
+                    {this.renderMenuTrigger()}
+                  </EuiHeaderSectionItem>
+                )}
                 <EuiHeaderSectionItem border="none">
                   {this.renderLogo()}
                 </EuiHeaderSectionItem>
@@ -152,7 +176,10 @@ export default class Chrome extends React.Component<any, any> {
               </EuiHeaderSection>
             </EuiHeader>
 
-            <EuiNavDrawer ref={this.setNavDrawerRef}>
+            <EuiNavDrawer
+              isLocked={this.state.navIsDocked}
+              showExpandButton={false}
+              ref={this.setNavDrawerRef}>
               <EuiNavDrawerGroup listItems={TopLinks} />
               <EuiHorizontalRule margin="none" />
               <EuiNavDrawerGroup listItems={ExploreLinks} />
