@@ -10,7 +10,7 @@ export const EuiNavDrawerGroup = ({
   className,
   listItems,
   flyoutMenuButtonClick,
-  onClose = () => {},
+  onClose,
   ...rest
 }) => {
   const classes = classNames('euiNavDrawerGroup', className);

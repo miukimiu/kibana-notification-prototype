@@ -11,22 +11,14 @@ import React from 'react';
 import { hamburger } from './assets/hamburger';
 
 import {
-  EuiButton,
-  // @ts-ignore
   EuiHeader,
-  // @ts-ignore
   EuiHeaderSection,
-  // @ts-ignore
   EuiHeaderSectionItem,
-  // @ts-ignore
   EuiHeaderSectionItemButton,
-  // @ts-ignore
   EuiHeaderBreadcrumbs,
   EuiHeaderLogo,
   EuiIcon,
   EuiHorizontalRule,
-  // @ts-ignore
-  EuiShowFor,
 } from '@elastic/eui';
 
 // @ts-ignore
@@ -39,10 +31,10 @@ import HeaderSpacesMenu from '../header/header_spaces_menu';
 // @ts-ignore
 import HeaderUserMenu from '../header/header_user_menu';
 
+import Deployment from './deployment';
 import { TopLinks } from '../navigation_links/top_links';
 import { SolutionLinks } from '../navigation_links/solution_links';
 import { ExploreLinks } from '../navigation_links/explore_links';
-// import { AdminLinks } from '../navigation_links/admin_links';
 
 export const ThemeContext = React.createContext('dark');
 
@@ -180,6 +172,7 @@ export default class Chrome extends React.Component<any, any> {
               isLocked={this.state.navIsDocked}
               showExpandButton={false}
               ref={this.setNavDrawerRef}>
+              <Deployment />
               <EuiNavDrawerGroup listItems={TopLinks} />
               <EuiHorizontalRule margin="none" />
               <EuiNavDrawerGroup listItems={ExploreLinks} />

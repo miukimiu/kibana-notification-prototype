@@ -1,0 +1,24 @@
+$chrDeploymentBackgroundColor: lightOrDarkTheme($euiColorDarkestShade, $euiColorLightestShade);
+
+.chrDeployment {
+  background-color: $chrDeploymentBackgroundColor;
+  color: $euiColorGhost;
+
+  &__button {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding: $euiSize;
+  }
+}
+
+.chrDeployment__buttonTitle {
+  small {
+    color: lightOrDarkTheme($euiColorLightShade, $euiColorDarkShade);
+  }
+}
+
+.chrDeployment__content {
+  background-color: shade($chrDeploymentBackgroundColor, 20%);
+  padding: $euiSize;
+  box-shadow: inset 0 1px 0 tint($chrDeploymentBackgroundColor, 10%);
+}
