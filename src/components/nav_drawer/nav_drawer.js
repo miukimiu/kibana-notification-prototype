@@ -391,5 +391,5 @@ EuiNavDrawer.propTypes = {
 
 EuiNavDrawer.defaultProps = {
   showExpandButton: true,
-  showToolTips: true,
+  showToolTips: false,
 };

@@ -1,6 +1,13 @@
 .euiNavDrawerGroup__item {
+  margin-top: 0;
+  color: $euiColorDarkShade; // Colors the icon
+
   .euiListGroupItem__label {
     transition: all $euiAnimSpeedExtraFast;
+    // Should these be overrides or change the EuiListGroupItem's small size?
+    font-size: $euiFontSizeS - 1px;
+    font-weight: $euiFontWeightMedium;
+    letter-spacing: 0;
   }
 
   .euiListGroupItem__button {
@@ -37,4 +44,14 @@
     right: -$euiSizeXS;
     bottom: -$euiSizeXS;
   }
+}
+
+.euiNavDrawerGroup__itemExtraAction {
+  svg {
+    transform: rotate(45deg);
+  }
+}
+
+.euiNavDrawerGroup__itemExtraAction-pinned {
+  color: $euiColorLightShade;
 }

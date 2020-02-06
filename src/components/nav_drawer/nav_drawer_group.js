@@ -2,63 +2,68 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { toInitials, EuiListGroup } from '@elastic/eui';
+import { EuiListGroup } from '@elastic/eui';
 
 export const ATTR_SELECTOR = 'data-name';
 
+export const pinExtraAction = {
+  color: 'primary',
+  iconType: 'pinFilled',
+  iconSize: 's',
+  className: 'euiNavDrawerGroup__itemExtraAction',
+  'aria-label': 'Pin to top',
+  title: 'Pin to top',
+};
+
+export const pinnedExtraAction = {
+  color: 'subdued',
+  iconType: 'pinFilled',
+  iconSize: 's',
+  className:
+    'euiNavDrawerGroup__itemExtraAction euiNavDrawerGroup__itemExtraAction-pinned',
+  'aria-label': 'Unpin item',
+  title: 'Unpin item',
+  alwaysShow: true,
+};
+
 export const EuiNavDrawerGroup = ({
   className,
+  onPinClick,
   listItems,
-  flyoutMenuButtonClick,
-  onClose,
   ...rest
 }) => {
   const classes = classNames('euiNavDrawerGroup', className);
 
   const listItemsExists = listItems && !!listItems.length;
 
-  // Alter listItems object with prop flyoutMenu and extra props
-  const newListItems = !listItemsExists
-    ? undefined
-    : listItems.map(item => {
-        // If the flyout menu exists, pass back the list of times and the title with the onClick handler of the item
-        const { flyoutMenu, onClick, ...itemProps } = item;
-        if (flyoutMenu && flyoutMenuButtonClick) {
-          const items = [...flyoutMenu.listItems];
-          const title = `${flyoutMenu.title}`;
-          itemProps.onClick = () => flyoutMenuButtonClick(items, title, item);
-          itemProps['aria-expanded'] = false;
+  // Alter listItems object with extra props
+  const newListItems =
+    listItemsExists &&
+    listItems.map(item => {
+      const { pinned, ...itemProps } = item;
+      // Make some declarations of props for the side nav implementation
+      itemProps.className = classNames(
+        'euiNavDrawerGroup__item',
+        item.className
+      );
+      itemProps.size = item.size || 's';
+      // itemProps[ATTR_SELECTOR] = item.label; // Not sure what this does
+      // itemProps['aria-label'] = item['aria-label'] || item.label; // unnecessary
+
+      // Add the pinning action
+      if (onPinClick) {
+        // Different displays for pinned vs unpinned
+        if (pinned) {
+          itemProps.extraAction = { ...pinnedExtraAction };
         } else {
-          itemProps.onClick = (...args) => {
-            if (onClick) {
-              onClick(...args);
-            }
-            onClose();
-          };
+          itemProps.extraAction = { ...pinExtraAction };
         }
+        // Return the item on click
+        itemProps.extraAction.onClick = () => onPinClick({ ...item });
+      }
 
-        // Make some declarations of props for the side nav implementation
-        itemProps.className = classNames(
-          'euiNavDrawerGroup__item',
-          item.className
-        );
-        itemProps.size = item.size || 's';
-        itemProps[ATTR_SELECTOR] = item.label;
-        itemProps['aria-label'] = item['aria-label'] || item.label;
-
-        // Add an avatar in place of non-existent icons
-        const itemProvidesIcon = !!item.iconType || !!item.icon;
-        if (!itemProvidesIcon) {
-          itemProps.icon = (
-            <span className="euiNavDrawerGroup__itemDefaultIcon">
-              {toInitials(item.label)}
-            </span>
-          );
-        }
-
-        // And return the item with conditional `onClick` and without `flyoutMenu`
-        return { ...itemProps };
-      });
+      return { ...itemProps };
+    });
 
   return (
     <EuiListGroup className={classes} listItems={newListItems} {...rest} />
@@ -69,20 +74,11 @@ EuiNavDrawerGroup.propTypes = {
   listItems: PropTypes.arrayOf(
     PropTypes.shape({
       ...EuiListGroup.propTypes.listItems[0],
-      flyoutMenu: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        listItems: EuiListGroup.propTypes.listItems.isRequired,
-      }),
+      pinned: PropTypes.bool,
     })
   ),
   /**
-   * While not normally required, it is required to pass a function for handling
-   * of the flyout menu button click
+   * Adds the pinning icon and calls this function on click
    */
-  flyoutMenuButtonClick: PropTypes.func,
-  /**
-   * Passthrough function to be called when the flyout is closing
-   * See ./nav_drawer.js
-   */
-  onClose: PropTypes.func,
+  onPinClick: PropTypes.func,
 };

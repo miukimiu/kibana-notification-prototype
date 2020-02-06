@@ -4,10 +4,16 @@ $chrDeploymentBackgroundColor: lightOrDarkTheme($euiColorDarkestShade, $euiColor
   background-color: $chrDeploymentBackgroundColor;
   color: $euiColorGhost;
 
+  // TODO: Allow EuiAccordion to swap arrow icon sides (left to right) (and arrow direction?)
   &__button {
     flex-direction: row-reverse;
     justify-content: space-between;
     padding: $euiSize;
+  }
+
+  .euiAccordion__iconWrapper {
+    margin-right: 0;
+    margin-left: $euiSizeS;
   }
 }
 
