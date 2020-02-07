@@ -1,4 +1,6 @@
-export const MiscLinks = {
+import { ChromeNavGroupProps } from '../chrome';
+
+export const MiscLinks: ChromeNavGroupProps = {
   title: 'Miscellaneous',
   links: [
     {

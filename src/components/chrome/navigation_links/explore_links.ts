@@ -1,4 +1,6 @@
-export const ExploreLinks = {
+import { ChromeNavGroupProps } from '../chrome';
+
+export const ExploreLinks: ChromeNavGroupProps = {
   title: 'Stack',
   iconType: 'logoElasticsearch',
   links: [

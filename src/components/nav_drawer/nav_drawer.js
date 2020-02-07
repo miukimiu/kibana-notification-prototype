@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { EuiNavDrawerFlyout } from './nav_drawer_flyout';
-import { EuiNavDrawerGroup, ATTR_SELECTOR } from './nav_drawer_group';
+import { EuiNavDrawerGroupList } from './nav_drawer_group_list';
+export const ATTR_SELECTOR = 'data-name';
+
 // import { throttle } from '@elastic/eui/src/components/color_picker/utils';
 import {
   EuiListGroup,
@@ -221,7 +223,7 @@ export class EuiNavDrawer extends Component {
       // Allow for Fragments by recursive modification
       if (child.type === React.Fragment) {
         return this.modifyChildren(child.props.children);
-      } else if (child.type === EuiNavDrawerGroup) {
+      } else if (child.type === EuiNavDrawerGroupList) {
         // Check if child is an EuiNavDrawerGroup and if it does have a flyout, add the expand function
         return React.cloneElement(child, {
           flyoutMenuButtonClick: this.expandFlyout,

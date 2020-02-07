@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import tabbable from 'tabbable';
 
 import { EuiTitle, EuiListGroup, EuiFocusTrap, keyCodes } from '@elastic/eui';
-import { EuiNavDrawerGroup } from './nav_drawer_group';
+import { EuiNavDrawerGroupList } from './nav_drawer_group_list';
 
 export const EuiNavDrawerFlyout = ({
   className,
@@ -62,7 +62,7 @@ export const EuiNavDrawerFlyout = ({
       </EuiTitle>
       {listItems ? (
         <EuiFocusTrap returnFocus={false}>
-          <EuiNavDrawerGroup
+          <EuiNavDrawerGroupList
             className="euiNavDrawerFlyout__listGroup"
             ariaLabelledby={LABEL}
             listItems={listItems}

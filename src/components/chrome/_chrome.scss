@@ -82,3 +82,11 @@ $euiHeaderChildSize--width: $euiSizeXXL;
   top: $euiHeaderChildSize--new + 1px;
   height: calc(100vh - #{$euiHeaderChildSize--new + 1px});
 }
+
+.chrNavGroup--noPaddingTop {
+  padding-top: 0;
+}
+
+.chrNavGroup--inShade {
+  background-color: $euiPageBackgroundColor;
+}

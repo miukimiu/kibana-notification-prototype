@@ -20,12 +20,15 @@ import {
   EuiHeaderLogo,
   EuiIcon,
   EuiHorizontalRule,
-  EuiListGroup,
+  IconType,
 } from '@elastic/eui';
-type EuiListGroupProps = React.ComponentProps<typeof EuiListGroup>;
 
-// @ts-ignore
-import { EuiNavDrawer, EuiNavDrawerGroup } from '../nav_drawer';
+import {
+  EuiNavDrawer,
+  EuiNavDrawerGroup,
+  EuiNavDrawerGroupList,
+  // @ts-ignore
+} from '../nav_drawer';
 
 // @ts-ignore
 import HeaderUpdates from '../header/header_updates';
@@ -43,6 +46,8 @@ import { SearchLinks } from './navigation_links/search_links';
 import { AdminLinks } from './navigation_links/admin_links';
 import { MiscLinks } from './navigation_links/misc_links';
 
+import { EuiNavDrawerGroupListItemProps } from '../nav_drawer/nav_drawer_group_list';
+
 export const ThemeContext = React.createContext('dark');
 
 if (localStorage.getItem('theme') === 'dark') {
@@ -55,10 +60,16 @@ interface State {
   navIsDocked: boolean;
   theme: string;
   themeIsLoading: boolean;
-  pinnedItems: EuiListGroupProps['listItems'];
+  pinnedItems: EuiNavDrawerGroupListItemProps[];
 }
 
-export default class Chrome extends React.Component<any, any> {
+export type ChromeNavGroupProps = {
+  title?: string;
+  iconType?: IconType;
+  links: EuiNavDrawerGroupListItemProps[];
+};
+
+export default class Chrome extends React.Component<any, State> {
   navDrawerRef: any;
   initialTheme = localStorage.getItem('theme') === 'light' ? 'light' : 'dark';
 
@@ -91,7 +102,10 @@ export default class Chrome extends React.Component<any, any> {
         navIsDocked: !this.state.navIsDocked,
       },
       () => {
-        localStorage.setItem('navIsDocked', this.state.navIsDocked);
+        localStorage.setItem(
+          'navIsDocked',
+          JSON.stringify(this.state.navIsDocked)
+        );
       }
     );
   };
@@ -134,6 +148,7 @@ export default class Chrome extends React.Component<any, any> {
   }
 
   addPin = (item: any) => {
+    if (!item) return;
     // @ts-ignore
     this.setState(prevState => {
       // Check if item already exists and exit if so
@@ -165,6 +180,21 @@ export default class Chrome extends React.Component<any, any> {
   };
 
   setNavDrawerRef = (ref: any) => (this.navDrawerRef = ref);
+
+  createNavGroup = (linksObject: any) => {
+    return (
+      <EuiNavDrawerGroup
+        title={linksObject.title}
+        iconType={linksObject.iconType}
+        initialIsOpen={true}>
+        <EuiNavDrawerGroupList
+          className="chrNavGroup--noPaddingTop"
+          listItems={linksObject.links}
+          onPinClick={this.addPin}
+        />
+      </EuiNavDrawerGroup>
+    );
+  };
 
   render() {
     const LockLink = [
@@ -200,7 +230,7 @@ export default class Chrome extends React.Component<any, any> {
             </EuiHeaderSectionItem>
             <EuiHeaderSectionItem border="none">
               <HeaderUserMenu
-                isDarkTheme={this.state.isDarkTheme}
+                isDarkTheme={this.state.theme === 'dark'}
                 handleChangeTheme={() => this.handleChangeTheme()}
                 themeIsLoading={this.state.themeIsLoading}
               />
@@ -213,45 +243,47 @@ export default class Chrome extends React.Component<any, any> {
           showExpandButton={false}
           ref={this.setNavDrawerRef}>
           <Deployment />
-          <EuiNavDrawerGroup listItems={TopLinks.links} />
+
+          <EuiNavDrawerGroupList
+            className="chrNavGroup--inShade"
+            listItems={TopLinks.links}
+          />
+
           {this.state.pinnedItems.length > 0 && (
-            <EuiNavDrawerGroup
+            <EuiNavDrawerGroupList
+              className="chrNavGroup--noPaddingTop chrNavGroup--inShade"
               listItems={this.state.pinnedItems}
               onPinClick={this.removePin}
             />
           )}
+
           <EuiHorizontalRule margin="none" />
-          <EuiNavDrawerGroup
-            listItems={ExploreLinks.links}
-            onPinClick={this.addPin}
-          />
+
+          {ExploreLinks && this.createNavGroup(ExploreLinks)}
+
           <EuiHorizontalRule margin="none" />
-          <EuiNavDrawerGroup
-            listItems={ObservabilityLinks.links}
-            onPinClick={this.addPin}
-          />
+
+          {ObservabilityLinks && this.createNavGroup(ObservabilityLinks)}
+
           <EuiHorizontalRule margin="none" />
-          <EuiNavDrawerGroup
-            listItems={SecurityLinks.links}
-            onPinClick={this.addPin}
-          />
+
+          {SecurityLinks && this.createNavGroup(SecurityLinks)}
+
           <EuiHorizontalRule margin="none" />
-          <EuiNavDrawerGroup
-            listItems={SearchLinks.links}
-            onPinClick={this.addPin}
-          />
+
+          {SearchLinks && this.createNavGroup(SearchLinks)}
+
           <EuiHorizontalRule margin="none" />
-          <EuiNavDrawerGroup
-            listItems={AdminLinks.links}
-            onPinClick={this.addPin}
-          />
+
+          {AdminLinks && this.createNavGroup(AdminLinks)}
+
           <EuiHorizontalRule margin="none" />
-          <EuiNavDrawerGroup
-            listItems={MiscLinks.links}
-            onPinClick={this.addPin}
-          />
+
+          {MiscLinks && this.createNavGroup(MiscLinks)}
+
           <EuiHorizontalRule margin="none" />
-          <EuiNavDrawerGroup listItems={LockLink} />
+
+          <EuiNavDrawerGroupList listItems={LockLink} />
         </EuiNavDrawer>
         <div className="chrWrap">{this.props.children}</div>
       </ThemeContext.Provider>

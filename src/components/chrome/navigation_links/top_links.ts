@@ -1,7 +1,8 @@
 // @ts-ignore
 import { home } from '../assets/home';
+import { ChromeNavGroupProps } from '../chrome';
 
-export const TopLinks = {
+export const TopLinks: ChromeNavGroupProps = {
   links: [
     {
       label: 'Home',

@@ -1,4 +1,6 @@
-export const AdminLinks = {
+import { ChromeNavGroupProps } from '../chrome';
+
+export const AdminLinks: ChromeNavGroupProps = {
   title: 'Developer Tools',
   iconType: 'devToolsApp',
   links: [

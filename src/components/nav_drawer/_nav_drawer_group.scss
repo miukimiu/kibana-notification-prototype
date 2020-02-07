@@ -1,57 +1,16 @@
-.euiNavDrawerGroup__item {
-  margin-top: 0;
-  color: $euiColorDarkShade; // Colors the icon
+.euiNavDrawerGroup {
 
-  .euiListGroupItem__label {
-    transition: all $euiAnimSpeedExtraFast;
-    // Should these be overrides or change the EuiListGroupItem's small size?
-    font-size: $euiFontSizeS - 1px;
-    font-weight: $euiFontWeightMedium;
-    letter-spacing: 0;
+  // TODO: Make this an option in EuiAccordion
+  &__button {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding: $euiSize;
+    font-size: $euiFontSizeS;
+    font-weight: $euiFontWeightSemiBold;
   }
 
-  .euiListGroupItem__button {
-    color: inherit; // Force color to inherit from regular text color in case it's an anchor tag
-
-    &:focus {
-      background-color: $euiFocusBackgroundColor;
-      border-radius: $euiBorderRadius;
-    }
+  .euiAccordion__iconWrapper {
+    margin-right: 0;
+    margin-left: $euiSizeS;
   }
-
-  .euiListGroupItem__icon {
-    max-width: $euiSize;
-  }
-}
-
-// Default icon will simulate an avatar but with coloring specific to
-.euiNavDrawerGroup__itemDefaultIcon {
-  @include innerBorder('dark', 50%, .05);
-  @include size($euiSize);
-  line-height: $euiSize;
-  font-size: $euiSizeM;
-  flex-shrink: 0; // Ensures it never scales down below its intended size
-  display: inline-block;
-  text-align: center;
-  vertical-align: middle;
-  overflow: visible;
-  font-weight: $euiFontWeightMedium; // Explicitly state so it doesn't get overridden by inheritence
-  border-radius: 50%;
-
-  &:after {
-    top: -$euiSizeXS;
-    left: -$euiSizeXS;
-    right: -$euiSizeXS;
-    bottom: -$euiSizeXS;
-  }
-}
-
-.euiNavDrawerGroup__itemExtraAction {
-  svg {
-    transform: rotate(45deg);
-  }
-}
-
-.euiNavDrawerGroup__itemExtraAction-pinned {
-  color: $euiColorLightShade;
 }

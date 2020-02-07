@@ -1,4 +1,6 @@
-export const SecurityLinks = {
+import { ChromeNavGroupProps } from '../chrome';
+
+export const SecurityLinks: ChromeNavGroupProps = {
   title: 'Security',
   iconType: 'logoSecurity',
   links: [

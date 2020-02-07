@@ -1,4 +1,6 @@
-export const SearchLinks = {
+import { ChromeNavGroupProps } from '../chrome';
+
+export const SearchLinks: ChromeNavGroupProps = {
   title: 'Enterprise Search',
   iconType: 'logoEnterpriseSearch',
   links: [
