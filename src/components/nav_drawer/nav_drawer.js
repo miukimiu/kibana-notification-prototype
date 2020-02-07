@@ -57,7 +57,11 @@ export class EuiNavDrawer extends Component {
   render() {
     const { children, className, isLocked, ...rest } = this.props;
 
-    const classes = classNames('euiNavDrawer2', className);
+    const classes = classNames(
+      'euiNavDrawer2',
+      { 'euiNavDrawer2--isLocked': isLocked },
+      className
+    );
     const menuClasses = classNames('euiNavDrawerMenu2');
 
     return (

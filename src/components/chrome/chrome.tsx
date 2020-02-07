@@ -68,7 +68,8 @@ export default class Chrome extends React.Component<any, State> {
     super(props);
     this.state = {
       themeIsLoading: false,
-      pinnedItems: [],
+      pinnedItems:
+        JSON.parse(String(localStorage.getItem('pinnedItems'))) || [],
     };
   }
 
@@ -97,12 +98,6 @@ export default class Chrome extends React.Component<any, State> {
       {
         text: 'Kibana',
         href: '#',
-        onClick: (e: { preventDefault: () => void }) => {
-          e.preventDefault();
-          console.log('You clicked home');
-        },
-        'data-test-subj': 'breadcrumbsAnimals',
-        className: 'customClass',
       },
     ];
 
@@ -111,34 +106,50 @@ export default class Chrome extends React.Component<any, State> {
 
   addPin = (item: any) => {
     if (!item) return;
-    // @ts-ignore
-    this.setState(prevState => {
-      // Check if item already exists and exit if so
-      if (_.find(prevState.pinnedItems, { label: item.label })) {
-        return;
+    this.setState(
+      // @ts-ignore
+      prevState => {
+        // Check if item already exists and exit if so
+        if (_.find(prevState.pinnedItems, { label: item.label })) {
+          return;
+        }
+        item.pinned = true;
+        return {
+          pinnedItems: prevState.pinnedItems
+            ? prevState.pinnedItems.concat(item)
+            : [item],
+        };
+      },
+      () => {
+        localStorage.setItem(
+          'pinnedItems',
+          JSON.stringify(this.state.pinnedItems)
+        );
       }
-      item.pinned = true;
-      return {
-        pinnedItems: prevState.pinnedItems
-          ? prevState.pinnedItems.concat(item)
-          : [item],
-      };
-    });
+    );
   };
 
   removePin = (item: any) => {
-    // @ts-ignore
-    this.setState(prevState => {
-      if (_.find(prevState.pinnedItems, { label: item.label })) {
-        item.pinned = false;
-        _.remove(prevState.pinnedItems, {
-          label: item.label,
-        });
-        return {
-          pinnedItems: prevState.pinnedItems,
-        };
+    this.setState(
+      // @ts-ignore
+      prevState => {
+        if (_.find(prevState.pinnedItems, { label: item.label })) {
+          item.pinned = false;
+          _.remove(prevState.pinnedItems, {
+            label: item.label,
+          });
+          return {
+            pinnedItems: prevState.pinnedItems,
+          };
+        }
+      },
+      () => {
+        localStorage.setItem(
+          'pinnedItems',
+          JSON.stringify(this.state.pinnedItems)
+        );
       }
-    });
+    );
   };
 
   setNavDrawerRef = (ref: any) => (this.navDrawerRef = ref);
