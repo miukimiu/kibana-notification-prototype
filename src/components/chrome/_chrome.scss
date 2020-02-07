@@ -79,4 +79,12 @@ $euiHeaderChildSize--width: $euiSizeXXL;
 
 .chrNavGroup--inShade {
   background-color: $euiPageBackgroundColor;
+  max-height: 40vh;
+}
+
+.chrNavGroup--scroll {
+  @include euiScrollBar;
+  border-top: $euiBorderThin;
+  overflow-y: auto;
+  height: 100%;
 }

@@ -22,8 +22,8 @@ import {
   EuiHeaderBreadcrumbs,
   EuiHeaderLogo,
   EuiIcon,
-  EuiHorizontalRule,
   IconType,
+  EuiFlexItem,
 } from '@elastic/eui';
 
 import {
@@ -204,27 +204,24 @@ export default class Chrome extends React.Component<any, State> {
   createNavGroups = () => {
     return Accordions.map(linksObject => {
       return (
-        <React.Fragment key={linksObject.title}>
-          <EuiNavDrawerGroup
-            title={linksObject.title}
-            iconType={linksObject.iconType}
-            initialIsOpen={
-              linksObject.title
-                ? this.state.openGroups.includes(linksObject.title)
-                : true
-            }
-            onToggle={(isOpen: boolean) =>
-              this.toggleAccordion(isOpen, linksObject.title)
-            }>
-            <EuiNavDrawerGroupList
-              className="chrNavGroup--noPaddingTop"
-              listItems={linksObject.links}
-              onPinClick={this.addPin}
-            />
-          </EuiNavDrawerGroup>
-
-          <EuiHorizontalRule margin="none" />
-        </React.Fragment>
+        <EuiNavDrawerGroup
+          key={linksObject.title}
+          title={linksObject.title}
+          iconType={linksObject.iconType}
+          initialIsOpen={
+            linksObject.title
+              ? this.state.openGroups.includes(linksObject.title)
+              : true
+          }
+          onToggle={(isOpen: boolean) =>
+            this.toggleAccordion(isOpen, linksObject.title)
+          }>
+          <EuiNavDrawerGroupList
+            className="chrNavGroup--noPaddingTop"
+            listItems={linksObject.links}
+            onPinClick={this.addPin}
+          />
+        </EuiNavDrawerGroup>
       );
     });
   };
@@ -276,36 +273,44 @@ export default class Chrome extends React.Component<any, State> {
             <EuiNavDrawer
               isLocked={context.navIsDocked}
               ref={this.setNavDrawerRef}>
-              <Deployment />
+              {/* TOP */}
+              <EuiFlexItem grow={false}>
+                <Deployment />
+              </EuiFlexItem>
 
-              <EuiNavDrawerGroupList
-                className="chrNavGroup--inShade"
-                listItems={TopLinks.links}
-              />
+              {/* PINNED */}
+              <EuiFlexItem grow={false}>
+                {/* Extra div necessary for flex and auto-scroll to behave properly */}
+                <div className="chrNavGroup--scroll chrNavGroup--inShade">
+                  <EuiNavDrawerGroupList listItems={TopLinks.links} />
 
-              {this.state.pinnedItems.length > 0 && (
+                  {this.state.pinnedItems.length > 0 && (
+                    <EuiNavDrawerGroupList
+                      className="chrNavGroup--noPaddingTop"
+                      listItems={this.state.pinnedItems}
+                      onPinClick={this.removePin}
+                    />
+                  )}
+                </div>
+              </EuiFlexItem>
+
+              {/* BOTTOM */}
+              <EuiFlexItem className="chrNavGroup--scroll">
+                {this.createNavGroups()}
+
                 <EuiNavDrawerGroupList
-                  className="chrNavGroup--noPaddingTop chrNavGroup--inShade"
-                  listItems={this.state.pinnedItems}
-                  onPinClick={this.removePin}
+                  className="euiNavDrawerGroup"
+                  listItems={[
+                    {
+                      label: `${
+                        context.navIsDocked ? 'Undock' : 'Dock'
+                      } navigation`,
+                      onClick: context.toggleDockedNav,
+                      iconType: context.navIsDocked ? 'lock' : 'lockOpen',
+                    },
+                  ]}
                 />
-              )}
-
-              <EuiHorizontalRule margin="none" />
-
-              {this.createNavGroups()}
-
-              <EuiNavDrawerGroupList
-                listItems={[
-                  {
-                    label: `${
-                      context.navIsDocked ? 'Undock' : 'Dock'
-                    } navigation`,
-                    onClick: context.toggleDockedNav,
-                    iconType: context.navIsDocked ? 'lock' : 'lockOpen',
-                  },
-                ]}
-              />
+              </EuiFlexItem>
             </EuiNavDrawer>
           </>
         )}

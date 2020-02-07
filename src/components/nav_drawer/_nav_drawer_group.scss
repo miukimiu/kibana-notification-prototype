@@ -1,4 +1,7 @@
 .euiNavDrawerGroup {
+  &:not(:first-child) {
+    border-top: $euiBorderThin;
+  }
 
   // TODO: Make this an option in EuiAccordion
   &__button {

@@ -17,12 +17,12 @@ export class EuiNavDrawer extends Component {
 
   componentDidMount() {
     if (this.props.isLocked) {
-      window.addEventListener('resize', this.functionToCallOnWindowResize);
+      // window.addEventListener('resize', this.functionToCallOnWindowResize);
     }
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.functionToCallOnWindowResize);
+    // window.removeEventListener('resize', this.functionToCallOnWindowResize);
   }
 
   functionToCallOnWindowResize = () => {
@@ -47,7 +47,7 @@ export class EuiNavDrawer extends Component {
     });
 
     // In case it was locked before, remove the window resize listener
-    window.removeEventListener('resize', this.functionToCallOnWindowResize);
+    // window.removeEventListener('resize', this.functionToCallOnWindowResize);
   };
 
   closeBoth = () => {
@@ -62,7 +62,6 @@ export class EuiNavDrawer extends Component {
       { 'euiNavDrawer2--isLocked': isLocked },
       className
     );
-    const menuClasses = classNames('euiNavDrawerMenu2');
 
     return (
       this.state.isExpanded && (
@@ -73,10 +72,8 @@ export class EuiNavDrawer extends Component {
           id="mainNav"
           className={classes}
           {...rest}>
-          <nav className={menuClasses}>
-            {/* TODO: Add a "skip navigation" keyboard only button */}
-            {children}
-          </nav>
+          {/* TODO: Add a "skip navigation" keyboard only button */}
+          {children}
         </EuiFlyout>
       )
     );
