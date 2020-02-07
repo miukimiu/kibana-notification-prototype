@@ -1,9 +1,12 @@
 .chrDeployment {
-  background-color: $chrDeploymentBackgroundColor;
+  background-color: shade($chrDeploymentBackgroundColor, 20%);
+  box-shadow: inset 0 -1px 0 tint($chrDeploymentBackgroundColor, 10%);
   color: $euiColorGhost;
 
   // TODO: Allow EuiAccordion to swap arrow icon sides (left to right) (and arrow direction?)
   &__button {
+    text-decoration: none !important; // override hover state
+    background-color: $chrDeploymentBackgroundColor;
     flex-direction: row-reverse;
     justify-content: space-between;
     padding: $euiSize;
@@ -22,7 +25,5 @@
 }
 
 .chrDeployment__content {
-  background-color: shade($chrDeploymentBackgroundColor, 20%);
-  padding: $euiSize;
-  box-shadow: inset 0 1px 0 tint($chrDeploymentBackgroundColor, 10%);
+  padding: $euiSizeS $euiSize $euiSize;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import Chrome from './src/components/chrome/chrome';
+import { ThemeProvider } from './src/themes/ThemeContext';
 
-export const wrapRootElement = ({ element }) => {
-  return <Chrome>{element}</Chrome>;
-};
+export const wrapRootElement = ({ element }) => (
+  <ThemeProvider>{element}</ThemeProvider>
+);

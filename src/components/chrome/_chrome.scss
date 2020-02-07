@@ -19,7 +19,7 @@ $euiHeaderChildSize--width: $euiSizeXXL;
       right: 0;
       top: $euiHeaderChildSize--new;
       bottom: 0;
-      background-color: transparentize($euiColorDarkestShade, .75);
+      background-color: transparentize(lightOrDarkTheme($euiColorDarkestShade, $euiColorInk), .75);
     }
   }
 }

@@ -19,6 +19,7 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
         plugins.define({
           HTMLElement: {},
           window: {},
+          document: {},
         }),
       ],
     });

@@ -54,8 +54,8 @@ const content = (
 export default () => (
   <EuiAccordion
     id="accordionForm1"
-    className="euiAccordionForm chrDeployment"
-    buttonClassName="euiAccordionForm__button chrDeployment__button"
+    className="chrDeployment"
+    buttonClassName="chrDeployment__button"
     buttonContent={buttonContent}>
     {content}
   </EuiAccordion>

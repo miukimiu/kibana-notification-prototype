@@ -9,6 +9,9 @@ import React from 'react';
 import _ from 'lodash';
 
 // @ts-ignore
+import ThemeContext from '../../themes/ThemeContext';
+
+// @ts-ignore
 import { hamburger } from './assets/hamburger';
 
 import {
@@ -47,18 +50,8 @@ import { AdminLinks } from './navigation_links/admin_links';
 import { MiscLinks } from './navigation_links/misc_links';
 
 import { EuiNavDrawerGroupListItemProps } from '../nav_drawer/nav_drawer_group_list';
-
-export const ThemeContext = React.createContext('dark');
-
-if (localStorage.getItem('theme') === 'dark') {
-  require('../../themes/theme_dark.scss');
-} else {
-  require('../../themes/theme_light.scss');
-}
-
 interface State {
   navIsDocked: boolean;
-  theme: string;
   themeIsLoading: boolean;
   pinnedItems: EuiNavDrawerGroupListItemProps[];
 }
@@ -71,30 +64,15 @@ export type ChromeNavGroupProps = {
 
 export default class Chrome extends React.Component<any, State> {
   navDrawerRef: any;
-  initialTheme = localStorage.getItem('theme') === 'light' ? 'light' : 'dark';
 
   constructor(props: any) {
     super(props);
     this.state = {
       navIsDocked: JSON.parse(localStorage.getItem('navIsDocked') || 'false'),
-      theme: this.initialTheme,
       themeIsLoading: false,
       pinnedItems: [],
     };
   }
-
-  handleChangeTheme = () => {
-    this.setState(
-      {
-        theme: this.state.theme === 'dark' ? 'light' : 'dark',
-        themeIsLoading: true,
-      },
-      () => {
-        localStorage.setItem('theme', this.state.theme);
-        window.location.reload();
-      }
-    );
-  };
 
   handleNavDocking = () => {
     this.setState(
@@ -206,87 +184,95 @@ export default class Chrome extends React.Component<any, State> {
     ];
 
     return (
-      <ThemeContext.Provider value={this.state.theme}>
-        <EuiHeader className="chrHeader">
-          <EuiHeaderSection grow={false}>
-            {!this.state.navIsDocked && (
-              <EuiHeaderSectionItem border="none">
-                {this.renderMenuTrigger()}
-              </EuiHeaderSectionItem>
-            )}
-            <EuiHeaderSectionItem border="none">
-              {this.renderLogo()}
-            </EuiHeaderSectionItem>
-          </EuiHeaderSection>
+      <ThemeContext.Consumer>
+        {/*
+          // @ts-ignore */}
+        {theme => (
+          <>
+            <EuiHeader className="chrHeader">
+              <EuiHeaderSection grow={false}>
+                {!this.state.navIsDocked && (
+                  <EuiHeaderSectionItem border="none">
+                    {this.renderMenuTrigger()}
+                  </EuiHeaderSectionItem>
+                )}
+                <EuiHeaderSectionItem border="none">
+                  {this.renderLogo()}
+                </EuiHeaderSectionItem>
+              </EuiHeaderSection>
 
-          {this.renderBreadcrumbs()}
+              {this.renderBreadcrumbs()}
 
-          <EuiHeaderSection side="right">
-            <EuiHeaderSectionItem border="none">
-              <HeaderUpdates />
-            </EuiHeaderSectionItem>
-            <EuiHeaderSectionItem border="none">
-              <HeaderSpacesMenu />
-            </EuiHeaderSectionItem>
-            <EuiHeaderSectionItem border="none">
-              <HeaderUserMenu
-                isDarkTheme={this.state.theme === 'dark'}
-                handleChangeTheme={() => this.handleChangeTheme()}
-                themeIsLoading={this.state.themeIsLoading}
+              <EuiHeaderSection side="right">
+                <EuiHeaderSectionItem border="none">
+                  <HeaderUpdates />
+                </EuiHeaderSectionItem>
+                <EuiHeaderSectionItem border="none">
+                  <HeaderSpacesMenu />
+                </EuiHeaderSectionItem>
+                <EuiHeaderSectionItem border="none">
+                  <HeaderUserMenu
+                    isDarkTheme={theme.theme === 'dark'}
+                    handleChangeTheme={() => {
+                      this.setState({ themeIsLoading: true });
+                      theme.toggleDark();
+                    }}
+                    themeIsLoading={this.state.themeIsLoading}
+                  />
+                </EuiHeaderSectionItem>
+              </EuiHeaderSection>
+            </EuiHeader>
+
+            <EuiNavDrawer
+              isLocked={this.state.navIsDocked}
+              showExpandButton={false}
+              ref={this.setNavDrawerRef}>
+              <Deployment />
+
+              <EuiNavDrawerGroupList
+                className="chrNavGroup--inShade"
+                listItems={TopLinks.links}
               />
-            </EuiHeaderSectionItem>
-          </EuiHeaderSection>
-        </EuiHeader>
 
-        <EuiNavDrawer
-          isLocked={this.state.navIsDocked}
-          showExpandButton={false}
-          ref={this.setNavDrawerRef}>
-          <Deployment />
+              {this.state.pinnedItems.length > 0 && (
+                <EuiNavDrawerGroupList
+                  className="chrNavGroup--noPaddingTop chrNavGroup--inShade"
+                  listItems={this.state.pinnedItems}
+                  onPinClick={this.removePin}
+                />
+              )}
 
-          <EuiNavDrawerGroupList
-            className="chrNavGroup--inShade"
-            listItems={TopLinks.links}
-          />
+              <EuiHorizontalRule margin="none" />
 
-          {this.state.pinnedItems.length > 0 && (
-            <EuiNavDrawerGroupList
-              className="chrNavGroup--noPaddingTop chrNavGroup--inShade"
-              listItems={this.state.pinnedItems}
-              onPinClick={this.removePin}
-            />
-          )}
+              {ExploreLinks && this.createNavGroup(ExploreLinks)}
 
-          <EuiHorizontalRule margin="none" />
+              <EuiHorizontalRule margin="none" />
 
-          {ExploreLinks && this.createNavGroup(ExploreLinks)}
+              {ObservabilityLinks && this.createNavGroup(ObservabilityLinks)}
 
-          <EuiHorizontalRule margin="none" />
+              <EuiHorizontalRule margin="none" />
 
-          {ObservabilityLinks && this.createNavGroup(ObservabilityLinks)}
+              {SecurityLinks && this.createNavGroup(SecurityLinks)}
 
-          <EuiHorizontalRule margin="none" />
+              <EuiHorizontalRule margin="none" />
 
-          {SecurityLinks && this.createNavGroup(SecurityLinks)}
+              {SearchLinks && this.createNavGroup(SearchLinks)}
 
-          <EuiHorizontalRule margin="none" />
+              <EuiHorizontalRule margin="none" />
 
-          {SearchLinks && this.createNavGroup(SearchLinks)}
+              {AdminLinks && this.createNavGroup(AdminLinks)}
 
-          <EuiHorizontalRule margin="none" />
+              <EuiHorizontalRule margin="none" />
 
-          {AdminLinks && this.createNavGroup(AdminLinks)}
+              {MiscLinks && this.createNavGroup(MiscLinks)}
 
-          <EuiHorizontalRule margin="none" />
+              <EuiHorizontalRule margin="none" />
 
-          {MiscLinks && this.createNavGroup(MiscLinks)}
-
-          <EuiHorizontalRule margin="none" />
-
-          <EuiNavDrawerGroupList listItems={LockLink} />
-        </EuiNavDrawer>
-        <div className="chrWrap">{this.props.children}</div>
-      </ThemeContext.Provider>
+              <EuiNavDrawerGroupList listItems={LockLink} />
+            </EuiNavDrawer>
+          </>
+        )}
+      </ThemeContext.Consumer>
     );
   }
 }

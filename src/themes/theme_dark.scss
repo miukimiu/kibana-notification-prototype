@@ -7,3 +7,8 @@
 @import '../global_styling/index';
 @import '~@elastic/eui/src/components/index';
 @import '../components/index';
+
+.pageScreenshot {
+  filter: invert(1) hue-rotate(154deg);
+  mix-blend-mode: color-dodge;
+}
