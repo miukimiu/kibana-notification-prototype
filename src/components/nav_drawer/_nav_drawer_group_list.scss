@@ -22,6 +22,14 @@
   .euiListGroupItem__icon {
     max-width: $euiSize;
   }
+
+  &.euiListGroupItem-isActive {
+    color: $euiTextColor;
+
+    .euiListGroupItem__label {
+      font-weight: $euiFontWeightSemiBold;
+    }
+  }
 }
 
 // Default icon will simulate an avatar but with coloring specific to
