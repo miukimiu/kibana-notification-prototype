@@ -50,16 +50,28 @@ import { AdminLinks } from './navigation_links/admin_links';
 import { MiscLinks } from './navigation_links/misc_links';
 
 import { EuiNavDrawerGroupListItemProps } from '../nav_drawer/nav_drawer_group_list';
+
 interface State {
   themeIsLoading: boolean;
   pinnedItems: EuiNavDrawerGroupListItemProps[];
+  openGroups: string[];
 }
 
 export type ChromeNavGroupProps = {
   title?: string;
   iconType?: IconType;
   links: EuiNavDrawerGroupListItemProps[];
+  isOpen?: boolean;
 };
+
+const Accordions = [
+  ExploreLinks,
+  ObservabilityLinks,
+  SecurityLinks,
+  SearchLinks,
+  AdminLinks,
+  MiscLinks,
+];
 
 export default class Chrome extends React.Component<any, State> {
   navDrawerRef: any;
@@ -70,6 +82,9 @@ export default class Chrome extends React.Component<any, State> {
       themeIsLoading: false,
       pinnedItems:
         JSON.parse(String(localStorage.getItem('pinnedItems'))) || [],
+      openGroups:
+        JSON.parse(String(localStorage.getItem('openNavGroups'))) ||
+        Accordions.map(object => object.title),
     };
   }
 
@@ -152,21 +167,66 @@ export default class Chrome extends React.Component<any, State> {
     );
   };
 
+  // Save which groups are open and which are not with state and local store
+  toggleAccordion = (isOpen: boolean, title?: string) => {
+    if (!title) return;
+    this.setState(
+      // @ts-ignore
+      prevState => {
+        const itExists = prevState.openGroups.includes(title);
+        if (isOpen) {
+          if (itExists) return;
+          prevState.openGroups.push(title);
+          return {
+            openGroups: prevState.openGroups,
+          };
+        } else {
+          const index = prevState.openGroups.indexOf(title);
+          if (index > -1) {
+            prevState.openGroups.splice(index, 1);
+          }
+          return {
+            openGroups: prevState.openGroups,
+          };
+        }
+      },
+      () => {
+        localStorage.setItem(
+          'openNavGroups',
+          JSON.stringify(this.state.openGroups)
+        );
+      }
+    );
+  };
+
   setNavDrawerRef = (ref: any) => (this.navDrawerRef = ref);
 
-  createNavGroup = (linksObject: any) => {
-    return (
-      <EuiNavDrawerGroup
-        title={linksObject.title}
-        iconType={linksObject.iconType}
-        initialIsOpen={true}>
-        <EuiNavDrawerGroupList
-          className="chrNavGroup--noPaddingTop"
-          listItems={linksObject.links}
-          onPinClick={this.addPin}
-        />
-      </EuiNavDrawerGroup>
-    );
+  createNavGroups = () => {
+    return Accordions.map(linksObject => {
+      return (
+        <React.Fragment key={linksObject.title}>
+          <EuiNavDrawerGroup
+            title={linksObject.title}
+            iconType={linksObject.iconType}
+            initialIsOpen={
+              linksObject.title
+                ? this.state.openGroups.includes(linksObject.title)
+                : true
+            }
+            onToggle={(isOpen: boolean) =>
+              this.toggleAccordion(isOpen, linksObject.title)
+            }>
+            <EuiNavDrawerGroupList
+              className="chrNavGroup--noPaddingTop"
+              listItems={linksObject.links}
+              onPinClick={this.addPin}
+            />
+          </EuiNavDrawerGroup>
+
+          <EuiHorizontalRule margin="none" />
+        </React.Fragment>
+      );
+    });
   };
 
   render() {
@@ -233,29 +293,7 @@ export default class Chrome extends React.Component<any, State> {
 
               <EuiHorizontalRule margin="none" />
 
-              {ExploreLinks && this.createNavGroup(ExploreLinks)}
-
-              <EuiHorizontalRule margin="none" />
-
-              {ObservabilityLinks && this.createNavGroup(ObservabilityLinks)}
-
-              <EuiHorizontalRule margin="none" />
-
-              {SecurityLinks && this.createNavGroup(SecurityLinks)}
-
-              <EuiHorizontalRule margin="none" />
-
-              {SearchLinks && this.createNavGroup(SearchLinks)}
-
-              <EuiHorizontalRule margin="none" />
-
-              {AdminLinks && this.createNavGroup(AdminLinks)}
-
-              <EuiHorizontalRule margin="none" />
-
-              {MiscLinks && this.createNavGroup(MiscLinks)}
-
-              <EuiHorizontalRule margin="none" />
+              {this.createNavGroups()}
 
               <EuiNavDrawerGroupList
                 listItems={[
