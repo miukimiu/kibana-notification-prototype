@@ -5,22 +5,10 @@ $euiHeaderChildSize--width: $euiSizeXXL;
 .chrWrap {
   padding-top: $euiHeaderChildSize--new;
 
-  .euiNavDrawer-isLocked + & {
+  .chrHeader--navIsDocked ~ & {
     // Shrink the content from the left so it's no longer overlapped by the nav drawer (ALWAYS)
     padding-left: $euiNavDrawerWidthExpanded !important; // sass-lint:disable-line no-important
     transition: padding $euiAnimSpeedFast $euiAnimSlightResistance;
-  }
-
-  .euiNavDrawer-isExpanded:not(.euiNavDrawer-isLocked) + & {
-    &::before {
-      content: '';
-      position: fixed;
-      left: 0;
-      right: 0;
-      top: $euiHeaderChildSize--new;
-      bottom: 0;
-      background-color: transparentize(lightOrDarkTheme($euiColorDarkestShade, $euiColorInk), .75);
-    }
   }
 }
 
@@ -35,6 +23,7 @@ $euiHeaderChildSize--width: $euiSizeXXL;
   border-bottom: none;
   padding-left: $euiSizeXS;
   padding-right: $euiSizeS;
+  z-index: $euiZLevel7;
 
   // EUI OVERRIDES and eventually changes
 
@@ -79,8 +68,9 @@ $euiHeaderChildSize--width: $euiSizeXXL;
 
 // Somehow this needs to happen for all Flyouts in consuming apps if they make the header sticky
 .euiFlyout {
-  top: $euiHeaderChildSize--new + 1px;
-  height: calc(100vh - #{$euiHeaderChildSize--new + 1px});
+  border-top: 1px solid $euiColorLightShade;
+  top: $euiHeaderChildSize--new;
+  height: calc(100vh - #{$euiHeaderChildSize--new});
 }
 
 .chrNavGroup--noPaddingTop {

@@ -88,7 +88,7 @@ EuiNavDrawerFlyout.propTypes = {
   /**
    * Toggle the nav drawer between collapsed and expanded
    */
-  isCollapsed: PropTypes.bool,
+  isExpanded: !PropTypes.bool,
 
   /**
    * Passthrough function to be called when the flyout is closing
@@ -98,5 +98,5 @@ EuiNavDrawerFlyout.propTypes = {
 };
 
 EuiNavDrawerFlyout.defaultProps = {
-  isCollapsed: true,
+  isExpanded: !true,
 };

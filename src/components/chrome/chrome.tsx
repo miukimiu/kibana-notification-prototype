@@ -51,7 +51,6 @@ import { MiscLinks } from './navigation_links/misc_links';
 
 import { EuiNavDrawerGroupListItemProps } from '../nav_drawer/nav_drawer_group_list';
 interface State {
-  navIsDocked: boolean;
   themeIsLoading: boolean;
   pinnedItems: EuiNavDrawerGroupListItemProps[];
 }
@@ -68,25 +67,10 @@ export default class Chrome extends React.Component<any, State> {
   constructor(props: any) {
     super(props);
     this.state = {
-      navIsDocked: JSON.parse(localStorage.getItem('navIsDocked') || 'false'),
       themeIsLoading: false,
       pinnedItems: [],
     };
   }
-
-  handleNavDocking = () => {
-    this.setState(
-      {
-        navIsDocked: !this.state.navIsDocked,
-      },
-      () => {
-        localStorage.setItem(
-          'navIsDocked',
-          JSON.stringify(this.state.navIsDocked)
-        );
-      }
-    );
-  };
 
   renderLogo() {
     return (
@@ -175,23 +159,18 @@ export default class Chrome extends React.Component<any, State> {
   };
 
   render() {
-    const LockLink = [
-      {
-        label: `${this.state.navIsDocked ? 'Undock' : 'Dock'} navigation`,
-        onClick: this.handleNavDocking,
-        iconType: this.state.navIsDocked ? 'lock' : 'lockOpen',
-      },
-    ];
-
     return (
       <ThemeContext.Consumer>
         {/*
           // @ts-ignore */}
-        {theme => (
+        {context => (
           <>
-            <EuiHeader className="chrHeader">
+            <EuiHeader
+              className={`chrHeader ${
+                context.navIsDocked ? 'chrHeader--navIsDocked' : null
+              }`}>
               <EuiHeaderSection grow={false}>
-                {!this.state.navIsDocked && (
+                {!context.navIsDocked && (
                   <EuiHeaderSectionItem border="none">
                     {this.renderMenuTrigger()}
                   </EuiHeaderSectionItem>
@@ -212,10 +191,10 @@ export default class Chrome extends React.Component<any, State> {
                 </EuiHeaderSectionItem>
                 <EuiHeaderSectionItem border="none">
                   <HeaderUserMenu
-                    isDarkTheme={theme.theme === 'dark'}
+                    isDarkTheme={context.theme === 'dark'}
                     handleChangeTheme={() => {
                       this.setState({ themeIsLoading: true });
-                      theme.toggleDark();
+                      context.toggleDark();
                     }}
                     themeIsLoading={this.state.themeIsLoading}
                   />
@@ -224,8 +203,7 @@ export default class Chrome extends React.Component<any, State> {
             </EuiHeader>
 
             <EuiNavDrawer
-              isLocked={this.state.navIsDocked}
-              showExpandButton={false}
+              isLocked={context.navIsDocked}
               ref={this.setNavDrawerRef}>
               <Deployment />
 
@@ -268,7 +246,17 @@ export default class Chrome extends React.Component<any, State> {
 
               <EuiHorizontalRule margin="none" />
 
-              <EuiNavDrawerGroupList listItems={LockLink} />
+              <EuiNavDrawerGroupList
+                listItems={[
+                  {
+                    label: `${
+                      context.navIsDocked ? 'Undock' : 'Dock'
+                    } navigation`,
+                    onClick: context.toggleDockedNav,
+                    iconType: context.navIsDocked ? 'lock' : 'lockOpen',
+                  },
+                ]}
+              />
             </EuiNavDrawer>
           </>
         )}
