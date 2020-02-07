@@ -226,7 +226,7 @@ export class EuiNavDrawer extends Component {
       } else if (child.type === EuiNavDrawerGroupList) {
         // Check if child is an EuiNavDrawerGroup and if it does have a flyout, add the expand function
         return React.cloneElement(child, {
-          flyoutMenuButtonClick: this.expandFlyout,
+          // flyoutMenuButtonClick: this.expandFlyout,
           showToolTips: this.state.toolTipsEnabled && this.props.showToolTips,
         });
       } else {

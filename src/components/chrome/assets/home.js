@@ -1,6 +1,6 @@
 import React from 'react';
 
-const EuiIconHome = ({ title, titleId, ...props }) => (
+export const EuiIconHome = ({ title, titleId, ...props }) => (
   <svg
     width={16}
     height={16}

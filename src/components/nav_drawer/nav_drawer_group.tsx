@@ -40,9 +40,11 @@ export const EuiNavDrawerGroup: FunctionComponent<EuiNavDrawerGroupProps> = ({
     </EuiFlexGroup>
   );
 
+  const generateID = htmlIdGenerator(title);
+
   return (
     <EuiAccordion
-      id={htmlIdGenerator()}
+      id={generateID()}
       className={classes}
       buttonClassName={buttonClasses}
       buttonContent={buttonContent}
