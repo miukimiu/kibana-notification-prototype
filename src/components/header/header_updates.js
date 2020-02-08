@@ -159,7 +159,10 @@ export default class extends Component {
             ))}
           </EuiFlyoutBody>
           <EuiFlyoutFooter>
-            <EuiFlexGroup justifyContent="spaceBetween" alignItems="center">
+            <EuiFlexGroup
+              justifyContent="spaceBetween"
+              alignItems="center"
+              responsive={false}>
               <EuiFlexItem grow={false}>
                 <EuiButtonEmpty
                   iconType="cross"

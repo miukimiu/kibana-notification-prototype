@@ -11,6 +11,7 @@ import {
   EuiFlexItem,
   EuiLink,
   EuiText,
+  EuiPopover,
 } from '@elastic/eui';
 
 import { searchData, recents } from './data';
@@ -130,18 +131,26 @@ export default class extends Component {
             // TODO: Allow pre/appends on search inputs
             append: 'Command + K',
             inputRef: this.setInputRef,
+            isClearable: true,
           }}
           onBlur={() => this.setState({ inputHasFocus: false })}
           listProps={{ bordered: true }}
           {...customProps}>
           {(list, search) => (
             <Fragment>
-              {search}
-              {inputHasFocus && (
-                <div className="searchCustomPopover">
+              <EuiPopover
+                id="popover"
+                button={search}
+                isOpen={inputHasFocus}
+                closePopover={() => this.setState({ inputHasFocus: false })}
+                panelPaddingSize="none">
+                <div style={{ width: '600px' }}>
                   {list}
                   <EuiText className="searchCustomPopover__footer" size="xs">
-                    <EuiFlexGroup alignItems="center" gutterSize="s">
+                    <EuiFlexGroup
+                      alignItems="center"
+                      gutterSize="s"
+                      responsive="false">
                       <EuiFlexItem grow={false}>
                         <EuiLink>View more results</EuiLink>
                       </EuiFlexItem>
@@ -155,7 +164,7 @@ export default class extends Component {
                     </EuiFlexGroup>
                   </EuiText>
                 </div>
-              )}
+              </EuiPopover>
             </Fragment>
           )}
         </EuiSelectable>

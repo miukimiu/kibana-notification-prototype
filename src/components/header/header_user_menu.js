@@ -13,9 +13,7 @@ import {
 } from '@elastic/eui';
 
 // @ts-ignore
-import moon from './assets/moon.svg';
-// @ts-ignore
-import sun from './assets/sun.svg';
+import { sun } from './assets/sun';
 
 export default class extends Component {
   constructor(props) {
@@ -39,7 +37,7 @@ export default class extends Component {
   };
 
   render() {
-    const themeIcon = this.props.isDarkTheme ? sun : moon;
+    const themeIcon = this.props.isDarkTheme ? sun : 'moon';
 
     const button = (
       <EuiHeaderSectionItemButton
@@ -77,17 +75,13 @@ export default class extends Component {
 
               <EuiSpacer size="m" />
 
-              <EuiFlexGroup>
-                <EuiFlexItem>
-                  <EuiFlexGroup justifyContent="spaceBetween">
-                    <EuiFlexItem grow={false}>
-                      <EuiLink href="">Edit profile</EuiLink>
-                    </EuiFlexItem>
+              <EuiFlexGroup justifyContent="spaceBetween" responsive={false}>
+                <EuiFlexItem grow={false}>
+                  <EuiLink href="">Edit profile</EuiLink>
+                </EuiFlexItem>
 
-                    <EuiFlexItem grow={false}>
-                      <EuiLink href="">Log out</EuiLink>
-                    </EuiFlexItem>
-                  </EuiFlexGroup>
+                <EuiFlexItem grow={false}>
+                  <EuiLink href="">Log out</EuiLink>
                 </EuiFlexItem>
               </EuiFlexGroup>
 
