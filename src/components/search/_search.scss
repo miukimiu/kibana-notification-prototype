@@ -1,0 +1,21 @@
+.searchSelectable {
+  justify-content: center;
+}
+
+.searchCustomPopover {
+  @include euiBottomShadowLarge;
+  position: fixed;
+  top: $euiHeaderChildSize--new;
+  left: calc(50% - 300px);
+  width: 600px;
+  background: $euiColorEmptyShade;
+  border-top: $euiBorderThin;
+  border-bottom-left-radius: $euiBorderRadius;
+  border-bottom-right-radius: $euiBorderRadius;
+}
+
+.searchCustomPopover__footer {
+  border-top: $euiBorderThin;
+  padding: $euiSizeM $euiSizeM $euiSizeS;
+  color: $euiColorDarkShade;
+}

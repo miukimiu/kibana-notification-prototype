@@ -40,6 +40,9 @@ import HeaderSpacesMenu from '../header/header_spaces_menu';
 // @ts-ignore
 import HeaderUserMenu from '../header/header_user_menu';
 
+// @ts-ignore
+import Search from '../search/search';
+
 import Deployment from './deployment';
 import { TopLinks } from './navigation_links/top_links';
 import { ObservabilityLinks } from './navigation_links/observability_links';
@@ -246,9 +249,11 @@ export default class Chrome extends React.Component<any, State> {
                 <EuiHeaderSectionItem border="none">
                   {this.renderLogo()}
                 </EuiHeaderSectionItem>
+
+                {this.renderBreadcrumbs()}
               </EuiHeaderSection>
 
-              {this.renderBreadcrumbs()}
+              <Search />
 
               <EuiHeaderSection side="right">
                 <EuiHeaderSectionItem border="none">
