@@ -34,8 +34,7 @@ import {
   // @ts-ignore
 } from '../nav_drawer';
 
-// @ts-ignore
-import HeaderUpdates from '../header/header_updates';
+import HeaderUpdates from '../kibana/header/header_updates';
 // @ts-ignore
 import HeaderSpacesMenu from '../header/header_spaces_menu';
 // @ts-ignore
