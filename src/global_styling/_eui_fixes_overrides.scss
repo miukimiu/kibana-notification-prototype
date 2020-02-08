@@ -1,0 +1,48 @@
+
+// Somehow this needs to happen for all Flyouts in consuming apps if they make the header sticky
+.euiFlyout {
+  border-left: none;
+  border-top: 1px solid $euiColorLightShade;
+  top: $euiHeaderChildSize--new;
+  height: calc(100vh - #{$euiHeaderChildSize--new});
+}
+
+.euiHeader {
+  .euiHeaderSectionItem {
+    display: flex;
+    align-items: center;
+  }
+
+  .euiHeaderSectionItem:hover {
+    background: none;
+  }
+
+  .euiHeaderSectionItem__button {
+    position: relative; // for aligning the notification badge
+    height: $euiHeaderChildSize--width;
+    min-width: $euiHeaderChildSize--width;
+
+    &:hover {
+      background: $euiColorLightestShade;
+    }
+
+    .euiHeaderNotification {
+      top: 4%;
+      right: 4%;
+    }
+  }
+
+  .euiHeaderLogo {
+    padding-left: $euiSizeS;
+    padding-right: $euiSizeS;
+    min-width: $euiHeaderChildSize--width;
+  }
+
+  .euiHeaderBreadcrumbs {
+    margin-left: $euiSizeS;
+  }
+
+  .euiBreadcrumbs {
+    @include euiFontSize;
+  }
+}

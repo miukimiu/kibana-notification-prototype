@@ -4,8 +4,9 @@
  *
  * See: https://www.gatsbyjs.org/docs/static-query/
  */
+/* eslint react/no-multi-comp: 0 */
 
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import _ from 'lodash';
 
 // @ts-ignore
@@ -76,7 +77,17 @@ const Accordions = [
   MiscLinks,
 ];
 
-export default class Chrome extends React.Component<any, State> {
+export const ChromeWrapper: FunctionComponent = () => {
+  return (
+    <ThemeContext.Consumer>
+      {/*
+      // @ts-ignore */}
+      {context => <Chrome context={context} />}
+    </ThemeContext.Consumer>
+  );
+};
+
+export class Chrome extends React.Component<any, State> {
   navDrawerRef: any;
 
   constructor(props: any) {
@@ -89,6 +100,24 @@ export default class Chrome extends React.Component<any, State> {
         JSON.parse(String(localStorage.getItem('openNavGroups'))) ||
         Accordions.map(object => object.title),
     };
+  }
+
+  componentDidMount() {
+    if (this.props.context.navIsDocked) {
+      document.body.classList.add('chrNavIsDocked');
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.context.navIsDocked) {
+      document.body.classList.add('chrNavIsDocked');
+    } else {
+      document.body.classList.remove('chrNavIsDocked');
+    }
+  }
+
+  componentWillUnmount() {
+    document.body.classList.remove('chrNavIsDocked');
   }
 
   renderLogo() {
@@ -230,96 +259,89 @@ export default class Chrome extends React.Component<any, State> {
   };
 
   render() {
+    const { context } = this.props;
     return (
-      <ThemeContext.Consumer>
-        {/*
-          // @ts-ignore */}
-        {context => (
-          <>
-            <EuiHeader
-              className={`chrHeader ${
-                context.navIsDocked ? 'chrHeader--navIsDocked' : null
-              }`}>
-              <EuiHeaderSection grow={false}>
-                {!context.navIsDocked && (
-                  <EuiHeaderSectionItem border="none">
-                    {this.renderMenuTrigger()}
-                  </EuiHeaderSectionItem>
-                )}
-                <EuiHeaderSectionItem border="none">
-                  {this.renderLogo()}
-                </EuiHeaderSectionItem>
+      <>
+        <EuiHeader
+          className={`chrHeader ${
+            context.navIsDocked ? 'chrHeader--navIsDocked' : null
+          }`}>
+          <EuiHeaderSection grow={false}>
+            {!context.navIsDocked && (
+              <EuiHeaderSectionItem border="none">
+                {this.renderMenuTrigger()}
+              </EuiHeaderSectionItem>
+            )}
+            <EuiHeaderSectionItem border="none">
+              {this.renderLogo()}
+            </EuiHeaderSectionItem>
 
-                {this.renderBreadcrumbs()}
-              </EuiHeaderSection>
+            {this.renderBreadcrumbs()}
+          </EuiHeaderSection>
 
-              <Search />
+          <Search />
 
-              <EuiHeaderSection side="right">
-                <EuiHeaderSectionItem border="none">
-                  <HeaderUpdates />
-                </EuiHeaderSectionItem>
-                <EuiHeaderSectionItem border="none">
-                  <HeaderSpacesMenu />
-                </EuiHeaderSectionItem>
-                <EuiHeaderSectionItem border="none">
-                  <HeaderUserMenu
-                    isDarkTheme={context.theme === 'dark'}
-                    handleChangeTheme={() => {
-                      this.setState({ themeIsLoading: true });
-                      context.toggleDark();
-                    }}
-                    themeIsLoading={this.state.themeIsLoading}
-                  />
-                </EuiHeaderSectionItem>
-              </EuiHeaderSection>
-            </EuiHeader>
+          <EuiHeaderSection side="right">
+            <EuiHeaderSectionItem border="none">
+              <HeaderUpdates />
+            </EuiHeaderSectionItem>
+            <EuiHeaderSectionItem border="none">
+              <HeaderSpacesMenu />
+            </EuiHeaderSectionItem>
+            <EuiHeaderSectionItem border="none">
+              <HeaderUserMenu
+                isDarkTheme={context.theme === 'dark'}
+                handleChangeTheme={() => {
+                  this.setState({ themeIsLoading: true });
+                  context.toggleDark();
+                }}
+                themeIsLoading={this.state.themeIsLoading}
+              />
+            </EuiHeaderSectionItem>
+          </EuiHeaderSection>
+        </EuiHeader>
 
-            <EuiNavDrawer
-              isLocked={context.navIsDocked}
-              ref={this.setNavDrawerRef}>
-              {/* TOP */}
-              <EuiFlexItem grow={false}>
-                <Deployment />
-              </EuiFlexItem>
+        <EuiNavDrawer isLocked={context.navIsDocked} ref={this.setNavDrawerRef}>
+          {/* TOP */}
+          <EuiFlexItem grow={false}>
+            <Deployment />
+          </EuiFlexItem>
 
-              {/* PINNED */}
-              <EuiFlexItem grow={false}>
-                {/* Extra div necessary for flex and auto-scroll to behave properly */}
-                <div className="chrNavGroup--scroll chrNavGroup--inShade">
-                  <EuiNavDrawerGroupList listItems={TopLinks.links} />
+          {/* PINNED */}
+          <EuiFlexItem grow={false}>
+            {/* Extra div necessary for flex and auto-scroll to behave properly */}
+            <div className="chrNavGroup--scroll chrNavGroup--inShade">
+              <EuiNavDrawerGroupList listItems={TopLinks.links} />
 
-                  {this.state.pinnedItems.length > 0 && (
-                    <EuiNavDrawerGroupList
-                      className="chrNavGroup--noPaddingTop"
-                      listItems={this.state.pinnedItems}
-                      onPinClick={this.removePin}
-                    />
-                  )}
-                </div>
-              </EuiFlexItem>
-
-              {/* BOTTOM */}
-              <EuiFlexItem className="chrNavGroup--scroll">
-                {this.createNavGroups()}
-
+              {this.state.pinnedItems.length > 0 && (
                 <EuiNavDrawerGroupList
-                  className="euiNavDrawerGroup"
-                  listItems={[
-                    {
-                      label: `${
-                        context.navIsDocked ? 'Undock' : 'Dock'
-                      } navigation`,
-                      onClick: context.toggleDockedNav,
-                      iconType: context.navIsDocked ? 'lock' : 'lockOpen',
-                    },
-                  ]}
+                  className="chrNavGroup--noPaddingTop"
+                  listItems={this.state.pinnedItems}
+                  onPinClick={this.removePin}
                 />
-              </EuiFlexItem>
-            </EuiNavDrawer>
-          </>
-        )}
-      </ThemeContext.Consumer>
+              )}
+            </div>
+          </EuiFlexItem>
+
+          {/* BOTTOM */}
+          <EuiFlexItem className="chrNavGroup--scroll">
+            {this.createNavGroups()}
+
+            <EuiNavDrawerGroupList
+              className="euiNavDrawerGroup"
+              listItems={[
+                {
+                  label: `${
+                    context.navIsDocked ? 'Undock' : 'Dock'
+                  } navigation`,
+                  onClick: context.toggleDockedNav,
+                  iconType: context.navIsDocked ? 'lock' : 'lockOpen',
+                },
+              ]}
+            />
+          </EuiFlexItem>
+        </EuiNavDrawer>
+      </>
     );
   }
 }

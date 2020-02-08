@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Chrome from './chrome/chrome';
+import { ChromeWrapper } from './chrome/chrome';
 
 if (localStorage.getItem('theme') === 'dark') {
   require('../themes/theme_dark.scss');
@@ -11,7 +11,7 @@ if (localStorage.getItem('theme') === 'dark') {
 
 const Layout = ({ children }) => (
   <>
-    <Chrome />
+    <ChromeWrapper />
     <div className="chrWrap">{children}</div>
   </>
 );
