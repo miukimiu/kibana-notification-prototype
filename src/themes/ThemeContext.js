@@ -3,6 +3,7 @@ import React from 'react';
 const defaultState = {
   navIsDocked: false,
   theme: 'light',
+  themeIsLoading: false,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   toggleDark: () => {},
 };
@@ -30,13 +31,14 @@ class ThemeProvider extends React.Component {
 
     this.state = {
       theme,
+      themeIsLoading: false,
       navIsDocked: JSON.parse(localStorage.getItem('navIsDocked') || 'false'),
     };
   }
 
   toggleDark = () => {
     const theme = this.state.theme === 'dark' ? 'light' : 'dark';
-    this.setState({ theme }, () => {
+    this.setState({ theme, themeIsLoading: true }, () => {
       localStorage.setItem('theme', theme);
       window.location.reload();
     });
@@ -51,11 +53,12 @@ class ThemeProvider extends React.Component {
 
   render() {
     const { children } = this.props;
-    const { theme, navIsDocked } = this.state;
+    const { theme, navIsDocked, themeIsLoading } = this.state;
     return (
       <ThemeContext.Provider
         value={{
           theme,
+          themeIsLoading,
           toggleDark: this.toggleDark,
           navIsDocked,
           toggleDockedNav: this.toggleDockedNav,

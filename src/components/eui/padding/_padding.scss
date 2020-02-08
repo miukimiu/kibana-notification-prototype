@@ -1,0 +1,14 @@
+$euiPaddingMap: (
+  'xs': $euiSizeXS,
+  's': $euiSizeS,
+  'm': $euiSizeM,
+  'default': $euiSize,
+  'l': $euiSizeL,
+  'xl': $euiSizeXL,
+);
+
+@each $name, $size in $euiPaddingMap {
+  .euiPadding--#{$name} {
+    padding: $size;
+  }
+}

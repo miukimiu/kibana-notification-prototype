@@ -37,8 +37,6 @@ import {
 import HeaderUpdates from '../kibana/header/header_updates';
 // @ts-ignore
 import HeaderSpacesMenu from '../header/header_spaces_menu';
-// @ts-ignore
-import HeaderUserMenu from '../header/header_user_menu';
 
 // @ts-ignore
 import Search from '../search/search';
@@ -53,6 +51,9 @@ import { AdminLinks } from './navigation_links/admin_links';
 import { MiscLinks } from './navigation_links/misc_links';
 
 import { EuiNavDrawerGroupListItemProps } from '../nav_drawer/nav_drawer_group_list';
+
+import { user } from '../kibana/data/user';
+import { KibanaHeaderUserMenu } from '../kibana/header/header_user_menu';
 
 interface State {
   themeIsLoading: boolean;
@@ -288,14 +289,7 @@ export class Chrome extends React.Component<any, State> {
               <HeaderSpacesMenu />
             </EuiHeaderSectionItem>
             <EuiHeaderSectionItem border="none">
-              <HeaderUserMenu
-                isDarkTheme={context.theme === 'dark'}
-                handleChangeTheme={() => {
-                  this.setState({ themeIsLoading: true });
-                  context.toggleDark();
-                }}
-                themeIsLoading={this.state.themeIsLoading}
-              />
+              <KibanaHeaderUserMenu {...user} />
             </EuiHeaderSectionItem>
           </EuiHeaderSection>
         </EuiHeader>
