@@ -12,7 +12,7 @@ import {
   htmlIdGenerator,
 } from '@elastic/eui';
 
-import ThemeButton from './header_theme_button';
+import { KibanaHeaderThemeButton } from './header_theme_button';
 
 export type KibanaUserProps = {
   username: string;
@@ -83,7 +83,7 @@ export const KibanaHeaderUserMenu: React.FunctionComponent<Props> = ({
 
           <EuiSpacer size="m" />
 
-          <ThemeButton />
+          <KibanaHeaderThemeButton />
         </EuiFlexItem>
       </EuiFlexGroup>
     </EuiPopover>

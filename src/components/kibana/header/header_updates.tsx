@@ -9,7 +9,7 @@ import {
 import { EuiHeaderAlertFlyout } from '../../eui/header';
 import { updates } from '../../kibana/data';
 
-const KibanaHeaderUpdates: FunctionComponent = () => {
+export const KibanaHeaderUpdates: FunctionComponent = () => {
   const [isFlyoutVisible, setIsFlyoutVisible] = useState(false);
   const [showNotification, setShowNotification] = useState(true);
 
@@ -59,5 +59,3 @@ const KibanaHeaderUpdates: FunctionComponent = () => {
     </Fragment>
   );
 };
-
-export default KibanaHeaderUpdates;

@@ -34,7 +34,9 @@ import {
   // @ts-ignore
 } from '../nav_drawer';
 
-import HeaderUpdates from '../kibana/header/header_updates';
+import { user } from '../kibana/data/user';
+import { KibanaHeaderUpdates, KibanaHeaderUserMenu } from '../kibana/header';
+
 // @ts-ignore
 import HeaderSpacesMenu from '../header/header_spaces_menu';
 
@@ -51,9 +53,6 @@ import { AdminLinks } from './navigation_links/admin_links';
 import { MiscLinks } from './navigation_links/misc_links';
 
 import { EuiNavDrawerGroupListItemProps } from '../nav_drawer/nav_drawer_group_list';
-
-import { user } from '../kibana/data/user';
-import { KibanaHeaderUserMenu } from '../kibana/header/header_user_menu';
 
 interface State {
   themeIsLoading: boolean;
@@ -283,7 +282,7 @@ export class Chrome extends React.Component<any, State> {
 
           <EuiHeaderSection side="right">
             <EuiHeaderSectionItem border="none">
-              <HeaderUpdates />
+              <KibanaHeaderUpdates />
             </EuiHeaderSectionItem>
             <EuiHeaderSectionItem border="none">
               <HeaderSpacesMenu />

@@ -6,7 +6,7 @@ import ThemeContext from '../../../themes/ThemeContext';
 // @ts-ignore
 import { sun } from './assets/sun';
 
-const KibanaHeaderThemeButton: React.FunctionComponent<EuiButtonProps> = ({
+export const KibanaHeaderThemeButton: React.FunctionComponent<EuiButtonProps> = ({
   ...props
 }) => {
   return (
@@ -26,5 +26,3 @@ const KibanaHeaderThemeButton: React.FunctionComponent<EuiButtonProps> = ({
     </ThemeContext.Consumer>
   );
 };
-
-export default KibanaHeaderThemeButton;
