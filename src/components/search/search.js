@@ -150,7 +150,7 @@ export default class extends Component {
                     <EuiFlexGroup
                       alignItems="center"
                       gutterSize="s"
-                      responsive="false">
+                      responsive={false}>
                       <EuiFlexItem grow={false}>
                         <EuiLink>View more results</EuiLink>
                       </EuiFlexItem>
