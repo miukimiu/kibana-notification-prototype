@@ -35,10 +35,11 @@ import {
 } from '../nav_drawer';
 
 import { user } from '../kibana/data/user';
-import { KibanaHeaderUpdates, KibanaHeaderUserMenu } from '../kibana/header';
-
-// @ts-ignore
-import HeaderSpacesMenu from '../header/header_spaces_menu';
+import {
+  KibanaHeaderUpdates,
+  KibanaHeaderUserMenu,
+  KibanaHeaderSpacesMenu,
+} from '../kibana/header';
 
 // @ts-ignore
 import Search from '../search/search';
@@ -285,7 +286,7 @@ export class Chrome extends React.Component<any, State> {
               <KibanaHeaderUpdates />
             </EuiHeaderSectionItem>
             <EuiHeaderSectionItem border="none">
-              <HeaderSpacesMenu />
+              <KibanaHeaderSpacesMenu />
             </EuiHeaderSectionItem>
             <EuiHeaderSectionItem border="none">
               <KibanaHeaderUserMenu {...user} />
