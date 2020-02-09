@@ -4,9 +4,19 @@ const defaultState = {
   navIsDocked: false,
   theme: 'light',
   themeIsLoading: false,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  toggleDark: () => {},
+  toggleDark: () => {
+    defaultState.theme === 'dark' ? 'light' : 'dark';
+  },
+  toggleDockedNav: () => {
+    !defaultState.navIsDocked;
+  },
 };
+
+interface State {
+  navIsDocked: boolean;
+  theme: string;
+  themeIsLoading: boolean;
+}
 
 const ThemeContext = React.createContext(defaultState);
 
@@ -15,8 +25,8 @@ const ThemeContext = React.createContext(defaultState);
 const supportsDarkMode = () =>
   window.matchMedia('(prefers-color-scheme: dark)').matches === true;
 
-class ThemeProvider extends React.Component {
-  constructor(props) {
+class ThemeProvider extends React.Component<object, State> {
+  constructor(props: object) {
     super(props);
 
     let theme;
@@ -47,7 +57,7 @@ class ThemeProvider extends React.Component {
   toggleDockedNav = () => {
     const navIsDocked = !this.state.navIsDocked;
     this.setState({ navIsDocked }, () => {
-      localStorage.setItem('navIsDocked', navIsDocked);
+      localStorage.setItem('navIsDocked', JSON.stringify(navIsDocked));
     });
   };
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { EuiButtonProps, EuiButton } from '@elastic/eui';
-// @ts-ignore
 import ThemeContext from '../../../themes/ThemeContext';
 
 // @ts-ignore
@@ -11,8 +10,6 @@ export const KibanaHeaderThemeButton: React.FunctionComponent<EuiButtonProps> = 
 }) => {
   return (
     <ThemeContext.Consumer>
-      {/*
-      // @ts-ignore */}
       {context => (
         <EuiButton
           size="s"

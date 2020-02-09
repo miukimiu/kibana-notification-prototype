@@ -79,8 +79,6 @@ const Accordions = [
 export const ChromeWrapper: FunctionComponent = () => {
   return (
     <ThemeContext.Consumer>
-      {/*
-      // @ts-ignore */}
       {context => <Chrome context={context} />}
     </ThemeContext.Consumer>
   );
