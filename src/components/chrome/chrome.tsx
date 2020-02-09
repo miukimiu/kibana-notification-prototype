@@ -16,9 +16,6 @@ import ThemeContext from '../../themes/ThemeContext';
 import { hamburger } from './assets/hamburger';
 
 import {
-  EuiHeader,
-  EuiHeaderSection,
-  EuiHeaderSectionItem,
   EuiHeaderSectionItemButton,
   EuiHeaderBreadcrumbs,
   EuiHeaderLogo,
@@ -54,6 +51,8 @@ import { AdminLinks } from './navigation_links/admin_links';
 import { MiscLinks } from './navigation_links/misc_links';
 
 import { EuiNavDrawerGroupListItemProps } from '../nav_drawer/nav_drawer_group_list';
+import { EuiHeaderShim } from '../eui/header';
+import classNames from 'classnames';
 
 interface State {
   themeIsLoading: boolean;
@@ -260,39 +259,31 @@ export class Chrome extends React.Component<any, State> {
 
   render() {
     const { context } = this.props;
+
+    const leftSectionItems = [
+      { children: this.renderLogo() },
+      { children: this.renderBreadcrumbs() },
+    ];
+    if (!context.navIsDocked) {
+      leftSectionItems.unshift({ children: this.renderMenuTrigger() });
+    }
+
+    const headerClasses = classNames('chrHeader', {
+      'chrHeader--navIsDocked': context.navIsDocked,
+    });
+
     return (
       <>
-        <EuiHeader
-          className={`chrHeader ${
-            context.navIsDocked ? 'chrHeader--navIsDocked' : null
-          }`}>
-          <EuiHeaderSection grow={false}>
-            {!context.navIsDocked && (
-              <EuiHeaderSectionItem border="none">
-                {this.renderMenuTrigger()}
-              </EuiHeaderSectionItem>
-            )}
-            <EuiHeaderSectionItem border="none">
-              {this.renderLogo()}
-            </EuiHeaderSectionItem>
-
-            {this.renderBreadcrumbs()}
-          </EuiHeaderSection>
-
-          <Search />
-
-          <EuiHeaderSection side="right">
-            <EuiHeaderSectionItem border="none">
-              <KibanaHeaderUpdates />
-            </EuiHeaderSectionItem>
-            <EuiHeaderSectionItem border="none">
-              <KibanaHeaderSpacesMenu />
-            </EuiHeaderSectionItem>
-            <EuiHeaderSectionItem border="none">
-              <KibanaHeaderUserMenu {...user} />
-            </EuiHeaderSectionItem>
-          </EuiHeaderSection>
-        </EuiHeader>
+        <EuiHeaderShim
+          className={headerClasses}
+          leftSectionItems={leftSectionItems}
+          centerSectionItems={[{ children: <Search /> }]}
+          rightSectionItems={[
+            { children: <KibanaHeaderUpdates /> },
+            { children: <KibanaHeaderSpacesMenu /> },
+            { children: <KibanaHeaderUserMenu {...user} /> },
+          ]}
+        />
 
         <EuiNavDrawer isLocked={context.navIsDocked} ref={this.setNavDrawerRef}>
           {/* TOP */}
