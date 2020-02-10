@@ -1,9 +1,3 @@
-/**
- * Chrome component that queries for data
- * with Gatsby's StaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/static-query/
- */
 /* eslint react/no-multi-comp: 0 */
 
 import React, { FunctionComponent } from 'react';
@@ -44,79 +38,64 @@ export const KibanaChromeWrapper: FunctionComponent = () => {
   );
 };
 
-export class KibanaChrome extends React.Component<any, State> {
-  navDrawerRef: any;
+function renderLogo() {
+  return (
+    <EuiHeaderLogo iconType="logoKibana" href="/#" aria-label="Goes to home" />
+  );
+}
 
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      themeIsLoading: false,
-    };
-  }
+function renderBreadcrumbs() {
+  const breadcrumbs = [
+    {
+      text: 'Kibana',
+      href: '#',
+    },
+  ];
 
-  renderLogo() {
-    return (
-      <EuiHeaderLogo
-        iconType="logoKibana"
-        href="/#"
-        aria-label="Goes to home"
-      />
-    );
-  }
+  return <EuiHeaderBreadcrumbs breadcrumbs={breadcrumbs} />;
+}
 
-  renderMenuTrigger() {
+export const KibanaChrome: React.FunctionComponent<any> = ({ context }) => {
+  let navDrawerRef: any;
+  const setNavDrawerRef = (ref: any) => (navDrawerRef = ref);
+
+  const renderMenuTrigger = () => {
     return (
       <EuiHeaderSectionItemButton
         aria-label="Open nav"
-        onClick={() => this.navDrawerRef.toggleOpen()}>
+        onClick={() => navDrawerRef.toggleOpen()}>
         <EuiIcon type={hamburger} size="m" />
       </EuiHeaderSectionItemButton>
     );
+  };
+
+  const leftSectionItems = [
+    { children: renderLogo() },
+    { children: renderBreadcrumbs() },
+  ];
+
+  if (!context.navIsDocked) {
+    leftSectionItems.unshift({ children: renderMenuTrigger() });
   }
 
-  renderBreadcrumbs() {
-    const breadcrumbs = [
-      {
-        text: 'Kibana',
-        href: '#',
-      },
-    ];
+  return (
+    <>
+      <EuiHeaderShim
+        className="kibanaChrome__header"
+        leftSectionItems={leftSectionItems}
+        centerSectionItems={[{ children: <KibanaChromeSearch /> }]}
+        rightSectionItems={[
+          { children: <KibanaHeaderUpdates /> },
+          { children: <KibanaHeaderSpacesMenu /> },
+          { children: <KibanaHeaderUserMenu {...user} /> },
+        ]}
+      />
 
-    return <EuiHeaderBreadcrumbs breadcrumbs={breadcrumbs} />;
-  }
-
-  setNavDrawerRef = (ref: any) => (this.navDrawerRef = ref);
-
-  render() {
-    const { context } = this.props;
-
-    const leftSectionItems = [
-      { children: this.renderLogo() },
-      { children: this.renderBreadcrumbs() },
-    ];
-    if (!context.navIsDocked) {
-      leftSectionItems.unshift({ children: this.renderMenuTrigger() });
-    }
-
-    return (
-      <>
-        <EuiHeaderShim
-          className="kibanaChrome__header"
-          leftSectionItems={leftSectionItems}
-          centerSectionItems={[{ children: <KibanaChromeSearch /> }]}
-          rightSectionItems={[
-            { children: <KibanaHeaderUpdates /> },
-            { children: <KibanaHeaderSpacesMenu /> },
-            { children: <KibanaHeaderUserMenu {...user} /> },
-          ]}
-        />
-
-        <KibanaNav
-          toggleDockedNav={context.toggleDockedNav}
-          navIsDocked={context.navIsDocked}
-          ref={this.setNavDrawerRef}
-        />
-      </>
-    );
-  }
-}
+      <KibanaNav
+        toggleDockedNav={context.toggleDockedNav}
+        navIsDocked={context.navIsDocked}
+        ref={setNavDrawerRef}
+      />
+    </>
+  );
+};

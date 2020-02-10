@@ -103,6 +103,7 @@ export const KibanaChromeSearch = () => {
         // TODO: Allow pre/appends on search inputs
         append: 'Command + K',
         inputRef: (ref: HTMLInputElement) => (inputRef = ref),
+        // TODO: `isClearable` doesn't seem to work or is not passed down
         isClearable: true,
       }}
       listProps={{
