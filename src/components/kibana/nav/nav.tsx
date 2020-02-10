@@ -17,7 +17,7 @@ import {
   // @ts-ignore
 } from '../../nav_drawer';
 
-import Deployment from '../../chrome/deployment';
+import { KibanaNavDeployment } from './deployment';
 import { KibanaNavLinks, KibanaNavTopLinks } from './nav_links';
 
 import {
@@ -121,7 +121,7 @@ export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
             toggleAccordion(isOpen, linksObject.title)
           }>
           <EuiNavDrawerGroupList
-            className="chrNavGroup--noPaddingTop"
+            className="kibanaNav__group--noPaddingTop"
             listItems={linksObject.links}
             onPinClick={addPin}
           />
@@ -134,18 +134,18 @@ export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
     <EuiNavDrawer isLocked={navIsDocked} ref={ref} {...rest}>
       {/* TOP */}
       <EuiFlexItem grow={false}>
-        <Deployment />
+        <KibanaNavDeployment />
       </EuiFlexItem>
 
       {/* PINNED */}
       <EuiFlexItem grow={false}>
         {/* Extra div necessary for flex and auto-scroll to behave properly */}
-        <div className="chrNavGroup--scroll chrNavGroup--inShade">
+        <div className="kibanaNav__group--scroll kibanaNav__group--inShade">
           <EuiNavDrawerGroupList listItems={KibanaNavTopLinks.links} />
 
           {pinnedItems.length > 0 && (
             <EuiNavDrawerGroupList
-              className="chrNavGroup--noPaddingTop"
+              className="kibanaNav__group--noPaddingTop"
               listItems={pinnedItems}
               onPinClick={removePin}
             />
@@ -154,7 +154,7 @@ export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
       </EuiFlexItem>
 
       {/* BOTTOM */}
-      <EuiFlexItem className="chrNavGroup--scroll">
+      <EuiFlexItem className="kibanaNav__group--scroll">
         {createNavGroups()}
 
         <EuiNavDrawerGroupList

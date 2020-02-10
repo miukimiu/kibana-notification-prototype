@@ -1,4 +1,6 @@
+import React from 'react';
 import { ChromeNavGroupProps } from './nav';
+import { EuiIcon } from '@elastic/eui';
 
 // @ts-ignore
 import { home } from '../../../images/home';
@@ -7,7 +9,8 @@ export const KibanaNavTopLinks: ChromeNavGroupProps = {
   links: [
     {
       label: 'Home',
-      iconType: home,
+      // @ts-ignore: Still throws a console error
+      icon: <EuiIcon type={home} />,
       isActive: true,
     },
     {

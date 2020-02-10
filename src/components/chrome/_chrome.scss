@@ -24,16 +24,16 @@
   justify-content: space-between;
 }
 
-.chrNavGroup--noPaddingTop {
+.kibanaNav__group--noPaddingTop {
   padding-top: 0;
 }
 
-.chrNavGroup--inShade {
+.kibanaNav__group--inShade {
   background-color: $euiPageBackgroundColor;
   max-height: 40vh;
 }
 
-.chrNavGroup--scroll {
+.kibanaNav__group--scroll {
   @include euiScrollBar;
   border-top: $euiBorderThin;
   overflow-y: auto;

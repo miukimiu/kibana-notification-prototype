@@ -20,7 +20,10 @@ const buttonContent = (
     </EuiFlexItem>
 
     <EuiFlexItem>
-      <EuiText color="ghost" size="s" className="chrDeployment__buttonTitle">
+      <EuiText
+        color="ghost"
+        size="s"
+        className="kibanaNavDeployment__buttonTitle">
         <p>
           <small>Deployment</small> <br />
           <strong>personal-databoard</strong>
@@ -44,18 +47,18 @@ const deploymentsList: EuiListGroupProps['listItems'] = [
 ];
 
 const content = (
-  <div className="chrDeployment__content">
+  <div className="kibanaNavDeployment__content">
     <EuiListGroup listItems={deploymentsList} flush />
     <EuiSpacer size="s" />
     <EuiButton fullWidth>Manage deployments</EuiButton>
   </div>
 );
 
-export default () => (
+export const KibanaNavDeployment = () => (
   <EuiAccordion
     id="accordionForm1"
-    className="chrDeployment"
-    buttonClassName="chrDeployment__button"
+    className="kibanaNavDeployment"
+    buttonClassName="kibanaNavDeployment__button"
     buttonContent={buttonContent}>
     {content}
   </EuiAccordion>
