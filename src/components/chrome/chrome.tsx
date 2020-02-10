@@ -7,7 +7,6 @@
 /* eslint react/no-multi-comp: 0 */
 
 import React, { FunctionComponent } from 'react';
-import _ from 'lodash';
 
 // @ts-ignore
 import ThemeContext from '../../themes/ThemeContext';
@@ -20,16 +19,7 @@ import {
   EuiHeaderBreadcrumbs,
   EuiHeaderLogo,
   EuiIcon,
-  IconType,
-  EuiFlexItem,
 } from '@elastic/eui';
-
-import {
-  EuiNavDrawer,
-  EuiNavDrawerGroup,
-  EuiNavDrawerGroupList,
-  // @ts-ignore
-} from '../nav_drawer';
 
 import { user } from '../kibana/data/user';
 import {

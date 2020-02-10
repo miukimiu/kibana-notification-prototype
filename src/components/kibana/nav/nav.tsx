@@ -18,13 +18,7 @@ import {
 } from '../../nav_drawer';
 
 import Deployment from '../../chrome/deployment';
-import { TopLinks } from '../../chrome/navigation_links/top_links';
-import { ObservabilityLinks } from '../../chrome/navigation_links/observability_links';
-import { ExploreLinks } from '../../chrome/navigation_links/explore_links';
-import { SecurityLinks } from '../../chrome/navigation_links/security_links';
-import { SearchLinks } from '../../chrome/navigation_links/search_links';
-import { AdminLinks } from '../../chrome/navigation_links/admin_links';
-import { MiscLinks } from '../../chrome/navigation_links/misc_links';
+import { KibanaNavLinks, KibanaNavTopLinks } from './nav_links';
 
 import {
   EuiNavDrawerGroupListItemProps,
@@ -51,15 +45,6 @@ export type ChromeNavGroupProps = {
   isOpen?: boolean;
 };
 
-const Accordions = [
-  ExploreLinks,
-  ObservabilityLinks,
-  SecurityLinks,
-  SearchLinks,
-  AdminLinks,
-  MiscLinks,
-];
-
 export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
   const { toggleDockedNav, navIsDocked, ...rest } = props;
 
@@ -81,7 +66,7 @@ export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
 
   const [openGroups, setOpenGroups] = useState(
     JSON.parse(String(localStorage.getItem('openNavGroups'))) ||
-      Accordions.map(object => object.title)
+      KibanaNavLinks.map(object => object.title)
   );
 
   const addPin = (item: any) => {
@@ -89,18 +74,20 @@ export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
       return;
     }
     item.pinned = true;
-    setPinnedItems(pinnedItems ? pinnedItems.concat(item) : [item]);
-    localStorage.setItem('pinnedItems', JSON.stringify(pinnedItems));
+    const newPinnedItems = pinnedItems ? pinnedItems.concat(item) : [item];
+    setPinnedItems(newPinnedItems);
+    localStorage.setItem('pinnedItems', JSON.stringify(newPinnedItems));
   };
 
   const removePin = (item: any) => {
-    if (_.find(pinnedItems, { label: item.label })) {
+    const pinIndex = _.findIndex(pinnedItems, { label: item.label });
+    if (pinIndex > -1) {
       item.pinned = false;
-      _.remove(pinnedItems, {
-        label: item.label,
-      });
+      const newPinnedItems = pinnedItems;
+      newPinnedItems.splice(pinIndex, 1);
+      setPinnedItems([...newPinnedItems]);
+      localStorage.setItem('pinnedItems', JSON.stringify(newPinnedItems));
     }
-    localStorage.setItem('pinnedItems', JSON.stringify(pinnedItems));
   };
 
   // Save which groups are open and which are not with state and local store
@@ -116,11 +103,12 @@ export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
         openGroups.splice(index, 1);
       }
     }
+    setOpenGroups([...openGroups]);
     localStorage.setItem('openNavGroups', JSON.stringify(openGroups));
   };
 
   const createNavGroups = () => {
-    return Accordions.map(linksObject => {
+    return KibanaNavLinks.map(linksObject => {
       return (
         <EuiNavDrawerGroup
           key={linksObject.title}
@@ -153,7 +141,7 @@ export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
       <EuiFlexItem grow={false}>
         {/* Extra div necessary for flex and auto-scroll to behave properly */}
         <div className="chrNavGroup--scroll chrNavGroup--inShade">
-          <EuiNavDrawerGroupList listItems={TopLinks.links} />
+          <EuiNavDrawerGroupList listItems={KibanaNavTopLinks.links} />
 
           {pinnedItems.length > 0 && (
             <EuiNavDrawerGroupList
