@@ -131,7 +131,7 @@ export class Chrome extends React.Component<any, State> {
         <KibanaNav
           toggleDockedNav={context.toggleDockedNav}
           navIsDocked={context.navIsDocked}
-          // ref={this.setNavDrawerRef}
+          ref={this.setNavDrawerRef}
         />
       </>
     );

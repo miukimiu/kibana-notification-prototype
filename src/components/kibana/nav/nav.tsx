@@ -6,7 +6,7 @@
  */
 /* eslint react/no-multi-comp: 0 */
 
-import React, { HTMLAttributes, useState, useEffect } from 'react';
+import React, { HTMLAttributes, useState, useEffect, forwardRef } from 'react';
 import _ from 'lodash';
 
 import { IconType, EuiFlexItem, EuiFlyoutProps } from '@elastic/eui';
@@ -60,11 +60,9 @@ const Accordions = [
   MiscLinks,
 ];
 
-export const KibanaNav: React.FunctionComponent<Props> = ({
-  toggleDockedNav,
-  navIsDocked,
-  ...rest
-}) => {
+export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
+  const { toggleDockedNav, navIsDocked, ...rest } = props;
+
   const [pinnedItems, setPinnedItems] = useState<
     EuiNavDrawerGroupListItemProps[]
   >(JSON.parse(String(localStorage.getItem('pinnedItems'))) || []);
@@ -145,7 +143,7 @@ export const KibanaNav: React.FunctionComponent<Props> = ({
   };
 
   return (
-    <EuiNavDrawer isLocked={navIsDocked} {...rest}>
+    <EuiNavDrawer isLocked={navIsDocked} ref={ref} {...rest}>
       {/* TOP */}
       <EuiFlexItem grow={false}>
         <Deployment />
@@ -184,4 +182,4 @@ export const KibanaNav: React.FunctionComponent<Props> = ({
       </EuiFlexItem>
     </EuiNavDrawer>
   );
-};
+});
