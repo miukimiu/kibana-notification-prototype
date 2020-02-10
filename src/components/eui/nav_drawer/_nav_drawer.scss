@@ -1,13 +1,14 @@
-// Nav drawer. Global application navigation.
+// Is a EuiFlyout component but shifted to the left side
 
 .euiNavDrawer2 {
   right: auto;
   left: 0;
+  // Needs both to override vw units
   min-width: $euiNavDrawerWidthExpanded;
   max-width: $euiNavDrawerWidthExpanded;
-  width: $euiNavDrawerWidthExpanded;
-  animation: euiFlyout2 $euiAnimSpeedNormal $euiAnimSlightResistance;
+  animation: euiNavDrawer $euiAnimSpeedNormal $euiAnimSlightResistance;
 
+  // TODO: Make optional in EuiFlyout?
   .euiFlyout__closeButton {
     display: none !important;
   }
@@ -17,19 +18,7 @@
   }
 }
 
-.euiNavDrawerMenu2 {
-  @include euiScrollBar;
-  overflow-y: auto;
-  overflow-x: hidden;
-  width: 100%;
-  height: 100%;
-
-  &-hasFooter {
-    margin-bottom: $euiSizeXXL;
-  }
-}
-
-@keyframes euiFlyout2 {
+@keyframes euiNavDrawer {
   0% {
     opacity: 0;
     transform: translateX(-100%);

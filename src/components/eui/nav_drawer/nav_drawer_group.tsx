@@ -12,10 +12,13 @@ import {
   htmlIdGenerator,
 } from '@elastic/eui';
 
-export interface EuiNavDrawerGroupProps extends CommonProps, EuiAccordionProps {
+export interface EuiNavDrawerGroupProps  // TODO: paddingSize should be optional on EuiAccordion
+  extends CommonProps,
+    Omit<EuiAccordionProps, 'paddingSize' | 'id'> {
   children?: ReactNode;
   title: string;
   iconType?: IconType;
+  id?: string;
 }
 
 export const EuiNavDrawerGroup: FunctionComponent<EuiNavDrawerGroupProps> = ({
@@ -23,6 +26,7 @@ export const EuiNavDrawerGroup: FunctionComponent<EuiNavDrawerGroupProps> = ({
   children,
   title,
   iconType,
+  id,
   ...rest
 }) => {
   const classes = classNames('euiNavDrawerGroup', className);
@@ -44,7 +48,7 @@ export const EuiNavDrawerGroup: FunctionComponent<EuiNavDrawerGroupProps> = ({
 
   return (
     <EuiAccordion
-      id={generateID()}
+      id={id || generateID()}
       className={classes}
       buttonClassName={buttonClasses}
       buttonContent={buttonContent}

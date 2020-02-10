@@ -2,7 +2,10 @@ import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 
 import { EuiListGroup, CommonProps } from '@elastic/eui';
-import { EuiListGroupProps, EuiListGroupItemProps } from '../../eui_types_shim';
+import {
+  EuiListGroupProps,
+  EuiListGroupItemProps,
+} from '../../../eui_types_shim';
 
 const pinExtraAction: EuiListGroupItemProps['extraAction'] = {
   color: 'primary',

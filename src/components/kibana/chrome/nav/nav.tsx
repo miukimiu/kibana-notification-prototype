@@ -9,11 +9,7 @@ import _ from 'lodash';
 
 import { IconType, EuiFlexItem, EuiFlyoutProps } from '@elastic/eui';
 
-import {
-  EuiNavDrawer,
-  EuiNavDrawerGroup,
-  // @ts-ignore
-} from '../../../nav_drawer';
+import { EuiNavDrawer, EuiNavDrawerGroup } from '../../../eui/nav_drawer';
 
 import { KibanaNavDeployment } from './deployment';
 import { KibanaNavLinks, KibanaNavTopLinks } from './nav_links';
@@ -21,7 +17,7 @@ import { KibanaNavLinks, KibanaNavTopLinks } from './nav_links';
 import {
   EuiNavDrawerGroupListItemProps,
   EuiNavDrawerGroupList,
-} from '../../../nav_drawer/nav_drawer_group_list';
+} from '../../../eui/nav_drawer/nav_drawer_group_list';
 
 interface Props
   extends Omit<EuiFlyoutProps, 'onClose'>,
@@ -32,7 +28,7 @@ interface Props
 }
 
 export type ChromeNavGroupProps = {
-  title?: string;
+  title: string;
   iconType?: IconType;
   links: EuiNavDrawerGroupListItemProps[];
   isOpen?: boolean;

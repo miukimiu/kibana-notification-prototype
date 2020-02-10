@@ -1,17 +1,26 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, ReactNode } from 'react';
 import classNames from 'classnames';
 
 // import { throttle } from '@elastic/eui/src/components/color_picker/utils';
-import { EuiFlyout } from '@elastic/eui';
+import { EuiFlyout, EuiFlyoutProps } from '@elastic/eui';
 
-export class EuiNavDrawer extends Component {
-  constructor(props) {
+export type EuiNavDrawerProps = Omit<EuiFlyoutProps, 'onClose'> & {
+  children?: ReactNode;
+  isLocked?: boolean;
+};
+
+type State = {
+  isLocked: boolean;
+  isExpanded: boolean;
+};
+
+export class EuiNavDrawer extends Component<EuiNavDrawerProps, State> {
+  constructor(props: EuiNavDrawerProps) {
     super(props);
 
     this.state = {
-      isLocked: props.isLocked,
-      isExpanded: props.isLocked,
+      isLocked: props.isLocked || false,
+      isExpanded: props.isLocked || false,
     };
   }
 
@@ -27,31 +36,32 @@ export class EuiNavDrawer extends Component {
 
   functionToCallOnWindowResize = () => {
     if (window.innerWidth < 1200) {
-      this.collapseDrawer();
+      this.collapse();
     }
     // reacts every 50ms to resize changes and always gets the final update
   };
 
   // Although not used in `src/`, this method is available to and used in `src-docs/`
   // for implementation-specific nav menu toggling via `ref` reference
-  toggleOpen = () => {
+  toggleExpansion = () => {
     this.setState(({ isExpanded }) => ({
       isExpanded: !isExpanded,
     }));
   };
 
-  collapseDrawer = () => {
+  forceClosed = () => {
     this.setState({
       isExpanded: false,
       isLocked: false,
     });
-
     // In case it was locked before, remove the window resize listener
     // window.removeEventListener('resize', this.functionToCallOnWindowResize);
   };
 
-  closeBoth = () => {
-    if (!this.props.isLocked) this.collapseDrawer();
+  collapse = () => {
+    if (!this.props.isLocked) {
+      this.forceClosed();
+    }
   };
 
   render() {
@@ -67,9 +77,8 @@ export class EuiNavDrawer extends Component {
       this.state.isExpanded && (
         <EuiFlyout
           ownFocus={!isLocked}
-          onClose={this.closeBoth}
+          onClose={this.collapse}
           size="s"
-          id="mainNav"
           className={classes}
           {...rest}>
           {/* TODO: Add a "skip navigation" keyboard only button */}
@@ -79,12 +88,3 @@ export class EuiNavDrawer extends Component {
     );
   }
 }
-
-EuiNavDrawer.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  /**
-   * Keep drawer locked open
-   */
-  isLocked: PropTypes.bool,
-};

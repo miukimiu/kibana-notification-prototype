@@ -6,6 +6,7 @@ import { EuiIcon } from '@elastic/eui';
 import { home } from '../../../../images/home';
 
 export const KibanaNavTopLinks: ChromeNavGroupProps = {
+  title: 'Top',
   links: [
     {
       label: 'Home',

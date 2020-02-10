@@ -63,7 +63,7 @@ export const KibanaChrome: React.FunctionComponent<any> = ({ context }) => {
     return (
       <EuiHeaderSectionItemButton
         aria-label="Open nav"
-        onClick={() => navDrawerRef.toggleOpen()}>
+        onClick={() => navDrawerRef.toggleExpansion()}>
         <EuiIcon type={hamburger} size="m" />
       </EuiHeaderSectionItemButton>
     );
