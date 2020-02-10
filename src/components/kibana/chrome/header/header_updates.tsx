@@ -6,8 +6,8 @@ import {
   EuiNotificationBadge,
 } from '@elastic/eui';
 
-import { EuiHeaderAlertFlyout } from '../../eui/header';
-import { updates } from '../../kibana/data';
+import { EuiHeaderAlertFlyout } from '../../../eui/header';
+import { updates } from '../data';
 
 export const KibanaHeaderUpdates: FunctionComponent = () => {
   const [isFlyoutVisible, setIsFlyoutVisible] = useState(false);

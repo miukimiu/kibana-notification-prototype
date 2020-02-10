@@ -4,8 +4,6 @@
  *
  * See: https://www.gatsbyjs.org/docs/static-query/
  */
-/* eslint react/no-multi-comp: 0 */
-
 import React, { HTMLAttributes, useState, useEffect, forwardRef } from 'react';
 import _ from 'lodash';
 
@@ -15,7 +13,7 @@ import {
   EuiNavDrawer,
   EuiNavDrawerGroup,
   // @ts-ignore
-} from '../../nav_drawer';
+} from '../../../nav_drawer';
 
 import { KibanaNavDeployment } from './deployment';
 import { KibanaNavLinks, KibanaNavTopLinks } from './nav_links';
@@ -23,7 +21,7 @@ import { KibanaNavLinks, KibanaNavTopLinks } from './nav_links';
 import {
   EuiNavDrawerGroupListItemProps,
   EuiNavDrawerGroupList,
-} from '../../nav_drawer/nav_drawer_group_list';
+} from '../../../nav_drawer/nav_drawer_group_list';
 
 interface Props
   extends Omit<EuiFlyoutProps, 'onClose'>,
@@ -31,11 +29,6 @@ interface Props
   toggleDockedNav: () => void;
   navIsDocked: boolean;
   toggleNav?: () => void;
-}
-
-interface State {
-  pinnedItems: EuiNavDrawerGroupListItemProps[];
-  openGroups: string[];
 }
 
 export type ChromeNavGroupProps = {

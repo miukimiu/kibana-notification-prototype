@@ -15,7 +15,7 @@ import {
 import {
   EuiSelectableOptionProps,
   EuiSelectableOptionsProps,
-} from '../../../eui_types_shim';
+} from '../../../../eui_types_shim';
 
 import { spaces, additionalSpaces } from '../data/spaces';
 

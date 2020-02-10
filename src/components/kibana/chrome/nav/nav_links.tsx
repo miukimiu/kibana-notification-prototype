@@ -3,7 +3,7 @@ import { ChromeNavGroupProps } from './nav';
 import { EuiIcon } from '@elastic/eui';
 
 // @ts-ignore
-import { home } from '../../../images/home';
+import { home } from '../../../../images/home';
 
 export const KibanaNavTopLinks: ChromeNavGroupProps = {
   links: [

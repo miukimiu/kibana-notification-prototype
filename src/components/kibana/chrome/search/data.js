@@ -1,12 +1,3 @@
-// label: string required Must be unique across items if key is not passed
-// key?: string Must be unique across items
-// checked?: 'on' | 'off' Leave off to indicate not selected, 'on' to indicate inclusion and 'off' to indicate exclusion
-// disabled?: boolean
-// isGroupLabel?: boolean Set to true to indicate object is just a grouping label, not a selectable item
-// prepend?: React.ReactNode Node to add between the selection icon and the label
-// append?: React.ReactNode Node to add to the far right of the item
-// ref?: () => void
-
 export const recents = [
   {
     title: 'Welcome dashboards',

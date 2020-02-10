@@ -1,6 +1,6 @@
 import React, { ReactNode, FunctionComponent } from 'react';
 
-import { ChromeWrapper } from './chrome/chrome';
+import { KibanaChromeWrapper } from './kibana/chrome/chrome';
 
 if (localStorage.getItem('theme') === 'dark') {
   require('../themes/theme_dark.scss');
@@ -11,7 +11,7 @@ if (localStorage.getItem('theme') === 'dark') {
 const Layout: FunctionComponent<{ children?: ReactNode }> = ({ children }) => {
   return (
     <>
-      <ChromeWrapper />
+      <KibanaChromeWrapper />
       <div className="chrWrap">{children}</div>
     </>
   );

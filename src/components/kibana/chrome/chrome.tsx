@@ -7,12 +7,7 @@
 /* eslint react/no-multi-comp: 0 */
 
 import React, { FunctionComponent } from 'react';
-
-// @ts-ignore
-import ThemeContext from '../../themes/ThemeContext';
-
-// @ts-ignore
-import { hamburger } from './assets/hamburger';
+import ThemeContext from '../../../themes/ThemeContext';
 
 import {
   EuiHeaderSectionItemButton,
@@ -21,33 +16,37 @@ import {
   EuiIcon,
 } from '@elastic/eui';
 
-import { user } from '../kibana/data/user';
+import { EuiHeaderShim } from '../../eui/header';
+
+import { user } from './data';
+
 import {
   KibanaHeaderUpdates,
   KibanaHeaderUserMenu,
   KibanaHeaderSpacesMenu,
-} from '../kibana/header';
+} from './header';
+
+import { KibanaNav } from './nav';
 
 // @ts-ignore
-import Search from '../search/search';
+import { hamburger } from '../../../images/hamburger';
 
-import { EuiHeaderShim } from '../eui/header';
-import classNames from 'classnames';
-import { KibanaNav } from '../kibana/nav';
+// @ts-ignore
+import Search from './search/search';
 
 interface State {
   themeIsLoading: boolean;
 }
 
-export const ChromeWrapper: FunctionComponent = () => {
+export const KibanaChromeWrapper: FunctionComponent = () => {
   return (
     <ThemeContext.Consumer>
-      {context => <Chrome context={context} />}
+      {context => <KibanaChrome context={context} />}
     </ThemeContext.Consumer>
   );
 };
 
-export class Chrome extends React.Component<any, State> {
+export class KibanaChrome extends React.Component<any, State> {
   navDrawerRef: any;
 
   constructor(props: any) {
@@ -101,14 +100,10 @@ export class Chrome extends React.Component<any, State> {
       leftSectionItems.unshift({ children: this.renderMenuTrigger() });
     }
 
-    const headerClasses = classNames('chrHeader', {
-      'chrHeader--navIsDocked': context.navIsDocked,
-    });
-
     return (
       <>
         <EuiHeaderShim
-          className={headerClasses}
+          className="kibanaChrome__header"
           leftSectionItems={leftSectionItems}
           centerSectionItems={[{ children: <Search /> }]}
           rightSectionItems={[

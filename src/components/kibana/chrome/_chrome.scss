@@ -1,4 +1,4 @@
-@import '../nav_drawer/variables';
+@import '../../nav_drawer/variables';
 
 .chrWrap {
   padding-top: $euiHeaderChildSize--new;
@@ -10,7 +10,7 @@
   transition: padding $euiAnimSpeedFast $euiAnimSlightResistance;
 }
 
-.chrHeader {
+.kibanaChrome__header {
   @include euiBottomShadowMedium;
   position: fixed;
   top: 0;
