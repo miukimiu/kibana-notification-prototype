@@ -27,12 +27,10 @@ import {
 } from './header';
 
 import { KibanaNav } from './nav';
+import { KibanaChromeSearch } from './search';
 
 // @ts-ignore
 import { hamburger } from '../../../images/hamburger';
-
-// @ts-ignore
-import Search from './search/search';
 
 interface State {
   themeIsLoading: boolean;
@@ -105,7 +103,7 @@ export class KibanaChrome extends React.Component<any, State> {
         <EuiHeaderShim
           className="kibanaChrome__header"
           leftSectionItems={leftSectionItems}
-          centerSectionItems={[{ children: <Search /> }]}
+          centerSectionItems={[{ children: <KibanaChromeSearch /> }]}
           rightSectionItems={[
             { children: <KibanaHeaderUpdates /> },
             { children: <KibanaHeaderSpacesMenu /> },
