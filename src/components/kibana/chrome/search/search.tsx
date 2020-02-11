@@ -61,7 +61,7 @@ export const KibanaChromeSearch = () => {
   };
 
   const onWindowKeyUp = () => {
-    inputRef.focus();
+    inputRef && inputRef.focus();
     window.removeEventListener('keyup', onWindowKeyUp);
   };
 
