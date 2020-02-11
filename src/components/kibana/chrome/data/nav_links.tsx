@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChromeNavGroupProps } from './nav';
+import { ChromeNavGroupProps } from '../nav/nav';
 import { EuiIcon } from '@elastic/eui';
 
 // @ts-ignore
@@ -27,10 +27,13 @@ export const KibanaNavLinks: ChromeNavGroupProps[] = [
     iconType: 'logoKibana',
     links: [
       {
-        label: 'Overview',
+        label: 'Discover',
       },
       {
-        label: 'Stack Monitoring',
+        label: 'Visualize',
+      },
+      {
+        label: 'Dashboard',
       },
       {
         label: 'Canvas',
@@ -39,16 +42,10 @@ export const KibanaNavLinks: ChromeNavGroupProps[] = [
         label: 'Maps',
       },
       {
-        label: 'Machine learning',
-      },
-      {
-        label: 'Infrastructure',
+        label: 'Machine Learning',
       },
       {
         label: 'Graph',
-      },
-      {
-        label: 'Visualize',
       },
     ],
   },
@@ -57,10 +54,10 @@ export const KibanaNavLinks: ChromeNavGroupProps[] = [
     iconType: 'logoObservability',
     links: [
       {
-        label: 'Logs',
+        label: 'Metrics',
       },
       {
-        label: 'Metrics',
+        label: 'Logs',
       },
       {
         label: 'APM',
@@ -75,62 +72,110 @@ export const KibanaNavLinks: ChromeNavGroupProps[] = [
     iconType: 'logoSecurity',
     links: [
       {
-        label: 'Endpoint',
-      },
-      {
         label: 'SIEM',
       },
+      {
+        label: 'Endpoint',
+      },
     ],
   },
   {
-    title: 'Enterprise Search',
-    iconType: 'logoEnterpriseSearch',
+    title: 'Workplace Search',
+    iconType: 'logoWorkplaceSearch',
     links: [
       {
-        label: 'App Search',
+        label: 'Analytics',
       },
       {
-        label: 'Workplace Search',
+        label: 'Documents',
+      },
+      {
+        label: 'Content Sources',
+      },
+      {
+        label: 'Crawler',
+      },
+      {
+        label: 'Curations',
+      },
+      {
+        label: 'Relevance Tuning',
+      },
+      {
+        label: 'Results Settings',
+      },
+      {
+        label: 'Schema',
+      },
+      {
+        label: 'Synonyms',
+      },
+      {
+        label: 'Workplace Admin',
       },
     ],
   },
   {
-    title: 'Developer Tools',
+    title: 'Management',
     iconType: 'devToolsApp',
     links: [
+      {
+        label: 'Dev Tools',
+      },
+      {
+        label: 'Stack Monitoring',
+      },
+      {
+        label: 'Stack Management',
+      },
       {
         label: 'Console',
       },
       {
+        label: 'Credentials',
+      },
+      {
         label: 'Ingestion APIs',
+      },
+      {
+        label: 'Query Tester',
+      },
+      {
+        label: 'Reference UI',
       },
     ],
   },
   {
-    title: 'Miscellaneous',
+    title: 'Learn',
+    iconType: 'training',
     links: [
       {
-        label: 'Elastic.co',
-        href: 'http://elastic.co',
-        target: '_blank',
-      },
-      {
-        label: 'Webinars',
-        href: 'http://elastic.co',
+        label: 'Docs',
+        href: 'https://www.elastic.co/guide',
         target: '_blank',
       },
       {
         label: 'Blogs',
-        href: 'http://elastic.co',
+        href: 'https://www.elastic.co/blog/',
+        target: '_blank',
+      },
+      {
+        label: 'Webinars',
+        href: 'https://www.elastic.co/videos/',
         target: '_blank',
       },
       {
         label: 'Training',
-        href: 'http://elastic.co',
+        href: 'https://www.elastic.co/training/',
         target: '_blank',
       },
       {
         label: 'Consulting',
+        href: 'https://www.elastic.co/consulting',
+        target: '_blank',
+      },
+      {
+        label: 'Elastic.co',
         href: 'http://elastic.co',
         target: '_blank',
       },

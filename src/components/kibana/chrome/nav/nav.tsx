@@ -12,7 +12,7 @@ import { IconType, EuiFlexItem, EuiFlyoutProps } from '@elastic/eui';
 import { EuiNavDrawer, EuiNavDrawerGroup } from '../../../eui/nav_drawer';
 
 import { KibanaNavDeployment } from './deployment';
-import { KibanaNavLinks, KibanaNavTopLinks } from './nav_links';
+import { KibanaNavLinks, KibanaNavTopLinks } from '../data/nav_links';
 
 import {
   EuiNavDrawerGroupListItemProps,
