@@ -40,14 +40,14 @@ export const KibanaChromeWrapper: FunctionComponent = () => {
 
 function renderLogo() {
   return (
-    <EuiHeaderLogo iconType="logoKibana" href="/#" aria-label="Goes to home" />
+    <EuiHeaderLogo iconType="logoElastic" href="/#" aria-label="Goes to home" />
   );
 }
 
 function renderBreadcrumbs() {
   const breadcrumbs = [
     {
-      text: 'Kibana',
+      text: 'Elastic',
       href: '#',
     },
   ];

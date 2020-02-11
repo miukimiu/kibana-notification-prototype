@@ -40,8 +40,8 @@ export const searchData = [
   {
     title: 'Dashboards',
     type: {
-      title: 'Stack application',
-      iconType: 'logoElasticsearch',
+      title: 'Kibana application',
+      iconType: 'logoKibana',
     },
   },
   {

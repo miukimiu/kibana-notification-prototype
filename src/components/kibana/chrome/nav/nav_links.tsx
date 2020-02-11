@@ -23,9 +23,12 @@ export const KibanaNavTopLinks: ChromeNavGroupProps = {
 
 export const KibanaNavLinks: ChromeNavGroupProps[] = [
   {
-    title: 'Stack',
-    iconType: 'logoElasticsearch',
+    title: 'Kibana',
+    iconType: 'logoKibana',
     links: [
+      {
+        label: 'Overview',
+      },
       {
         label: 'Stack Monitoring',
       },
