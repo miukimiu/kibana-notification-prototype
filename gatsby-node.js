@@ -13,13 +13,25 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
             test: /react-ace/,
             use: loaders.null(),
           },
+          {
+            test: /react-datepicker/,
+            use: loaders.null(),
+          },
         ],
       },
       plugins: [
         plugins.define({
-          HTMLElement: {},
-          window: {},
-          document: {},
+          HTMLElement: class {},
+          window: {
+            matchMedia: () => '()',
+          },
+          document: {
+            createElement: () => null,
+          },
+          localStorage: {
+            getItem: () => null,
+            setItem: () => null,
+          },
         }),
       ],
     });
