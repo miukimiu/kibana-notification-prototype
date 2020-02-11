@@ -1,0 +1,1 @@
+export { EuiPadding } from './padding';

@@ -1,0 +1,29 @@
+.kibanaNavDeployment {
+  background-color: shade($kibanaNavDeploymentBackgroundColor, 20%);
+  box-shadow: inset 0 -1px 0 tint($kibanaNavDeploymentBackgroundColor, 10%);
+  color: $euiColorGhost;
+
+  // TODO: Allow EuiAccordion to swap arrow icon sides (left to right) (and arrow direction?)
+  &__button {
+    text-decoration: none !important; // override hover state
+    background-color: $kibanaNavDeploymentBackgroundColor;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding: $euiSize;
+  }
+
+  .euiAccordion__iconWrapper {
+    margin-right: 0;
+    margin-left: $euiSizeS;
+  }
+}
+
+.kibanaNavDeployment__buttonTitle {
+  small {
+    color: lightOrDarkTheme($euiColorLightShade, $euiColorDarkShade);
+  }
+}
+
+.kibanaNavDeployment__content {
+  padding: $euiSizeS $euiSize $euiSize;
+}

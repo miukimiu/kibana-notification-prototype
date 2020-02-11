@@ -1,0 +1,31 @@
+// Is a EuiFlyout component but shifted to the left side
+
+.euiNavDrawer2 {
+  right: auto;
+  left: 0;
+  // Needs both to override vw units
+  min-width: $euiNavDrawerWidthExpanded;
+  max-width: $euiNavDrawerWidthExpanded;
+  animation: euiNavDrawer $euiAnimSpeedNormal $euiAnimSlightResistance;
+
+  // TODO: Make optional in EuiFlyout?
+  .euiFlyout__closeButton {
+    display: none !important;
+  }
+
+  &--isLocked {
+    @include euiBottomShadowMedium;
+  }
+}
+
+@keyframes euiNavDrawer {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  75% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}

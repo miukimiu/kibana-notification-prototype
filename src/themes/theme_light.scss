@@ -1,9 +1,10 @@
 // This file generates a blob file that has a light background
+@import '~@elastic/eui/src/theme_amsterdam_light';
 
-// If you want to change the dark theme, replace this line
-@import '~@elastic/eui/src/themes/eui/eui_colors_light';
-
-// These are required
 @import '../global_styling/index';
-@import '~@elastic/eui/src/components/index';
 @import '../components/index';
+
+.pageScreenshot {
+  filter: none;
+  mix-blend-mode: normal;
+}

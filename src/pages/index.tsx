@@ -1,8 +1,6 @@
 import React from 'react';
 import { EuiPage, EuiFlexGroup, EuiFlexItem } from '@elastic/eui';
-// @ts-ignore
 import Layout from '../components/layout';
-
 // @ts-ignore
 import home_img from '../images/home.png';
 

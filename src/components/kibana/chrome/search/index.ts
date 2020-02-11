@@ -1,0 +1,1 @@
+export { KibanaChromeSearch } from './search';

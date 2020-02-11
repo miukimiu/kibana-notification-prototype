@@ -1,6 +1,12 @@
+// sass-lint:disable no-url-domains, no-url-protocols
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,400i,700,700i');
+@import url('https://rsms.me/inter/inter-ui.css');
+
 // Imported global styling from EUI
 @import '~@elastic/eui/src/global_styling/index';
 
 // Site specific global styling
 @import './variables/index';
 @import './mixins/index';
+
+@import './eui_fixes_overrides';

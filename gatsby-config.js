@@ -1,3 +1,6 @@
+/* eslint @typescript-eslint/no-var-requires: 0 */
+const path = require('path');
+
 module.exports = {
   pathPrefix: '/kibana-8-nav',
   siteMetadata: {
@@ -11,7 +14,7 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
-        path: `${__dirname}/src/images`,
+        path: path.join(__dirname, 'src', 'images'),
       },
     },
     'gatsby-transformer-sharp',
@@ -21,11 +24,11 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'gatsby-eui-starter',
-        short_name: 'starter',
-        start_url: '/',
-        background_color: '#F5F7FA',
-        theme_color: '#006BB4',
+        name: 'k8-prototype',
+        short_name: 'k8',
+        start_url: '',
+        background_color: '#FAFBFD',
+        theme_color: '#006DE4',
         display: 'minimal-ui',
         icon: 'src/images/logo_elastic.png', // This path is relative to the root of the site.
       },
