@@ -3,3 +3,8 @@
 
 @import '../global_styling/index';
 @import '../components/index';
+
+.pageScreenshot {
+  filter: none;
+  mix-blend-mode: normal;
+}
