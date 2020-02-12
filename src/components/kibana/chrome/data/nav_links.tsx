@@ -14,10 +14,10 @@ export const KibanaNavTopLinks: ChromeNavGroupProps = {
       icon: <EuiIcon type={home} />,
       isActive: true,
     },
-    {
-      label: 'Settings',
-      iconType: 'gear',
-    },
+    // {
+    //   label: 'Settings',
+    //   iconType: 'gear',
+    // },
   ],
 };
 
