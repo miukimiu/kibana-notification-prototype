@@ -4,7 +4,8 @@
  *
  * See: https://www.gatsbyjs.org/docs/static-query/
  */
-import React, { HTMLAttributes, useState, useEffect, forwardRef } from 'react';
+import React, { HTMLAttributes, useState, forwardRef } from 'react';
+import Helmet from 'react-helmet';
 import _ from 'lodash';
 
 import { IconType, EuiFlexItem, EuiFlyoutProps } from '@elastic/eui';
@@ -40,18 +41,6 @@ export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
   const [pinnedItems, setPinnedItems] = useState<
     EuiNavDrawerGroupListItemProps[]
   >(JSON.parse(String(localStorage.getItem('pinnedItems'))) || []);
-
-  useEffect(() => {
-    if (navIsDocked) {
-      document.body.classList.add('chrNavIsDocked');
-    } else {
-      document.body.classList.remove('chrNavIsDocked');
-    }
-
-    return function cleanup() {
-      document.body.classList.remove('chrNavIsDocked');
-    };
-  });
 
   const [openGroups, setOpenGroups] = useState(
     JSON.parse(String(localStorage.getItem('openNavGroups'))) ||
@@ -121,8 +110,13 @@ export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
 
   return (
     <EuiNavDrawer isLocked={navIsDocked} ref={ref} {...rest}>
+      <Helmet>
+        <body className={navIsDocked ? 'chrNavIsDocked' : ''} />
+      </Helmet>
+
       {/* TOP */}
-      <EuiFlexItem grow={false}>
+      {/* TODO: Add `shrink` to EuiFlexItem */}
+      <EuiFlexItem grow={false} style={{ flexShrink: 0 }}>
         <KibanaNavDeployment />
       </EuiFlexItem>
 
