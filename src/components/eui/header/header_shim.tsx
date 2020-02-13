@@ -2,7 +2,7 @@
  * This file adds an auto render based on an object of items passed to EuiHeader.
  * TODO: To be added directly to EuiHeader.
  */
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   EuiHeaderSectionItem,
   EuiHeader,
@@ -19,6 +19,7 @@ interface EuiHeaderShimProps extends EuiHeaderProps {
   leftSectionItems: EuiHeaderShimItemProps[];
   centerSectionItems?: EuiHeaderShimItemProps[];
   rightSectionItems?: EuiHeaderShimItemProps[];
+  position?: 'static' | 'fixed';
 }
 
 function createHeaderSection(sections: EuiHeaderShimItemProps[]) {
@@ -32,8 +33,21 @@ export const EuiHeaderShim: React.FunctionComponent<EuiHeaderShimProps> = ({
   leftSectionItems,
   centerSectionItems,
   rightSectionItems,
+  position = 'static',
+  className,
   ...rest
 }) => {
+  const positionClass = `euiHeader--${position} ${className}`;
+
+  useEffect(() => {
+    if (position === 'fixed') {
+      document.body.classList.add('euiBody--headerIsFixed');
+    }
+    return () => {
+      document.body.classList.remove('euiBody--headerIsFixed');
+    };
+  }, [position]);
+
   const leftSection = (
     <EuiHeaderSection grow={centerSectionItems ? false : undefined}>
       {createHeaderSection(leftSectionItems)}
@@ -51,7 +65,7 @@ export const EuiHeaderShim: React.FunctionComponent<EuiHeaderShimProps> = ({
   );
 
   return (
-    <EuiHeader {...rest}>
+    <EuiHeader className={positionClass} {...rest}>
       {leftSection}
       {centerSection}
       {rightSection}

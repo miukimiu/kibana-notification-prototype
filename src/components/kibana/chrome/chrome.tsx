@@ -81,6 +81,7 @@ export const KibanaChrome: React.FunctionComponent<any> = ({ context }) => {
   return (
     <>
       <EuiHeaderShim
+        position="fixed"
         className="kibanaChrome__header"
         leftSectionItems={leftSectionItems}
         centerSectionItems={[{ children: <KibanaChromeSearch /> }]}

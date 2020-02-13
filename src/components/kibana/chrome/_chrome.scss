@@ -1,27 +1,9 @@
 @import '../../eui/nav_drawer/variables';
 
-.chrWrap {
-  padding-top: $euiHeaderChildSize--new;
-}
-
 .chrNavIsDocked .chrWrap {
   // Shrink the content from the left so it's no longer overlapped by the nav drawer (ALWAYS)
   padding-left: $euiNavDrawerWidthExpanded !important; // sass-lint:disable-line no-important
   transition: padding $euiAnimSpeedFast $euiAnimSlightResistance;
-}
-
-.kibanaChrome__header {
-  @include euiBottomShadowMedium;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: $euiHeaderChildSize--new;
-  border-bottom: none;
-  padding-left: $euiSizeXS;
-  padding-right: $euiSizeS;
-  z-index: $euiZLevel7;
-  justify-content: space-between;
 }
 
 .kibanaNav__group--noPaddingTop {

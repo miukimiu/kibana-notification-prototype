@@ -1,39 +1,20 @@
 .euiHeader {
+  justify-content: space-between;
+
+  &--fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: $euiZLevel7;
+  }
+
   .euiHeaderSectionItem {
     display: flex;
     align-items: center;
   }
+}
 
-  .euiHeaderSectionItem:hover {
-    background: none;
-  }
-
-  .euiHeaderSectionItem__button {
-    position: relative; // for aligning the notification badge
-    height: $euiHeaderChildSize--width;
-    min-width: $euiHeaderChildSize--width;
-
-    &:hover {
-      background: $euiColorLightestShade;
-    }
-
-    .euiHeaderNotification {
-      top: 4%;
-      right: 4%;
-    }
-  }
-
-  .euiHeaderLogo {
-    padding-left: $euiSizeS;
-    padding-right: $euiSizeS;
-    min-width: $euiHeaderChildSize--width;
-  }
-
-  .euiHeaderBreadcrumbs {
-    margin-left: $euiSizeS;
-  }
-
-  .euiBreadcrumbs {
-    @include euiFontSize;
-  }
+.euiBody--headerIsFixed {
+  padding-top: $euiHeaderChildSize--new;
 }
