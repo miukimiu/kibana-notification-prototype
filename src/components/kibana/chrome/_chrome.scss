@@ -1,6 +1,6 @@
 @import '../../eui/nav_drawer/variables';
 
-.chrNavIsDocked .chrWrap {
+.chrNavIsDocked {
   // Shrink the content from the left so it's no longer overlapped by the nav drawer (ALWAYS)
   padding-left: $euiNavDrawerWidthExpanded !important; // sass-lint:disable-line no-important
   transition: padding $euiAnimSpeedFast $euiAnimSlightResistance;
