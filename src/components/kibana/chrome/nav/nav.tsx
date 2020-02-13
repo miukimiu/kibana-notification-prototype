@@ -4,8 +4,7 @@
  *
  * See: https://www.gatsbyjs.org/docs/static-query/
  */
-import React, { HTMLAttributes, useState, forwardRef } from 'react';
-import Helmet from 'react-helmet';
+import React, { HTMLAttributes, useState, forwardRef, useEffect } from 'react';
 import _ from 'lodash';
 
 import { IconType, EuiFlexItem, EuiFlyoutProps } from '@elastic/eui';
@@ -37,6 +36,15 @@ export type ChromeNavGroupProps = {
 
 export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
   const { toggleDockedNav, navIsDocked, ...rest } = props;
+
+  useEffect(() => {
+    if (navIsDocked) {
+      document.body.classList.add('chrNavIsDocked');
+    }
+    return () => {
+      document.body.classList.remove('chrNavIsDocked');
+    };
+  }, [navIsDocked]);
 
   const [pinnedItems, setPinnedItems] = useState<
     EuiNavDrawerGroupListItemProps[]
@@ -110,10 +118,6 @@ export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
 
   return (
     <EuiNavDrawer isLocked={navIsDocked} ref={ref} {...rest}>
-      <Helmet>
-        <body className={navIsDocked ? 'chrNavIsDocked' : ''} />
-      </Helmet>
-
       {/* TOP */}
       {/* TODO: Add `shrink` to EuiFlexItem */}
       <EuiFlexItem grow={false} style={{ flexShrink: 0 }}>
