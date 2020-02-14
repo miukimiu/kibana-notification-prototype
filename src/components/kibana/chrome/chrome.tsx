@@ -8,6 +8,7 @@ import {
   EuiHeaderBreadcrumbs,
   EuiHeaderLogo,
   EuiIcon,
+  Breadcrumb,
 } from '@elastic/eui';
 
 import { EuiHeaderShim } from '../../eui/header';
@@ -26,17 +27,13 @@ import { KibanaChromeSearch } from './search';
 // @ts-ignore
 import { hamburger } from '../../../images/hamburger';
 
+type Props = {
+  breadcrumbs?: Breadcrumb[];
+};
+
 interface State {
   themeIsLoading: boolean;
 }
-
-export const KibanaChromeWrapper: FunctionComponent = () => {
-  return (
-    <ThemeContext.Consumer>
-      {context => <KibanaChrome context={context} />}
-    </ThemeContext.Consumer>
-  );
-};
 
 function renderLogo() {
   return (
@@ -44,18 +41,11 @@ function renderLogo() {
   );
 }
 
-function renderBreadcrumbs() {
-  const breadcrumbs = [
-    {
-      text: 'Elastic',
-      href: '#',
-    },
-  ];
+export const KibanaChrome: React.FunctionComponent<Props> = ({
+  breadcrumbs,
+}) => {
+  const context = React.useContext(ThemeContext);
 
-  return <EuiHeaderBreadcrumbs breadcrumbs={breadcrumbs} />;
-}
-
-export const KibanaChrome: React.FunctionComponent<any> = ({ context }) => {
   let navDrawerRef: any;
   const setNavDrawerRef = (ref: any) => (navDrawerRef = ref);
 
@@ -67,6 +57,17 @@ export const KibanaChrome: React.FunctionComponent<any> = ({ context }) => {
         <EuiIcon type={hamburger} size="m" />
       </EuiHeaderSectionItemButton>
     );
+  };
+
+  const renderBreadcrumbs = () => {
+    const elasticLogo = [
+      {
+        text: 'Elastic',
+        href: '#',
+      },
+    ];
+
+    return <EuiHeaderBreadcrumbs breadcrumbs={breadcrumbs || elasticLogo} />;
   };
 
   const leftSectionItems = [
