@@ -1,0 +1,30 @@
+.euiBreadcrumb {
+  @include euiFontSizeXS();
+  font-weight: $euiFontWeightMedium;
+  color: $euiColorPrimary !important; // sass-lint:disable-line no-important
+  padding: $euiSizeXS $euiSize;
+  clip-path: polygon(0 0, calc(100% - #{$euiSizeS}) 0, 100% 50%, calc(100% - #{$euiSizeS}) 100%, 0 100%, #{$euiSizeS} 50%);
+}
+
+.euiBreadcrumb:first-child {
+  padding-left: $euiSizeM;
+  border-radius: #{$euiSizeS} 0 0 #{$euiSizeS};
+  clip-path: polygon(0 0, calc(100% - #{$euiSizeS}) 0, 100% 50%, calc(100% - #{$euiSizeS}) 100%, 0 100%);
+}
+
+.euiBreadcrumb:not(.euiBreadcrumb--last) {
+  background: tintOrShade($euiColorPrimary, 88%, 88%);
+  margin-right: -$euiSizeXS;
+}
+
+.euiBreadcrumb--last {
+  background: $euiColorLightestShade;
+  border-radius: 0 #{$euiSizeS} #{$euiSizeS} 0;
+  color: $euiTextColor !important; // sass-lint:disable-line no-important
+  padding-right: $euiSizeM;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, #{$euiSizeS} 50%);
+}
+
+.euiBreadcrumbSeparator {
+  display: none !important; // sass-lint:disable-line no-important
+}
