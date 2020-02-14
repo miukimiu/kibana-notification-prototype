@@ -46,9 +46,21 @@ export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
     };
   }, [navIsDocked]);
 
+  // Local storage cant stringify the onClick handler so the state must
+  function getFullObjectForPinnedItems() {
+    const stored: EuiNavDrawerGroupListItemProps[] =
+      JSON.parse(String(localStorage.getItem('pinnedItems'))) || [];
+    if (stored.length < 1) return stored;
+    return KibanaNavLinks.map(group =>
+      group.links.filter(link => _.find(stored, { label: link.label }))
+    ).flat();
+  }
+
+  getFullObjectForPinnedItems();
+
   const [pinnedItems, setPinnedItems] = useState<
     EuiNavDrawerGroupListItemProps[]
-  >(JSON.parse(String(localStorage.getItem('pinnedItems'))) || []);
+  >(getFullObjectForPinnedItems());
 
   const [openGroups, setOpenGroups] = useState(
     JSON.parse(String(localStorage.getItem('openNavGroups'))) ||

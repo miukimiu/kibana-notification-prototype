@@ -1,4 +1,5 @@
 import React from 'react';
+import { navigate } from 'gatsby';
 import { ChromeNavGroupProps } from '../nav/nav';
 import { EuiIcon } from '@elastic/eui';
 
@@ -34,12 +35,18 @@ export const KibanaNavLinks: ChromeNavGroupProps[] = [
       },
       {
         label: 'Dashboard',
+        onClick: () => {
+          navigate('dashboards');
+        },
       },
       {
         label: 'Canvas',
       },
       {
         label: 'Maps',
+        onClick: () => {
+          navigate('maps');
+        },
       },
       {
         label: 'Machine Learning',
@@ -121,6 +128,9 @@ export const KibanaNavLinks: ChromeNavGroupProps[] = [
     links: [
       {
         label: 'Dev Tools',
+        onClick: () => {
+          navigate('dev-tools-console');
+        },
       },
       {
         label: 'Stack Monitoring',
@@ -128,9 +138,9 @@ export const KibanaNavLinks: ChromeNavGroupProps[] = [
       {
         label: 'Stack Management',
       },
-      {
-        label: 'Console',
-      },
+      // {
+      //   label: 'Console',
+      // },
       {
         label: 'Credentials',
       },
