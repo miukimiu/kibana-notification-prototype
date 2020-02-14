@@ -1,6 +1,6 @@
 import React, { ReactNode, FunctionComponent } from 'react';
 
-import { KibanaChrome } from './kibana/chrome/chrome';
+import { KibanaChrome, KibanaChromeProps } from './kibana/chrome/chrome';
 
 if (localStorage.getItem('theme') === 'dark') {
   require('../themes/theme_dark.scss');
@@ -8,10 +8,13 @@ if (localStorage.getItem('theme') === 'dark') {
   require('../themes/theme_light.scss');
 }
 
-const Layout: FunctionComponent<{ children?: ReactNode }> = ({ children }) => {
+const Layout: FunctionComponent<{
+  children?: ReactNode;
+  chrome?: KibanaChromeProps;
+}> = ({ children, chrome }) => {
   return (
     <>
-      <KibanaChrome />
+      <KibanaChrome {...chrome} />
       <div className="chrWrap">{children}</div>
     </>
   );

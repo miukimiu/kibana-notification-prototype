@@ -3,12 +3,18 @@ import Helmet from 'react-helmet';
 // import { Link } from 'gatsby';
 import Layout from '../components/layout';
 
-import { EuiPage, EuiFlexGroup, EuiFlexItem } from '@elastic/eui';
+import { EuiPage, EuiFlexGroup, EuiFlexItem, Breadcrumb } from '@elastic/eui';
 // @ts-ignore
 import maps_img from '../images/Maps - Listing.png';
 
+const breadcrumbs: Breadcrumb[] = [
+  {
+    text: 'Maps',
+  },
+];
+
 export default () => (
-  <Layout>
+  <Layout chrome={{ breadcrumbs }}>
     <Helmet>
       <title>Maps | Kibana 8 Prototype</title>
     </Helmet>

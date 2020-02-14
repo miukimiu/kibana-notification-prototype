@@ -1,6 +1,6 @@
 /* eslint react/no-multi-comp: 0 */
 
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import ThemeContext from '../../../themes/ThemeContext';
 
 import {
@@ -27,21 +27,13 @@ import { KibanaChromeSearch } from './search';
 // @ts-ignore
 import { hamburger } from '../../../images/hamburger';
 
-type Props = {
+import { navigate } from 'gatsby';
+
+export type KibanaChromeProps = {
   breadcrumbs?: Breadcrumb[];
 };
 
-interface State {
-  themeIsLoading: boolean;
-}
-
-function renderLogo() {
-  return (
-    <EuiHeaderLogo iconType="logoElastic" href="/#" aria-label="Goes to home" />
-  );
-}
-
-export const KibanaChrome: React.FunctionComponent<Props> = ({
+export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
   breadcrumbs,
 }) => {
   const context = React.useContext(ThemeContext);
@@ -59,15 +51,27 @@ export const KibanaChrome: React.FunctionComponent<Props> = ({
     );
   };
 
+  function renderLogo() {
+    return (
+      <EuiHeaderLogo iconType="logoElastic" href="/" aria-label="Goes to home">
+        {!breadcrumbs && 'Elastic'}
+      </EuiHeaderLogo>
+    );
+  }
+
   const renderBreadcrumbs = () => {
-    const elasticLogo = [
+    if (!breadcrumbs) return;
+    const breadcrumbList: Breadcrumb[] = [
       {
-        text: 'Elastic',
-        href: '#',
+        text: 'Home',
+        onClick: () => {
+          navigate('/');
+        },
       },
     ];
-
-    return <EuiHeaderBreadcrumbs breadcrumbs={breadcrumbs || elasticLogo} />;
+    return (
+      <EuiHeaderBreadcrumbs breadcrumbs={breadcrumbList.concat(breadcrumbs)} />
+    );
   };
 
   const leftSectionItems = [

@@ -1,13 +1,26 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import { navigate } from 'gatsby';
 import Layout from '../components/layout';
 
-import { EuiPage, EuiFlexGroup, EuiFlexItem } from '@elastic/eui';
+import { EuiPage, EuiFlexGroup, EuiFlexItem, Breadcrumb } from '@elastic/eui';
 // @ts-ignore
 import logs_dashboard_img from '../images/[Logs] Web Traffic.png';
 
+const breadcrumbs: Breadcrumb[] = [
+  {
+    text: 'Dashboards',
+    onClick: () => {
+      navigate('dashboards');
+    },
+  },
+  {
+    text: '[Logs] Web Traffic',
+  },
+];
+
 export default () => (
-  <Layout>
+  <Layout chrome={{ breadcrumbs }}>
     <Helmet>
       <title>[Logs] Web Traffic | Dashboards | Kibana 8 Prototype</title>
     </Helmet>
