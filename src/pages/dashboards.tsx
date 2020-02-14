@@ -21,7 +21,12 @@ export default () => (
     <EuiPage>
       <EuiFlexGroup justifyContent="center">
         <EuiFlexItem grow={false} style={{ position: 'relative' }}>
-          <img alt="Dashboard listing page" width={990} src={dashboard_img} />
+          <img
+            className="pageScreenshot"
+            alt="Dashboard listing page"
+            width={990}
+            src={dashboard_img}
+          />
           <Link
             className="fake-logs-dashboard-link"
             to="/dashboard-logs-web-traffic">

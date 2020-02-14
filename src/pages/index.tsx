@@ -14,7 +14,7 @@ export default () => (
       <EuiFlexGroup justifyContent="center">
         <EuiFlexItem grow={false}>
           <img
-            className="pageScreenshot pageScreenshot--fullWidth"
+            className="pageScreenshot pageScreenshot--responsive"
             alt="Kibana home page"
             width={1175}
             src={home_img}

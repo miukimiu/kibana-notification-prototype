@@ -23,7 +23,7 @@ export default () => (
         <EuiFlexItem grow={false} style={{ position: 'relative' }}>
           <img
             className="pageScreenshot"
-            alt="Dashboard listing page"
+            alt="Maps listing page"
             width={978}
             src={maps_img}
           />
