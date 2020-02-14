@@ -14,6 +14,9 @@ export const KibanaNavTopLinks: ChromeNavGroupProps = {
       // @ts-ignore: Still throws a console error
       icon: <EuiIcon type={home} />,
       isActive: true,
+      onClick: () => {
+        navigate('/');
+      },
     },
     // {
     //   label: 'Settings',

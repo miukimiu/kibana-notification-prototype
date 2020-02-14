@@ -46,14 +46,23 @@ export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
     };
   }, [navIsDocked]);
 
-  // Local storage cant stringify the onClick handler so the state must
+  // Local storage cant stringify the onClick handler so the state must grab it from the full item from fill list
+  // (this is starting to get hacky)
   function getFullObjectForPinnedItems() {
     const stored: EuiNavDrawerGroupListItemProps[] =
       JSON.parse(String(localStorage.getItem('pinnedItems'))) || [];
     if (stored.length < 1) return stored;
-    return KibanaNavLinks.map(group =>
-      group.links.filter(link => _.find(stored, { label: link.label }))
-    ).flat();
+
+    const fullLinks = _.cloneDeep(KibanaNavLinks)
+      .map(group =>
+        group.links.filter(link => _.find(stored, { label: link.label }))
+      )
+      .flat();
+
+    return fullLinks.map(link => {
+      link.pinned = true;
+      return link;
+    });
   }
 
   getFullObjectForPinnedItems();
