@@ -1,5 +1,3 @@
-/* eslint react/no-multi-comp: 0 */
-
 import React from 'react';
 import ThemeContext from '../../../themes/ThemeContext';
 
@@ -98,6 +96,7 @@ export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
       />
 
       <KibanaNav
+        currentRoute={breadcrumbs ? String(breadcrumbs[0].text) : 'Home'}
         toggleDockedNav={context.toggleDockedNav}
         navIsDocked={context.navIsDocked}
         ref={setNavDrawerRef}

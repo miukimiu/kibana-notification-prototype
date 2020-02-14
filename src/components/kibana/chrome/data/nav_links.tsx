@@ -1,5 +1,4 @@
 import React from 'react';
-import { navigate } from 'gatsby';
 import { ChromeNavGroupProps } from '../nav/nav';
 import { EuiIcon } from '@elastic/eui';
 
@@ -13,10 +12,7 @@ export const KibanaNavTopLinks: ChromeNavGroupProps = {
       label: 'Home',
       // @ts-ignore: Still throws a console error
       icon: <EuiIcon type={home} />,
-      isActive: true,
-      onClick: () => {
-        navigate('/');
-      },
+      url: '/',
     },
     // {
     //   label: 'Settings',
@@ -37,19 +33,15 @@ export const KibanaNavLinks: ChromeNavGroupProps[] = [
         label: 'Visualize',
       },
       {
-        label: 'Dashboard',
-        onClick: () => {
-          navigate('dashboards');
-        },
+        label: 'Dashboards',
+        url: 'dashboards',
       },
       {
         label: 'Canvas',
       },
       {
         label: 'Maps',
-        onClick: () => {
-          navigate('maps');
-        },
+        url: 'maps',
       },
       {
         label: 'Machine Learning',
@@ -131,9 +123,7 @@ export const KibanaNavLinks: ChromeNavGroupProps[] = [
     links: [
       {
         label: 'Dev Tools',
-        onClick: () => {
-          navigate('dev-tools-console');
-        },
+        url: 'dev-tools-console',
       },
       {
         label: 'Stack Monitoring',

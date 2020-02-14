@@ -6,6 +6,7 @@
  */
 import React, { HTMLAttributes, useState, forwardRef, useEffect } from 'react';
 import _ from 'lodash';
+import { navigate } from 'gatsby';
 
 import { IconType, EuiFlexItem, EuiFlyoutProps } from '@elastic/eui';
 
@@ -24,18 +25,27 @@ interface Props
     HTMLAttributes<HTMLDivElement> {
   toggleDockedNav: () => void;
   navIsDocked: boolean;
-  toggleNav?: () => void;
+  currentRoute?: string;
 }
+
+type ChromNavListItem = EuiNavDrawerGroupListItemProps & {
+  url?: string;
+};
 
 export type ChromeNavGroupProps = {
   title: string;
   iconType?: IconType;
-  links: EuiNavDrawerGroupListItemProps[];
+  links: ChromNavListItem[];
   isOpen?: boolean;
 };
 
 export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
-  const { toggleDockedNav, navIsDocked, ...rest } = props;
+  const {
+    toggleDockedNav,
+    navIsDocked,
+    currentRoute = 'Home',
+    ...rest
+  } = props;
 
   useEffect(() => {
     if (navIsDocked) {
@@ -46,30 +56,9 @@ export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
     };
   }, [navIsDocked]);
 
-  // Local storage cant stringify the onClick handler so the state must grab it from the full item from fill list
-  // (this is starting to get hacky)
-  function getFullObjectForPinnedItems() {
-    const stored: EuiNavDrawerGroupListItemProps[] =
-      JSON.parse(String(localStorage.getItem('pinnedItems'))) || [];
-    if (stored.length < 1) return stored;
-
-    const fullLinks = _.cloneDeep(KibanaNavLinks)
-      .map(group =>
-        group.links.filter(link => _.find(stored, { label: link.label }))
-      )
-      .flat();
-
-    return fullLinks.map(link => {
-      link.pinned = true;
-      return link;
-    });
-  }
-
-  getFullObjectForPinnedItems();
-
   const [pinnedItems, setPinnedItems] = useState<
     EuiNavDrawerGroupListItemProps[]
-  >(getFullObjectForPinnedItems());
+  >(JSON.parse(String(localStorage.getItem('pinnedItems'))) || []);
 
   const [openGroups, setOpenGroups] = useState(
     JSON.parse(String(localStorage.getItem('openNavGroups'))) ||
@@ -114,6 +103,23 @@ export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
     localStorage.setItem('openNavGroups', JSON.stringify(openGroups));
   };
 
+  function alterLinksWithCurrentStateAndLinks(
+    links: ChromNavListItem[],
+    showPinned = false
+  ): EuiNavDrawerGroupListItemProps[] {
+    // @ts-ignore
+    return links.map(link => {
+      const { url, onClick, pinned, isActive, ...rest } = link;
+      return {
+        onClick: url ? () => navigate(url) : onClick,
+        pinned: showPinned ? pinned : false,
+        isActive: link.label === currentRoute ? true : false,
+        url,
+        ...rest,
+      };
+    });
+  }
+
   const createNavGroups = () => {
     return KibanaNavLinks.map(linksObject => {
       return (
@@ -129,7 +135,7 @@ export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
           }>
           <EuiNavDrawerGroupList
             className="kibanaNav__group--noPaddingTop"
-            listItems={linksObject.links}
+            listItems={alterLinksWithCurrentStateAndLinks(linksObject.links)}
             onPinClick={addPin}
           />
         </EuiNavDrawerGroup>
@@ -149,15 +155,12 @@ export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
       <EuiFlexItem grow={false}>
         {/* Extra div necessary for flex and auto-scroll to behave properly */}
         <div className="kibanaNav__group--scroll kibanaNav__group--inShade">
-          <EuiNavDrawerGroupList listItems={KibanaNavTopLinks.links} />
-
-          {pinnedItems.length > 0 && (
-            <EuiNavDrawerGroupList
-              className="kibanaNav__group--noPaddingTop"
-              listItems={pinnedItems}
-              onPinClick={removePin}
-            />
-          )}
+          <EuiNavDrawerGroupList
+            listItems={alterLinksWithCurrentStateAndLinks(
+              KibanaNavTopLinks.links
+            ).concat(alterLinksWithCurrentStateAndLinks(pinnedItems, true))}
+            onPinClick={removePin}
+          />
         </div>
       </EuiFlexItem>
 
