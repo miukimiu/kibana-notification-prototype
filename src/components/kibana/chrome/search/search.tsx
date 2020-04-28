@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
+import { navigate } from 'gatsby';
 
 import {
   EuiIcon,
@@ -39,7 +40,7 @@ const recentData: EuiSelectableOptionsProps = recents.map(item => {
 });
 
 export const KibanaChromeSearch = () => {
-  const [options, setOptions] = useState(data);
+  const options = data;
   const [inputHasFocus, setInputHasFocus] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const searchValueExists = searchValue && searchValue !== '';
@@ -65,6 +66,13 @@ export const KibanaChromeSearch = () => {
     window.removeEventListener('keyup', onWindowKeyUp);
   };
 
+  const onChange = (updatedOptions: EuiSelectableOptionProps[]) => {
+    const clickedItem = _.find(updatedOptions, { checked: 'on' });
+    if (!clickedItem) return;
+    const searchItem = _.find(allSearches, { title: clickedItem.key });
+    if (searchItem && searchItem.url) navigate(searchItem.url);
+  };
+
   const renderOption = (
     option: EuiSelectableOptionProps,
     searchValue: string
@@ -75,7 +83,9 @@ export const KibanaChromeSearch = () => {
     return (
       <>
         <EuiHighlight search={searchValue}>{moreInfo.title}</EuiHighlight>
-        <EuiTextColor color="subdued" className="eui-displayBlock">
+        <EuiTextColor
+          color="subdued"
+          className="eui-displayBlock kibanaChromeSearch__itemLinkSubtext">
           <small>
             <EuiHighlight search={searchValue}>
               {moreInfo.type.title}
@@ -91,10 +101,10 @@ export const KibanaChromeSearch = () => {
       className="kibanaChromeSearch"
       searchable
       options={searchValueExists ? options : recentData}
-      onChange={updatedOptions => setOptions(updatedOptions)}
-      onBlur={() => setInputHasFocus(false)}
+      onChange={onChange}
       renderOption={renderOption}
       height={300}
+      singleSelection={true}
       searchProps={{
         compressed: true,
         placeholder: 'Search for anything...',
@@ -109,6 +119,7 @@ export const KibanaChromeSearch = () => {
       listProps={{
         rowHeight: 68,
         showIcons: false,
+        className: 'kibanaChromeSearch__list',
       }}>
       {(list, search) => (
         <EuiPopover

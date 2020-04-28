@@ -21,17 +21,17 @@ export const recents = [
     },
   },
   {
-    title: '[Logs] Web Traffic',
+    title: '[Logs] Host, Visits and Bytes Table',
     type: {
-      title: 'Saved dashboard',
-      iconType: 'dashboardApp',
+      title: 'TSVB visualization',
+      iconType: 'visVisualBuilder',
     },
   },
   {
-    title: '[Azure Monitor] Alerts',
+    title: '[Flights] Flight Log',
     type: {
-      title: 'Saved dashboard',
-      iconType: 'dashboardApp',
+      title: 'Saved discover',
+      iconType: 'discoverApp',
     },
   },
 ];
@@ -39,13 +39,15 @@ export const recents = [
 export const searchData = [
   {
     title: 'Dashboards',
+    url: 'dashboards',
     type: {
       title: 'Kibana application',
       iconType: 'logoKibana',
     },
   },
   {
-    title: 'Sample flight dashboard',
+    title: '[Logs] Web Traffic',
+    url: 'dashboard-logs-web-traffic',
     type: {
       title: 'Saved dashboard',
       iconType: 'dashboardApp',
@@ -70,6 +72,30 @@ export const searchData = [
     type: {
       title: 'personal-databoard',
       iconType: 'logoSecurity',
+    },
+  },
+  {
+    title: 'Dev tools',
+    url: 'dev-tools-console',
+    type: {
+      title: 'Management application',
+      iconType: 'devToolsApp',
+    },
+  },
+  {
+    title: 'Console',
+    url: 'dev-tools-console',
+    type: {
+      title: 'Dev tools application',
+      iconType: 'consoleApp',
+    },
+  },
+  {
+    title: 'Maps',
+    url: 'maps',
+    type: {
+      title: 'Kibana application',
+      iconType: 'gisApp',
     },
   },
 ];

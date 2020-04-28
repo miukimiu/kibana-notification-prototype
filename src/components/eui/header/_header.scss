@@ -16,5 +16,5 @@
 }
 
 .euiBody--headerIsFixed {
-  padding-top: $euiHeaderChildSize--new;
+  padding-top: $euiHeaderChildSize--new + $euiSizeS; // Extra padding to accound for the shadow
 }

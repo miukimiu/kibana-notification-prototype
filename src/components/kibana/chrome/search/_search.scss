@@ -1,5 +1,18 @@
 .kibanaChromeSearch {
   justify-content: center;
+
+}
+
+// TODO: How to make this easier on the EUI side?
+.kibanaChromeSearch__list {
+  .euiSelectableListItem:hover .euiSelectableListItem__text,
+  .euiSelectableListItem:focus .euiSelectableListItem__text {
+    text-decoration: none;
+
+    .kibanaChromeSearch__itemLink > span:first-child {
+      text-decoration: underline;
+    }
+  }
 }
 
 .kibanaChromeSearch__popoverFooter {

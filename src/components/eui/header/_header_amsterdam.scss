@@ -31,11 +31,12 @@
     min-width: $euiHeaderChildSize--width;
   }
 
-  .euiHeaderBreadcrumbs {
-    margin-left: $euiSizeS;
+  .euiHeaderLogo__text {
+    @include euiFontSize;
+    font-weight: $euiFontWeightMedium;
   }
 
-  .euiBreadcrumbs {
-    @include euiFontSize;
+  .euiHeaderBreadcrumbs {
+    margin-left: $euiSizeS;
   }
 }

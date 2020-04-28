@@ -1,6 +1,4 @@
-/* eslint react/no-multi-comp: 0 */
-
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import ThemeContext from '../../../themes/ThemeContext';
 
 import {
@@ -8,6 +6,7 @@ import {
   EuiHeaderBreadcrumbs,
   EuiHeaderLogo,
   EuiIcon,
+  Breadcrumb,
 } from '@elastic/eui';
 
 import { EuiHeaderShim } from '../../eui/header';
@@ -26,36 +25,17 @@ import { KibanaChromeSearch } from './search';
 // @ts-ignore
 import { hamburger } from '../../../images/hamburger';
 
-interface State {
-  themeIsLoading: boolean;
-}
+import { navigate } from 'gatsby';
 
-export const KibanaChromeWrapper: FunctionComponent = () => {
-  return (
-    <ThemeContext.Consumer>
-      {context => <KibanaChrome context={context} />}
-    </ThemeContext.Consumer>
-  );
+export type KibanaChromeProps = {
+  breadcrumbs?: Breadcrumb[];
 };
 
-function renderLogo() {
-  return (
-    <EuiHeaderLogo iconType="logoElastic" href="/#" aria-label="Goes to home" />
-  );
-}
+export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
+  breadcrumbs,
+}) => {
+  const context = React.useContext(ThemeContext);
 
-function renderBreadcrumbs() {
-  const breadcrumbs = [
-    {
-      text: 'Elastic',
-      href: '#',
-    },
-  ];
-
-  return <EuiHeaderBreadcrumbs breadcrumbs={breadcrumbs} />;
-}
-
-export const KibanaChrome: React.FunctionComponent<any> = ({ context }) => {
   let navDrawerRef: any;
   const setNavDrawerRef = (ref: any) => (navDrawerRef = ref);
 
@@ -66,6 +46,29 @@ export const KibanaChrome: React.FunctionComponent<any> = ({ context }) => {
         onClick={() => navDrawerRef.toggleExpansion()}>
         <EuiIcon type={hamburger} size="m" />
       </EuiHeaderSectionItemButton>
+    );
+  };
+
+  function renderLogo() {
+    return (
+      <EuiHeaderLogo iconType="logoElastic" href="/" aria-label="Goes to home">
+        {!breadcrumbs && 'Elastic'}
+      </EuiHeaderLogo>
+    );
+  }
+
+  const renderBreadcrumbs = () => {
+    if (!breadcrumbs) return;
+    const breadcrumbList: Breadcrumb[] = [
+      {
+        text: 'Home',
+        onClick: () => {
+          navigate('/');
+        },
+      },
+    ];
+    return (
+      <EuiHeaderBreadcrumbs breadcrumbs={breadcrumbList.concat(breadcrumbs)} />
     );
   };
 
@@ -93,6 +96,7 @@ export const KibanaChrome: React.FunctionComponent<any> = ({ context }) => {
       />
 
       <KibanaNav
+        currentRoute={breadcrumbs ? String(breadcrumbs[0].text) : 'Home'}
         toggleDockedNav={context.toggleDockedNav}
         navIsDocked={context.navIsDocked}
         ref={setNavDrawerRef}

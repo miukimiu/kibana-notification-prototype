@@ -12,7 +12,7 @@ export const KibanaNavTopLinks: ChromeNavGroupProps = {
       label: 'Home',
       // @ts-ignore: Still throws a console error
       icon: <EuiIcon type={home} />,
-      isActive: true,
+      url: '/',
     },
     // {
     //   label: 'Settings',
@@ -33,13 +33,15 @@ export const KibanaNavLinks: ChromeNavGroupProps[] = [
         label: 'Visualize',
       },
       {
-        label: 'Dashboard',
+        label: 'Dashboards',
+        url: 'dashboards',
       },
       {
         label: 'Canvas',
       },
       {
         label: 'Maps',
+        url: 'maps',
       },
       {
         label: 'Machine Learning',
@@ -121,6 +123,7 @@ export const KibanaNavLinks: ChromeNavGroupProps[] = [
     links: [
       {
         label: 'Dev Tools',
+        url: 'dev-tools-console',
       },
       {
         label: 'Stack Monitoring',
@@ -128,9 +131,9 @@ export const KibanaNavLinks: ChromeNavGroupProps[] = [
       {
         label: 'Stack Management',
       },
-      {
-        label: 'Console',
-      },
+      // {
+      //   label: 'Console',
+      // },
       {
         label: 'Credentials',
       },
@@ -153,31 +156,37 @@ export const KibanaNavLinks: ChromeNavGroupProps[] = [
         label: 'Docs',
         href: 'https://www.elastic.co/guide',
         target: '_blank',
+        rel: 'noopener noreferrer',
       },
       {
         label: 'Blogs',
         href: 'https://www.elastic.co/blog/',
         target: '_blank',
+        rel: 'noopener noreferrer',
       },
       {
         label: 'Webinars',
         href: 'https://www.elastic.co/videos/',
         target: '_blank',
+        rel: 'noopener noreferrer',
       },
       {
         label: 'Training',
         href: 'https://www.elastic.co/training/',
         target: '_blank',
+        rel: 'noopener noreferrer',
       },
       {
         label: 'Consulting',
         href: 'https://www.elastic.co/consulting',
         target: '_blank',
+        rel: 'noopener noreferrer',
       },
       {
         label: 'Elastic.co',
         href: 'http://elastic.co',
         target: '_blank',
+        rel: 'noopener noreferrer',
       },
     ],
   },

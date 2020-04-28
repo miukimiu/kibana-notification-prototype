@@ -15,6 +15,7 @@
 
   &--isLocked {
     @include euiBottomShadowMedium;
+    animation: none !important;
   }
 }
 

@@ -1,0 +1,19 @@
+.pageScreenshot--responsive {
+  max-width: 100%;
+}
+.pageScreenshot--fullWidth {
+  width: 100%;
+}
+
+.fake-logs-dashboard-link {
+  position: absolute;
+  left: 74px;
+  bottom: 141px;
+  text-indent: -30000px;
+  padding: 1px;
+  width: 138px;
+
+  &:hover {
+    border-bottom: 1px solid $euiColorPrimary;
+  }
+}
