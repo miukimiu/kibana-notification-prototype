@@ -114,6 +114,7 @@ export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
         onClick: url ? () => navigate(url) : onClick,
         pinned: showPinned ? pinned : false,
         isActive: link.label === currentRoute ? true : false,
+        'aria-current': link.label === currentRoute ? true : false,
         url,
         ...rest,
       };
