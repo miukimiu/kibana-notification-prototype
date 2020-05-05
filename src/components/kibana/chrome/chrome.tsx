@@ -7,9 +7,8 @@ import {
   EuiHeaderLogo,
   EuiIcon,
   Breadcrumb,
+  EuiHeader,
 } from '@elastic/eui';
-
-import { EuiHeaderShim } from '../../eui/header';
 
 import { user } from './data';
 
@@ -67,31 +66,37 @@ export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
         },
       },
     ];
-    return (
-      <EuiHeaderBreadcrumbs breadcrumbs={breadcrumbList.concat(breadcrumbs)} />
-    );
+    return breadcrumbList.concat(breadcrumbs);
   };
 
-  const leftSectionItems = [
-    { children: renderLogo() },
-    { children: renderBreadcrumbs() },
-  ];
+  const leftSectionItems = [renderLogo()];
 
   if (!context.navIsDocked) {
-    leftSectionItems.unshift({ children: renderMenuTrigger() });
+    leftSectionItems.unshift(renderMenuTrigger());
   }
 
   return (
     <>
-      <EuiHeaderShim
+      <EuiHeader
         position="fixed"
-        className="kibanaChrome__header"
-        leftSectionItems={leftSectionItems}
-        centerSectionItems={[{ children: <KibanaChromeSearch /> }]}
-        rightSectionItems={[
-          { children: <KibanaHeaderUpdates /> },
-          { children: <KibanaHeaderSpacesMenu /> },
-          { children: <KibanaHeaderUserMenu {...user} /> },
+        sections={[
+          {
+            items: leftSectionItems,
+            borders: 'none',
+            breadcrumbs: renderBreadcrumbs(),
+          },
+          {
+            items: [<KibanaChromeSearch />],
+            borders: 'none',
+          },
+          {
+            items: [
+              <KibanaHeaderUpdates />,
+              <KibanaHeaderSpacesMenu />,
+              <KibanaHeaderUserMenu {...user} />,
+            ],
+            borders: 'none',
+          },
         ]}
       />
 
