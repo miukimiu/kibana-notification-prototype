@@ -1,4 +1,4 @@
-import React, { FunctionComponent, HtmlHTMLAttributes } from 'react';
+import React, { FunctionComponent } from 'react';
 
 import {
   EuiHeaderAlert,
@@ -14,16 +14,14 @@ import {
   EuiFlyoutProps,
   EuiHeaderAlertProps,
   htmlIdGenerator,
-  // EuiIcon,
+  EuiIcon,
 } from '@elastic/eui';
 
 export type EuiHeaderAlertFlyoutProps = {
   alerts?: EuiHeaderAlertProps[];
   title?: string;
   version?: string;
-  // TODO: Fix EuiFlyoutProps needs to extend HTMLDivElement
-} & EuiFlyoutProps &
-  HtmlHTMLAttributes<HTMLDivElement>;
+} & EuiFlyoutProps;
 
 export const EuiHeaderAlertFlyout: FunctionComponent<EuiHeaderAlertFlyoutProps> = ({
   onClose,
@@ -50,8 +48,7 @@ export const EuiHeaderAlertFlyout: FunctionComponent<EuiHeaderAlertFlyoutProps> 
           ))
         ) : (
           <EuiText color="subdued" textAlign="center">
-            {/* TODO: Figure out why cheer icon isn't displaying */}
-            {/* <EuiIcon type="cheer" size="l" /> */}
+            <EuiIcon type="cheer" size="l" />
             <h3>All caught up!</h3>
           </EuiText>
         )}

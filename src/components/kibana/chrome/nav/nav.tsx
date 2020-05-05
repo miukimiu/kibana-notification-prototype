@@ -4,31 +4,37 @@
  *
  * See: https://www.gatsbyjs.org/docs/static-query/
  */
-import React, { HTMLAttributes, useState, forwardRef, useEffect } from 'react';
+import React, { HTMLAttributes, useState, FunctionComponent } from 'react';
 import _ from 'lodash';
 import { navigate } from 'gatsby';
 
-import { IconType, EuiFlexItem, EuiFlyoutProps } from '@elastic/eui';
-
-import { EuiNavDrawer, EuiNavDrawerGroup } from '../../../eui/nav_drawer';
+import {
+  IconType,
+  EuiFlexItem,
+  EuiFlyoutProps,
+  EuiPinnableListGroup,
+  EuiIcon,
+  EuiCollapsibleNavGroup,
+  EuiHeaderSectionItemButton,
+  EuiShowFor,
+  EuiListGroupItem,
+  EuiHorizontalRule,
+  EuiCollapsibleNav,
+  EuiPinnableListGroupItemProps,
+} from '@elastic/eui';
 
 import { KibanaNavDeployment } from './deployment';
 import { KibanaNavLinks, KibanaNavTopLinks } from '../data/nav_links';
 
-import {
-  EuiNavDrawerGroupListItemProps,
-  EuiNavDrawerGroupList,
-} from '../../../eui/nav_drawer/nav_drawer_group_list';
+import ThemeContext from '../../../../themes/ThemeContext';
 
 interface Props
   extends Omit<EuiFlyoutProps, 'onClose'>,
     HTMLAttributes<HTMLDivElement> {
-  toggleDockedNav: () => void;
-  navIsDocked: boolean;
   currentRoute?: string;
 }
 
-type ChromNavListItem = EuiNavDrawerGroupListItemProps & {
+type ChromNavListItem = EuiPinnableListGroupItemProps & {
   url?: string;
 };
 
@@ -39,25 +45,15 @@ export type ChromeNavGroupProps = {
   isOpen?: boolean;
 };
 
-export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
-  const {
-    toggleDockedNav,
-    navIsDocked,
-    currentRoute = 'Home',
-    ...rest
-  } = props;
-
-  useEffect(() => {
-    if (navIsDocked) {
-      document.body.classList.add('chrNavIsDocked');
-    }
-    return () => {
-      document.body.classList.remove('chrNavIsDocked');
-    };
-  }, [navIsDocked]);
+export const KibanaNav: FunctionComponent<Props> = ({
+  currentRoute = 'Home',
+}) => {
+  const context = React.useContext(ThemeContext);
+  const [navIsOpen, setNavIsOpen] = useState(context.navIsDocked);
+  const [navIsDocked, setNavIsDocked] = useState(context.navIsDocked);
 
   const [pinnedItems, setPinnedItems] = useState<
-    EuiNavDrawerGroupListItemProps[]
+    EuiPinnableListGroupItemProps[]
   >(JSON.parse(String(localStorage.getItem('pinnedItems'))) || []);
 
   const [openGroups, setOpenGroups] = useState(
@@ -106,7 +102,7 @@ export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
   function alterLinksWithCurrentStateAndLinks(
     links: ChromNavListItem[],
     showPinned = false
-  ): EuiNavDrawerGroupListItemProps[] {
+  ): EuiPinnableListGroupItemProps[] {
     // @ts-ignore
     return links.map(link => {
       const { url, onClick, pinned, isActive, ...rest } = link;
@@ -124,62 +120,95 @@ export const KibanaNav = forwardRef<EuiNavDrawer, Props>((props, ref) => {
   const createNavGroups = () => {
     return KibanaNavLinks.map(linksObject => {
       return (
-        <EuiNavDrawerGroup
+        <EuiCollapsibleNavGroup
           key={linksObject.title}
           title={linksObject.title}
           iconType={linksObject.iconType}
+          isCollapsible={true}
           initialIsOpen={
             linksObject.title ? openGroups.includes(linksObject.title) : true
           }
           onToggle={(isOpen: boolean) =>
             toggleAccordion(isOpen, linksObject.title)
           }>
-          <EuiNavDrawerGroupList
-            className="kibanaNav__group--noPaddingTop"
+          <EuiPinnableListGroup
+            aria-label={linksObject.title} // A11y : EuiCollapsibleNavGroup can't correctly pass the `title` as the `aria-label` to the right HTML element, so it must be added manually
             listItems={alterLinksWithCurrentStateAndLinks(linksObject.links)}
             onPinClick={addPin}
+            maxWidth="none"
+            color="subdued"
+            gutterSize="none"
+            size="s"
           />
-        </EuiNavDrawerGroup>
+        </EuiCollapsibleNavGroup>
       );
     });
   };
 
   return (
-    <EuiNavDrawer isLocked={navIsDocked} ref={ref} {...rest}>
-      {/* TOP */}
-      {/* TODO: Add `shrink` to EuiFlexItem */}
+    <EuiCollapsibleNav
+      id="kbnCollapsibleNav"
+      aria-label="Main navigation"
+      isOpen={navIsOpen}
+      isDocked={navIsDocked}
+      button={
+        <EuiHeaderSectionItemButton
+          aria-label="Toggle main navigation"
+          onClick={() => setNavIsOpen(!navIsOpen)}>
+          <EuiIcon type={'menu'} size="m" aria-hidden="true" />
+        </EuiHeaderSectionItemButton>
+      }
+      onClose={() => setNavIsOpen(false)}>
+      {/* Dark deployments section */}
       <EuiFlexItem grow={false} style={{ flexShrink: 0 }}>
         <KibanaNavDeployment />
       </EuiFlexItem>
 
-      {/* PINNED */}
-      <EuiFlexItem grow={false}>
-        {/* Extra div necessary for flex and auto-scroll to behave properly */}
-        <div className="kibanaNav__group--scroll kibanaNav__group--inShade">
-          <EuiNavDrawerGroupList
+      {/* Shaded pinned section always with a home item */}
+      <EuiFlexItem grow={false} style={{ flexShrink: 0 }}>
+        <EuiCollapsibleNavGroup
+          background="light"
+          className="eui-yScroll"
+          style={{ maxHeight: '40vh' }}>
+          <EuiPinnableListGroup
+            aria-label="Pinned links" // A11y : Since this group doesn't have a visible `title` it should be provided an accessible description
             listItems={alterLinksWithCurrentStateAndLinks(
               KibanaNavTopLinks.links
             ).concat(alterLinksWithCurrentStateAndLinks(pinnedItems, true))}
             onPinClick={removePin}
+            maxWidth="none"
+            color="text"
+            gutterSize="none"
+            size="s"
           />
-        </div>
+        </EuiCollapsibleNavGroup>
       </EuiFlexItem>
+
+      <EuiHorizontalRule margin="none" />
 
       {/* BOTTOM */}
-      <EuiFlexItem className="kibanaNav__group--scroll">
+      <EuiFlexItem className="eui-yScroll">
         {createNavGroups()}
 
-        <EuiNavDrawerGroupList
-          className="euiNavDrawerGroup"
-          listItems={[
-            {
-              label: `${navIsDocked ? 'Undock' : 'Dock'} navigation`,
-              onClick: toggleDockedNav,
-              iconType: navIsDocked ? 'lock' : 'lockOpen',
-            },
-          ]}
-        />
+        {/* Docking button only for larger screens that can support it*/}
+        <EuiShowFor sizes={['l', 'xl']}>
+          <EuiCollapsibleNavGroup>
+            <EuiListGroupItem
+              size="xs"
+              color="subdued"
+              label={`${navIsDocked ? 'Undock' : 'Dock'} navigation`}
+              onClick={() => {
+                setNavIsDocked(!navIsDocked);
+                localStorage.setItem(
+                  'navIsDocked',
+                  JSON.stringify(!navIsDocked)
+                );
+              }}
+              iconType={navIsDocked ? 'lock' : 'lockOpen'}
+            />
+          </EuiCollapsibleNavGroup>
+        </EuiShowFor>
       </EuiFlexItem>
-    </EuiNavDrawer>
+    </EuiCollapsibleNav>
   );
-});
+};
