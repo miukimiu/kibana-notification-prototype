@@ -3,7 +3,6 @@ import ThemeContext from '../../../themes/ThemeContext';
 
 import {
   EuiHeaderSectionItemButton,
-  EuiHeaderBreadcrumbs,
   EuiHeaderLogo,
   EuiIcon,
   Breadcrumb,
