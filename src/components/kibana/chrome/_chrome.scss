@@ -1,0 +1,21 @@
+.kbnChrome {
+  z-index: $euiZHeader;
+}
+
+.euiBody--hasFixed__kbnChrome {
+  padding-top: $euiHeaderChildSize--new * 2;
+
+  .euiHeader {
+    z-index: 0;
+  }
+
+  .euiFlyout,
+  .euiCollapsibleNav {
+    top: $euiHeaderChildSize--new * 2;
+  }
+
+  // HACK!!!
+  .euiOverlayMask {
+    z-index: $euiZHeader - 1;
+  }
+}

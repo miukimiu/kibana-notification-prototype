@@ -18,3 +18,42 @@
 .euiBody--headerIsFixed {
   padding-top: $euiHeaderChildSize--new + $euiSizeS; // Extra padding to accound for the shadow
 }
+
+.euiHeader--light + .euiHeader--light {
+  border-top: $euiBorderThin;
+}
+
+.euiHeader--dark {
+  @import '~@elastic/eui/src/themes/eui-amsterdam/eui_amsterdam_colors_dark';
+  background-color: $euiColorLightestShade;
+  // color: $euiColorGhost;
+
+  .euiHeaderLogo__text,
+  .euiHeaderSectionItem__button {
+    color: $euiColorGhost;
+  }
+
+  .euiHeaderSectionItem {
+    &:after {
+      background: $euiColorLightShade;
+    }
+  }
+
+  .euiHeaderLogo,
+  .euiHeaderSectionItem__button {
+    &:hover {
+      // TODO: Remove from the `.euiHeader` scope
+      background: $euiColorLightShade !important;
+    }
+
+    &:focus {
+      // TODO: Remove from the `.euiHeader` scope
+      background: shade($euiColorPrimary, 50%) !important;
+    }
+  }
+
+  .euiHeaderNotification,
+  .euiHeaderSectionItemButton__notification {
+    box-shadow: 0 0 0 1px $euiColorLightestShade;
+  }
+}

@@ -106,12 +106,13 @@ export const KibanaChromeSearch = () => {
       height={300}
       singleSelection={true}
       searchProps={{
+        className: 'kbnSearch__darkTheme',
         compressed: true,
         placeholder: 'Search for anything...',
         onFocus: () => setInputHasFocus(true),
         onKeyUpCapture: (e: any) => setSearchValue(e.currentTarget.value),
         // TODO: Allow pre/appends on search inputs
-        append: 'Command + K',
+        append: '⌘K',
         inputRef: (ref: HTMLInputElement) => (inputRef = ref),
         // TODO: `isClearable` doesn't seem to work or is not passed down
         isClearable: true,

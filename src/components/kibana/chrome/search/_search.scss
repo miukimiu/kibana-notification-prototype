@@ -20,3 +20,20 @@
   padding: $euiSizeM $euiSizeM $euiSizeS;
   color: $euiColorDarkShade;
 }
+
+.euiFieldSearch.kbnSearch__darkTheme {
+  @import '~@elastic/eui/src/themes/eui-amsterdam/eui_amsterdam_colors_dark';
+  @import '~@elastic/eui/src/global_styling/variables/form';
+  background-color: $euiPageBackgroundColor;
+  box-shadow: inset 0 0 0 1px transparentize($euiFormBorderOpaqueColor, .9);
+  color: $euiTextColor;
+
+  // sass-lint:disable-block mixins-before-declarations
+  @include euiPlaceholderPerBrowser {
+    color: $euiColorDarkShade;
+  }
+
+  &:focus { // 2
+    @include euiFormControlFocusStyle;
+  }
+}
