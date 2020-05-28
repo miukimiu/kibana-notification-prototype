@@ -4,25 +4,24 @@
   border-bottom: none;
   padding-left: $euiSizeXS;
   padding-right: $euiSizeS;
-  z-index: $euiZLevel7;
 
   .euiHeaderSectionItem:hover {
     background: none;
   }
 
   .euiHeaderSectionItem__button {
-    position: relative; // for aligning the notification badge
     height: $euiHeaderChildSize--width;
+    position: relative; // for aligning the notification badge
     min-width: $euiHeaderChildSize--width;
 
     &:hover {
       background: $euiColorLightestShade;
     }
+  }
 
-    .euiHeaderNotification {
-      top: 4%;
-      right: 4%;
-    }
+  .euiHeaderNotification {
+    top: 4%;
+    right: 4%;
   }
 
   .euiHeaderLogo {
@@ -39,4 +38,10 @@
   .euiHeaderBreadcrumbs {
     margin-left: $euiSizeS;
   }
+}
+
+.euiBody--headerIsFixed .euiCollapsibleNav,
+.euiBody--headerIsFixed .euiFlyout {
+  top: $euiHeaderChildSize--new;
+  height: calc(100% - #{$euiHeaderChildSize--new});
 }

@@ -51,7 +51,7 @@ export const KibanaHeaderSpacesMenu: React.FunctionComponent<Props> = ({
     find(spacesList, { checked: 'on' })
   );
   const [menuIsOpen, setMenuIsOpen] = useState(false);
-  const [isListExtended, setIsListExtended] = useState();
+  const [isListExtended, setIsListExtended] = useState(false);
 
   const onMenuButtonClick = () => {
     setMenuIsOpen(!menuIsOpen);
@@ -98,7 +98,7 @@ export const KibanaHeaderSpacesMenu: React.FunctionComponent<Props> = ({
       panelPaddingSize="none">
       <EuiSelectable
         // TODO: searchable is not of type boolean only true | undefined
-        searchable={isListExtended}
+        searchable={isListExtended ? true : undefined}
         options={options}
         onChange={onSpaceSelect}
         singleSelection="always"

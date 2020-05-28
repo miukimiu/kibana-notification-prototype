@@ -1,15 +1,6 @@
 import React from 'react';
-import ThemeContext from '../../../themes/ThemeContext';
 
-import {
-  EuiHeaderSectionItemButton,
-  EuiHeaderBreadcrumbs,
-  EuiHeaderLogo,
-  EuiIcon,
-  Breadcrumb,
-} from '@elastic/eui';
-
-import { EuiHeaderShim } from '../../eui/header';
+import { EuiHeaderLogo, Breadcrumb, EuiHeader } from '@elastic/eui';
 
 import { user } from './data';
 
@@ -21,10 +12,6 @@ import {
 
 import { KibanaNav } from './nav';
 import { KibanaChromeSearch } from './search';
-
-// @ts-ignore
-import { hamburger } from '../../../images/hamburger';
-
 import { navigate } from 'gatsby';
 
 export type KibanaChromeProps = {
@@ -34,21 +21,6 @@ export type KibanaChromeProps = {
 export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
   breadcrumbs,
 }) => {
-  const context = React.useContext(ThemeContext);
-
-  let navDrawerRef: any;
-  const setNavDrawerRef = (ref: any) => (navDrawerRef = ref);
-
-  const renderMenuTrigger = () => {
-    return (
-      <EuiHeaderSectionItemButton
-        aria-label="Open nav"
-        onClick={() => navDrawerRef.toggleExpansion()}>
-        <EuiIcon type={hamburger} size="m" />
-      </EuiHeaderSectionItemButton>
-    );
-  };
-
   function renderLogo() {
     return (
       <EuiHeaderLogo iconType="logoElastic" href="/" aria-label="Goes to home">
@@ -67,40 +39,38 @@ export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
         },
       },
     ];
-    return (
-      <EuiHeaderBreadcrumbs breadcrumbs={breadcrumbList.concat(breadcrumbs)} />
-    );
+    return breadcrumbList.concat(breadcrumbs);
   };
 
   const leftSectionItems = [
-    { children: renderLogo() },
-    { children: renderBreadcrumbs() },
+    <KibanaNav
+      currentRoute={breadcrumbs ? String(breadcrumbs[0].text) : 'Home'}
+    />,
+    renderLogo(),
   ];
 
-  if (!context.navIsDocked) {
-    leftSectionItems.unshift({ children: renderMenuTrigger() });
-  }
-
   return (
-    <>
-      <EuiHeaderShim
-        position="fixed"
-        className="kibanaChrome__header"
-        leftSectionItems={leftSectionItems}
-        centerSectionItems={[{ children: <KibanaChromeSearch /> }]}
-        rightSectionItems={[
-          { children: <KibanaHeaderUpdates /> },
-          { children: <KibanaHeaderSpacesMenu /> },
-          { children: <KibanaHeaderUserMenu {...user} /> },
-        ]}
-      />
-
-      <KibanaNav
-        currentRoute={breadcrumbs ? String(breadcrumbs[0].text) : 'Home'}
-        toggleDockedNav={context.toggleDockedNav}
-        navIsDocked={context.navIsDocked}
-        ref={setNavDrawerRef}
-      />
-    </>
+    <EuiHeader
+      position="fixed"
+      sections={[
+        {
+          items: leftSectionItems,
+          borders: 'none',
+          breadcrumbs: renderBreadcrumbs(),
+        },
+        {
+          items: [<KibanaChromeSearch />],
+          borders: 'none',
+        },
+        {
+          items: [
+            <KibanaHeaderUpdates />,
+            <KibanaHeaderSpacesMenu />,
+            <KibanaHeaderUserMenu {...user} />,
+          ],
+          borders: 'none',
+        },
+      ]}
+    />
   );
 };

@@ -1,37 +1,12 @@
 import React from 'react';
 
 import {
-  EuiAccordion,
-  EuiText,
-  EuiIcon,
-  EuiFlexGroup,
-  EuiFlexItem,
+  EuiCollapsibleNavGroup,
+  EuiListGroupProps,
   EuiListGroup,
   EuiButton,
   EuiSpacer,
 } from '@elastic/eui';
-
-type EuiListGroupProps = React.ComponentProps<typeof EuiListGroup>;
-
-const buttonContent = (
-  <EuiFlexGroup gutterSize="s" alignItems="center" responsive={false}>
-    <EuiFlexItem grow={false}>
-      <EuiIcon type="logoGCPMono" color="ghost" size="xl" />
-    </EuiFlexItem>
-
-    <EuiFlexItem>
-      <EuiText
-        color="ghost"
-        size="s"
-        className="kibanaNavDeployment__buttonTitle">
-        <p>
-          <small>Deployment</small> <br />
-          <strong>personal-databoard</strong>
-        </p>
-      </EuiText>
-    </EuiFlexItem>
-  </EuiFlexGroup>
-);
 
 const deploymentsList: EuiListGroupProps['listItems'] = [
   {
@@ -46,20 +21,25 @@ const deploymentsList: EuiListGroupProps['listItems'] = [
   },
 ];
 
-const content = (
-  <div className="kibanaNavDeployment__content">
-    <EuiListGroup listItems={deploymentsList} flush />
-    <EuiSpacer size="s" />
-    <EuiButton fullWidth>Manage deployments</EuiButton>
-  </div>
-);
-
 export const KibanaNavDeployment = () => (
-  <EuiAccordion
-    id="accordionForm1"
-    className="kibanaNavDeployment"
-    buttonClassName="kibanaNavDeployment__button"
-    buttonContent={buttonContent}>
-    {content}
-  </EuiAccordion>
+  <EuiCollapsibleNavGroup
+    title={
+      <span>
+        <small style={{ fontWeight: 'normal' }}>Deployment</small> <br />
+        <strong>personal-databoard</strong>
+      </span>
+    }
+    iconType="logoGCPMono"
+    iconSize="xl"
+    isCollapsible={true}
+    initialIsOpen={false}
+    background="dark">
+    <div role="group" className="kibanaNavDeployment__content">
+      <EuiListGroup listItems={deploymentsList} flush />
+      <EuiSpacer size="s" />
+      <EuiButton color="ghost" fullWidth>
+        Manage deployments
+      </EuiButton>
+    </div>
+  </EuiCollapsibleNavGroup>
 );

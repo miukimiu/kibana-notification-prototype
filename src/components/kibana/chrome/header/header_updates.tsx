@@ -1,10 +1,6 @@
 import React, { FunctionComponent, Fragment, useState } from 'react';
 
-import {
-  EuiIcon,
-  EuiHeaderSectionItemButton,
-  EuiNotificationBadge,
-} from '@elastic/eui';
+import { EuiIcon, EuiHeaderSectionItemButton } from '@elastic/eui';
 
 import { EuiHeaderAlertFlyout } from '../../../eui/header';
 import { updates } from '../data';
@@ -28,15 +24,9 @@ export const KibanaHeaderUpdates: FunctionComponent = () => {
       aria-expanded={isFlyoutVisible}
       aria-haspopup="true"
       aria-label="News feed"
+      notification={showNotification ? '•' : undefined}
       onClick={toggleFlyout}>
       <EuiIcon type="email" size="m" />
-
-      {showNotification ? (
-        /** TODO: Add this as an option directly to EuiHeaderSectionItemButton */
-        <EuiNotificationBadge className="euiHeaderNotification">
-          &#9642;
-        </EuiNotificationBadge>
-      ) : null}
     </EuiHeaderSectionItemButton>
   );
 
