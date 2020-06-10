@@ -3,7 +3,7 @@
 .euiFlyout {
   border-left: none;
   border-top: 1px solid $euiColorLightShade;
-  top: $euiHeaderChildSize--new;
-  height: calc(100vh - #{$euiHeaderChildSize--new});
+  top: $euiHeaderChildSize;
+  height: calc(100vh - #{$euiHeaderChildSize});
 }
 

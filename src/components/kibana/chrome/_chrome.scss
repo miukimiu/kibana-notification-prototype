@@ -3,7 +3,7 @@
 }
 
 .euiBody--hasFixed__kbnChrome {
-  padding-top: $euiHeaderChildSize--new * 2;
+  padding-top: $euiHeaderHeight * 2;
 
   .euiHeader {
     z-index: 0;
@@ -11,7 +11,7 @@
 
   .euiFlyout,
   .euiCollapsibleNav {
-    top: $euiHeaderChildSize--new * 2;
+    top: $euiHeaderHeight * 2;
   }
 
   // HACK!!!

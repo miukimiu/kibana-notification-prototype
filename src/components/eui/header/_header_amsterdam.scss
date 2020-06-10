@@ -1,33 +1,18 @@
 .euiHeader {
   @include euiBottomShadowMedium;
-  height: $euiHeaderChildSize--new;
   border-bottom: none;
-  padding-left: $euiSizeXS;
+  padding-left: $euiSizeS;
   padding-right: $euiSizeS;
 
-  .euiHeaderSectionItem:hover {
-    background: none;
-  }
-
   .euiHeaderSectionItem__button {
-    height: $euiHeaderChildSize--width;
-    position: relative; // for aligning the notification badge
-    min-width: $euiHeaderChildSize--width;
-
-    &:hover {
-      background: $euiColorLightestShade;
-    }
-  }
-
-  .euiHeaderNotification {
-    top: 4%;
-    right: 4%;
+    height: $euiHeaderChildSize;
+    min-width: $euiHeaderChildSize;
   }
 
   .euiHeaderLogo {
     padding-left: $euiSizeS;
     padding-right: $euiSizeS;
-    min-width: $euiHeaderChildSize--width;
+    min-width: $euiHeaderChildSize;
   }
 
   .euiHeaderLogo__text {
@@ -38,10 +23,4 @@
   .euiHeaderBreadcrumbs {
     margin-left: $euiSizeS;
   }
-}
-
-.euiBody--headerIsFixed .euiCollapsibleNav,
-.euiBody--headerIsFixed .euiFlyout {
-  top: $euiHeaderChildSize--new;
-  height: calc(100% - #{$euiHeaderChildSize--new});
 }

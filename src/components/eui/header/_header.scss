@@ -1,24 +1,3 @@
-.euiHeader {
-  justify-content: space-between;
-
-  &--fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: $euiZLevel7;
-  }
-
-  .euiHeaderSectionItem {
-    display: flex;
-    align-items: center;
-  }
-}
-
-.euiBody--headerIsFixed {
-  padding-top: $euiHeaderChildSize--new + $euiSizeS; // Extra padding to accound for the shadow
-}
-
 .euiHeader--light + .euiHeader--light {
   border-top: $euiBorderThin;
 }
