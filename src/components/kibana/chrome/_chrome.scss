@@ -1,21 +1,23 @@
-.kbnChrome {
-  z-index: $euiZHeader;
-}
+@include euiHeaderAffordForFixed($euiHeaderHeightCompensation * 2);
 
-.euiBody--hasFixed__kbnChrome {
-  padding-top: $euiHeaderHeight * 2;
+// .kbnChrome {
+//   z-index: $euiZHeader;
+// }
 
-  .euiHeader {
-    z-index: 0;
-  }
+// .euiBody--hasFixed__kbnChrome {
+//   padding-top: $euiHeaderHeight * 2;
 
-  .euiFlyout,
-  .euiCollapsibleNav {
-    top: $euiHeaderHeight * 2;
-  }
+//   .euiHeader {
+//     z-index: 0;
+//   }
 
-  // HACK!!!
-  .euiOverlayMask {
-    z-index: $euiZHeader - 1;
-  }
-}
+//   .euiFlyout,
+//   .euiCollapsibleNav {
+//     top: $euiHeaderHeight * 2;
+//   }
+
+//   // HACK!!!
+//   .euiOverlayMask {
+//     z-index: $euiZHeader - 1;
+//   }
+// }

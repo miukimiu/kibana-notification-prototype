@@ -2,11 +2,12 @@ import React from 'react';
 
 import {
   EuiHeaderLogo,
-  Breadcrumb,
+  EuiBreadcrumb,
   EuiBadge,
   EuiHeaderLinks,
   EuiHeaderLink,
   EuiButton,
+  EuiHeader,
 } from '@elastic/eui';
 import theme from '@elastic/eui/dist/eui_theme_light.json';
 
@@ -21,11 +22,9 @@ import {
 import { KibanaNav } from './nav';
 // import { KibanaChromeSearch } from './search';
 import { navigate } from 'gatsby';
-import { EuiFixed } from '../../eui/fixed/fixed';
-import { EuiHeaderShim } from '../../eui/header/header_shim';
 
 export type KibanaChromeProps = {
-  breadcrumbs?: Breadcrumb[];
+  breadcrumbs?: EuiBreadcrumb[];
 };
 
 export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
@@ -41,10 +40,12 @@ export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
 
   const renderBreadcrumbs = () => {
     if (!breadcrumbs) return;
-    const breadcrumbList: Breadcrumb[] = [
+    const breadcrumbList: EuiBreadcrumb[] = [
       {
         text: 'Home',
-        onClick: () => {
+        href: '#',
+        onClick: (e: any) => {
+          e.preventDefault();
           navigate('/');
         },
       },
@@ -53,8 +54,9 @@ export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
   };
 
   return (
-    <EuiFixed className="kbnChrome">
-      <EuiHeaderShim
+    <>
+      <EuiHeader
+        position="fixed"
         theme="dark"
         sections={[
           {
@@ -80,7 +82,8 @@ export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
           },
         ]}
       />
-      <EuiHeaderShim
+      <EuiHeader
+        position="fixed"
         sections={[
           {
             items: [
@@ -116,6 +119,6 @@ export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
           },
         ]}
       />
-    </EuiFixed>
+    </>
   );
 };

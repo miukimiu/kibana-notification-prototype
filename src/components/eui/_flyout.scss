@@ -1,9 +1,0 @@
-
-// Somehow this needs to happen for all Flyouts in consuming apps if they make the header sticky
-.euiFlyout {
-  border-left: none;
-  border-top: 1px solid $euiColorLightShade;
-  top: $euiHeaderChildSize;
-  height: calc(100vh - #{$euiHeaderChildSize});
-}
-
