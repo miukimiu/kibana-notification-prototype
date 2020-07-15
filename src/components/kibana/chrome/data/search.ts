@@ -46,7 +46,6 @@ export const searchData = [
     title: 'Dashboards',
     url: 'dashboards',
     type: {
-      title: 'Kibana application',
       iconType: 'logoKibana',
     },
   },
