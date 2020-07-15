@@ -20,7 +20,7 @@ import {
 } from './header';
 
 import { KibanaNav } from './nav';
-// import { KibanaChromeSearch } from './search';
+import { KibanaChromeSearch } from './search';
 import { navigate } from 'gatsby';
 
 export type KibanaChromeProps = {
@@ -64,7 +64,7 @@ export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
             borders: 'none',
           },
           {
-            // items: [<KibanaChromeSearch />],
+            items: [<KibanaChromeSearch />],
             borders: 'none',
           },
           {

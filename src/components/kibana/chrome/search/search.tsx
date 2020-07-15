@@ -13,6 +13,7 @@ import {
   EuiLink,
   EuiText,
   EuiPopover,
+  EuiAvatar,
 } from '@elastic/eui';
 import {
   EuiSelectableOptionsProps,
@@ -21,12 +22,40 @@ import {
 
 import { searchData, recents } from '../data';
 
+function createAppendNodes(space?: string) {
+  const spaceAvatar = space ? (
+    <EuiAvatar type="space" name={space} size="s" />
+  ) : (
+    undefined
+  );
+
+  return (
+    <EuiFlexGroup responsive={false} gutterSize="s">
+      {spaceAvatar && <EuiFlexItem grow={false}>{spaceAvatar}</EuiFlexItem>}
+      <EuiFlexItem grow={false}>
+        <EuiBadge
+          aria-hidden={true}
+          className="kibanaChromeSearch__itemGotoBadge"
+          color="hollow">
+          Go to <small>↩</small>
+        </EuiBadge>
+      </EuiFlexItem>
+    </EuiFlexGroup>
+  );
+}
+
 const allSearches = searchData.concat(recents);
 const data: EuiSelectableOptionsProps = allSearches.map(item => {
   return {
     key: item.title,
     label: `${item.title} ${item.type.title}`,
-    prepend: <EuiIcon type={item.type.iconType} size="l" color="subdued" />,
+    prepend: item.type.iconType ? (
+      <EuiIcon type={item.type.iconType} size="m" color="subdued" />
+    ) : (
+      undefined
+    ),
+    className: 'kibanaChromeSearch__item',
+    append: createAppendNodes(item.space),
   };
 });
 
@@ -34,8 +63,9 @@ const recentData: EuiSelectableOptionsProps = recents.map(item => {
   return {
     key: item.title,
     label: `${item.title} ${item.type.title}`,
-    prepend: <EuiIcon type={item.type.iconType} size="l" color="subdued" />,
-    append: <EuiIcon type="clock" size="s" color="subdued" />,
+    prepend: <EuiIcon type="clock" size="m" color="subdued" />,
+    className: 'kibanaChromeSearch__item',
+    append: createAppendNodes(item.space),
   };
 });
 
@@ -82,16 +112,25 @@ export const KibanaChromeSearch = () => {
 
     return (
       <>
-        <EuiHighlight search={searchValue}>{moreInfo.title}</EuiHighlight>
-        <EuiTextColor
-          color="subdued"
-          className="eui-displayBlock kibanaChromeSearch__itemLinkSubtext">
-          <small>
-            <EuiHighlight search={searchValue}>
-              {moreInfo.type.title}
-            </EuiHighlight>
-          </small>
-        </EuiTextColor>
+        <strong>
+          <EuiHighlight search={searchValue}>{moreInfo.title}</EuiHighlight>
+        </strong>
+        <br />
+        <small>
+          <EuiTextColor color="secondary">
+            <strong>
+              <EuiHighlight search={searchValue}>
+                {moreInfo.type.title}
+              </EuiHighlight>
+            </strong>
+          </EuiTextColor>
+          {moreInfo.meta && (
+            <EuiTextColor color="subdued">
+              &ensp;•&ensp;
+              <EuiHighlight search={searchValue}>{moreInfo.meta}</EuiHighlight>
+            </EuiTextColor>
+          )}
+        </small>
       </>
     );
   };

@@ -5,13 +5,16 @@ export const recents = [
       title: 'Saved dashboard',
       iconType: 'dashboardApp',
     },
+    space: 'Default Space',
   },
   {
-    title: '[Flights] Flight Count and Average Ticket Price',
+    title:
+      '[Flights] Flight Count and Average Ticket Price over the course of several years maybe even decades',
     type: {
       title: 'Saved visualization',
       iconType: 'visualizeApp',
     },
+    space: 'Default Space',
   },
   {
     title: '[Flights] Global Flight Dashboard',
@@ -19,6 +22,7 @@ export const recents = [
       title: 'Saved dashboard',
       iconType: 'dashboardApp',
     },
+    space: 'Hello World',
   },
   {
     title: '[Logs] Host, Visits and Bytes Table',
@@ -33,6 +37,7 @@ export const recents = [
       title: 'Saved discover',
       iconType: 'discoverApp',
     },
+    space: 'Hello World',
   },
 ];
 
@@ -46,12 +51,22 @@ export const searchData = [
     },
   },
   {
+    title:
+      'Generate HAR Archive of Network Timings/Details for Kibana requests',
+    type: {
+      title: 'Article',
+    },
+    meta:
+      'https://discuss.elastic.co/t/generate-har-archive-of-network-timings',
+  },
+  {
     title: '[Logs] Web Traffic',
     url: 'dashboard-logs-web-traffic',
     type: {
       title: 'Saved dashboard',
       iconType: 'dashboardApp',
     },
+    space: 'Another',
   },
   {
     title: 'Databoard analytics',
@@ -66,6 +81,7 @@ export const searchData = [
       title: 'personal-databoard',
       iconType: 'logstashInput',
     },
+    space: 'Hello World',
   },
   {
     title: 'SIEM',
@@ -97,5 +113,6 @@ export const searchData = [
       title: 'Kibana application',
       iconType: 'gisApp',
     },
+    space: 'Hello World',
   },
 ];

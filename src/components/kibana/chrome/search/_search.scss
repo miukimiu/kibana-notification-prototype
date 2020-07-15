@@ -1,6 +1,5 @@
 .kibanaChromeSearch {
   justify-content: center;
-
 }
 
 // TODO: How to make this easier on the EUI side?
@@ -21,19 +20,34 @@
   color: $euiColorDarkShade;
 }
 
-.euiFieldSearch.kbnSearch__darkTheme {
-  @import '~@elastic/eui/src/themes/eui-amsterdam/eui_amsterdam_colors_dark';
-  @import '~@elastic/eui/src/global_styling/variables/form';
-  background-color: $euiPageBackgroundColor;
-  box-shadow: inset 0 0 0 1px transparentize($euiFormBorderOpaqueColor, .9);
-  color: $euiTextColor;
-
-  // sass-lint:disable-block mixins-before-declarations
-  @include euiPlaceholderPerBrowser {
-    color: $euiColorDarkShade;
-  }
-
-  &:focus { // 2
-    @include euiFormControlFocusStyle;
+.kibanaChromeSearch__item {
+  strong {
+    font-weight: $euiFontWeightMedium;
   }
 }
+
+.kibanaChromeSearch__itemGotoBadge {
+  display: none;
+
+  .kibanaChromeSearch__item[class*='-isFocused'] &,
+  .kibanaChromeSearch__item:focus & {
+    display: block;
+  }
+}
+
+// .euiFieldSearch.kbnSearch__darkTheme {
+//   @import '~@elastic/eui/src/themes/eui-amsterdam/eui_amsterdam_colors_dark';
+//   @import '~@elastic/eui/src/global_styling/variables/form';
+//   background-color: $euiPageBackgroundColor;
+//   box-shadow: inset 0 0 0 1px transparentize($euiFormBorderOpaqueColor, .9);
+//   color: $euiTextColor;
+
+//   // sass-lint:disable-block mixins-before-declarations
+//   @include euiPlaceholderPerBrowser {
+//     color: $euiColorDarkShade;
+//   }
+
+//   &:focus { // 2
+//     @include euiFormControlFocusStyle;
+//   }
+// }
