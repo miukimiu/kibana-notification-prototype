@@ -2,11 +2,11 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import Layout from '../components/layout';
 
-import { EuiFlexGroup, EuiFlexItem, Breadcrumb } from '@elastic/eui';
+import { EuiFlexGroup, EuiFlexItem, EuiBreadcrumb } from '@elastic/eui';
 // @ts-ignore
 import console_img from '../images/Dev Tools - Console.png';
 
-const breadcrumbs: Breadcrumb[] = [
+const breadcrumbs: EuiBreadcrumb[] = [
   {
     text: 'Dev Tools',
   },

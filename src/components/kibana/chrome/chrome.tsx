@@ -1,6 +1,15 @@
 import React from 'react';
 
-import { EuiHeaderLogo, Breadcrumb, EuiHeader } from '@elastic/eui';
+import {
+  EuiHeaderLogo,
+  EuiBreadcrumb,
+  EuiBadge,
+  EuiHeaderLinks,
+  EuiHeaderLink,
+  EuiButton,
+  EuiHeader,
+} from '@elastic/eui';
+import theme from '@elastic/eui/dist/eui_theme_light.json';
 
 import { user } from './data';
 
@@ -15,7 +24,7 @@ import { KibanaChromeSearch } from './search';
 import { navigate } from 'gatsby';
 
 export type KibanaChromeProps = {
-  breadcrumbs?: Breadcrumb[];
+  breadcrumbs?: EuiBreadcrumb[];
 };
 
 export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
@@ -24,17 +33,19 @@ export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
   function renderLogo() {
     return (
       <EuiHeaderLogo iconType="logoElastic" href="/" aria-label="Goes to home">
-        {!breadcrumbs && 'Elastic'}
+        Elastic
       </EuiHeaderLogo>
     );
   }
 
   const renderBreadcrumbs = () => {
     if (!breadcrumbs) return;
-    const breadcrumbList: Breadcrumb[] = [
+    const breadcrumbList: EuiBreadcrumb[] = [
       {
         text: 'Home',
-        onClick: () => {
+        href: '#',
+        onClick: (e: any) => {
+          e.preventDefault();
           navigate('/');
         },
       },
@@ -42,35 +53,72 @@ export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
     return breadcrumbList.concat(breadcrumbs);
   };
 
-  const leftSectionItems = [
-    <KibanaNav
-      currentRoute={breadcrumbs ? String(breadcrumbs[0].text) : 'Home'}
-    />,
-    renderLogo(),
-  ];
-
   return (
-    <EuiHeader
-      position="fixed"
-      sections={[
-        {
-          items: leftSectionItems,
-          borders: 'none',
-          breadcrumbs: renderBreadcrumbs(),
-        },
-        {
-          items: [<KibanaChromeSearch />],
-          borders: 'none',
-        },
-        {
-          items: [
-            <KibanaHeaderUpdates />,
-            <KibanaHeaderSpacesMenu />,
-            <KibanaHeaderUserMenu {...user} />,
-          ],
-          borders: 'none',
-        },
-      ]}
-    />
+    <>
+      <EuiHeader
+        position="fixed"
+        theme="dark"
+        sections={[
+          {
+            items: [renderLogo()],
+            borders: 'none',
+          },
+          {
+            items: [<KibanaChromeSearch />],
+            borders: 'none',
+          },
+          {
+            items: [
+              <EuiBadge
+                color={theme.euiColorDarkestShade}
+                iconType="arrowDown"
+                iconSide="right">
+                Production logs
+              </EuiBadge>,
+              <KibanaHeaderUpdates />,
+              <KibanaHeaderUserMenu {...user} />,
+            ],
+            borders: 'none',
+          },
+        ]}
+      />
+      <EuiHeader
+        position="fixed"
+        sections={[
+          {
+            items: [
+              <KibanaNav
+                currentRoute={
+                  breadcrumbs ? String(breadcrumbs[0].text) : 'Home'
+                }
+              />,
+              <KibanaHeaderSpacesMenu />,
+            ],
+            borders: 'none',
+            breadcrumbs: renderBreadcrumbs(),
+          },
+          {
+            borders: 'none',
+            items: [
+              <EuiHeaderLinks>
+                <EuiHeaderLink href="#">Full screen</EuiHeaderLink>
+
+                <EuiHeaderLink href="#">Share</EuiHeaderLink>
+
+                <EuiHeaderLink>Clone</EuiHeaderLink>
+
+                <EuiButton
+                  iconType="pencil"
+                  style={{ minWidth: 80 }}
+                  size="s"
+                  color="secondary">
+                  Edit
+                </EuiButton>
+              </EuiHeaderLinks>,
+            ],
+          },
+        ]}
+      />
+    </>
   );
 };

@@ -3,11 +3,16 @@ import Helmet from 'react-helmet';
 // import { Link } from 'gatsby';
 import Layout from '../components/layout';
 
-import { EuiPage, EuiFlexGroup, EuiFlexItem, Breadcrumb } from '@elastic/eui';
+import {
+  EuiPage,
+  EuiFlexGroup,
+  EuiFlexItem,
+  EuiBreadcrumb,
+} from '@elastic/eui';
 // @ts-ignore
 import maps_img from '../images/Maps - Listing.png';
 
-const breadcrumbs: Breadcrumb[] = [
+const breadcrumbs: EuiBreadcrumb[] = [
   {
     text: 'Maps',
   },

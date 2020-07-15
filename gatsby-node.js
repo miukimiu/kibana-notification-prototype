@@ -17,6 +17,10 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
             test: /react-datepicker/,
             use: loaders.null(),
           },
+          {
+            test: /react-beautiful-dnd/,
+            use: loaders.null(),
+          },
         ],
       },
       plugins: [

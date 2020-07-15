@@ -3,13 +3,19 @@ import Helmet from 'react-helmet';
 import { navigate } from 'gatsby';
 import Layout from '../components/layout';
 
-import { EuiPage, EuiFlexGroup, EuiFlexItem, Breadcrumb } from '@elastic/eui';
+import {
+  EuiPage,
+  EuiFlexGroup,
+  EuiFlexItem,
+  EuiBreadcrumb,
+} from '@elastic/eui';
 // @ts-ignore
 import logs_dashboard_img from '../images/[Logs] Web Traffic.png';
 
-const breadcrumbs: Breadcrumb[] = [
+const breadcrumbs: EuiBreadcrumb[] = [
   {
     text: 'Dashboards',
+    href: '#',
     onClick: () => {
       navigate('dashboards');
     },

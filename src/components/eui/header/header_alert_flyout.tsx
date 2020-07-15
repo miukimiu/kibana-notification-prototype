@@ -34,7 +34,7 @@ export const EuiHeaderAlertFlyout: FunctionComponent<EuiHeaderAlertFlyoutProps> 
   const headerId = `${createId()}__header`;
 
   return (
-    <EuiFlyout size="s" aria-labelledby={headerId} {...rest}>
+    <EuiFlyout onClose={onClose} size="s" aria-labelledby={headerId} {...rest}>
       <EuiFlyoutHeader hasBorder>
         <EuiTitle size="s">
           <h2 id={headerId}>{title}</h2>

@@ -1001,10 +1001,10 @@
   resolved "https://registry.yarnpkg.com/@elastic/eslint-config-kibana/-/eslint-config-kibana-0.15.0.tgz#a552793497cdfc1829c2f9b7cd7018eb008f1606"
   integrity sha1-pVJ5NJfN/Bgpwvm3zXAY6wCPFgY=
 
-"@elastic/eui@^23.1.0":
-  version "23.1.0"
-  resolved "https://registry.yarnpkg.com/@elastic/eui/-/eui-23.1.0.tgz#168b296057fe00e734a47441e9954ef9101fa660"
-  integrity sha512-Fa6qU96GcvWe4RLqX/JJ5Gr8KuTLe0ATwoBGcrSFxY8eoc1ScUKQkl4F+OB3a/rZsbopX7C3joRofTVHaKIjFQ==
+"@elastic/eui@^26.0.0":
+  version "26.0.0"
+  resolved "https://registry.yarnpkg.com/@elastic/eui/-/eui-26.0.0.tgz#ea87ee0799731c56c195441f49332a4f873571d6"
+  integrity sha512-0PT3v46IdfUbT0A0XZICPw8EFqOH1TpEace1u86QKpBs0h/NbyGcBGuW+4bjhSyx10jWJVpijY4mrR4g94lXfw==
   dependencies:
     "@types/chroma-js" "^2.0.0"
     "@types/enzyme" "^3.1.13"
@@ -1029,6 +1029,7 @@
     react-virtualized "^9.21.2"
     resize-observer-polyfill "^1.5.0"
     tabbable "^3.0.0"
+    text-diff "^1.0.1"
     uuid "^3.1.0"
 
 "@hapi/address@2.x.x":
@@ -13770,6 +13771,11 @@ terser@^4.1.2:
     commander "^2.20.0"
     source-map "~0.6.1"
     source-map-support "~0.5.12"
+
+text-diff@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/text-diff/-/text-diff-1.0.1.tgz#6c105905435e337857375c9d2f6ca63e453ff565"
+  integrity sha1-bBBZBUNeM3hXN1ydL2ymPkU/9WU=
 
 text-table@0.2.0, text-table@^0.2.0:
   version "0.2.0"
