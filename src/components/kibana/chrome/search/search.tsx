@@ -117,13 +117,15 @@ export const KibanaChromeSearch = () => {
         </strong>
         <br />
         <small>
-          <EuiTextColor color="secondary">
-            <strong>
-              <EuiHighlight search={searchValue}>
-                {moreInfo.type.title}
-              </EuiHighlight>
-            </strong>
-          </EuiTextColor>
+          {moreInfo.type.title && (
+            <EuiTextColor color="secondary">
+              <strong>
+                <EuiHighlight search={searchValue}>
+                  {moreInfo.type.title}
+                </EuiHighlight>
+              </strong>
+            </EuiTextColor>
+          )}
           {moreInfo.meta && (
             <EuiTextColor color="subdued">
               &ensp;•&ensp;
