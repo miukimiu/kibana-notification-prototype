@@ -13,24 +13,24 @@ import {
   EuiTitle,
 } from '@elastic/eui';
 import Layout from '../components/layout';
-import { ObservabilityNav } from '../components/kibana/chrome/nav';
+import { SecurityNav } from '../components/kibana/chrome/nav';
 // @ts-ignore
-import observability_overview_img from '../images/Observability - overview.png';
+import security_overview_img from '../images/Security - overview.png';
 
 const breadcrumbs: EuiBreadcrumb[] = [
   {
-    text: 'Observability',
+    text: 'Security',
   },
 ];
 
 export default () => (
   <Layout chrome={{ breadcrumbs }}>
     <Helmet>
-      <title>Observability Overview | Kibana 8 Prototype</title>
+      <title>Security Overview | Kibana 8 Prototype</title>
     </Helmet>
     <EuiPage>
       <EuiPageSideBar>
-        <ObservabilityNav />
+        <SecurityNav />
       </EuiPageSideBar>
       <EuiPageBody>
         <EuiPageHeader
@@ -40,11 +40,11 @@ export default () => (
             <EuiTitle size="l">
               <h1>
                 <EuiIcon
-                  type="logoObservability"
+                  type="logoSecurity"
                   size="xl"
                   style={{ verticalAlign: 'baseline' }}
                 />{' '}
-                Observability
+                Security
               </h1>
             </EuiTitle>
           </EuiPageHeaderSection>
@@ -53,9 +53,9 @@ export default () => (
           <EuiPageContentBody>
             <img
               className="pageScreenshot pageScreenshot--responsive"
-              alt="Observability overview"
+              alt="Security overview"
               width={1212}
-              src={observability_overview_img}
+              src={security_overview_img}
             />
           </EuiPageContentBody>
         </EuiPageContent>
