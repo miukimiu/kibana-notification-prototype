@@ -15,10 +15,10 @@ import {
   EuiHeaderLinks,
   EuiHeaderLink,
 } from '@elastic/eui';
-import Layout from '../components/layout';
-import { SecurityNav } from '../components/kibana/chrome/nav';
+import Layout from '../../components/layout';
+import { SecurityNav } from '../../components/kibana/chrome/nav';
 // @ts-ignore
-import security_overview_img from '../images/Security - overview.png';
+import security_overview_img from '../../images/Security - overview.png';
 
 const breadcrumbs: EuiBreadcrumb[] = [
   {
@@ -60,7 +60,7 @@ export default () => (
         </EuiPageHeader>
         <EuiPageContent className="euiPageContent--restrictWidth">
           <EuiPageContentBody>
-            <Link to="/security-event">
+            <Link to="/security/event">
               <img
                 className="pageScreenshot pageScreenshot--responsive"
                 alt="Security overview"

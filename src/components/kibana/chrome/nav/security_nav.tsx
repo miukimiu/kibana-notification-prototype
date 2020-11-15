@@ -7,7 +7,7 @@ type Props = {
   currentUrl?: string;
 };
 
-export function SecurityNav({ currentUrl = 'security-overview' }: Props) {
+export function SecurityNav({ currentUrl = 'security/overview' }: Props) {
   const [isSideNavOpenOnMobile, setIsSideNavOpenOnMobile] = useState(false);
 
   const toggleOpenOnMobile = () => {
@@ -36,14 +36,14 @@ export function SecurityNav({ currentUrl = 'security-overview' }: Props) {
   };
 
   const sideNav = [
-    createItem('Overview', { url: 'security-overview' }),
+    createItem('Overview', { url: 'security/overview' }),
     createItem('Alerts'),
     createItem('Hosts', {
       items: [
         createItem('All hosts', { disabled: true }), // TODO: Allow side nav items to be disabled
         createItem('Anamolies'),
         createItem('Authentication list'),
-        createItem('Events', { url: 'security-event' }),
+        createItem('Events', { url: 'security/event' }),
       ],
     }),
     createItem('Network'),

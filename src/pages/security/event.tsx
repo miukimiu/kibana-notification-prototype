@@ -21,11 +21,11 @@ import {
   EuiHeaderLink,
   EuiHeaderLinks,
 } from '@elastic/eui';
-import Layout from '../components/layout';
-import { SecurityNav } from '../components/kibana/chrome/nav';
+import Layout from '../../components/layout';
+import { SecurityNav } from '../../components/kibana/chrome/nav';
 // @ts-ignore
-import traces_img from '../images/Traces - Explorer.png';
-import { KibanaGlobals } from '../components/kibana/chrome/globals';
+import traces_img from '../../images/Traces - Explorer.png';
+import { KibanaGlobals } from '../../components/kibana/chrome/globals';
 
 const breadcrumbs: EuiBreadcrumb[] = [
   {
@@ -57,7 +57,7 @@ export default () => (
     </Helmet>
     <EuiPage>
       <EuiPageSideBar>
-        <SecurityNav currentUrl="security-event" />
+        <SecurityNav currentUrl="security/event" />
       </EuiPageSideBar>
       <EuiPageBody>
         <EuiPageHeader style={{ padding: 16 }}>

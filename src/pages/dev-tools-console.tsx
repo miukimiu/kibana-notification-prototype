@@ -54,18 +54,20 @@ export default () => (
         </EuiPageContent>
       </EuiPageBody>
     </EuiPage>
-    <EuiBottomBar affordForDisplacement={false} paddingSize="s">
-      <EuiButton size="s" color="ghost" minWidth={0}>
-        History
-      </EuiButton>
-      &emsp;
-      <EuiButton size="s" color="ghost" minWidth={0}>
-        Settings
-      </EuiButton>
-      &emsp;
-      <EuiButton size="s" color="ghost" minWidth={0}>
-        Help
-      </EuiButton>
-    </EuiBottomBar>
+    {typeof document !== 'undefined' && (
+      <EuiBottomBar affordForDisplacement={false} paddingSize="s">
+        <EuiButton size="s" color="ghost" minWidth={0}>
+          History
+        </EuiButton>
+        &emsp;
+        <EuiButton size="s" color="ghost" minWidth={0}>
+          Settings
+        </EuiButton>
+        &emsp;
+        <EuiButton size="s" color="ghost" minWidth={0}>
+          Help
+        </EuiButton>
+      </EuiBottomBar>
+    )}
   </Layout>
 );

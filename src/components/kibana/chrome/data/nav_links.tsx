@@ -85,7 +85,7 @@ export const KibanaNavLinks: ChromeNavGroupProps[] = [
     links: [
       {
         label: 'Overview',
-        url: 'security-overview',
+        url: 'security/overview',
       },
       {
         label: 'SIEM',
