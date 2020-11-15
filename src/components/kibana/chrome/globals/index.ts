@@ -1,0 +1,1 @@
+export { KibanaGlobals } from './globals';
