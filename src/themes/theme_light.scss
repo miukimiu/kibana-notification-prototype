@@ -10,3 +10,11 @@
   filter: none;
   mix-blend-mode: normal;
 }
+
+.euiBody--collapsibleNavIsDocked {
+  transition: none;
+}
+
+.euiCollapsibleNav--isDocked {
+  animation: none;
+}

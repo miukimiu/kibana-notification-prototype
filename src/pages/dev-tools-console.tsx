@@ -54,7 +54,7 @@ export default () => (
         </EuiPageContent>
       </EuiPageBody>
     </EuiPage>
-    {typeof document !== 'undefined' && (
+    {/* {typeof document !== 'undefined' && (
       <EuiBottomBar affordForDisplacement={false} paddingSize="s">
         <EuiButton size="s" color="ghost" minWidth={0}>
           History
@@ -68,6 +68,6 @@ export default () => (
           Help
         </EuiButton>
       </EuiBottomBar>
-    )}
+    )} */}
   </Layout>
 );

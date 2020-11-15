@@ -18,13 +18,18 @@
 .euiPageHeader {
   padding: $euiSizeL;
   margin-bottom: 0;
-  border-bottom: $euiBorderThin;
   background: $euiPageBackgroundColor;
+  border-bottom: $euiBorderThin;
+
+   + .euiPageContent:not(.euiPageContent--verticalCenter):not(.euiPageContent--horizontalCenter) {
+    box-shadow: 0 0px 0 1px $euiBorderColor;
+   }
 }
 
 .euiPageHeader--restrictWidth,
 .euiPageContent--restrictWidth .euiPageContentBody {
-  width: max(1000px);
+  width: 100%;
+  max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -39,7 +44,7 @@
 }
 
 .euiPageContent:not(.euiPageContent--verticalCenter):not(.euiPageContent--horizontalCenter) {
-  box-shadow: none !important; // sass-lint:disable-line no-important
+  box-shadow: none;
   border-radius: 0 !important; // sass-lint:disable-line no-important
 }
 

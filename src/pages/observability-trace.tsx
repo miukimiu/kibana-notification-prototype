@@ -73,7 +73,7 @@ export default () => (
         <ObservabilityNav currentUrl="observability-trace" />
       </EuiPageSideBar>
       <EuiPageBody>
-        <EuiPageHeader style={{ padding: 32 }}>
+        <EuiPageHeader>
           <EuiPageHeaderSection>
             <EuiTitle size="l">
               <h1>Finch</h1>

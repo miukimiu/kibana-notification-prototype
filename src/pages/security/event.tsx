@@ -63,7 +63,7 @@ export default () => (
         <EuiPageHeader style={{ padding: 16 }}>
           <KibanaGlobals />
         </EuiPageHeader>
-        <EuiPageHeader style={{ padding: 32 }}>
+        <EuiPageHeader>
           <EuiPageHeaderSection>
             <EuiTitle size="l">
               <h1>Suspicious login</h1>

@@ -50,7 +50,6 @@ export const KibanaNav: FunctionComponent<Props> = ({
 }) => {
   const context = React.useContext(ThemeContext);
   const [navIsOpen, setNavIsOpen] = useState(context.navIsDocked);
-  const [navIsDocked, setNavIsDocked] = useState(context.navIsDocked);
 
   const [pinnedItems, setPinnedItems] = useState<
     EuiPinnableListGroupItemProps[]
@@ -155,7 +154,7 @@ export const KibanaNav: FunctionComponent<Props> = ({
       id="kbnCollapsibleNav"
       aria-label="Main navigation"
       isOpen={navIsOpen}
-      isDocked={navIsDocked}
+      isDocked={context.navIsDocked}
       button={
         <EuiHeaderSectionItemButton
           aria-label="Toggle main navigation"
@@ -201,15 +200,11 @@ export const KibanaNav: FunctionComponent<Props> = ({
             <EuiListGroupItem
               size="xs"
               color="subdued"
-              label={`${navIsDocked ? 'Undock' : 'Dock'} navigation`}
+              label={`${context.navIsDocked ? 'Undock' : 'Dock'} navigation`}
               onClick={() => {
-                setNavIsDocked(!navIsDocked);
-                localStorage.setItem(
-                  'navIsDocked',
-                  JSON.stringify(!navIsDocked)
-                );
+                context.toggleDockedNav();
               }}
-              iconType={navIsDocked ? 'lock' : 'lockOpen'}
+              iconType={context.navIsDocked ? 'lock' : 'lockOpen'}
             />
           </EuiCollapsibleNavGroup>
         </EuiShowFor>

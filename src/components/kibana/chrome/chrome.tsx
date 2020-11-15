@@ -46,10 +46,10 @@ export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
             items: [renderLogo()],
             borders: 'none',
           },
-          {
-            items: [<KibanaChromeSearch />],
-            borders: 'none',
-          },
+          // {
+          //   items: [<KibanaChromeSearch />],
+          //   borders: 'none',
+          // },
           {
             items: [
               <EuiBadge
