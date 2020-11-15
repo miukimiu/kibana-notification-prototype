@@ -5,9 +5,14 @@ import Layout from '../components/layout';
 
 import {
   EuiPage,
-  EuiFlexGroup,
-  EuiFlexItem,
   EuiBreadcrumb,
+  EuiPageBody,
+  EuiPageContent,
+  EuiPageContentBody,
+  EuiPageHeader,
+  EuiPageHeaderSection,
+  EuiTitle,
+  EuiButton,
 } from '@elastic/eui';
 // @ts-ignore
 import dashboard_img from '../images/Dashboard - Listing.png';
@@ -24,21 +29,32 @@ export default () => (
       <title>Dashboards | Kibana 8 Prototype</title>
     </Helmet>
     <EuiPage>
-      <EuiFlexGroup justifyContent="center">
-        <EuiFlexItem grow={false} style={{ position: 'relative' }}>
-          <img
-            className="pageScreenshot"
-            alt="Dashboard listing page"
-            width={990}
-            src={dashboard_img}
-          />
-          <Link
-            className="fake-logs-dashboard-link"
-            to="/dashboard-logs-web-traffic">
-            [Logs] Web traffic
-          </Link>
-        </EuiFlexItem>
-      </EuiFlexGroup>
+      <EuiPageBody>
+        <EuiPageHeader className="euiPageHeader--restrictWidth">
+          <EuiPageHeaderSection>
+            <EuiTitle size="l">
+              <h1>Dashboard</h1>
+            </EuiTitle>
+          </EuiPageHeaderSection>
+          <EuiPageHeaderSection>
+            <EuiButton fill iconType="plusInCircle">
+              Add dashboard
+            </EuiButton>
+          </EuiPageHeaderSection>
+        </EuiPageHeader>
+        <EuiPageContent className="euiPageContent--restrictWidth">
+          <EuiPageContentBody>
+            <Link to="/dashboard-logs-web-traffic">
+              <img
+                className="pageScreenshot pageScreenshot--responsive"
+                alt="Dashboard listing page"
+                width={1212}
+                src={dashboard_img}
+              />
+            </Link>
+          </EuiPageContentBody>
+        </EuiPageContent>
+      </EuiPageBody>
     </EuiPage>
   </Layout>
 );

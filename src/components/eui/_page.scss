@@ -1,0 +1,42 @@
+// There's some funky reversing of background colors to
+// ensure any restricted widths center and color properly
+
+.euiPage {
+  padding: 0;
+  background: $euiColorEmptyShade;
+}
+
+.euiPageSideBar {
+  padding: $euiSizeL;
+  border-right: $euiBorderThin;
+  margin-right: 0;
+  background: $euiPageBackgroundColor;
+}
+
+.euiPageHeader {
+  padding: $euiSizeL;
+  margin-bottom: 0;
+  border-bottom: $euiBorderThin;
+  background: $euiPageBackgroundColor;
+}
+
+.euiPageHeader--restrictWidth,
+.euiPageContent--restrictWidth .euiPageContentBody {
+  width: max(1000px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.euiPageBody {
+  background: $euiPageBackgroundColor;
+}
+
+.euiPageBody--restrictWidth-default,
+.euiPageBody--restrictWidth-custom {
+  background: none;
+}
+
+.euiPageContent:not(.euiPageContent--verticalCenter):not(.euiPageContent--horizontalCenter) {
+  box-shadow: none !important; // sass-lint:disable-line no-important
+  border-radius: 0 !important; // sass-lint:disable-line no-important
+}

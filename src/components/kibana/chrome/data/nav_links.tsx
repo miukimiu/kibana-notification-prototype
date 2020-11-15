@@ -23,9 +23,13 @@ export const KibanaNavTopLinks: ChromeNavGroupProps = {
 
 export const KibanaNavLinks: ChromeNavGroupProps[] = [
   {
-    title: 'Kibana',
+    title: 'Analytics',
     iconType: 'logoKibana',
     links: [
+      {
+        label: 'Overview',
+        url: 'analytics-overview',
+      },
       {
         label: 'Discover',
       },
@@ -38,6 +42,7 @@ export const KibanaNavLinks: ChromeNavGroupProps[] = [
       },
       {
         label: 'Canvas',
+        url: 'canvas',
       },
       {
         label: 'Maps',

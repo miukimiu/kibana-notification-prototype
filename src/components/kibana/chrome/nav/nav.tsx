@@ -107,10 +107,15 @@ export const KibanaNav: FunctionComponent<Props> = ({
     return links.map(link => {
       const { url, onClick, pinned, isActive, ...rest } = link;
       return {
-        onClick: url ? () => navigate(url) : onClick,
+        onClick: url
+          ? () => navigate(url)
+          : () => {
+              return null;
+            },
         pinned: showPinned ? pinned : false,
         isActive: link.label === currentRoute ? true : false,
         'aria-current': link.label === currentRoute ? true : false,
+        isDisabled: !url,
         url,
         ...rest,
       };

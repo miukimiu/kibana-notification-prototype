@@ -21,7 +21,6 @@ import {
 
 import { KibanaNav } from './nav';
 import { KibanaChromeSearch } from './search';
-import { navigate } from 'gatsby';
 
 export type KibanaChromeProps = {
   breadcrumbs?: EuiBreadcrumb[];
@@ -37,21 +36,6 @@ export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
       </EuiHeaderLogo>
     );
   }
-
-  const renderBreadcrumbs = () => {
-    if (!breadcrumbs) return;
-    const breadcrumbList: EuiBreadcrumb[] = [
-      {
-        text: 'Home',
-        href: '#',
-        onClick: (e: any) => {
-          e.preventDefault();
-          navigate('/');
-        },
-      },
-    ];
-    return breadcrumbList.concat(breadcrumbs);
-  };
 
   return (
     <>
@@ -95,7 +79,7 @@ export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
               <KibanaHeaderSpacesMenu />,
             ],
             borders: 'none',
-            breadcrumbs: renderBreadcrumbs(),
+            breadcrumbs,
           },
           {
             borders: 'none',
