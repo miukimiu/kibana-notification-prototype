@@ -8,7 +8,6 @@ import {
   EuiBreadcrumb,
   EuiPageBody,
   EuiPageHeader,
-  EuiPageHeaderSection,
 } from '@elastic/eui';
 // @ts-ignore
 import logs_dashboard_img from '../images/[Logs] Web Traffic.png';

@@ -136,6 +136,7 @@ export const KibanaNavLinks: ChromeNavGroupProps[] = [
       },
       {
         label: 'Stack Management',
+        url: 'stack-management',
       },
       // {
       //   label: 'Console',
