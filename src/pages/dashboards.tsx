@@ -13,6 +13,8 @@ import {
   EuiPageHeaderSection,
   EuiTitle,
   EuiButton,
+  EuiSpacer,
+  EuiFieldSearch,
 } from '@elastic/eui';
 // @ts-ignore
 import dashboard_img from '../images/Dashboard - Listing.png';
@@ -44,6 +46,11 @@ export default () => (
         </EuiPageHeader>
         <EuiPageContent className="euiPageContent--restrictWidth">
           <EuiPageContentBody>
+            <EuiFieldSearch
+              fullWidth
+              placeholder="Search for by dashboard name..."
+            />
+            <EuiSpacer />
             <Link to="/dashboard-logs-web-traffic">
               <img
                 className="pageScreenshot pageScreenshot--responsive"

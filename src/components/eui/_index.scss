@@ -4,3 +4,9 @@
 
 @import './fixed/index';
 @import './padding/index';
+
+.euiButtonContent > * + * {
+  &:empty {
+    margin: 0;
+  }
+}

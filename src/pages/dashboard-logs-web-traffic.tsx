@@ -5,12 +5,14 @@ import Layout from '../components/layout';
 
 import {
   EuiPage,
-  EuiFlexGroup,
-  EuiFlexItem,
   EuiBreadcrumb,
+  EuiPageBody,
+  EuiPageHeader,
+  EuiPageHeaderSection,
 } from '@elastic/eui';
 // @ts-ignore
 import logs_dashboard_img from '../images/[Logs] Web Traffic.png';
+import { KibanaGlobals } from '../components/kibana/chrome/globals';
 
 const breadcrumbs: EuiBreadcrumb[] = [
   {
@@ -31,16 +33,17 @@ export default () => (
       <title>[Logs] Web Traffic | Dashboards | Kibana 8 Prototype</title>
     </Helmet>
     <EuiPage>
-      <EuiFlexGroup justifyContent="center">
-        <EuiFlexItem grow={false}>
-          <img
-            className="pageScreenshot pageScreenshot--fullWidth"
-            alt="[Logs] Web Traffic dashboard"
-            width={1175}
-            src={logs_dashboard_img}
-          />
-        </EuiFlexItem>
-      </EuiFlexGroup>
+      <EuiPageBody>
+        <EuiPageHeader style={{ padding: 16 }}>
+          <KibanaGlobals />
+        </EuiPageHeader>
+        <img
+          className="pageScreenshot pageScreenshot--fullWidth"
+          alt="[Logs] Web Traffic dashboard"
+          width={1175}
+          src={logs_dashboard_img}
+        />
+      </EuiPageBody>
     </EuiPage>
   </Layout>
 );
