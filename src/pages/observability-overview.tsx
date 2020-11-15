@@ -1,5 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import { Link } from 'gatsby';
 import {
   EuiBreadcrumb,
   EuiIcon,
@@ -51,12 +52,14 @@ export default () => (
         </EuiPageHeader>
         <EuiPageContent className="euiPageContent--restrictWidth">
           <EuiPageContentBody>
-            <img
-              className="pageScreenshot pageScreenshot--responsive"
-              alt="Observability overview"
-              width={1212}
-              src={observability_overview_img}
-            />
+            <Link to="/observability-trace">
+              <img
+                className="pageScreenshot pageScreenshot--responsive"
+                alt="Observability overview"
+                width={1212}
+                src={observability_overview_img}
+              />
+            </Link>
           </EuiPageContentBody>
         </EuiPageContent>
       </EuiPageBody>

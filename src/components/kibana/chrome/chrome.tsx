@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import {
   EuiHeaderLogo,
@@ -24,10 +24,12 @@ import { KibanaChromeSearch } from './search';
 
 export type KibanaChromeProps = {
   breadcrumbs?: EuiBreadcrumb[];
+  headerLinks?: ReactNode;
 };
 
 export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
   breadcrumbs,
+  headerLinks,
 }) => {
   function renderLogo() {
     return (
@@ -83,23 +85,7 @@ export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
           },
           {
             borders: 'none',
-            items: [
-              <EuiHeaderLinks>
-                <EuiHeaderLink href="#">Full screen</EuiHeaderLink>
-
-                <EuiHeaderLink href="#">Share</EuiHeaderLink>
-
-                <EuiHeaderLink>Clone</EuiHeaderLink>
-
-                <EuiButton
-                  iconType="pencil"
-                  style={{ minWidth: 80 }}
-                  size="s"
-                  color="secondary">
-                  Edit
-                </EuiButton>
-              </EuiHeaderLinks>,
-            ],
+            items: [headerLinks],
           },
         ]}
       />

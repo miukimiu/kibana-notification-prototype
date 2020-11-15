@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 import Layout from '../components/layout';
 
 import {
@@ -20,6 +20,13 @@ import {
 import dashboard_img from '../images/Dashboard - Listing.png';
 
 const breadcrumbs: EuiBreadcrumb[] = [
+  {
+    text: 'Analytics',
+    href: '#',
+    onClick: () => {
+      navigate('analytics-overview');
+    },
+  },
   {
     text: 'Dashboards',
   },

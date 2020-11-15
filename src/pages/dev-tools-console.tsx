@@ -3,8 +3,6 @@ import Helmet from 'react-helmet';
 import Layout from '../components/layout';
 
 import {
-  EuiFlexGroup,
-  EuiFlexItem,
   EuiBreadcrumb,
   EuiPage,
   EuiPageBody,
@@ -12,7 +10,6 @@ import {
   EuiPageContentBody,
   EuiPageHeader,
   EuiPageHeaderSection,
-  EuiSuperDatePicker,
   EuiTab,
   EuiTabs,
   EuiBottomBar,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Helmet from 'react-helmet';
 import { navigate } from 'gatsby';
 import Layout from '../components/layout';
@@ -8,12 +8,22 @@ import {
   EuiBreadcrumb,
   EuiPageBody,
   EuiPageHeader,
+  EuiButton,
+  EuiHeaderLink,
+  EuiHeaderLinks,
 } from '@elastic/eui';
 // @ts-ignore
 import logs_dashboard_img from '../images/[Logs] Web Traffic.png';
 import { KibanaGlobals } from '../components/kibana/chrome/globals';
 
 const breadcrumbs: EuiBreadcrumb[] = [
+  {
+    text: 'Analytics',
+    href: '#',
+    onClick: () => {
+      navigate('analytics-overview');
+    },
+  },
   {
     text: 'Dashboards',
     href: '#',
@@ -26,8 +36,26 @@ const breadcrumbs: EuiBreadcrumb[] = [
   },
 ];
 
+const headerLinks: ReactNode = (
+  <EuiHeaderLinks>
+    <EuiHeaderLink href="#">Full screen</EuiHeaderLink>
+
+    <EuiHeaderLink href="#">Share</EuiHeaderLink>
+
+    <EuiHeaderLink>Clone</EuiHeaderLink>
+
+    <EuiButton
+      iconType="pencil"
+      style={{ minWidth: 80 }}
+      size="s"
+      color="secondary">
+      Edit
+    </EuiButton>
+  </EuiHeaderLinks>
+);
+
 export default () => (
-  <Layout chrome={{ breadcrumbs }}>
+  <Layout chrome={{ breadcrumbs, headerLinks }}>
     <Helmet>
       <title>[Logs] Web Traffic | Dashboards | Kibana 8 Prototype</title>
     </Helmet>

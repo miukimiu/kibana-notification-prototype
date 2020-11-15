@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Helmet from 'react-helmet';
+import { navigate } from 'gatsby';
+
 import {
   EuiBreadcrumb,
+  EuiHeaderLinks,
   EuiPage,
   EuiPageBody,
   EuiPageContent,
@@ -9,6 +12,8 @@ import {
   EuiPageHeader,
   EuiPageHeaderSection,
   EuiTitle,
+  EuiHeaderLink,
+  EuiButton,
 } from '@elastic/eui';
 import Layout from '../components/layout';
 // @ts-ignore
@@ -20,8 +25,26 @@ const breadcrumbs: EuiBreadcrumb[] = [
   },
 ];
 
+const headerLinks: ReactNode = (
+  <EuiHeaderLinks>
+    <EuiHeaderLink href="#">App directory</EuiHeaderLink>
+
+    <EuiHeaderLink href="#" onClick={() => navigate('dev-tools-console')}>
+      Dev tools
+    </EuiHeaderLink>
+
+    <EuiHeaderLink href="#" onClick={() => navigate('stack-management')}>
+      Manage stack
+    </EuiHeaderLink>
+
+    <EuiButton minWidth={0} size="s" color="secondary">
+      Add data
+    </EuiButton>
+  </EuiHeaderLinks>
+);
+
 export default () => (
-  <Layout chrome={{ breadcrumbs }}>
+  <Layout chrome={{ breadcrumbs, headerLinks }}>
     <Helmet>
       <title>Kibana 8 Prototype</title>
     </Helmet>

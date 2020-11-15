@@ -1,5 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import { Link } from 'gatsby';
 import {
   EuiBreadcrumb,
   EuiIcon,
@@ -51,12 +52,14 @@ export default () => (
         </EuiPageHeader>
         <EuiPageContent className="euiPageContent--restrictWidth">
           <EuiPageContentBody>
-            <img
-              className="pageScreenshot pageScreenshot--responsive"
-              alt="Security overview"
-              width={1212}
-              src={security_overview_img}
-            />
+            <Link to="/security-event">
+              <img
+                className="pageScreenshot pageScreenshot--responsive"
+                alt="Security overview"
+                width={1212}
+                src={security_overview_img}
+              />
+            </Link>
           </EuiPageContentBody>
         </EuiPageContent>
       </EuiPageBody>
