@@ -12,6 +12,7 @@
   border-right: $euiBorderThin;
   margin-right: 0;
   background: $euiPageBackgroundColor;
+  min-width: 220px;
 }
 
 .euiPageHeader {
@@ -40,4 +41,25 @@
 .euiPageContent:not(.euiPageContent--verticalCenter):not(.euiPageContent--horizontalCenter) {
   box-shadow: none !important; // sass-lint:disable-line no-important
   border-radius: 0 !important; // sass-lint:disable-line no-important
+}
+
+// First level of side nav
+.euiSideNavItem--root > .euiSideNavItemButton .euiSideNavItemButton__label {
+  @include euiFontSizeS;
+}
+
+.euiSideNavItem--root + .euiSideNavItem--root {
+  margin-top: $euiSize;
+}
+
+.euiSideNavItemButton:disabled {
+  pointer-events: none;
+}
+
+.euiSideNavItem--trunk .euiSideNavItemButton:disabled .euiSideNavItemButton__label {
+  color: makeHighContrastColor($euiColorLightShade, $euiColorLightShade, 2);
+}
+
+.euiSideNavItem--root > .euiSideNavItemButton-isSelected .euiSideNavItemButton__label {
+  color: $euiColorPrimaryText;
 }

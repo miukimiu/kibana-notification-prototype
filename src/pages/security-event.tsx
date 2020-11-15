@@ -57,7 +57,7 @@ export default () => (
     </Helmet>
     <EuiPage>
       <EuiPageSideBar>
-        <SecurityNav />
+        <SecurityNav currentUrl="security-event" />
       </EuiPageSideBar>
       <EuiPageBody>
         <EuiPageHeader style={{ padding: 16 }}>

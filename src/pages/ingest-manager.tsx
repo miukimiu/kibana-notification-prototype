@@ -54,7 +54,7 @@ export default () => (
     </Helmet>
     <EuiPage>
       <EuiPageSideBar>
-        <KibanaManagementNav />
+        <KibanaManagementNav currentUrl="ingest-manager" />
       </EuiPageSideBar>
       <EuiPageBody>
         <EuiPageHeader>

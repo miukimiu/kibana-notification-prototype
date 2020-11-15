@@ -4,9 +4,6 @@ import {
   EuiHeaderLogo,
   EuiBreadcrumb,
   EuiBadge,
-  EuiHeaderLinks,
-  EuiHeaderLink,
-  EuiButton,
   EuiHeader,
 } from '@elastic/eui';
 import theme from '@elastic/eui/dist/eui_theme_light.json';
@@ -29,7 +26,7 @@ export type KibanaChromeProps = {
 
 export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
   breadcrumbs,
-  headerLinks,
+  headerLinks = <></>,
 }) => {
   function renderLogo() {
     return (

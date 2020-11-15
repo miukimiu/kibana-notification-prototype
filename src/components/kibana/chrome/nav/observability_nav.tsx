@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { navigate } from 'gatsby';
 
-import { EuiIcon, EuiSideNav } from '@elastic/eui';
+import { EuiIcon, EuiSideNav, EuiSpacer, EuiTitle } from '@elastic/eui';
 
-export const ObservabilityNav = () => {
+type Props = {
+  currentUrl?: string;
+};
+
+export function ObservabilityNav({
+  currentUrl = 'observability-overview',
+}: Props) {
   const [isSideNavOpenOnMobile, setIsSideNavOpenOnMobile] = useState(false);
-  const [selectedItemName, setSelectedItem] = useState('Overview');
 
   const toggleOpenOnMobile = () => {
     setIsSideNavOpenOnMobile(!isSideNavOpenOnMobile);
-  };
-
-  const selectItem = (name: string) => {
-    setSelectedItem(name);
   };
 
   const createItem = (name: string, data = {}) => {
@@ -20,15 +21,19 @@ export const ObservabilityNav = () => {
       ...data,
       id: name,
       name,
-      isSelected: selectedItemName === name,
+      // @ts-ignore
+      isSelected: data.url && data.url === currentUrl,
+      // @ts-ignore
+      disabled: !data.url,
       // @ts-ignore
       onClick: data.url
         ? () => {
             // @ts-ignore
             navigate(data.url);
-            selectItem(name);
           }
-        : () => selectItem(name),
+        : () => {
+            return null;
+          },
     };
   };
 
@@ -54,12 +59,19 @@ export const ObservabilityNav = () => {
   ];
 
   return (
-    <EuiSideNav
-      mobileTitle="Navigate within Observability"
-      toggleOpenOnMobile={toggleOpenOnMobile}
-      isOpenOnMobile={isSideNavOpenOnMobile}
-      items={sideNav}
-      style={{ width: 192 }}
-    />
+    <>
+      <EuiTitle size="xs">
+        <h2>
+          <EuiIcon size="l" type="logoObservability" /> &ensp; Observability
+        </h2>
+      </EuiTitle>
+      <EuiSpacer />
+      <EuiSideNav
+        mobileTitle="Navigate within Observability"
+        toggleOpenOnMobile={toggleOpenOnMobile}
+        isOpenOnMobile={isSideNavOpenOnMobile}
+        items={sideNav}
+      />
+    </>
   );
-};
+}

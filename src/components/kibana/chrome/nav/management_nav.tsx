@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { navigate } from 'gatsby';
 
-import { EuiIcon, EuiSideNav } from '@elastic/eui';
+import { EuiIcon, EuiSideNav, EuiSpacer, EuiTitle } from '@elastic/eui';
 
-export const KibanaManagementNav = () => {
+type Props = {
+  currentUrl?: string;
+};
+
+export function KibanaManagementNav({
+  currentUrl = 'stack-management',
+}: Props) {
   const [isSideNavOpenOnMobile, setIsSideNavOpenOnMobile] = useState(false);
-  const [selectedItemName, setSelectedItem] = useState('Overview');
 
   const toggleOpenOnMobile = () => {
     setIsSideNavOpenOnMobile(!isSideNavOpenOnMobile);
-  };
-
-  const selectItem = (name: string) => {
-    setSelectedItem(name);
   };
 
   const createItem = (name: string, data = {}) => {
@@ -20,57 +21,79 @@ export const KibanaManagementNav = () => {
       ...data,
       id: name,
       name,
-      isSelected: selectedItemName === name,
+      // @ts-ignore
+      isSelected: data.url && data.url === currentUrl,
+      // @ts-ignore
+      disabled: !data.url,
       // @ts-ignore
       onClick: data.url
         ? () => {
             // @ts-ignore
             navigate(data.url);
-            selectItem(name);
           }
-        : () => selectItem(name),
+        : () => {
+            return null;
+          },
     };
   };
 
   const sideNav = [
     createItem('Overview', { url: 'stack-management' }),
-    createItem('Elasticsearch', {
-      icon: <EuiIcon type="logoElasticsearch" />,
+    createItem('Console', {
       items: [
-        createItem('Data sources', { disabled: true }), // TODO: Allow side nav items to be disabled
-        createItem('Users'),
-        createItem('Roles'),
-        createItem('Watches'),
-        createItem(
-          'Extremely long title will become truncated when the browser is narrow enough'
-        ),
-      ],
-    }),
-    createItem('Kibana', {
-      icon: <EuiIcon type="logoKibana" />,
-      items: [
+        createItem('Index Patterns'),
+        createItem('Saved Objects'),
+        createItem('Spaces'),
+        createItem('Reporting'),
         createItem('Advanced settings', {
           items: [createItem('General'), createItem('Visualizations')],
         }),
-        createItem('Index Patterns'),
-        createItem('Saved Objects'),
-        createItem('Reporting'),
       ],
     }),
-    createItem('Logstash', {
-      icon: <EuiIcon type="logoLogstash" />,
-      items: [createItem('Pipeline viewer')],
+    createItem('Security', {
+      items: [
+        createItem('Users'),
+        createItem('Roles'),
+        createItem('API Keys'),
+        createItem('Role Mappings'),
+      ],
     }),
-    createItem('Ingest Manager', { url: 'ingest-manager' }),
+    createItem('Elasticsearch', {
+      items: [
+        createItem('Index Management'),
+        createItem('Index Lifecycle Policies'),
+        createItem('Rolllup Jobs'),
+        createItem('Transforms'),
+        createItem('Watcher'),
+        createItem('Snapshot and Restore'),
+        createItem('8.0 Upgrade Assistant'),
+      ],
+    }),
+    createItem('Ingest Manager', {
+      url: 'ingest-manager',
+      items: [
+        createItem('Integrations'),
+        createItem('Configuration'),
+        createItem('Fleet'),
+        createItem('Datasets'),
+      ],
+    }),
   ];
 
   return (
-    <EuiSideNav
-      mobileTitle="Navigate within $APP_NAME"
-      toggleOpenOnMobile={toggleOpenOnMobile}
-      isOpenOnMobile={isSideNavOpenOnMobile}
-      items={sideNav}
-      style={{ width: 192 }}
-    />
+    <>
+      <EuiTitle size="xs">
+        <h2>
+          <EuiIcon size="l" type="managementApp" /> &ensp; Management
+        </h2>
+      </EuiTitle>
+      <EuiSpacer />
+      <EuiSideNav
+        mobileTitle="Navigate within $APP_NAME"
+        toggleOpenOnMobile={toggleOpenOnMobile}
+        isOpenOnMobile={isSideNavOpenOnMobile}
+        items={sideNav}
+      />
+    </>
   );
-};
+}

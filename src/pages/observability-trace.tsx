@@ -70,7 +70,7 @@ export default () => (
     </Helmet>
     <EuiPage>
       <EuiPageSideBar>
-        <ObservabilityNav />
+        <ObservabilityNav currentUrl="observability-trace" />
       </EuiPageSideBar>
       <EuiPageBody>
         <EuiPageHeader style={{ padding: 32 }}>

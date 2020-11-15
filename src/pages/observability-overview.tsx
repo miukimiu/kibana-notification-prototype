@@ -5,15 +5,11 @@ import {
   EuiBreadcrumb,
   EuiButton,
   EuiHeaderLinks,
-  EuiIcon,
   EuiPage,
   EuiPageBody,
   EuiPageContent,
   EuiPageContentBody,
-  EuiPageHeader,
-  EuiPageHeaderSection,
   EuiPageSideBar,
-  EuiTitle,
 } from '@elastic/eui';
 import Layout from '../components/layout';
 import { ObservabilityNav } from '../components/kibana/chrome/nav';
@@ -44,22 +40,6 @@ export default () => (
         <ObservabilityNav />
       </EuiPageSideBar>
       <EuiPageBody>
-        <EuiPageHeader
-          className="euiPageHeader--restrictWidth"
-          style={{ padding: 32 }}>
-          <EuiPageHeaderSection>
-            <EuiTitle size="l">
-              <h1>
-                <EuiIcon
-                  type="logoObservability"
-                  size="xl"
-                  style={{ verticalAlign: 'baseline' }}
-                />{' '}
-                Observability
-              </h1>
-            </EuiTitle>
-          </EuiPageHeaderSection>
-        </EuiPageHeader>
         <EuiPageContent className="euiPageContent--restrictWidth">
           <EuiPageContentBody>
             <Link to="/observability-trace">
