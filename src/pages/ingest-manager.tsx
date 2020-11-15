@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Helmet from 'react-helmet';
 import Layout from '../components/layout';
 import { navigate } from 'gatsby';
@@ -18,6 +18,8 @@ import {
   EuiFlexGrid,
   EuiFlexItem,
   EuiPanel,
+  EuiHeaderLink,
+  EuiHeaderLinks,
 } from '@elastic/eui';
 
 import { KibanaManagementNav } from '../components/kibana/chrome/nav';
@@ -35,8 +37,18 @@ const breadcrumbs: EuiBreadcrumb[] = [
   },
 ];
 
+const headerLinks: ReactNode = (
+  <EuiHeaderLinks>
+    <EuiHeaderLink href="#">Send feedback</EuiHeaderLink>
+
+    <EuiButton minWidth={0} size="s">
+      Settings
+    </EuiButton>
+  </EuiHeaderLinks>
+);
+
 export default () => (
-  <Layout chrome={{ breadcrumbs }}>
+  <Layout chrome={{ breadcrumbs, headerLinks }}>
     <Helmet>
       <title>Ingest Manager | Kibana 8 Prototype</title>
     </Helmet>

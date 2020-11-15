@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Helmet from 'react-helmet';
 import { Link } from 'gatsby';
 import {
   EuiBreadcrumb,
+  EuiButton,
+  EuiHeaderLinks,
   EuiIcon,
   EuiPage,
   EuiPageBody,
@@ -24,8 +26,16 @@ const breadcrumbs: EuiBreadcrumb[] = [
   },
 ];
 
+const headerLinks: ReactNode = (
+  <EuiHeaderLinks>
+    <EuiButton iconType="plusInCircle" minWidth={0} size="s">
+      Add data
+    </EuiButton>
+  </EuiHeaderLinks>
+);
+
 export default () => (
-  <Layout chrome={{ breadcrumbs }}>
+  <Layout chrome={{ breadcrumbs, headerLinks }}>
     <Helmet>
       <title>Observability Overview | Kibana 8 Prototype</title>
     </Helmet>

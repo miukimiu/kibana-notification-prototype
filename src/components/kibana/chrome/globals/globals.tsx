@@ -6,6 +6,7 @@ import {
   EuiFieldText,
   EuiFlexGroup,
   EuiFlexItem,
+  EuiButtonEmpty,
 } from '@elastic/eui';
 import { EuiSuperDatePicker } from '../../../eui';
 
@@ -24,11 +25,20 @@ export function KibanaGlobals({ className, ...rest }: Props): ReactElement {
         <EuiButton size="s" iconType="filter" minWidth={0} />
       </EuiFlexItem>
       <EuiFlexItem grow={true}>
-        <EuiFieldText placeholder="Filter with KQL..." compressed fullWidth />
+        <EuiFieldText
+          placeholder="Filter with KQL..."
+          compressed
+          fullWidth
+          append={
+            <EuiButtonEmpty size="xs" iconType="plusInCircle">
+              Add
+            </EuiButtonEmpty>
+          }
+        />
       </EuiFlexItem>
-      <EuiFlexItem grow={false}>
+      {/* <EuiFlexItem grow={false}>
         <EuiButton size="s" iconType="plusInCircle" color="text" minWidth={0} />
-      </EuiFlexItem>
+      </EuiFlexItem> */}
       <EuiFlexItem grow={false}>
         <EuiSuperDatePicker />
       </EuiFlexItem>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Helmet from 'react-helmet';
 import { Link } from 'gatsby';
 import {
@@ -12,6 +12,8 @@ import {
   EuiPageHeaderSection,
   EuiPageSideBar,
   EuiTitle,
+  EuiHeaderLinks,
+  EuiHeaderLink,
 } from '@elastic/eui';
 import Layout from '../components/layout';
 import { SecurityNav } from '../components/kibana/chrome/nav';
@@ -24,8 +26,14 @@ const breadcrumbs: EuiBreadcrumb[] = [
   },
 ];
 
+const headerLinks: ReactNode = (
+  <EuiHeaderLinks>
+    <EuiHeaderLink href="#">Settings</EuiHeaderLink>
+  </EuiHeaderLinks>
+);
+
 export default () => (
-  <Layout chrome={{ breadcrumbs }}>
+  <Layout chrome={{ breadcrumbs, headerLinks }}>
     <Helmet>
       <title>Security Overview | Kibana 8 Prototype</title>
     </Helmet>
