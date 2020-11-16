@@ -8,7 +8,7 @@ type Props = {
 };
 
 export function ObservabilityNav({
-  currentUrl = 'observability-overview',
+  currentUrl = 'observability/overview',
 }: Props) {
   const [isSideNavOpenOnMobile, setIsSideNavOpenOnMobile] = useState(false);
 
@@ -38,7 +38,7 @@ export function ObservabilityNav({
   };
 
   const sideNav = [
-    createItem('Overview', { url: 'observability-overview' }),
+    createItem('Overview', { url: 'observability/overview' }),
     createItem('Logs', {
       items: [
         createItem('Stream', { disabled: true }), // TODO: Allow side nav items to be disabled

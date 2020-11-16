@@ -64,7 +64,7 @@ export const KibanaNavLinks: ChromeNavGroupProps[] = [
     links: [
       {
         label: 'Overview',
-        url: 'observability-overview',
+        url: 'observability/overview',
       },
       {
         label: 'Metrics',

@@ -60,7 +60,7 @@ export function SolutionCards({
               <EuiButton
                 color="danger"
                 onClick={() => {
-                  navigate('observability-overview');
+                  navigate('observability/overview');
                 }}
                 iconSide="right"
                 iconType="arrowRight">

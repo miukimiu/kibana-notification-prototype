@@ -37,7 +37,7 @@ const breadcrumbs: EuiBreadcrumb[] = [
     text: 'Observability',
     href: '#',
     onClick: () => {
-      navigate('observability-overview');
+      navigate('observability/overview');
     },
   },
   {
