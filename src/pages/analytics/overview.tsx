@@ -24,12 +24,10 @@ import {
   EuiFlexGroup,
   EuiFlexItem,
   EuiCard,
-  EuiFlexGrid,
 } from '@elastic/eui';
 import Layout from '../../components/layout';
 import { SolutionCards } from '../../components/kibana/solutions';
 // @ts-ignore
-import analytics_overview_img from '../../images/analytics_overview.png';
 // @ts-ignore
 import dashboard_img from '../../images/analytics-card-dashboard.png';
 // @ts-ignore
@@ -162,7 +160,9 @@ export default () => (
                     }
                     title="Discover"
                     description="Visualize all aspects of your data."
-                    onClick={() => {}}
+                    onClick={() => {
+                      navigate('analytics/discover');
+                    }}
                   />
                 </EuiFlexItem>
               </EuiFlexGroup>

@@ -32,6 +32,7 @@ export const KibanaNavLinks: ChromeNavGroupProps[] = [
       },
       {
         label: 'Discover',
+        url: 'analytics/discover',
       },
       {
         label: 'Visualize',
@@ -47,7 +48,7 @@ export const KibanaNavLinks: ChromeNavGroupProps[] = [
       },
       {
         label: 'Maps',
-        // url: 'maps',
+        url: 'maps',
       },
       {
         label: 'Machine Learning',

@@ -104,7 +104,7 @@ export const KibanaNav: FunctionComponent<Props> = ({
   ): EuiPinnableListGroupItemProps[] {
     // @ts-ignore
     return links.map(link => {
-      const { url, onClick, pinned, isActive, ...rest } = link;
+      const { url, onClick, pinned, isActive, href, ...rest } = link;
       return {
         onClick: url
           ? () => navigate(url)
@@ -114,7 +114,8 @@ export const KibanaNav: FunctionComponent<Props> = ({
         pinned: showPinned ? pinned : false,
         isActive: link.label === currentRoute ? true : false,
         'aria-current': link.label === currentRoute ? true : false,
-        isDisabled: !url,
+        isDisabled: !url && !href,
+        href,
         url,
         ...rest,
       };

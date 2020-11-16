@@ -18,3 +18,7 @@
 .euiCollapsibleNav--isDocked {
   animation: none;
 }
+
+.euiTab:not(.euiTab--small) {
+  @include euiFontSizeM;
+}
