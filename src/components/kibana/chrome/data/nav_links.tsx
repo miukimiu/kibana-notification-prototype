@@ -21,7 +21,7 @@ export const KibanaNavTopLinks: ChromeNavGroupProps = {
   ],
 };
 
-export const KibanaNavLinks: ChromeNavGroupProps[] = [
+export const KibanaNavLinksFirst: ChromeNavGroupProps[] = [
   {
     title: 'Analytics',
     iconType: 'logoKibana',
@@ -96,42 +96,21 @@ export const KibanaNavLinks: ChromeNavGroupProps[] = [
       },
     ],
   },
-  {
-    title: 'Workplace Search',
-    iconType: 'logoWorkplaceSearch',
-    links: [
-      {
-        label: 'Analytics',
-      },
-      {
-        label: 'Documents',
-      },
-      {
-        label: 'Content Sources',
-      },
-      {
-        label: 'Crawler',
-      },
-      {
-        label: 'Curations',
-      },
-      {
-        label: 'Relevance Tuning',
-      },
-      {
-        label: 'Results Settings',
-      },
-      {
-        label: 'Schema',
-      },
-      {
-        label: 'Synonyms',
-      },
-      {
-        label: 'Workplace Admin',
-      },
-    ],
-  },
+];
+
+export const KibanaNavLinksLast: ChromeNavGroupProps[] = [
+  // {
+  //   title: 'Enterprise Search',
+  //   iconType: 'logoWorkplaceSearch',
+  //   links: [
+  //     {
+  //       label: 'App Search',
+  //     },
+  //     {
+  //       label: 'Workplace Search',
+  //     },
+  //   ],
+  // },
   {
     title: 'Management',
     iconType: 'devToolsApp',

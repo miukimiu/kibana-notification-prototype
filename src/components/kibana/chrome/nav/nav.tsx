@@ -21,10 +21,17 @@ import {
   EuiHorizontalRule,
   EuiCollapsibleNav,
   EuiPinnableListGroupItemProps,
+  EuiButtonIcon,
+  EuiLink,
+  EuiText,
 } from '@elastic/eui';
 
 import { KibanaNavDeployment } from './deployment';
-import { KibanaNavLinks, KibanaNavTopLinks } from '../data/nav_links';
+import {
+  KibanaNavLinksFirst,
+  KibanaNavLinksLast,
+  KibanaNavTopLinks,
+} from '../data/nav_links';
 
 import ThemeContext from '../../../../themes/ThemeContext';
 
@@ -57,7 +64,7 @@ export const KibanaNav: FunctionComponent<Props> = ({
 
   const [openGroups, setOpenGroups] = useState(
     JSON.parse(String(localStorage.getItem('openNavGroups'))) ||
-      KibanaNavLinks.map(object => object.title)
+      KibanaNavLinksFirst.map(object => object.title)
   );
 
   const addPin = (item: any) => {
@@ -122,8 +129,8 @@ export const KibanaNav: FunctionComponent<Props> = ({
     });
   }
 
-  const createNavGroups = () => {
-    return KibanaNavLinks.map(linksObject => {
+  const createNavGroups = (links: ChromeNavGroupProps[]) => {
+    return links.map(linksObject => {
       return (
         <EuiCollapsibleNavGroup
           key={linksObject.title}
@@ -193,7 +200,37 @@ export const KibanaNav: FunctionComponent<Props> = ({
 
       {/* BOTTOM */}
       <EuiFlexItem className="eui-yScroll">
-        {createNavGroups()}
+        {createNavGroups(KibanaNavLinksFirst)}
+
+        <EuiCollapsibleNavGroup
+          background="light"
+          iconType="logoWorkplaceSearch"
+          title="Enterprise Search"
+          isCollapsible={true}
+          initialIsOpen={true}
+          arrowDisplay="none"
+          extraAction={
+            <EuiButtonIcon
+              aria-label="Hide and never show again"
+              title="Hide and never show again"
+              iconType="cross"
+            />
+          }>
+          <EuiText size="s" color="subdued" style={{ padding: '0 8px 8px' }}>
+            <p>
+              Quickly add pretuned search to your website, app, or workplace.
+              Search it all, simply.
+              <br />
+              <EuiLink
+                onClick={() => {
+                  navigate('enterprise-search/overview');
+                }}>
+                Learn more
+              </EuiLink>
+            </p>
+          </EuiText>
+        </EuiCollapsibleNavGroup>
+        {createNavGroups(KibanaNavLinksLast)}
 
         {/* Docking button only for larger screens that can support it*/}
         <EuiShowFor sizes={['l', 'xl']}>
