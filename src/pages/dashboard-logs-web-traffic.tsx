@@ -21,7 +21,7 @@ const breadcrumbs: EuiBreadcrumb[] = [
     text: 'Analytics',
     href: '#',
     onClick: () => {
-      navigate('analytics-overview');
+      navigate('analytics/overview');
     },
   },
   {

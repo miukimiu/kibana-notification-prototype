@@ -14,10 +14,12 @@ import {
   EuiTitle,
   EuiHeaderLink,
   EuiButton,
+  EuiSpacer,
 } from '@elastic/eui';
 import Layout from '../components/layout';
 // @ts-ignore
 import home_img from '../images/home.png';
+import { SolutionCards } from '../components/kibana/solutions';
 
 const breadcrumbs: EuiBreadcrumb[] = [
   {
@@ -61,10 +63,12 @@ export default () => (
         </EuiPageHeader>
         <EuiPageContent className="euiPageContent--restrictWidth">
           <EuiPageContentBody>
+            <SolutionCards />
+            <EuiSpacer size="xl" />
             <img
               className="pageScreenshot pageScreenshot--responsive"
               alt="Elastic home page"
-              width={1212}
+              width={1175}
               src={home_img}
             />
           </EuiPageContentBody>
