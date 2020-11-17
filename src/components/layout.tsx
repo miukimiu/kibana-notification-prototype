@@ -1,22 +1,59 @@
-import React, { ReactNode, FunctionComponent } from 'react';
+import React, {
+  ReactNode,
+  FunctionComponent,
+  createContext,
+  useState,
+} from 'react';
 
 import { KibanaChrome, KibanaChromeProps } from './kibana/chrome/chrome';
 
-if (localStorage.getItem('theme') === 'dark') {
+const localStorageIsDefined: boolean = typeof localStorage !== 'undefined';
+
+if (localStorageIsDefined && localStorage.getItem('theme') === 'dark') {
   require('../themes/theme_dark.scss');
 } else {
   require('../themes/theme_light.scss');
 }
 
+interface KibanaChromeContextShape {
+  chrome?: KibanaChromeProps;
+  setChrome?: React.Dispatch<
+    React.SetStateAction<KibanaChromeContextShape['chrome']>
+  >;
+}
+
+export const KibanaChromeContext = createContext<KibanaChromeContextShape>({
+  chrome: {
+    breadcrumbs: [
+      {
+        text: 'Home',
+      },
+    ],
+  },
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  setChrome: () => {},
+});
+
 const Layout: FunctionComponent<{
   children?: ReactNode;
-  chrome?: KibanaChromeProps;
-}> = ({ children, chrome }) => {
+}> = ({ children }) => {
+  const [chromeOptions, setChromeOptions] = useState({
+    breadcrumbs: [
+      {
+        text: 'Home',
+      },
+    ],
+  });
+
   return (
-    <>
-      <KibanaChrome {...chrome} />
-      <div className="chrWrap">{children}</div>
-    </>
+    <KibanaChromeContext.Provider
+      value={{ chrome: chromeOptions, setChrome: setChromeOptions }}>
+      <div>
+        <KibanaChrome {...chromeOptions} />
+        <div className="chrWrap">{children}</div>
+      </div>
+    </KibanaChromeContext.Provider>
   );
 };
 

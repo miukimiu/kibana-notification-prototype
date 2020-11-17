@@ -20,12 +20,11 @@ import {
   EuiSpacer,
   EuiText,
 } from '@elastic/eui';
-import Layout from '../../components/layout';
 import { ObservabilityNav } from '../../components/kibana/chrome/nav';
-// @ts-ignore
+import { SolutionCards } from '../../components/kibana/solutions';
+import { KibanaPage } from '../../components/kibana/page/page';
 // @ts-ignore
 import illustration_1 from '../../images/Illustration_1.png';
-import { SolutionCards } from '../../components/kibana/solutions';
 
 const breadcrumbs: EuiBreadcrumb[] = [
   {
@@ -42,7 +41,7 @@ const headerLinks: ReactNode = (
 );
 
 export default () => (
-  <Layout chrome={{ breadcrumbs, headerLinks }}>
+  <KibanaPage breadcrumbs={breadcrumbs} headerLinks={headerLinks}>
     <Helmet>
       <title>Observability Overview | Kibana 8 Prototype</title>
     </Helmet>
@@ -175,5 +174,5 @@ export default () => (
         </EuiPageContent>
       </EuiPageBody>
     </EuiPage>
-  </Layout>
+  </KibanaPage>
 );
