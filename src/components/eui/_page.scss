@@ -9,12 +9,14 @@
 
 .euiPageSideBar {
   @include euiYScroll;
+  height: auto;
   padding: $euiSizeL;
   border-right: $euiBorderThin;
   margin-right: 0;
   background: $euiPageBackgroundColor;
   min-width: 260px;
   max-height: calc(100vh - #{$euiHeaderHeightCompensation * 2});
+  flex-grow: 1;
   position: sticky;
   top: #{$euiHeaderHeightCompensation * 2};
 }

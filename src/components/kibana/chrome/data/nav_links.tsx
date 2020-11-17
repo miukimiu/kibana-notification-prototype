@@ -129,18 +129,18 @@ export const KibanaNavLinksLast: ChromeNavGroupProps[] = [
       // {
       //   label: 'Console',
       // },
-      {
-        label: 'Credentials',
-      },
-      {
-        label: 'Ingestion APIs',
-      },
-      {
-        label: 'Query Tester',
-      },
-      {
-        label: 'Reference UI',
-      },
+      //   {
+      //     label: 'Credentials',
+      //   },
+      //   {
+      //     label: 'Ingestion APIs',
+      //   },
+      //   {
+      //     label: 'Query Tester',
+      //   },
+      //   {
+      //     label: 'Reference UI',
+      //   },
     ],
   },
   {

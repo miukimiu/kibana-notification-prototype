@@ -161,8 +161,10 @@ export const KibanaNav: FunctionComponent<Props> = ({
     <EuiCollapsibleNav
       id="kbnCollapsibleNav"
       aria-label="Main navigation"
+      maskProps={{
+        className: 'kbnCollapsibleNav__overlay',
+      }}
       isOpen={navIsOpen}
-      isDocked={context.navIsDocked}
       button={
         <EuiHeaderSectionItemButton
           aria-label="Toggle main navigation"
@@ -232,8 +234,8 @@ export const KibanaNav: FunctionComponent<Props> = ({
         </EuiCollapsibleNavGroup>
         {createNavGroups(KibanaNavLinksLast)}
 
-        {/* Docking button only for larger screens that can support it*/}
-        <EuiShowFor sizes={['l', 'xl']}>
+        {/* NO -- Docking button only for larger screens that can support it*/}
+        {/* <EuiShowFor sizes={['l', 'xl']}>
           <EuiCollapsibleNavGroup>
             <EuiListGroupItem
               size="xs"
@@ -245,7 +247,7 @@ export const KibanaNav: FunctionComponent<Props> = ({
               iconType={context.navIsDocked ? 'lock' : 'lockOpen'}
             />
           </EuiCollapsibleNavGroup>
-        </EuiShowFor>
+        </EuiShowFor> */}
       </EuiFlexItem>
     </EuiCollapsibleNav>
   );

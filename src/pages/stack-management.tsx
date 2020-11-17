@@ -21,7 +21,7 @@ const breadcrumbs: EuiBreadcrumb[] = [
 ];
 
 export default () => (
-  <Layout chrome={{ breadcrumbs }}>
+  <>
     <Helmet>
       <title>Management | Kibana 8 Prototype</title>
     </Helmet>
@@ -55,5 +55,5 @@ export default () => (
         </EuiPageContent>
       </EuiPageBody>
     </EuiPage>
-  </Layout>
+  </>
 );
