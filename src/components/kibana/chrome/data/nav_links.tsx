@@ -36,19 +36,19 @@ export const KibanaNavLinksFirst: ChromeNavGroupProps[] = [
       },
       {
         label: 'Visualize',
-        url: 'visualize',
+        url: 'analytics/visualize',
       },
       {
         label: 'Dashboards',
-        url: 'dashboards',
+        url: 'analytics/dashboards',
       },
       {
         label: 'Canvas',
-        url: 'canvas',
+        url: 'analytics/canvas',
       },
       {
         label: 'Maps',
-        url: 'maps',
+        url: 'analytics/maps',
       },
       {
         label: 'Machine Learning',
@@ -124,7 +124,7 @@ export const KibanaNavLinksLast: ChromeNavGroupProps[] = [
       },
       {
         label: 'Stack Management',
-        url: 'stack-management',
+        url: 'management/stack',
       },
       // {
       //   label: 'Console',

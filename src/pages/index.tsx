@@ -35,7 +35,7 @@ const headerLinks: ReactNode = (
       Dev tools
     </EuiHeaderLink>
 
-    <EuiHeaderLink href="#" onClick={() => navigate('stack-management')}>
+    <EuiHeaderLink href="#" onClick={() => navigate('management/stack')}>
       Manage stack
     </EuiHeaderLink>
 

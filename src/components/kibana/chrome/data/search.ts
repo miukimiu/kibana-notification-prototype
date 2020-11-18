@@ -44,7 +44,7 @@ export const recents = [
 export const searchData = [
   {
     title: 'Dashboards',
-    url: 'dashboards',
+    url: 'analytics/dashboards',
     type: {
       iconType: 'logoKibana',
     },
@@ -60,7 +60,7 @@ export const searchData = [
   },
   {
     title: '[Logs] Web Traffic',
-    url: 'dashboard-logs-web-traffic',
+    url: '/analytics/dashboards/logs-web-traffic',
     type: {
       title: 'Saved dashboard',
       iconType: 'dashboardApp',
@@ -107,7 +107,7 @@ export const searchData = [
   },
   {
     title: 'Maps',
-    url: 'maps',
+    url: 'analytics/maps',
     type: {
       title: 'Kibana application',
       iconType: 'gisApp',

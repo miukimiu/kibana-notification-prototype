@@ -1,30 +1,55 @@
-import React, {
-  FunctionComponent,
-  ReactNode,
-  useContext,
-  useEffect,
-} from 'react';
-import { EuiBreadcrumb } from '@elastic/eui';
-import { KibanaChromeContext } from '../../components/layout';
+import React, { FunctionComponent, ReactNode } from 'react';
+import {
+  EuiBreadcrumb,
+  EuiPageBody,
+  EuiPageSideBar,
+  EuiHeaderLinks,
+  EuiButton,
+} from '@elastic/eui';
+import { KibanaPage, KibanaPageProps } from '../../components/kibana/page/page';
+import { ObservabilityNav } from './nav';
 
-export type KibanaPageProps = {
-  breadcrumbs: EuiBreadcrumb[];
-  headerLinks: ReactNode;
+export type ObservabilityPage = KibanaPageProps & {
+  navItem?: string;
 };
 
-export const KibanaPage: FunctionComponent<KibanaPageProps> = ({
+export const ObservabilityPage: FunctionComponent<ObservabilityPage> = ({
   breadcrumbs,
   headerLinks,
+  navItem,
   children,
+  ...rest
 }) => {
-  const setHeaderItems = useContext(KibanaChromeContext);
+  const baseBreadcrumb: EuiBreadcrumb[] = [
+    {
+      text: 'Observability',
+      href: breadcrumbs?.length ? '/observability/overview' : undefined,
+    },
+  ];
 
-  useEffect(() => {
-    setHeaderItems.setChrome({
-      breadcrumbs,
-      headerLinks,
-    });
-  }, [breadcrumbs, headerLinks]);
+  let theBreadcrumbs = baseBreadcrumb;
+  if (breadcrumbs?.length) {
+    theBreadcrumbs = baseBreadcrumb.concat(breadcrumbs);
+  }
 
-  return <>{children}</>;
+  const theHeaderLinks: ReactNode = (
+    <EuiHeaderLinks>
+      {headerLinks}
+      <EuiButton iconType="plusInCircle" minWidth={0} size="s">
+        Add data
+      </EuiButton>
+    </EuiHeaderLinks>
+  );
+
+  return (
+    <KibanaPage
+      breadcrumbs={theBreadcrumbs}
+      headerLinks={theHeaderLinks}
+      {...rest}>
+      <EuiPageSideBar>
+        <ObservabilityNav navItem={navItem} />
+      </EuiPageSideBar>
+      <EuiPageBody>{children}</EuiPageBody>
+    </KibanaPage>
+  );
 };

@@ -7,7 +7,7 @@ type Props = {
   currentUrl?: string;
 };
 
-export function KibanaSolutionNav({ currentUrl = 'stack-management' }: Props) {
+export function KibanaSolutionNav({ currentUrl = 'management/stack' }: Props) {
   const [isSideNavOpenOnMobile, setIsSideNavOpenOnMobile] = useState(false);
 
   const toggleOpenOnMobile = () => {
@@ -36,7 +36,7 @@ export function KibanaSolutionNav({ currentUrl = 'stack-management' }: Props) {
   };
 
   const sideNav = [
-    createItem('Overview', { url: 'stack-management' }),
+    createItem('Overview', { url: 'management/stack' }),
     createItem('Console', {
       items: [
         createItem('Index Patterns'),
@@ -68,7 +68,7 @@ export function KibanaSolutionNav({ currentUrl = 'stack-management' }: Props) {
       ],
     }),
     createItem('Ingest Manager', {
-      url: 'ingest-manager',
+      url: 'management/ingest',
       items: [
         createItem('Integrations'),
         createItem('Configuration'),

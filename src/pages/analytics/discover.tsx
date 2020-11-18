@@ -1,10 +1,6 @@
 import React, { ReactNode } from 'react';
-import Helmet from 'react-helmet';
-import { navigate } from 'gatsby';
-import Layout from '../../components/layout';
 
 import {
-  EuiPage,
   EuiBreadcrumb,
   EuiPageBody,
   EuiPageHeader,
@@ -22,14 +18,12 @@ import sidebar_img from '../../images/Discover - sidebar.svg';
 import table_img from '../../images/Discover - table.svg';
 
 import { KibanaGlobals } from '../../components/kibana/chrome/globals';
+import { KibanaPage } from '../../components/kibana/page/page';
 
 const breadcrumbs: EuiBreadcrumb[] = [
   {
     text: 'Analytics',
-    href: '#',
-    onClick: () => {
-      navigate('analytics/overview');
-    },
+    href: '/analytics/overview',
   },
   {
     text: 'Discover',
@@ -57,37 +51,35 @@ const headerLinks: ReactNode = (
 );
 
 export default () => (
-  <Layout chrome={{ breadcrumbs, headerLinks }}>
-    <Helmet>
-      <title>[Logs] Web Traffic | Dashboards | Kibana 8 Prototype</title>
-    </Helmet>
-    <EuiPage>
-      <EuiPageBody>
-        <EuiPageHeader style={{ padding: 16 }}>
-          <KibanaGlobals />
-        </EuiPageHeader>
-        <EuiFlexGroup gutterSize="none" responsive={false}>
-          <EuiFlexItem grow={false}>
-            <EuiPageSideBar style={{ backgroundColor: '#F5F7FA' }}>
-              <img
-                className="pageScreenshot"
-                alt="Discover sidebar"
-                width={288}
-                src={sidebar_img}
-              />
-            </EuiPageSideBar>
-          </EuiFlexItem>
-          <EuiFlexItem>
-            <EuiPageContent>
-              <img
-                className="pageScreenshot pageScreenshot--fullWidth"
-                alt="Discover table"
-                src={table_img}
-              />
-            </EuiPageContent>
-          </EuiFlexItem>
-        </EuiFlexGroup>
-      </EuiPageBody>
-    </EuiPage>
-  </Layout>
+  <KibanaPage
+    pageTitle="Discover"
+    breadcrumbs={breadcrumbs}
+    headerLinks={headerLinks}>
+    <EuiPageBody>
+      <EuiPageHeader style={{ padding: 16 }}>
+        <KibanaGlobals />
+      </EuiPageHeader>
+      <EuiFlexGroup gutterSize="none" responsive={false}>
+        <EuiFlexItem grow={false}>
+          <EuiPageSideBar style={{ backgroundColor: '#F5F7FA' }}>
+            <img
+              className="pageScreenshot"
+              alt="Discover sidebar"
+              width={288}
+              src={sidebar_img}
+            />
+          </EuiPageSideBar>
+        </EuiFlexItem>
+        <EuiFlexItem>
+          <EuiPageContent>
+            <img
+              className="pageScreenshot pageScreenshot--fullWidth"
+              alt="Discover table"
+              src={table_img}
+            />
+          </EuiPageContent>
+        </EuiFlexItem>
+      </EuiFlexGroup>
+    </EuiPageBody>
+  </KibanaPage>
 );
