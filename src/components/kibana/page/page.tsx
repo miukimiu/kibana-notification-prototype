@@ -10,6 +10,7 @@ import {
   EuiPageBody,
   EuiPageSideBar,
 } from '@elastic/eui';
+import { KibanaPageHeader, KibanaPageHeaderProps } from './page_header';
 import { KibanaChromeContext } from '../../layout';
 import Helmet from 'react-helmet';
 
@@ -18,6 +19,8 @@ export type KibanaPageProps = {
   headerLinks?: ReactNode;
   pageTitle: string;
   solutionNav?: ReactNode;
+
+  pageHeader?: KibanaPageHeaderProps;
 };
 
 export const KibanaPage: FunctionComponent<KibanaPageProps> = ({
@@ -25,7 +28,8 @@ export const KibanaPage: FunctionComponent<KibanaPageProps> = ({
   headerLinks,
   solutionNav,
   children,
-  pageTitle = '',
+  pageTitle,
+  pageHeader,
 }) => {
   const setHeaderItems = useContext(KibanaChromeContext);
 
@@ -36,23 +40,26 @@ export const KibanaPage: FunctionComponent<KibanaPageProps> = ({
     });
   }, [breadcrumbs, headerLinks]);
 
-  const pageContent = solutionNav ? (
-    <EuiPage>
-      <EuiPageSideBar>{solutionNav}</EuiPageSideBar>
-      <EuiPageBody>{children}</EuiPageBody>
-    </EuiPage>
+  const optionalSideBar = solutionNav ? (
+    <EuiPageSideBar>{solutionNav}</EuiPageSideBar>
   ) : (
-    <EuiPage>
-      <EuiPageBody>{children}</EuiPageBody>
-    </EuiPage>
+    undefined
   );
+
+  const optionalPageHeader = pageHeader && <KibanaPageHeader {...pageHeader} />;
 
   return (
     <>
       <Helmet>
         <title>{pageTitle} | Kibana 8 Prototype</title>
       </Helmet>
-      {pageContent}
+      <EuiPage>
+        {optionalSideBar}
+        <EuiPageBody>
+          {optionalPageHeader}
+          {children}
+        </EuiPageBody>
+      </EuiPage>
     </>
   );
 };

@@ -5,16 +5,16 @@ import {
   EuiBreadcrumb,
   EuiPageContent,
   EuiPageContentBody,
-  EuiPageHeader,
-  EuiPageHeaderSection,
-  EuiTitle,
-  EuiButton,
   EuiSpacer,
   EuiFieldSearch,
+  EuiButton,
 } from '@elastic/eui';
 // @ts-ignore
 import dashboard_img from '../../images/Dashboard - Listing.png';
 import { KibanaPage } from '../../components/kibana/page/page';
+import { KibanaPageHeaderProps } from '../../components/kibana/page/page_header';
+
+const PAGE_TITLE = 'Dashboards';
 
 const breadcrumbs: EuiBreadcrumb[] = [
   {
@@ -25,24 +25,24 @@ const breadcrumbs: EuiBreadcrumb[] = [
     },
   },
   {
-    text: 'Dashboards',
+    text: PAGE_TITLE,
   },
 ];
 
+const pageHeader: KibanaPageHeaderProps = {
+  pageTitle: PAGE_TITLE,
+  restrictWidth: true,
+  primary: {
+    children: 'Add dashboard',
+    iconType: 'plusInCircle',
+  },
+};
+
 export default () => (
-  <KibanaPage pageTitle="Dashboards" breadcrumbs={breadcrumbs}>
-    <EuiPageHeader className="euiPageHeader--restrictWidth">
-      <EuiPageHeaderSection>
-        <EuiTitle size="l">
-          <h1>Dashboards</h1>
-        </EuiTitle>
-      </EuiPageHeaderSection>
-      <EuiPageHeaderSection>
-        <EuiButton fill iconType="plusInCircle">
-          Add dashboard
-        </EuiButton>
-      </EuiPageHeaderSection>
-    </EuiPageHeader>
+  <KibanaPage
+    pageTitle={PAGE_TITLE}
+    breadcrumbs={breadcrumbs}
+    pageHeader={pageHeader}>
     <EuiPageContent className="euiPageContent--restrictWidth">
       <EuiPageContentBody>
         <EuiFieldSearch

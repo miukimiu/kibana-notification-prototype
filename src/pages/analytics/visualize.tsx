@@ -5,15 +5,13 @@ import {
   EuiBreadcrumb,
   EuiPageContent,
   EuiPageContentBody,
-  EuiPageHeader,
-  EuiPageHeaderSection,
-  EuiTab,
-  EuiTabs,
 } from '@elastic/eui';
 // @ts-ignore
 import tsvb_img from '../../images/TSVB.png';
-import { EuiSuperDatePicker } from '../../components/eui/super_date_picker';
 import { KibanaPage } from '../../components/kibana/page/page';
+import { KibanaPageHeaderTabs } from '../../components/kibana/page/page_header';
+
+const PAGE_TITLE = 'TSVB';
 
 const breadcrumbs: EuiBreadcrumb[] = [
   {
@@ -28,27 +26,40 @@ const breadcrumbs: EuiBreadcrumb[] = [
     href: '#',
   },
   {
-    text: 'TSVB',
+    text: PAGE_TITLE,
+  },
+];
+
+const tabs: KibanaPageHeaderTabs['tabs'] = [
+  {
+    name: 'Time series',
+  },
+  {
+    name: 'Metric',
+  },
+  {
+    name: 'Top N',
+    isSelected: true,
+  },
+  {
+    name: 'Gauge',
+  },
+  {
+    name: 'Markdown',
+  },
+  {
+    name: 'Tables',
   },
 ];
 
 export default () => (
-  <KibanaPage pageTitle="TSVB" breadcrumbs={breadcrumbs}>
-    <EuiPageHeader>
-      <EuiPageHeaderSection>
-        <EuiTabs display="condensed">
-          <EuiTab>Time series</EuiTab>
-          <EuiTab>Metric</EuiTab>
-          <EuiTab>Top N</EuiTab>
-          <EuiTab isSelected>Gauge</EuiTab>
-          <EuiTab>Markdown</EuiTab>
-          <EuiTab>Table</EuiTab>
-        </EuiTabs>
-      </EuiPageHeaderSection>
-      <EuiPageHeaderSection>
-        <EuiSuperDatePicker />
-      </EuiPageHeaderSection>
-    </EuiPageHeader>
+  <KibanaPage
+    pageTitle={PAGE_TITLE}
+    breadcrumbs={breadcrumbs}
+    pageHeader={{
+      tabs: tabs,
+      time: true,
+    }}>
     <EuiPageContent>
       <EuiPageContentBody>
         <img
