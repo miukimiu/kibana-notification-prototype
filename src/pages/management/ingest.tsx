@@ -13,8 +13,6 @@ import {
   EuiHeaderLink,
   EuiHeaderLinks,
   EuiPageContentBody,
-  EuiTab,
-  EuiTabs,
   EuiFieldSearch,
   EuiFlexGroup,
   EuiFacetButton,
@@ -24,7 +22,6 @@ import {
   EuiCard,
   EuiIcon,
   EuiHorizontalRule,
-  EuiPanel,
   EuiCallOut,
 } from '@elastic/eui';
 
