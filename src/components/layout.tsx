@@ -17,7 +17,7 @@ if (localStorageIsDefined && localStorage.getItem('theme') === 'dark') {
 
 interface KibanaChromeContextShape {
   chrome?: KibanaChromeProps;
-  setChrome?: React.Dispatch<
+  setChrome: React.Dispatch<
     React.SetStateAction<KibanaChromeContextShape['chrome']>
   >;
 }

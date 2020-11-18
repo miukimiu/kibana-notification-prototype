@@ -3,7 +3,6 @@ import { navigate } from 'gatsby';
 
 import {
   EuiBreadcrumb,
-  EuiPageBody,
   EuiPageHeader,
   EuiButton,
   EuiHeaderLink,
@@ -57,16 +56,14 @@ export default () => (
     pageTitle="[Logs] Web Traffic | Dashboards"
     breadcrumbs={breadcrumbs}
     headerLinks={headerLinks}>
-    <EuiPageBody>
-      <EuiPageHeader style={{ padding: 16 }}>
-        <KibanaGlobals />
-      </EuiPageHeader>
-      <img
-        className="pageScreenshot pageScreenshot--fullWidth"
-        alt="[Logs] Web Traffic dashboard"
-        width={1175}
-        src={logs_dashboard_img}
-      />
-    </EuiPageBody>
+    <EuiPageHeader style={{ padding: 16 }}>
+      <KibanaGlobals />
+    </EuiPageHeader>
+    <img
+      className="pageScreenshot pageScreenshot--fullWidth"
+      alt="[Logs] Web Traffic dashboard"
+      width={1175}
+      src={logs_dashboard_img}
+    />
   </KibanaPage>
 );

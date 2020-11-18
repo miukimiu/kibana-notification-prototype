@@ -3,7 +3,6 @@ import { Link, navigate } from 'gatsby';
 
 import {
   EuiBreadcrumb,
-  EuiPageBody,
   EuiPageContent,
   EuiPageContentBody,
   EuiPageHeader,
@@ -32,36 +31,34 @@ const breadcrumbs: EuiBreadcrumb[] = [
 
 export default () => (
   <KibanaPage pageTitle="Dashboards" breadcrumbs={breadcrumbs}>
-    <EuiPageBody>
-      <EuiPageHeader className="euiPageHeader--restrictWidth">
-        <EuiPageHeaderSection>
-          <EuiTitle size="l">
-            <h1>Dashboards</h1>
-          </EuiTitle>
-        </EuiPageHeaderSection>
-        <EuiPageHeaderSection>
-          <EuiButton fill iconType="plusInCircle">
-            Add dashboard
-          </EuiButton>
-        </EuiPageHeaderSection>
-      </EuiPageHeader>
-      <EuiPageContent className="euiPageContent--restrictWidth">
-        <EuiPageContentBody>
-          <EuiFieldSearch
-            fullWidth
-            placeholder="Search for by dashboard name..."
+    <EuiPageHeader className="euiPageHeader--restrictWidth">
+      <EuiPageHeaderSection>
+        <EuiTitle size="l">
+          <h1>Dashboards</h1>
+        </EuiTitle>
+      </EuiPageHeaderSection>
+      <EuiPageHeaderSection>
+        <EuiButton fill iconType="plusInCircle">
+          Add dashboard
+        </EuiButton>
+      </EuiPageHeaderSection>
+    </EuiPageHeader>
+    <EuiPageContent className="euiPageContent--restrictWidth">
+      <EuiPageContentBody>
+        <EuiFieldSearch
+          fullWidth
+          placeholder="Search for by dashboard name..."
+        />
+        <EuiSpacer />
+        <Link to="/analytics/dashboards/logs-web-traffic">
+          <img
+            className="pageScreenshot pageScreenshot--responsive"
+            alt="Dashboard listing page"
+            width={1212}
+            src={dashboard_img}
           />
-          <EuiSpacer />
-          <Link to="/analytics/dashboards/logs-web-traffic">
-            <img
-              className="pageScreenshot pageScreenshot--responsive"
-              alt="Dashboard listing page"
-              width={1212}
-              src={dashboard_img}
-            />
-          </Link>
-        </EuiPageContentBody>
-      </EuiPageContent>
-    </EuiPageBody>
+        </Link>
+      </EuiPageContentBody>
+    </EuiPageContent>
   </KibanaPage>
 );

@@ -1,11 +1,5 @@
 import React, { FunctionComponent, ReactNode } from 'react';
-import {
-  EuiBreadcrumb,
-  EuiPageBody,
-  EuiPageSideBar,
-  EuiHeaderLinks,
-  EuiButton,
-} from '@elastic/eui';
+import { EuiBreadcrumb, EuiHeaderLinks, EuiButton } from '@elastic/eui';
 import { KibanaPage, KibanaPageProps } from '../../components/kibana/page/page';
 import { ObservabilityNav } from './nav';
 
@@ -45,11 +39,9 @@ export const ObservabilityPage: FunctionComponent<ObservabilityPage> = ({
     <KibanaPage
       breadcrumbs={theBreadcrumbs}
       headerLinks={theHeaderLinks}
+      solutionNav={<ObservabilityNav navItem={navItem} />}
       {...rest}>
-      <EuiPageSideBar>
-        <ObservabilityNav navItem={navItem} />
-      </EuiPageSideBar>
-      <EuiPageBody>{children}</EuiPageBody>
+      {children}
     </KibanaPage>
   );
 };

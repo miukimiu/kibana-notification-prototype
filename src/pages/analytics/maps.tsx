@@ -3,7 +3,6 @@ import { navigate } from 'gatsby';
 
 import {
   EuiBreadcrumb,
-  EuiPageBody,
   EuiPageContent,
   EuiPageContentBody,
   EuiPageHeader,
@@ -32,32 +31,30 @@ const breadcrumbs: EuiBreadcrumb[] = [
 
 export default () => (
   <KibanaPage pageTitle="Maps" breadcrumbs={breadcrumbs}>
-    <EuiPageBody>
-      <EuiPageHeader className="euiPageHeader--restrictWidth">
-        <EuiPageHeaderSection>
-          <EuiTitle size="l">
-            <h1>Maps</h1>
-          </EuiTitle>
-        </EuiPageHeaderSection>
-        <EuiPageHeaderSection>
-          <EuiButton fill iconType="plusInCircle">
-            Add map
-          </EuiButton>
-        </EuiPageHeaderSection>
-      </EuiPageHeader>
-      <EuiPageContent className="euiPageContent--restrictWidth">
-        <EuiPageContentBody>
-          <EuiFieldSearch fullWidth placeholder="Search for a by map name..." />
-          <EuiSpacer />
+    <EuiPageHeader className="euiPageHeader--restrictWidth">
+      <EuiPageHeaderSection>
+        <EuiTitle size="l">
+          <h1>Maps</h1>
+        </EuiTitle>
+      </EuiPageHeaderSection>
+      <EuiPageHeaderSection>
+        <EuiButton fill iconType="plusInCircle">
+          Add map
+        </EuiButton>
+      </EuiPageHeaderSection>
+    </EuiPageHeader>
+    <EuiPageContent className="euiPageContent--restrictWidth">
+      <EuiPageContentBody>
+        <EuiFieldSearch fullWidth placeholder="Search for a by map name..." />
+        <EuiSpacer />
 
-          <img
-            className="pageScreenshot pageScreenshot--responsive"
-            alt="Dashboard listing page"
-            width={1212}
-            src={dashboard_img}
-          />
-        </EuiPageContentBody>
-      </EuiPageContent>
-    </EuiPageBody>
+        <img
+          className="pageScreenshot pageScreenshot--responsive"
+          alt="Dashboard listing page"
+          width={1212}
+          src={dashboard_img}
+        />
+      </EuiPageContentBody>
+    </EuiPageContent>
   </KibanaPage>
 );

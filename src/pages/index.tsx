@@ -1,12 +1,9 @@
 import React, { ReactNode } from 'react';
-import Helmet from 'react-helmet';
 import { navigate } from 'gatsby';
 
 import {
   EuiBreadcrumb,
   EuiHeaderLinks,
-  EuiPage,
-  EuiPageBody,
   EuiPageContent,
   EuiPageContentBody,
   EuiPageHeader,
@@ -16,10 +13,10 @@ import {
   EuiButton,
   EuiSpacer,
 } from '@elastic/eui';
-import Layout from '../components/layout';
 // @ts-ignore
 import home_img from '../images/home.png';
 import { SolutionCards } from '../components/kibana/solutions';
+import { KibanaPage } from '../components/kibana/page/page';
 
 const breadcrumbs: EuiBreadcrumb[] = [
   {
@@ -46,34 +43,30 @@ const headerLinks: ReactNode = (
 );
 
 export default () => (
-  <Layout chrome={{ breadcrumbs, headerLinks }}>
-    <Helmet>
-      <title>Kibana 8 Prototype</title>
-    </Helmet>
-    <EuiPage>
-      <EuiPageBody>
-        <EuiPageHeader
-          className="euiPageHeader--restrictWidth"
-          style={{ padding: 32 }}>
-          <EuiPageHeaderSection>
-            <EuiTitle size="l">
-              <h1>Welcome to the Elastic stack!</h1>
-            </EuiTitle>
-          </EuiPageHeaderSection>
-        </EuiPageHeader>
-        <EuiPageContent className="euiPageContent--restrictWidth">
-          <EuiPageContentBody>
-            <SolutionCards />
-            <EuiSpacer size="xl" />
-            <img
-              className="pageScreenshot pageScreenshot--responsive"
-              alt="Elastic home page"
-              width={1175}
-              src={home_img}
-            />
-          </EuiPageContentBody>
-        </EuiPageContent>
-      </EuiPageBody>
-    </EuiPage>
-  </Layout>
+  <KibanaPage
+    pageTitle="Home"
+    breadcrumbs={breadcrumbs}
+    headerLinks={headerLinks}>
+    <EuiPageHeader
+      className="euiPageHeader--restrictWidth"
+      style={{ padding: 32 }}>
+      <EuiPageHeaderSection>
+        <EuiTitle size="l">
+          <h1>Welcome to the Elastic stack!</h1>
+        </EuiTitle>
+      </EuiPageHeaderSection>
+    </EuiPageHeader>
+    <EuiPageContent className="euiPageContent--restrictWidth">
+      <EuiPageContentBody>
+        <SolutionCards />
+        <EuiSpacer size="xl" />
+        <img
+          className="pageScreenshot pageScreenshot--fullWidth"
+          alt="Elastic home page"
+          width={1175}
+          src={home_img}
+        />
+      </EuiPageContentBody>
+    </EuiPageContent>
+  </KibanaPage>
 );

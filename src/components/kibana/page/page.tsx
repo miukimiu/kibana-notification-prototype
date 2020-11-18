@@ -4,7 +4,12 @@ import React, {
   useContext,
   useEffect,
 } from 'react';
-import { EuiBreadcrumb, EuiPage } from '@elastic/eui';
+import {
+  EuiBreadcrumb,
+  EuiPage,
+  EuiPageBody,
+  EuiPageSideBar,
+} from '@elastic/eui';
 import { KibanaChromeContext } from '../../layout';
 import Helmet from 'react-helmet';
 
@@ -12,11 +17,13 @@ export type KibanaPageProps = {
   breadcrumbs?: EuiBreadcrumb[];
   headerLinks?: ReactNode;
   pageTitle: string;
+  solutionNav?: ReactNode;
 };
 
 export const KibanaPage: FunctionComponent<KibanaPageProps> = ({
   breadcrumbs,
   headerLinks,
+  solutionNav,
   children,
   pageTitle = '',
 }) => {
@@ -29,12 +36,23 @@ export const KibanaPage: FunctionComponent<KibanaPageProps> = ({
     });
   }, [breadcrumbs, headerLinks]);
 
+  const pageContent = solutionNav ? (
+    <EuiPage>
+      <EuiPageSideBar>{solutionNav}</EuiPageSideBar>
+      <EuiPageBody>{children}</EuiPageBody>
+    </EuiPage>
+  ) : (
+    <EuiPage>
+      <EuiPageBody>{children}</EuiPageBody>
+    </EuiPage>
+  );
+
   return (
     <>
       <Helmet>
         <title>{pageTitle} | Kibana 8 Prototype</title>
       </Helmet>
-      <EuiPage>{children}</EuiPage>
+      {pageContent}
     </>
   );
 };

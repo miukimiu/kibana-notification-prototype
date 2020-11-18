@@ -2,7 +2,6 @@ import React, { ReactNode } from 'react';
 
 import {
   EuiBreadcrumb,
-  EuiPageBody,
   EuiPageHeader,
   EuiButton,
   EuiHeaderLink,
@@ -55,31 +54,29 @@ export default () => (
     pageTitle="Discover"
     breadcrumbs={breadcrumbs}
     headerLinks={headerLinks}>
-    <EuiPageBody>
-      <EuiPageHeader style={{ padding: 16 }}>
-        <KibanaGlobals />
-      </EuiPageHeader>
-      <EuiFlexGroup gutterSize="none" responsive={false}>
-        <EuiFlexItem grow={false}>
-          <EuiPageSideBar style={{ backgroundColor: '#F5F7FA' }}>
-            <img
-              className="pageScreenshot"
-              alt="Discover sidebar"
-              width={288}
-              src={sidebar_img}
-            />
-          </EuiPageSideBar>
-        </EuiFlexItem>
-        <EuiFlexItem>
-          <EuiPageContent>
-            <img
-              className="pageScreenshot pageScreenshot--fullWidth"
-              alt="Discover table"
-              src={table_img}
-            />
-          </EuiPageContent>
-        </EuiFlexItem>
-      </EuiFlexGroup>
-    </EuiPageBody>
+    <EuiPageHeader style={{ padding: 16 }}>
+      <KibanaGlobals />
+    </EuiPageHeader>
+    <EuiFlexGroup gutterSize="none" responsive={false}>
+      <EuiFlexItem grow={false}>
+        <EuiPageSideBar style={{ backgroundColor: '#F5F7FA' }}>
+          <img
+            className="pageScreenshot"
+            alt="Discover sidebar"
+            width={288}
+            src={sidebar_img}
+          />
+        </EuiPageSideBar>
+      </EuiFlexItem>
+      <EuiFlexItem>
+        <EuiPageContent>
+          <img
+            className="pageScreenshot pageScreenshot--fullWidth"
+            alt="Discover table"
+            src={table_img}
+          />
+        </EuiPageContent>
+      </EuiFlexItem>
+    </EuiFlexGroup>
   </KibanaPage>
 );

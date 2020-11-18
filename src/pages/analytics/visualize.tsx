@@ -3,7 +3,6 @@ import { navigate } from 'gatsby';
 
 import {
   EuiBreadcrumb,
-  EuiPageBody,
   EuiPageContent,
   EuiPageContentBody,
   EuiPageHeader,
@@ -35,32 +34,30 @@ const breadcrumbs: EuiBreadcrumb[] = [
 
 export default () => (
   <KibanaPage pageTitle="TSVB" breadcrumbs={breadcrumbs}>
-    <EuiPageBody>
-      <EuiPageHeader>
-        <EuiPageHeaderSection>
-          <EuiTabs display="condensed">
-            <EuiTab>Time series</EuiTab>
-            <EuiTab>Metric</EuiTab>
-            <EuiTab>Top N</EuiTab>
-            <EuiTab isSelected>Gauge</EuiTab>
-            <EuiTab>Markdown</EuiTab>
-            <EuiTab>Table</EuiTab>
-          </EuiTabs>
-        </EuiPageHeaderSection>
-        <EuiPageHeaderSection>
-          <EuiSuperDatePicker />
-        </EuiPageHeaderSection>
-      </EuiPageHeader>
-      <EuiPageContent>
-        <EuiPageContentBody>
-          <img
-            className="pageScreenshot pageScreenshot--responsive"
-            alt="TSVB Gauge chart"
-            width={1400}
-            src={tsvb_img}
-          />
-        </EuiPageContentBody>
-      </EuiPageContent>
-    </EuiPageBody>
+    <EuiPageHeader>
+      <EuiPageHeaderSection>
+        <EuiTabs display="condensed">
+          <EuiTab>Time series</EuiTab>
+          <EuiTab>Metric</EuiTab>
+          <EuiTab>Top N</EuiTab>
+          <EuiTab isSelected>Gauge</EuiTab>
+          <EuiTab>Markdown</EuiTab>
+          <EuiTab>Table</EuiTab>
+        </EuiTabs>
+      </EuiPageHeaderSection>
+      <EuiPageHeaderSection>
+        <EuiSuperDatePicker />
+      </EuiPageHeaderSection>
+    </EuiPageHeader>
+    <EuiPageContent>
+      <EuiPageContentBody>
+        <img
+          className="pageScreenshot pageScreenshot--responsive"
+          alt="TSVB Gauge chart"
+          width={1400}
+          src={tsvb_img}
+        />
+      </EuiPageContentBody>
+    </EuiPageContent>
   </KibanaPage>
 );

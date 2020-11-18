@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { EuiBreadcrumb, EuiPageBody, EuiPageSideBar } from '@elastic/eui';
+import { EuiBreadcrumb } from '@elastic/eui';
 import { KibanaPage, KibanaPageProps } from '../../components/kibana/page/page';
 import { KibanaManagementNav } from './nav';
 
@@ -26,11 +26,11 @@ export const ManagementPage: FunctionComponent<ManagementPage> = ({
   }
 
   return (
-    <KibanaPage breadcrumbs={theBreadcrumbs} {...rest}>
-      <EuiPageSideBar>
-        <KibanaManagementNav currentItem={sideNavItem} />
-      </EuiPageSideBar>
-      <EuiPageBody>{children}</EuiPageBody>
+    <KibanaPage
+      breadcrumbs={theBreadcrumbs}
+      solutionNav={<KibanaManagementNav currentItem={sideNavItem} />}
+      {...rest}>
+      {children}
     </KibanaPage>
   );
 };

@@ -1,12 +1,5 @@
 import React, { FunctionComponent, ReactNode } from 'react';
-import {
-  EuiBreadcrumb,
-  EuiHeaderLink,
-  EuiHeaderLinks,
-  EuiPage,
-  EuiPageBody,
-  EuiPageSideBar,
-} from '@elastic/eui';
+import { EuiBreadcrumb, EuiHeaderLink, EuiHeaderLinks } from '@elastic/eui';
 import { KibanaPage, KibanaPageProps } from '../../components/kibana/page/page';
 import { SecurityNav } from './nav';
 
@@ -44,13 +37,9 @@ export const SecurityPage: FunctionComponent<SecurityPage> = ({
     <KibanaPage
       breadcrumbs={theBreadcrumbs}
       headerLinks={theHeaderLinks}
+      solutionNav={<SecurityNav navItem={navItem} />}
       {...rest}>
-      <EuiPage>
-        <EuiPageSideBar>
-          <SecurityNav navItem={navItem} />
-        </EuiPageSideBar>
-        <EuiPageBody>{children}</EuiPageBody>
-      </EuiPage>
+      {children}
     </KibanaPage>
   );
 };
