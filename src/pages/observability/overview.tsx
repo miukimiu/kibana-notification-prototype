@@ -84,7 +84,7 @@ export default () => (
                 title="APM"
                 description="Track the real-time health and performance of your Elastic Stack."
                 onClick={() => {
-                  navigate('observability-trace');
+                  navigate('observability/trace');
                 }}
               />
             </EuiFlexItem>
