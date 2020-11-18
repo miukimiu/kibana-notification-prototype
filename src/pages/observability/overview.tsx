@@ -123,7 +123,7 @@ export default () => (
                 title="Have you seen our new Ingest Manager"
                 description="The Elastic Agent provides a simple, unified way to add monitoring for logs, metrics, and other types of data to your hosts. You no longer need to install multiple Beats and other agents, making it easier and faster to deploy configurations across your infrastructure"
                 onClick={() => {
-                  navigate('management/ingest');
+                  navigate('management/fleet');
                 }}
                 betaBadgeLabel="Beta"
                 footer={

@@ -48,6 +48,7 @@ const Layout: FunctionComponent<{
 
   return (
     <KibanaChromeContext.Provider
+      // @ts-ignore
       value={{ chrome: chromeOptions, setChrome: setChromeOptions }}>
       <div>
         <KibanaChrome {...chromeOptions} />

@@ -67,14 +67,14 @@ export function KibanaSolutionNav({ currentUrl = 'management/stack' }: Props) {
         createItem('8.0 Upgrade Assistant'),
       ],
     }),
-    createItem('Ingest Manager', {
-      url: 'management/ingest',
-      items: [
-        createItem('Integrations'),
-        createItem('Configuration'),
-        createItem('Fleet'),
-        createItem('Datasets'),
-      ],
+    createItem('Fleet', {
+      url: 'management/fleet',
+      // items: [
+      //   createItem('Integrations'),
+      //   createItem('Configuration'),
+      //   createItem('Fleet'),
+      //   createItem('Datasets'),
+      // ],
     }),
   ];
 

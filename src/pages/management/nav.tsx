@@ -58,6 +58,14 @@ export function KibanaManagementNav({
         createItem('Role Mappings'),
       ],
     }),
+    createItem('Fleet', {
+      items: [
+        createItem('Agents', { url: 'management/agents' }),
+        createItem('Integrations', { url: 'management/ingest' }),
+        // createItem('Fleet'),
+        // createItem('Datasets'),
+      ],
+    }),
     createItem('Elasticsearch', {
       items: [
         createItem('Index Management'),
@@ -67,15 +75,6 @@ export function KibanaManagementNav({
         createItem('Watcher'),
         createItem('Snapshot and Restore'),
         createItem('8.0 Upgrade Assistant'),
-      ],
-    }),
-    createItem('Ingest Manager', {
-      url: 'management/ingest',
-      items: [
-        createItem('Integrations'),
-        createItem('Configuration'),
-        createItem('Fleet'),
-        createItem('Datasets'),
       ],
     }),
   ];

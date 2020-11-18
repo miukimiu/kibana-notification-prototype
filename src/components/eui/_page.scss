@@ -26,10 +26,6 @@
   margin-bottom: 0;
   background: $euiPageBackgroundColor;
   border-bottom: $euiBorderThin;
-
-   + .euiPageContent:not(.euiPageContent--verticalCenter):not(.euiPageContent--horizontalCenter) {
-    box-shadow: 0 0px 0 1px $euiBorderColor;
-   }
 }
 
 .euiPageHeader--restrictWidth {
@@ -55,7 +51,7 @@
 }
 
 .euiPageContent:not(.euiPageContent--verticalCenter):not(.euiPageContent--horizontalCenter) {
-  box-shadow: none;
+  box-shadow: 0 0 0 1px $euiBorderColor;
   border-radius: 0 !important; // sass-lint:disable-line no-important
 }
 

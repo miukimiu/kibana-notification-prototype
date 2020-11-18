@@ -6,22 +6,35 @@ import {
   EuiPageContent,
   EuiPageHeader,
   EuiPageHeaderSection,
-  EuiTitle,
   EuiButton,
   EuiText,
   EuiSpacer,
-  EuiFlexGrid,
   EuiFlexItem,
-  EuiPanel,
   EuiHeaderLink,
   EuiHeaderLinks,
+  EuiPageContentBody,
+  EuiTab,
+  EuiTabs,
+  EuiFieldSearch,
+  EuiFlexGroup,
+  EuiFacetButton,
+  EuiFacetGroup,
+  EuiFlexGrid,
+  EuiTitle,
+  EuiCard,
+  EuiIcon,
+  EuiHorizontalRule,
+  EuiPanel,
+  EuiCallOut,
 } from '@elastic/eui';
 
 import { ManagementPage } from './page';
+// @ts-ignore
+import illustration_img from '../../images/Illustration_3.svg';
 
 const breadcrumbs: EuiBreadcrumb[] = [
   {
-    text: 'Ingest Manager',
+    text: 'Integrations',
   },
 ];
 
@@ -35,46 +48,105 @@ const headerLinks: ReactNode = (
   </EuiHeaderLinks>
 );
 
+const Cards: ReactNode[] = [];
+
+for (let i = 0; i < 20; i++) {
+  Cards.push(
+    <EuiFlexItem>
+      <EuiCard
+        icon={<EuiIcon type="logoElastic" size="xl" />}
+        title="Elastic"
+        description="Integration"
+        betaBadgeLabel="Experimental"
+        footer={
+          <EuiCallOut
+            color="success"
+            iconType="checkInCircleFilled"
+            size="s"
+            title="Installed"
+          />
+        }
+      />
+    </EuiFlexItem>
+  );
+}
+
 export default () => (
   <ManagementPage
-    pageTitle="Ingest Manager"
-    sideNavItem="Ingest Manager"
+    pageTitle="Integrations"
+    sideNavItem="Integrations"
     headerLinks={headerLinks}
     breadcrumbs={breadcrumbs}>
     <EuiPageBody>
       <EuiPageHeader>
         <EuiPageHeaderSection>
-          <EuiTitle size="l">
-            <h1>Ingest Manager</h1>
-          </EuiTitle>
-          <EuiSpacer />
           <EuiText color="subdued">
-            <p>
-              Central management for Elastic Agents and agent configurations.
-            </p>
+            <h1>Integrations</h1>
+            <p>Browse integrations for popular apps and services.</p>
           </EuiText>
         </EuiPageHeaderSection>
         <EuiPageHeaderSection>
-          <EuiButton fill iconType="plusInCircle">
-            Add agent
-          </EuiButton>
+          <img
+            className="pageScreenshot pageScreenshot--responsive"
+            style={{ marginBottom: -32 }}
+            alt=""
+            aria-hidden={true}
+            width={320}
+            src={illustration_img}
+          />
         </EuiPageHeaderSection>
       </EuiPageHeader>
       <EuiPageContent>
-        <EuiFlexGrid columns={2}>
-          <EuiFlexItem>
-            <EuiPanel style={{ minHeight: 200 }} />
-          </EuiFlexItem>
-          <EuiFlexItem>
-            <EuiPanel style={{ minHeight: 200 }} />
-          </EuiFlexItem>
-          <EuiFlexItem>
-            <EuiPanel style={{ minHeight: 200 }} />
-          </EuiFlexItem>
-          <EuiFlexItem>
-            <EuiPanel style={{ minHeight: 200 }} />
-          </EuiFlexItem>
-        </EuiFlexGrid>
+        <EuiPageContentBody>
+          <EuiFieldSearch fullWidth placeholder="Search integrations..." />
+          <EuiSpacer size="xxl" />
+          <EuiFlexGroup gutterSize="xl">
+            <EuiFlexItem grow={false}>
+              <div>
+                <EuiTitle size="xs">
+                  <h2>Installed</h2>
+                </EuiTitle>
+                <EuiSpacer size="s" />
+                <EuiFacetGroup>
+                  <EuiFacetButton isSelected quantity={20}>
+                    All
+                  </EuiFacetButton>
+                  <EuiFacetButton quantity={0}>
+                    Updates available
+                  </EuiFacetButton>
+                </EuiFacetGroup>
+                <EuiHorizontalRule margin="xl" />
+                <EuiTitle size="xs">
+                  <h2>Available</h2>
+                </EuiTitle>
+                <EuiSpacer size="s" />
+                <EuiFacetGroup>
+                  <EuiFacetButton quantity={35}>All</EuiFacetButton>
+                  <EuiFacetButton quantity={1}>Azure</EuiFacetButton>
+                  <EuiFacetButton quantity={2}>Cloud</EuiFacetButton>
+                  <EuiFacetButton quantity={1}>
+                    Config management
+                  </EuiFacetButton>
+                  <EuiFacetButton quantity={1}>Containers</EuiFacetButton>
+                  <EuiFacetButton quantity={1}>Custom</EuiFacetButton>
+                  <EuiFacetButton quantity={6}>Datastore</EuiFacetButton>
+                  <EuiFacetButton quantity={1}>Kubernetes</EuiFacetButton>
+                  <EuiFacetButton quantity={3}>Message Queue</EuiFacetButton>
+                  <EuiFacetButton quantity={2}>Monitoring</EuiFacetButton>
+                  <EuiFacetButton quantity={6}>Network 1</EuiFacetButton>
+                  <EuiFacetButton quantity={4}>OS & System</EuiFacetButton>
+                  <EuiFacetButton quantity={33}>Security</EuiFacetButton>
+                  <EuiFacetButton quantity={5}>Web</EuiFacetButton>
+                </EuiFacetGroup>
+              </div>
+            </EuiFlexItem>
+            <EuiFlexItem>
+              <EuiFlexGrid columns={3} gutterSize="xl">
+                {Cards}
+              </EuiFlexGrid>
+            </EuiFlexItem>
+          </EuiFlexGroup>
+        </EuiPageContentBody>
       </EuiPageContent>
     </EuiPageBody>
   </ManagementPage>

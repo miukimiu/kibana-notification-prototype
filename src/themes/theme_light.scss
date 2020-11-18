@@ -4,6 +4,9 @@
 @import '../global_styling/index';
 @import '../components/index';
 
+// Testing old layout vs new by only importing new page into light theme
+@import '../components/eui/page';
+
 @import '../pages/index';
 
 .pageScreenshot {

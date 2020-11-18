@@ -33,14 +33,19 @@ export function SolutionCards({
         <EuiFlexItem>
           <EuiCard
             display="plain"
-            // @ts-ignore
-            style={{ background: '#e6f9f7' }}
+            className="euiPanel euiPanel--success"
             icon={<EuiIcon size="xl" type="logoEnterpriseSearch" />}
             title="Enterprise search"
             description="Build a powerful website search. Search any data from any
   application. Unify searchable workplace content."
             footer={
-              <EuiButton disabled color="secondary">
+              <EuiButton
+                color="secondary"
+                onClick={() => {
+                  navigate('enterprise-search/overview');
+                }}
+                iconSide="right"
+                iconType="arrowRight">
                 Search everything
               </EuiButton>
             }
@@ -51,8 +56,7 @@ export function SolutionCards({
         <EuiFlexItem>
           <EuiCard
             display="plain"
-            // @ts-ignore
-            style={{ background: '#ffebf4' }}
+            className="euiPanel euiPanel--accent"
             icon={<EuiIcon size="xl" type="logoObservability" />}
             title="Observability"
             description="Monitor all infrastructure metrics. Track application performance."
@@ -74,8 +78,7 @@ export function SolutionCards({
         <EuiFlexItem>
           <EuiCard
             display="plain"
-            // @ts-ignore
-            style={{ background: '#f5f7fa' }}
+            className="euiPanel euiPanel--subdued"
             icon={<EuiIcon size="xl" type="logoSecurity" />}
             title="Security"
             description="Detect critical security events. Investigate incidents and collaborate. Prevent threats autonomously."
@@ -97,8 +100,7 @@ export function SolutionCards({
         <EuiFlexItem>
           <EuiCard
             display="plain"
-            // @ts-ignore
-            style={{ background: '#E6F0FC' }}
+            className="euiPanel euiPanel--primary"
             icon={<EuiIcon size="xl" type="logoKibana" />}
             title="Analytics"
             description="Visualize every aspect of your data. Search and explore your data. Plot your geographic information. Craft pixel-perfect reports."
