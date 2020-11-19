@@ -5,12 +5,8 @@ import {
   EuiFlexGroup,
   EuiPageContent,
   EuiPageHeader,
-  EuiPageHeaderSection,
-  EuiTitle,
   EuiFlexItem,
-  EuiSpacer,
   EuiButton,
-  EuiText,
   EuiStat,
   EuiHorizontalRule,
 } from '@elastic/eui';
@@ -18,6 +14,7 @@ import {
 import traces_img from '../../images/Traces - Explorer.png';
 import { KibanaGlobals } from '../../components/kibana/chrome/globals';
 import { SecurityPage } from './page';
+import { KibanaPageHeader } from '../../components/kibana/page/page_header';
 
 const breadcrumbs: EuiBreadcrumb[] = [
   {
@@ -37,24 +34,16 @@ export default () => (
     <EuiPageHeader style={{ padding: 16 }}>
       <KibanaGlobals />
     </EuiPageHeader>
-    <EuiPageHeader>
-      <EuiPageHeaderSection>
-        <EuiTitle size="l">
-          <h1>Suspicious login</h1>
-        </EuiTitle>
-        <EuiSpacer />
-        <EuiText color="subdued">
-          <p>This timeline is to investigate a suspicious login.</p>
-        </EuiText>
-      </EuiPageHeaderSection>
-      <EuiPageHeaderSection>
-        <EuiButton iconType="starEmpty">Add to favorites</EuiButton>
-        &emsp;
+    <KibanaPageHeader
+      pageTitle="Suspcious login"
+      description="This timeline is to investigate a suspicious login."
+      actionButtons={[
         <EuiButton fill iconType="arrowDown" iconSide="right">
           Add to case
-        </EuiButton>
-      </EuiPageHeaderSection>
-    </EuiPageHeader>
+        </EuiButton>,
+        <EuiButton iconType="starEmpty">Add to favorites</EuiButton>,
+      ]}
+    />
     <EuiPageContent grow={false}>
       <EuiFlexGroup>
         <EuiFlexItem>

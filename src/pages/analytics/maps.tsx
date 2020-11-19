@@ -5,44 +5,41 @@ import {
   EuiBreadcrumb,
   EuiPageContent,
   EuiPageContentBody,
-  EuiPageHeader,
-  EuiPageHeaderSection,
-  EuiTitle,
-  EuiButton,
   EuiSpacer,
   EuiFieldSearch,
 } from '@elastic/eui';
 // @ts-ignore
 import dashboard_img from '../../images/Dashboard - Listing.png';
 import { KibanaPage } from '../../components/kibana/page/page';
+import { KibanaPageHeaderPrimaryAddButton } from '../../components/kibana/page/page_header';
+
+const PAGE_TITLE = 'Maps';
 
 const breadcrumbs: EuiBreadcrumb[] = [
   {
     text: 'Analytics',
-    href: '#',
     onClick: () => {
       navigate('analytics/overview');
     },
   },
   {
-    text: 'Maps',
+    text: PAGE_TITLE,
   },
 ];
 
 export default () => (
-  <KibanaPage pageTitle="Maps" breadcrumbs={breadcrumbs}>
-    <EuiPageHeader className="euiPageHeader--restrictWidth">
-      <EuiPageHeaderSection>
-        <EuiTitle size="l">
-          <h1>Maps</h1>
-        </EuiTitle>
-      </EuiPageHeaderSection>
-      <EuiPageHeaderSection>
-        <EuiButton fill iconType="plusInCircle">
+  <KibanaPage
+    pageTitle={PAGE_TITLE}
+    breadcrumbs={breadcrumbs}
+    pageHeader={{
+      restrictWidth: true,
+      pageTitle: PAGE_TITLE,
+      actionButtons: [
+        <KibanaPageHeaderPrimaryAddButton>
           Add map
-        </EuiButton>
-      </EuiPageHeaderSection>
-    </EuiPageHeader>
+        </KibanaPageHeaderPrimaryAddButton>,
+      ],
+    }}>
     <EuiPageContent className="euiPageContent--restrictWidth">
       <EuiPageContentBody>
         <EuiFieldSearch fullWidth placeholder="Search for a by map name..." />

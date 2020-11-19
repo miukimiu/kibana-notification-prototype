@@ -7,12 +7,14 @@ import {
   EuiPageContentBody,
   EuiSpacer,
   EuiFieldSearch,
-  EuiButton,
 } from '@elastic/eui';
 // @ts-ignore
 import dashboard_img from '../../images/Dashboard - Listing.png';
 import { KibanaPage } from '../../components/kibana/page/page';
-import { KibanaPageHeaderProps } from '../../components/kibana/page/page_header';
+import {
+  KibanaPageHeaderPrimaryAddButton,
+  KibanaPageHeaderProps,
+} from '../../components/kibana/page/page_header';
 
 const PAGE_TITLE = 'Dashboards';
 
@@ -32,10 +34,11 @@ const breadcrumbs: EuiBreadcrumb[] = [
 const pageHeader: KibanaPageHeaderProps = {
   pageTitle: PAGE_TITLE,
   restrictWidth: true,
-  primary: {
-    children: 'Add dashboard',
-    iconType: 'plusInCircle',
-  },
+  actionButtons: [
+    <KibanaPageHeaderPrimaryAddButton>
+      Add dashboard
+    </KibanaPageHeaderPrimaryAddButton>,
+  ],
 };
 
 export default () => (

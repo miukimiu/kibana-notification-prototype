@@ -2,11 +2,7 @@ import React from 'react';
 import {
   EuiPageContent,
   EuiPageContentBody,
-  EuiPageHeader,
-  EuiPageHeaderSection,
   EuiButton,
-  EuiTab,
-  EuiTabs,
   EuiFlexGroup,
   EuiFlexItem,
   EuiFieldSearch,
@@ -17,24 +13,37 @@ import {
 // @ts-ignore
 import canvas_img from '../../images/Canvas - Listing.png';
 import { KibanaPage } from '../../components/kibana/page/page';
+import {
+  KibanaPageHeaderPrimaryAddButton,
+  KibanaPageHeaderTabs,
+} from '../../components/kibana/page/page_header';
+
+const PAGE_TITLE = 'Canvas';
+
+const tabs: KibanaPageHeaderTabs['tabs'] = [
+  {
+    name: 'Workpads',
+    isSelected: true,
+  },
+  {
+    name: 'Templates',
+  },
+];
 
 export default () => (
-  <KibanaPage pageTitle="Canvas" breadcrumbs={[{ text: 'Canvas' }]}>
-    <EuiPageHeader className="euiPageHeader--restrictWidth">
-      <EuiPageHeaderSection>
-        <EuiTabs display="condensed">
-          <EuiTab isSelected>Workpads</EuiTab>
-          <EuiTab>Templates</EuiTab>
-        </EuiTabs>
-      </EuiPageHeaderSection>
-      <EuiPageHeaderSection>
-        <EuiButton iconType="importAction">Import workpad</EuiButton>
-        &emsp;
-        <EuiButton fill iconType="plusInCircle">
+  <KibanaPage
+    pageTitle={PAGE_TITLE}
+    breadcrumbs={[{ text: PAGE_TITLE }]}
+    pageHeader={{
+      restrictWidth: true,
+      tabs: tabs,
+      actionButtons: [
+        <KibanaPageHeaderPrimaryAddButton>
           Add workpad
-        </EuiButton>
-      </EuiPageHeaderSection>
-    </EuiPageHeader>
+        </KibanaPageHeaderPrimaryAddButton>,
+        <EuiButton iconType="importAction">Import workpad</EuiButton>,
+      ],
+    }}>
     <EuiPageContent className="euiPageContent--restrictWidth">
       <EuiPageContentBody>
         <EuiFlexGroup>

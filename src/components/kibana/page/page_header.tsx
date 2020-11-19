@@ -2,7 +2,6 @@ import React, { FunctionComponent, ReactNode } from 'react';
 import {
   EuiPageHeader,
   EuiPageHeaderSection,
-  EuiButton,
   IconType,
   EuiTabsProps,
   ExclusiveUnion,
@@ -11,9 +10,10 @@ import {
   EuiText,
   EuiTabs,
   CommonProps,
-  EuiButtonProps,
   EuiFlexGroup,
   EuiFlexItem,
+  EuiButton,
+  EuiButtonProps,
 } from '@elastic/eui';
 import classNames from 'classnames';
 import { EuiTabProps } from '@elastic/eui/src/components/tabs/tab';
@@ -44,7 +44,7 @@ export type KibanaPageHeaderTabs = {
   /**
    * Any extras to apply to the outer tabs container
    */
-  tabsProps: EuiTabsProps;
+  tabsProps?: EuiTabsProps;
 };
 
 /**
@@ -56,17 +56,7 @@ type KibanaPageHeaderLeft = ExclusiveUnion<
   KibanaPageHeaderTabs
 >;
 
-export type KibanaPageHeaderActions = {
-  /**
-   * There can only be one primary action.
-   * Extends EuiButton
-   */
-  primary: Omit<typeof EuiButton, 'fill'>;
-  secondary?: Omit<typeof EuiButton, 'fill'>;
-  tertiary?: Omit<typeof EuiButton, 'fill'>;
-};
-
-export type KibanaPageHeaderTime = {
+type KibanaPageHeaderTime = {
   /**
    * Would normally be EuiSuperDatePicker props, but
    * we're faking the component so just check for true
@@ -79,15 +69,24 @@ export type KibanaPageHeaderTime = {
  * Or the time picker
  */
 type KibanaPageHeaderRight = ExclusiveUnion<
-  KibanaPageHeaderActions,
+  {
+    /**
+     * The first button in the list will should always be primary/filled
+     */
+    actionButtons?: ReactNode[];
+  },
   KibanaPageHeaderTime
 >;
 
 export type KibanaPageHeaderProps = CommonProps &
   KibanaPageHeaderLeft &
-  Partial<KibanaPageHeaderRight> & {
+  KibanaPageHeaderRight & {
     restrictWidth?: boolean;
   };
+
+export const KibanaPageHeaderPrimaryAddButton: FunctionComponent<EuiButtonProps> = ({
+  ...buttonProps
+}) => <EuiButton iconType="plusInCircleFilled" {...buttonProps} fill />;
 
 export const KibanaPageHeader: FunctionComponent<KibanaPageHeaderProps> = ({
   pageTitle,
@@ -97,9 +96,7 @@ export const KibanaPageHeader: FunctionComponent<KibanaPageHeaderProps> = ({
   tabsProps,
   className,
   restrictWidth = false,
-  primary,
-  secondary,
-  tertiary,
+  actionButtons = [],
   time,
 }) => {
   let leftSideContent;
@@ -145,24 +142,19 @@ export const KibanaPageHeader: FunctionComponent<KibanaPageHeaderProps> = ({
   let rightSideContent;
   if (time) {
     rightSideContent = <EuiSuperDatePicker />;
-  } else if (primary || secondary || tertiary) {
-    const buttonArray: typeof EuiButton[] = [];
-    if (primary) buttonArray.push({ fill: true, ...primary });
-    if (secondary) buttonArray.push(secondary);
-    if (tertiary) buttonArray.push(tertiary);
+  } else if (actionButtons!.length) {
     const renderButtons = () => {
-      return buttonArray.map((button, index) => {
-        const { children, ...buttonRest } = button;
+      return actionButtons.map((button, index) => {
         return (
           <EuiFlexItem grow={false} key={index}>
-            <EuiButton {...buttonRest}>{children}</EuiButton>
+            {button}
           </EuiFlexItem>
         );
       });
     };
 
     rightSideContent = (
-      <EuiFlexGroup responsive={false} direction="columnReverse">
+      <EuiFlexGroup wrap responsive={false} direction="rowReverse">
         {renderButtons()}
       </EuiFlexGroup>
     );
@@ -171,6 +163,7 @@ export const KibanaPageHeader: FunctionComponent<KibanaPageHeaderProps> = ({
   const classes = classNames(
     {
       'euiPageHeader--restrictWidth': restrictWidth,
+      'euiPageHeader--solutionHeading': iconType,
     },
     className
   );

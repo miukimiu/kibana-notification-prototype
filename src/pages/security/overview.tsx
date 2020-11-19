@@ -1,11 +1,7 @@
 import React from 'react';
 import {
-  EuiIcon,
   EuiPageContent,
   EuiPageContentBody,
-  EuiPageHeader,
-  EuiPageHeaderSection,
-  EuiTitle,
   EuiButton,
   EuiCard,
   EuiFlexGroup,
@@ -21,23 +17,14 @@ import { SolutionCards } from '../../components/kibana/solutions';
 import { SecurityPage } from './page';
 
 export default () => (
-  <SecurityPage pageTitle="Security Overview" navItem="Overview">
-    <EuiPageHeader
-      className="euiPageHeader--restrictWidth"
-      style={{ padding: 32 }}>
-      <EuiPageHeaderSection>
-        <EuiTitle size="l">
-          <h1>
-            <EuiIcon
-              type="logoSecurity"
-              size="xl"
-              style={{ verticalAlign: 'baseline' }}
-            />{' '}
-            Security
-          </h1>
-        </EuiTitle>
-      </EuiPageHeaderSection>
-    </EuiPageHeader>
+  <SecurityPage
+    pageTitle="Security Overview"
+    navItem="Overview"
+    pageHeader={{
+      restrictWidth: true,
+      pageTitle: 'Security',
+      iconType: 'logoSecurity',
+    }}>
     <EuiPageContent className="euiPageContent--restrictWidth">
       <EuiPageContentBody>
         <EuiPanel color="subdued" paddingSize="l" hasShadow={false}>
