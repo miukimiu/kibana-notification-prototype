@@ -13,7 +13,7 @@ import {
 // @ts-ignore
 import traces_img from '../../images/Traces - Explorer.png';
 import { KibanaGlobals } from '../../components/kibana/chrome/globals';
-import { SecurityPage } from './page';
+import { SecurityPage } from '../../components/security/page';
 import { KibanaPageHeader } from '../../components/kibana/page/page_header';
 
 const breadcrumbs: EuiBreadcrumb[] = [

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { EuiBreadcrumb } from '@elastic/eui';
-import { KibanaPage, KibanaPageProps } from '../../components/kibana/page/page';
+import { KibanaPage, KibanaPageProps } from '../page/page';
 import { KibanaManagementNav } from './nav';
 
 export type ManagementPage = KibanaPageProps & {

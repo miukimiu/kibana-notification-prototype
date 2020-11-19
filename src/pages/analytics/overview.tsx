@@ -4,12 +4,9 @@ import { navigate } from 'gatsby';
 import {
   EuiBreadcrumb,
   EuiCallOut,
-  EuiIcon,
   EuiLink,
   EuiPageContent,
   EuiPageContentBody,
-  EuiPageHeader,
-  EuiPageHeaderSection,
   EuiTitle,
   EuiHeaderLinks,
   EuiHeaderLink,
@@ -38,9 +35,11 @@ import machine_img from '../../images/analytics-card-Machine Learning.svg';
 import maps_img from '../../images/analytics-card-Maps.svg';
 import { KibanaPage } from '../../components/kibana/page/page';
 
+const PAGE_TITLE = 'Analytics';
+
 const breadcrumbs: EuiBreadcrumb[] = [
   {
-    text: 'Analytics',
+    text: PAGE_TITLE,
   },
 ];
 
@@ -64,34 +63,23 @@ const headerLinks: ReactNode = (
 
 export default () => (
   <KibanaPage
-    pageTitle="Analytics Overview"
+    pageTitle={`${PAGE_TITLE} Overview`}
     breadcrumbs={breadcrumbs}
-    headerLinks={headerLinks}>
-    <EuiPageHeader
-      className="euiPageHeader--restrictWidth"
-      style={{ padding: 32 }}>
-      <EuiPageHeaderSection>
-        <EuiTitle size="l">
-          <h1>
-            <EuiIcon
-              type="logoKibana"
-              size="xl"
-              style={{ verticalAlign: 'baseline' }}
-            />{' '}
-            Analytics
-          </h1>
-        </EuiTitle>
-      </EuiPageHeaderSection>
-      <EuiPageHeaderSection>
+    headerLinks={headerLinks}
+    pageHeader={{
+      restrictWidth: true,
+      pageTitle: PAGE_TITLE,
+      iconType: 'logoKibana',
+      actionButtons: [
         <EuiCallOut size="s" title="New in 7.10!">
           <p>
             Congratulations on upgrading! Want to see all the cool new things?{' '}
             <EuiLink>Take a tour</EuiLink>! Or read the{' '}
             <EuiLink>blog post</EuiLink> for details.
           </p>
-        </EuiCallOut>
-      </EuiPageHeaderSection>
-    </EuiPageHeader>
+        </EuiCallOut>,
+      ],
+    }}>
     <EuiPageContent className="euiPageContent--restrictWidth">
       <EuiPageContentBody>
         <EuiPanel

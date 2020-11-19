@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { EuiBreadcrumb, EuiHeaderLink, EuiHeaderLinks } from '@elastic/eui';
-import { KibanaPage, KibanaPageProps } from '../../components/kibana/page/page';
+import { KibanaPage, KibanaPageProps } from '../kibana/page/page';
 import { SecurityNav } from './nav';
 
 export type SecurityPage = KibanaPageProps & {

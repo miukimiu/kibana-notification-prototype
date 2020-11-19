@@ -18,7 +18,7 @@ import {
 import { SolutionCards } from '../../components/kibana/solutions';
 // @ts-ignore
 import illustration_1 from '../../images/Illustration_1.png';
-import { ObservabilityPage } from './page';
+import { ObservabilityPage } from '../../components/observability/page';
 
 export default () => (
   <ObservabilityPage pageTitle="Observability Overview" navItem="Overview">

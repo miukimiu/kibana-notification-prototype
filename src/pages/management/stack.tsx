@@ -6,7 +6,7 @@ import {
   EuiHorizontalRule,
 } from '@elastic/eui';
 
-import { ManagementPage } from './page';
+import { ManagementPage } from '../../components/kibana/management/page';
 
 export default () => (
   <>

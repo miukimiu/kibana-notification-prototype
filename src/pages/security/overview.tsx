@@ -14,7 +14,7 @@ import {
 // @ts-ignore
 import illustration_2 from '../../images/Illustration_2.png';
 import { SolutionCards } from '../../components/kibana/solutions';
-import { SecurityPage } from './page';
+import { SecurityPage } from '../../components/security/page';
 
 export default () => (
   <SecurityPage

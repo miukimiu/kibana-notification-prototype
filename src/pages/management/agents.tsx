@@ -22,7 +22,7 @@ import {
   EuiStat,
 } from '@elastic/eui';
 
-import { ManagementPage } from './page';
+import { ManagementPage } from '../../components/kibana/management/page';
 // @ts-ignore
 import table_img from '../../images/Agents - table.png';
 

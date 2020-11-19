@@ -24,7 +24,7 @@ import {
   EuiCallOut,
 } from '@elastic/eui';
 
-import { ManagementPage } from './page';
+import { ManagementPage } from '../../components/kibana/management/page';
 // @ts-ignore
 import illustration_img from '../../images/Illustration_3.svg';
 
