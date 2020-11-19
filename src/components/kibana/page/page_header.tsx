@@ -107,9 +107,7 @@ export const KibanaPageHeader: FunctionComponent<KibanaPageHeaderProps> = ({
         size="xl"
         style={{ verticalAlign: 'baseline', marginRight: 16 }}
       />
-    ) : (
-      undefined
-    );
+    ) : undefined;
 
     leftSideContent = (
       <EuiText>
