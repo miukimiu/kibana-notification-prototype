@@ -7,9 +7,9 @@ type Props = {
   currentItem?: string;
 };
 
-export function KibanaManagementNav({
+export const KibanaManagementNav: any = ({
   currentItem = 'management/stack',
-}: Props) {
+}: Props) => {
   const [isSideNavOpenOnMobile, setIsSideNavOpenOnMobile] = useState(false);
 
   const toggleOpenOnMobile = () => {
@@ -95,4 +95,4 @@ export function KibanaManagementNav({
       />
     </>
   );
-}
+};

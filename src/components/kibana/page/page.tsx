@@ -42,9 +42,7 @@ export const KibanaPage: FunctionComponent<KibanaPageProps> = ({
 
   const optionalSideBar = solutionNav ? (
     <EuiPageSideBar>{solutionNav}</EuiPageSideBar>
-  ) : (
-    undefined
-  );
+  ) : undefined;
 
   const optionalPageHeader = pageHeader && <KibanaPageHeader {...pageHeader} />;
 

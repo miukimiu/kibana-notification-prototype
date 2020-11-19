@@ -64,7 +64,7 @@ export const KibanaNav: FunctionComponent<Props> = ({
 
   const [openGroups, setOpenGroups] = useState(
     JSON.parse(String(localStorage.getItem('openNavGroups'))) ||
-      KibanaNavLinksFirst.map(object => object.title)
+      KibanaNavLinksFirst.map((object) => object.title)
   );
 
   const addPin = (item: any) => {
@@ -110,7 +110,7 @@ export const KibanaNav: FunctionComponent<Props> = ({
     showPinned = false
   ): EuiPinnableListGroupItemProps[] {
     // @ts-ignore
-    return links.map(link => {
+    return links.map((link) => {
       const { url, onClick, pinned, isActive, href, ...rest } = link;
       return {
         onClick: url
@@ -130,7 +130,7 @@ export const KibanaNav: FunctionComponent<Props> = ({
   }
 
   const createNavGroups = (links: ChromeNavGroupProps[]) => {
-    return links.map(linksObject => {
+    return links.map((linksObject) => {
       return (
         <EuiCollapsibleNavGroup
           key={linksObject.title}

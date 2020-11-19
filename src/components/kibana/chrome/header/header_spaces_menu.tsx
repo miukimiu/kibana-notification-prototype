@@ -39,11 +39,11 @@ type Props = React.ComponentProps<typeof EuiHeaderSectionItemButton>;
 export const KibanaHeaderSpacesMenu: React.FunctionComponent<Props> = ({
   ...props
 }) => {
-  const spacesList: EuiSelectableOptionsProps = spaces.map(space =>
+  const spacesList: EuiSelectableOptionsProps = spaces.map((space) =>
     createOptionFromSpace(space)
   );
   const additionalSpacesList: EuiSelectableOptionsProps = additionalSpaces.map(
-    space => createOptionFromSpace(space)
+    (space) => createOptionFromSpace(space)
   );
 
   const [options, setOptions] = useState(spacesList);

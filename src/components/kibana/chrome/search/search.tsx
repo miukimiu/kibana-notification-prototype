@@ -25,9 +25,7 @@ import { searchData, recents } from '../data';
 function createAppendNodes(space?: string) {
   const spaceAvatar = space ? (
     <EuiAvatar type="space" name={space} size="s" />
-  ) : (
-    undefined
-  );
+  ) : undefined;
 
   return (
     <EuiFlexGroup responsive={false} gutterSize="s">
@@ -45,21 +43,19 @@ function createAppendNodes(space?: string) {
 }
 
 const allSearches = searchData.concat(recents);
-const data: EuiSelectableOptionsProps = allSearches.map(item => {
+const data: EuiSelectableOptionsProps = allSearches.map((item) => {
   return {
     key: item.title,
     label: `${item.title} ${item.type.title}`,
     prepend: item.type.iconType ? (
       <EuiIcon type={item.type.iconType} size="m" color="subdued" />
-    ) : (
-      undefined
-    ),
+    ) : undefined,
     className: 'kibanaChromeSearch__item',
     append: createAppendNodes(item.space),
   };
 });
 
-const recentData: EuiSelectableOptionsProps = recents.map(item => {
+const recentData: EuiSelectableOptionsProps = recents.map((item) => {
   return {
     key: item.title,
     label: `${item.title} ${item.type.title}`,
@@ -154,7 +150,7 @@ export const KibanaChromeSearch = () => {
         onKeyUpCapture: (e: any) => setSearchValue(e.currentTarget.value),
         // TODO: Allow pre/appends on search inputs
         append: '⌘K',
-        inputRef: (ref: HTMLInputElement) => (inputRef = ref),
+        inputRef: (ref: any) => (inputRef = ref),
         // TODO: `isClearable` doesn't seem to work or is not passed down
         isClearable: true,
       }}

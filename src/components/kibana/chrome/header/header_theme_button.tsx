@@ -10,7 +10,7 @@ export const KibanaHeaderThemeButton: React.FunctionComponent<EuiButtonProps> = 
 }) => {
   return (
     <ThemeContext.Consumer>
-      {context => (
+      {(context) => (
         <EuiButton
           size="s"
           iconType={context.theme === 'dark' ? sun : 'moon'}
