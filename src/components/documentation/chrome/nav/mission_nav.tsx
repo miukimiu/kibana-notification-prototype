@@ -4,19 +4,17 @@ import {
   EuiCollapsibleNavGroup,
   EuiListGroupProps,
   EuiListGroup,
-  EuiButton,
-  EuiSpacer,
 } from '@elastic/eui';
 
 const deploymentsList: EuiListGroupProps['listItems'] = [
   {
-    label: 'combining-binaries',
-    iconType: 'logoAzureMono',
+    label: 'Elastic Observability',
+    iconType: 'logoObservability',
     size: 's',
   },
   {
-    label: 'stack-monitoring',
-    iconType: 'logoAWSMono',
+    label: 'Elastic Security',
+    iconType: 'logoSecurity',
     size: 's',
   },
 ];
@@ -25,21 +23,17 @@ export const DocsMissionNav = () => (
   <EuiCollapsibleNavGroup
     title={
       <span>
-        <small style={{ fontWeight: 'normal' }}>Deployment</small> <br />
-        <strong>personal-databoard</strong>
+        <small style={{ fontWeight: 'normal' }}>Mission</small> <br />
+        <strong>Product Design</strong>
       </span>
     }
-    iconType="logoGCPMono"
+    iconType="glasses"
     iconSize="xl"
     isCollapsible={true}
     initialIsOpen={false}
     background="dark">
     <div role="group" className="kibanaNavDeployment__content">
       <EuiListGroup listItems={deploymentsList} flush />
-      <EuiSpacer size="s" />
-      <EuiButton color="ghost" fullWidth>
-        Manage deployments
-      </EuiButton>
     </div>
   </EuiCollapsibleNavGroup>
 );

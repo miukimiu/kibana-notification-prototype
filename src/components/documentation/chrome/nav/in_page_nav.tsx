@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
 import { navigate } from 'gatsby';
 
-import { EuiIcon, EuiSideNav, EuiSpacer, EuiTitle } from '@elastic/eui';
+import {
+  EuiButton,
+  EuiFlexGroup,
+  EuiFlexItem,
+  EuiHorizontalRule,
+  EuiSideNav,
+  EuiSpacer,
+  EuiText,
+  EuiTitle,
+} from '@elastic/eui';
 
 type Props = {
   currentUrl?: string;
 };
 
-export function DocsInPageNav({ currentUrl = 'management/stack' }: Props) {
+export function DocsInPageNav({ currentUrl = 'introduction' }: Props) {
   const [isSideNavOpenOnMobile, setIsSideNavOpenOnMobile] = useState(false);
 
   const toggleOpenOnMobile = () => {
@@ -22,7 +31,7 @@ export function DocsInPageNav({ currentUrl = 'management/stack' }: Props) {
       // @ts-ignore
       isSelected: data.url && data.url === currentUrl,
       // @ts-ignore
-      disabled: !data.url,
+      // disabled: !data.url,
       // @ts-ignore
       onClick: data.url
         ? () => {
@@ -36,62 +45,59 @@ export function DocsInPageNav({ currentUrl = 'management/stack' }: Props) {
   };
 
   const sideNav = [
-    createItem('Overview', { url: 'management/stack' }),
-    createItem('Console', {
+    createItem('Introduction', { url: 'introduction' }),
+    createItem('Design Principles', {
       items: [
-        createItem('Index Patterns'),
-        createItem('Saved Objects'),
-        createItem('Spaces'),
-        createItem('Reporting'),
-        createItem('Advanced settings', {
-          items: [createItem('General'), createItem('Visualizations')],
-        }),
+        createItem('Purpose with delight'),
+        createItem('Empowering through thoughtfulness'),
+        createItem('Optimized, yet flexible'),
       ],
     }),
-    createItem('Security', {
+    createItem('Culture', {
       items: [
-        createItem('Users'),
-        createItem('Roles'),
-        createItem('API Keys'),
-        createItem('Role Mappings'),
+        createItem('Purpose'),
+        createItem('Workflow values'),
+        createItem('Design decisions'),
       ],
     }),
-    createItem('Elasticsearch', {
+    createItem('Practices', {
       items: [
-        createItem('Index Management'),
-        createItem('Index Lifecycle Policies'),
-        createItem('Rolllup Jobs'),
-        createItem('Transforms'),
-        createItem('Watcher'),
-        createItem('Snapshot and Restore'),
-        createItem('8.0 Upgrade Assistant'),
+        createItem('Communication'),
+        createItem('Tooling'),
+        createItem('Critiques'),
+        createItem('User research'),
       ],
-    }),
-    createItem('Fleet', {
-      url: 'management/fleet',
-      // items: [
-      //   createItem('Integrations'),
-      //   createItem('Configuration'),
-      //   createItem('Fleet'),
-      //   createItem('Datasets'),
-      // ],
     }),
   ];
 
   return (
-    <>
-      <EuiTitle size="xs">
-        <h2>
-          <EuiIcon size="l" type="managementApp" /> &ensp; Management
-        </h2>
-      </EuiTitle>
-      <EuiSpacer />
-      <EuiSideNav
-        mobileTitle="Navigate within $APP_NAME"
-        toggleOpenOnMobile={toggleOpenOnMobile}
-        isOpenOnMobile={isSideNavOpenOnMobile}
-        items={sideNav}
-      />
-    </>
+    <EuiFlexGroup direction="column" style={{ height: '100%' }}>
+      <EuiFlexItem style={{ overflowY: 'auto', overflowX: 'hidden' }}>
+        <div>
+          <EuiTitle size="xs">
+            <h2>On this page</h2>
+          </EuiTitle>
+          <EuiSpacer />
+          <EuiSideNav
+            mobileTitle="Navigate within $APP_NAME"
+            toggleOpenOnMobile={toggleOpenOnMobile}
+            isOpenOnMobile={isSideNavOpenOnMobile}
+            items={sideNav}
+          />
+        </div>
+      </EuiFlexItem>
+      <EuiFlexItem grow={false}>
+        <div>
+          <EuiHorizontalRule />
+          <EuiText size="s" color="subdued">
+            <p>No credit card required. Get up and running in 3-minutes!</p>
+          </EuiText>
+          <EuiSpacer size="s" />
+          <EuiButton fill fullWidth>
+            Start a free trial
+          </EuiButton>
+        </div>
+      </EuiFlexItem>
+    </EuiFlexGroup>
   );
 }

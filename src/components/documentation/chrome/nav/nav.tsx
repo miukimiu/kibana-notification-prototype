@@ -100,7 +100,6 @@ export const DocsNav: FunctionComponent<Props> = ({}) => {
         pinned: showPinned ? pinned : false,
         'aria-current': isActive,
         color: isActive ? 'primary' : undefined,
-        isDisabled: !url && !href && !onClick,
         isActive,
         href,
         url,

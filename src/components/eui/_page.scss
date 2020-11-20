@@ -76,3 +76,23 @@
 .euiSideNavItem--root > .euiSideNavItemButton-isSelected .euiSideNavItemButton__label {
   color: $euiColorPrimaryText;
 }
+
+// DOCUMENTATION STYLE
+
+.euiPageContentBody .euiPageSideBar {
+  box-shadow: none;
+  border: none;
+  border-radius: $euiBorderRadius;
+  max-height: calc(100vh - #{($euiHeaderHeightCompensation * 2) + ($euiSize * 2)});
+  overflow: hidden;
+}
+
+.euiCollapsibleNav--isDocked {
+  box-shadow: none !important;
+  background: transparent;
+  max-width: 260px;
+}
+
+.euiBody--collapsibleNavIsDocked {
+  padding-left: 260px !important;
+}
