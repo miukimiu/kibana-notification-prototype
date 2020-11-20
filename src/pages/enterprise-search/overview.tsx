@@ -18,9 +18,9 @@ import {
 } from '@elastic/eui';
 import { SolutionCards } from '../../components/kibana/solutions';
 // @ts-ignore
-import app_img from '../../images/App_Search.png';
+import appImg from '../../images/App_Search.png';
 // @ts-ignore
-import workplace_img from '../../images/Workplace_Search.png';
+import workplaceImg from '../../images/Workplace_Search.png';
 import { KibanaPage } from '../../components/kibana/page/page';
 
 const breadcrumbs: EuiBreadcrumb[] = [
@@ -52,7 +52,7 @@ export default () => (
         <EuiFlexGroup>
           <EuiFlexItem grow={false}>
             <EuiCard
-              image={<img alt="" aria-hidden={true} src={app_img} />}
+              image={<img alt="" aria-hidden={true} src={appImg} />}
               title="Elastic App Search"
               description="Provides user-friendly tools to design a deploy a powerful search to your websites or web/mobile applications."
               footer={<EuiButton>Launch App Search</EuiButton>}
@@ -61,7 +61,7 @@ export default () => (
           </EuiFlexItem>
           <EuiFlexItem grow={false}>
             <EuiCard
-              image={<img alt="" aria-hidden={true} src={workplace_img} />}
+              image={<img alt="" aria-hidden={true} src={workplaceImg} />}
               title="Elastic Workplace Search"
               description="Unify all your team's content in one place, with instance connectivity to popular productivity nd collaboration tools."
               footer={<EuiButton>Launch Workplace Search</EuiButton>}

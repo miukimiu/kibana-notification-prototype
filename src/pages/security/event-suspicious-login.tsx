@@ -11,7 +11,7 @@ import {
   EuiHorizontalRule,
 } from '@elastic/eui';
 // @ts-ignore
-import traces_img from '../../images/Traces - Explorer.png';
+import tracesImg from '../../images/Traces - Explorer.png';
 import { KibanaGlobals } from '../../components/kibana/chrome/globals';
 import { SecurityPage } from '../../components/security/page';
 import { KibanaPageHeader } from '../../components/kibana/page/page_header';
@@ -92,7 +92,7 @@ export default () => (
         className="pageScreenshot pageScreenshot--fullWidth"
         alt="Traces explorer"
         width={1275}
-        src={traces_img}
+        src={tracesImg}
       />
     </EuiPageContent>
   </SecurityPage>

@@ -10,7 +10,7 @@ import {
   EuiTabs,
 } from '@elastic/eui';
 // @ts-ignore
-import console_img from '../images/Dev Tools - Console.png';
+import consoleImg from '../images/Dev Tools - Console.png';
 import { KibanaPage } from '../components/kibana/page/page';
 
 const breadcrumbs: EuiBreadcrumb[] = [
@@ -38,7 +38,7 @@ export default () => (
           className="pageScreenshot pageScreenshot--fullWidth"
           alt="Dev Tools / Console"
           width={1341}
-          src={console_img}
+          src={consoleImg}
         />
       </EuiPageContentBody>
     </EuiPageContent>

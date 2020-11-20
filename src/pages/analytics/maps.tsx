@@ -9,7 +9,7 @@ import {
   EuiFieldSearch,
 } from '@elastic/eui';
 // @ts-ignore
-import dashboard_img from '../../images/Dashboard - Listing.png';
+import dashboardImg from '../../images/Dashboard - Listing.png';
 import { KibanaPage } from '../../components/kibana/page/page';
 import { KibanaPageHeaderPrimaryAddButton } from '../../components/kibana/page/page_header';
 
@@ -49,7 +49,7 @@ export default () => (
           className="pageScreenshot pageScreenshot--responsive"
           alt="Dashboard listing page"
           width={1212}
-          src={dashboard_img}
+          src={dashboardImg}
         />
       </EuiPageContentBody>
     </EuiPageContent>

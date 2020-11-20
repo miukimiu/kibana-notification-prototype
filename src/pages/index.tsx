@@ -22,7 +22,7 @@ import {
   EuiBetaBadge,
 } from '@elastic/eui';
 // @ts-ignore
-import illustration_img from '../images/Illustration_3.svg';
+import illustrationImg from '../images/Illustration_3.svg';
 import { SolutionCards } from '../components/kibana/solutions';
 import { KibanaPage } from '../components/kibana/page/page';
 
@@ -111,7 +111,7 @@ export default () => (
                 alt=""
                 aria-hidden={true}
                 width={320}
-                src={illustration_img}
+                src={illustrationImg}
               />
             </EuiFlexItem>
           </EuiFlexGroup>

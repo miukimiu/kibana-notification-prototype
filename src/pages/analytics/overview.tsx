@@ -22,17 +22,17 @@ import {
 import { SolutionCards } from '../../components/kibana/solutions';
 // @ts-ignore
 // @ts-ignore
-import dashboard_img from '../../images/analytics-card-dashboard.png';
+import dashboardImg from '../../images/analytics-card-dashboard.png';
 // @ts-ignore
-import discover_img from '../../images/analytics-card-discover.png';
+import discoverImg from '../../images/analytics-card-discover.png';
 // @ts-ignore
-import canvas_img from '../../images/analytics-card-Canvas.svg';
+import canvasImg from '../../images/analytics-card-Canvas.svg';
 // @ts-ignore
-import graph_img from '../../images/analytics-card-Graph.svg';
+import graphImg from '../../images/analytics-card-Graph.svg';
 // @ts-ignore
-import machine_img from '../../images/analytics-card-Machine Learning.svg';
+import machineImg from '../../images/analytics-card-Machine Learning.svg';
 // @ts-ignore
-import maps_img from '../../images/analytics-card-Maps.svg';
+import mapsImg from '../../images/analytics-card-Maps.svg';
 import { KibanaPage } from '../../components/kibana/page/page';
 
 const PAGE_TITLE = 'Analytics';
@@ -115,7 +115,7 @@ export default () => (
                     alt=""
                     aria-hidden={true}
                     height={170}
-                    src={dashboard_img}
+                    src={dashboardImg}
                   />
                 }
                 title="Dashboard"
@@ -138,7 +138,7 @@ export default () => (
                     alt=""
                     aria-hidden={true}
                     height={170}
-                    src={discover_img}
+                    src={discoverImg}
                   />
                 }
                 title="Discover"
@@ -163,7 +163,7 @@ export default () => (
               }}
               image={
                 <div>
-                  <img alt="" aria-hidden={true} src={maps_img} />
+                  <img alt="" aria-hidden={true} src={mapsImg} />
                 </div>
               }
               title="Maps"
@@ -182,7 +182,7 @@ export default () => (
               }}
               image={
                 <div>
-                  <img alt="" aria-hidden={true} src={canvas_img} />
+                  <img alt="" aria-hidden={true} src={canvasImg} />
                 </div>
               }
               title="Canvas"
@@ -201,7 +201,7 @@ export default () => (
               }}
               image={
                 <div>
-                  <img alt="" aria-hidden={true} src={machine_img} />
+                  <img alt="" aria-hidden={true} src={machineImg} />
                 </div>
               }
               title="Machine Learning"
@@ -218,7 +218,7 @@ export default () => (
               }}
               image={
                 <div>
-                  <img alt="" aria-hidden={true} src={graph_img} />
+                  <img alt="" aria-hidden={true} src={graphImg} />
                 </div>
               }
               title="Graph"

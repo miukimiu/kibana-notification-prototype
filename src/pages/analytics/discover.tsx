@@ -12,9 +12,9 @@ import {
   EuiFlexItem,
 } from '@elastic/eui';
 // @ts-ignore
-import sidebar_img from '../../images/Discover - sidebar.svg';
+import sidebarImg from '../../images/Discover - sidebar.svg';
 // @ts-ignore
-import table_img from '../../images/Discover - table.svg';
+import tableImg from '../../images/Discover - table.svg';
 
 import { KibanaGlobals } from '../../components/kibana/chrome/globals';
 import { KibanaPage } from '../../components/kibana/page/page';
@@ -64,7 +64,7 @@ export default () => (
             className="pageScreenshot"
             alt="Discover sidebar"
             width={288}
-            src={sidebar_img}
+            src={sidebarImg}
           />
         </EuiPageSideBar>
       </EuiFlexItem>
@@ -73,7 +73,7 @@ export default () => (
           <img
             className="pageScreenshot pageScreenshot--fullWidth"
             alt="Discover table"
-            src={table_img}
+            src={tableImg}
           />
         </EuiPageContent>
       </EuiFlexItem>

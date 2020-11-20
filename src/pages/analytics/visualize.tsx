@@ -7,7 +7,7 @@ import {
   EuiPageContentBody,
 } from '@elastic/eui';
 // @ts-ignore
-import tsvb_img from '../../images/TSVB.png';
+import tsvbImg from '../../images/TSVB.png';
 import { KibanaPage } from '../../components/kibana/page/page';
 import { KibanaPageHeaderTabs } from '../../components/kibana/page/page_header';
 
@@ -66,7 +66,7 @@ export default () => (
           className="pageScreenshot pageScreenshot--fullWidth"
           alt="TSVB Gauge chart"
           width={1400}
-          src={tsvb_img}
+          src={tsvbImg}
         />
       </EuiPageContentBody>
     </EuiPageContent>

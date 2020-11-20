@@ -26,7 +26,7 @@ import {
 
 import { ManagementPage } from '../../components/kibana/management/page';
 // @ts-ignore
-import illustration_img from '../../images/Illustration_3.svg';
+import illustrationImg from '../../images/Illustration_3.svg';
 
 const breadcrumbs: EuiBreadcrumb[] = [
   {
@@ -87,7 +87,7 @@ export default () => (
           alt=""
           aria-hidden={true}
           width={320}
-          src={illustration_img}
+          src={illustrationImg}
         />
       </EuiPageHeaderSection>
     </EuiPageHeader>

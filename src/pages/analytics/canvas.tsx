@@ -11,7 +11,7 @@ import {
   EuiSpacer,
 } from '@elastic/eui';
 // @ts-ignore
-import canvas_img from '../../images/Canvas - Listing.png';
+import canvasImg from '../../images/Canvas - Listing.png';
 import { KibanaPage } from '../../components/kibana/page/page';
 import {
   KibanaPageHeaderPrimaryAddButton,
@@ -66,7 +66,7 @@ export default () => (
           className="pageScreenshot pageScreenshot--responsive"
           alt="Canvas listing page"
           width={1212}
-          src={canvas_img}
+          src={canvasImg}
         />
       </EuiPageContentBody>
     </EuiPageContent>

@@ -24,7 +24,7 @@ import {
 
 import { ManagementPage } from '../../components/kibana/management/page';
 // @ts-ignore
-import table_img from '../../images/Agents - table.png';
+import tableImg from '../../images/Agents - table.png';
 
 const breadcrumbs: EuiBreadcrumb[] = [
   {
@@ -114,7 +114,7 @@ export default () => (
             className="pageScreenshot pageScreenshot--responsive"
             alt="Blank table"
             width={1168}
-            src={table_img}
+            src={tableImg}
           />
         </EuiPageContentBody>
       </EuiPageContentBody>
