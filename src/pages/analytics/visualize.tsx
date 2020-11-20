@@ -63,7 +63,7 @@ export default () => (
     <EuiPageContent>
       <EuiPageContentBody>
         <img
-          className="pageScreenshot pageScreenshot--responsive"
+          className="pageScreenshot pageScreenshot--fullWidth"
           alt="TSVB Gauge chart"
           width={1400}
           src={tsvb_img}

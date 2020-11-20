@@ -43,7 +43,7 @@ export function SecurityNav({ navItem }: Props) {
         createItem('All hosts', { disabled: true }), // TODO: Allow side nav items to be disabled
         createItem('Anamolies'),
         createItem('Authentication list'),
-        createItem('Events', { url: 'security/event' }),
+        createItem('Events', { url: 'security/event-suspicious-login' }),
       ],
     }),
     createItem('Network'),

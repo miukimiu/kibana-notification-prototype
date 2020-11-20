@@ -17,3 +17,11 @@
     border-bottom: 1px solid $euiColorPrimary;
   }
 }
+
+/**
+Hack fix
+**/
+
+#gatsby-focus-wrapper > .euiPage {
+  display: block;
+}
