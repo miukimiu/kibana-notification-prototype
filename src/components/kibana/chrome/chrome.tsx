@@ -18,6 +18,7 @@ import {
 
 import { KibanaNav } from './nav';
 import { KibanaChromeSearch } from './search';
+import { KibanaHeaderHelpMenu } from './header/header_help_menu';
 
 export type KibanaChromeProps = {
   breadcrumbs?: EuiBreadcrumb[];
@@ -58,6 +59,7 @@ export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
                 iconSide="right">
                 Production logs
               </EuiBadge>,
+              <KibanaHeaderHelpMenu />,
               <KibanaHeaderUpdates />,
               <KibanaHeaderUserMenu {...user} />,
             ],
