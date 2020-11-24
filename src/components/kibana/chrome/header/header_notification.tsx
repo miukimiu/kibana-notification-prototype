@@ -2,10 +2,10 @@ import React, { FunctionComponent, Fragment, useState } from 'react';
 
 import { EuiIcon, EuiHeaderSectionItemButton } from '@elastic/eui';
 
-import { EuiNotificationFlyout } from '../../../eui/notification/notification_flyout';
+import { EuiNotificationFlyout } from '../../../eui/notification';
 import { updates } from '../data';
 
-export const KibanaHeaderUpdates: FunctionComponent = () => {
+export const KibanaHeaderNotification: FunctionComponent = () => {
   const [isFlyoutVisible, setIsFlyoutVisible] = useState(false);
   const [showNotification, setShowNotification] = useState(true);
 
@@ -20,13 +20,13 @@ export const KibanaHeaderUpdates: FunctionComponent = () => {
 
   const button = (
     <EuiHeaderSectionItemButton
-      aria-controls="headerNewsFeed"
+      aria-controls="headerNotificationCenter"
       aria-expanded={isFlyoutVisible}
       aria-haspopup="true"
-      aria-label="News feed"
+      aria-label="Notification Center"
       notification={showNotification ? '•' : undefined}
       onClick={toggleFlyout}>
-      <EuiIcon type="email" size="m" />
+      <EuiIcon type="bell" size="m" />
     </EuiHeaderSectionItemButton>
   );
 
@@ -34,7 +34,7 @@ export const KibanaHeaderUpdates: FunctionComponent = () => {
   if (isFlyoutVisible) {
     flyout = (
       <EuiNotificationFlyout
-        id="headerNewsFeed"
+        id="headerNotificationCenter"
         alerts={updates}
         version="Version 8.0"
         onClose={closeFlyout}
@@ -45,7 +45,13 @@ export const KibanaHeaderUpdates: FunctionComponent = () => {
   return (
     <Fragment>
       {button}
-      {flyout}
+      {/* {flyout} */}
+
+      <EuiNotificationFlyout
+        id="headerNotificationCenter"
+        version="Version 8.0"
+        onClose={closeFlyout}
+      />
     </Fragment>
   );
 };

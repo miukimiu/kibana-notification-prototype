@@ -1,0 +1,49 @@
+.euiNotificationFlyoutMessage {
+  padding: $euiSizeM $euiSizeS;
+  border-bottom: $euiBorderThin;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  // &__secondaryAction {
+  //   display: none;
+  // }
+
+  // &:hover {
+  //   .euiNotificationFlyoutMessage__secondaryAction {
+  //     display: block;
+  //   }
+  // }
+}
+
+.euiNotificationFlyoutMessage__content {
+  padding-left: $euiSizeL;
+  
+  > * { 
+    margin-top: $euiSizeS;
+  }
+}
+
+.euiNotificationFlyoutMessage__meta {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  > div > * + * {
+    margin-left: $euiSizeS;
+  }
+}
+
+.euiNotificationFlyoutMessage__readState {
+ 
+  &--isSeen{
+    fill: $euiColorPrimary;
+  }
+  &--isUnseen {
+    fill: transparent;
+    stroke-width: 1px;
+    stroke: $euiBorderColor;
+  }
+}
