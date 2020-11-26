@@ -38,10 +38,11 @@
 
 .euiNotificationFlyoutMessage__readState {
  
-  &--isSeen{
+  &--isUnseen {
     fill: $euiColorPrimary;
   }
-  &--isUnseen {
+
+  &--isSeen {
     fill: transparent;
     stroke-width: 1px;
     stroke: $euiBorderColor;

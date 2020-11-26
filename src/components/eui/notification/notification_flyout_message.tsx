@@ -1,92 +1,98 @@
 import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 import {
-  EuiTitle,
-  EuiButtonIcon,
-  EuiIcon,
-  EuiBadge,
-  EuiIconProps,
+  EuiButtonEmpty,
+  EuiButtonEmptyProps,
+  EuiAccordion,
+  htmlIdGenerator,
 } from '@elastic/eui';
-// import { EuiAvatarProps } from '@elastic/eui/lib/components/avatar/avatar';
-import classNames from 'classnames';
+import {
+  EuiNotificationFlyoutMessageLink,
+  EuiNotificationFlyoutMessageLinkProps,
+} from './notification_flyout_message_link';
 
-type EuiNotificationFlyoutMessageHealthStatus = {
-  title: string;
-  type: 'success' | 'warning' | 'danger';
-};
+import {
+  EuiNotificationFlyoutMessageMeta,
+  EuiNotificationFlyoutMessageMetaProps,
+} from './notification_flyout_message_meta';
+
+export interface EuiNotificationFlyoutMessageButtonProps
+  extends Omit<EuiButtonEmptyProps, 'size' | 'flush'> {
+  label: ReactNode;
+}
+
+type metaProps = Omit<EuiNotificationFlyoutMessageMetaProps, 'isRead'>;
 
 export type EuiNotificationFlyoutMessageProps = {
   /**
-   * The name of the
+   * The title of the
    */
-  type: string;
+  meta: metaProps;
   /**
    * The title of the
    */
-  title: ReactElement;
+  link: EuiNotificationFlyoutMessageLinkProps;
   /**
    * readState
    */
   readState: 'seen' | 'unseen';
-  /**
-   * The icon used to visually represent this data type. Accepts any `EuiIcon IconType`.
-   */
-  icon?: EuiIconProps | 'EuiAvatarProps';
-  /**
-   * healthStatus
-   */
-  healthStatus?: EuiNotificationFlyoutMessageHealthStatus;
+
   /**
    * Button ...
    */
-  primaryAction?: ReactNode;
+  button?: EuiNotificationFlyoutMessageButtonProps;
+  /**
+   * A string or an array of strings.
+   */
+  messages: ReactElement[];
 };
 
 export const EuiNotificationFlyoutMessage: FunctionComponent<EuiNotificationFlyoutMessageProps> = ({
-  type,
-  icon,
-  title,
+  link,
   readState,
-  healthStatus,
-  primaryAction,
+  button,
+  messages,
+  meta,
 }) => {
-  const classesReadState = classNames(
-    'euiNotificationFlyoutMessage__readState',
-    {
-      'euiNotificationFlyoutMessage__readState--isSeen': readState === 'seen',
-      'euiNotificationFlyoutMessage__readState--isUnseen':
-        readState === 'unseen',
-    }
-  );
+  const isRead = readState === 'seen';
 
   return (
     <div className="euiNotificationFlyoutMessage">
-      <div className="euiNotificationFlyoutMessage__meta">
-        <div>
-          <EuiIcon type="dot" className={classesReadState} />
-          {icon && <EuiIcon type="logoCloud" />}
-          <EuiBadge color="hollow">{type}</EuiBadge>
+      <EuiNotificationFlyoutMessageMeta
+        iconType={meta.iconType}
+        type={meta.type}
+        healthStatus={meta.healthStatus}
+        isRead={isRead}
+      />
 
-          {healthStatus && (
-            <EuiBadge color={healthStatus.type}>{healthStatus.title}</EuiBadge>
+      <div className="euiNotificationFlyoutMessage__content">
+        <EuiNotificationFlyoutMessageLink
+          {...link}
+          visited={isRead ? true : false}
+        />
+
+        <div className="euiNotificationFlyoutMessage__messages">
+          {messages && messages.length === 1 ? (
+            messages
+          ) : (
+            <EuiAccordion
+              id={htmlIdGenerator()()}
+              className="euiNotificationFlyoutMessage__accordion"
+              buttonClassName="euiNotificationFlyoutMessage__accordionButton"
+              buttonContent={`+ ${messages.length} messages`}>
+              {messages}
+            </EuiAccordion>
           )}
         </div>
 
-        <div>
-          <span>12 min ago</span>
-          <EuiButtonIcon
-            iconType="boxesVertical"
-            color="subdued"
-            className="euiNotificationFlyoutMessage__secondaryAction"
-          />
-        </div>
-      </div>
-
-      <div className="euiNotificationFlyoutMessage__content">
-        <EuiTitle size="xxs">{title}</EuiTitle>
-        <div>+3 more messages</div>
-
         <div className="euiNotificationFlyoutMessage__primaryAction">
-          {primaryAction && primaryAction}
+          {button && (
+            <EuiButtonEmpty
+              flush="left"
+              size="s"
+              {...(button as EuiButtonEmptyProps)}>
+              {button.label}
+            </EuiButtonEmpty>
+          )}
         </div>
       </div>
     </div>

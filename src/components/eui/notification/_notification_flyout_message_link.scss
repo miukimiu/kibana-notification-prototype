@@ -1,0 +1,8 @@
+.euiNotificationFlyoutMessageLink {
+  @include euiTitle('xs');
+  display: flex;
+
+  &--isSeen {
+    color: $euiColorDarkShade !important;
+  }
+}
