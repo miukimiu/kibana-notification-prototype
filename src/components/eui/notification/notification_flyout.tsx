@@ -1,4 +1,4 @@
-import React, { Fragment, FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 
 import {
   EuiFlyout,
@@ -12,8 +12,9 @@ import {
   htmlIdGenerator,
   EuiButton,
   EuiButtonEmpty,
-  EuiIcon,
 } from '@elastic/eui';
+
+import { navigate } from 'gatsby';
 
 import {
   EuiNotificationFlyoutHeader,
@@ -32,6 +33,7 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
   version,
   ...rest
 }) => {
+  const [isRead, setIsRead] = useState(false);
   const createId = htmlIdGenerator('euiHeaderAlertFlyout');
   const headerId = `${createId()}__header`;
 
@@ -40,6 +42,8 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
     <p>The request completed at 12:32:33 GMT+4</p>,
     <p>A background request started at 12:32:33 GMT+4</p>,
   ];
+
+  const onRead = () => setIsRead(true);
 
   return (
     <EuiFlyout
@@ -69,7 +73,6 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
             title: '[APM 500 Server errors] is now active',
             href: '#',
           }}
-          readState="unseen"
           button={{
             href: 'http://www.elastic.co',
             label: 'View',
@@ -85,7 +88,8 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
             title: '[APM 500 Server errors] is now active',
             href: '#',
           }}
-          readState="seen"
+          isRead={isRead}
+          onRead={onRead}
           messages={multipleMessages}
         />
         <EuiNotificationFlyoutMessage
@@ -98,7 +102,7 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
             title: '[APM 500 Server errors] is now active',
             href: '#',
           }}
-          readState="unseen"
+          isRead={true}
           button={{
             href: 'http://www.elastic.co',
             iconType: 'download',
@@ -114,11 +118,11 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
             title: '[APM 500 Server errors] is now active',
             href: '#',
           }}
-          readState="unseen"
+          isRead={false}
           button={{
             href: 'http://www.elastic.co',
             iconType: 'popout',
-            label: 'Go to',
+            label: 'Read more on the blog',
             iconSide: 'right',
           }}
           messages={[<p>The request completed at 10:21:12 GMT+4</p>]}
@@ -130,15 +134,16 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
           alignItems="center"
           responsive={false}>
           <EuiFlexItem grow={false}>
-            <EuiButtonEmpty onClick={onClose}>
+            <EuiButtonEmpty
+              onClick={() => {
+                navigate('notification/center');
+              }}>
               Open notification center
             </EuiButtonEmpty>
           </EuiFlexItem>
-          {version && (
-            <EuiFlexItem grow={false}>
-              <EuiButton size="s">Refresh</EuiButton>
-            </EuiFlexItem>
-          )}
+          <EuiFlexItem grow={false}>
+            <EuiButton size="s">Refresh</EuiButton>
+          </EuiFlexItem>
         </EuiFlexGroup>
       </EuiFlyoutFooter>
     </EuiFlyout>

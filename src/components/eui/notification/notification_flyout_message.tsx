@@ -5,6 +5,7 @@ import {
   EuiAccordion,
   htmlIdGenerator,
 } from '@elastic/eui';
+import classNames from 'classnames';
 import {
   EuiNotificationFlyoutMessageLink,
   EuiNotificationFlyoutMessageLinkProps,
@@ -32,9 +33,11 @@ export type EuiNotificationFlyoutMessageProps = {
    */
   link: EuiNotificationFlyoutMessageLinkProps;
   /**
-   * readState
+   * If readState exists an icon appears.
    */
-  readState: 'seen' | 'unseen';
+  isRead?: boolean | undefined;
+
+  onRead?: () => void;
 
   /**
    * Button ...
@@ -48,20 +51,28 @@ export type EuiNotificationFlyoutMessageProps = {
 
 export const EuiNotificationFlyoutMessage: FunctionComponent<EuiNotificationFlyoutMessageProps> = ({
   link,
-  readState,
   button,
   messages,
+  isRead,
+  onRead,
   meta,
 }) => {
-  const isRead = readState === 'seen';
+  const classes = classNames('euiNotificationFlyoutMessage', {
+    'euiNotificationFlyoutMessage--withReadState': typeof isRead === 'boolean',
+  });
 
   return (
-    <div className="euiNotificationFlyoutMessage">
+    <div className={classes}>
       <EuiNotificationFlyoutMessageMeta
         iconType={meta.iconType}
         type={meta.type}
         healthStatus={meta.healthStatus}
         isRead={isRead}
+        onRead={() => {
+          if (onRead) {
+            onRead();
+          }
+        }}
       />
 
       <div className="euiNotificationFlyoutMessage__content">

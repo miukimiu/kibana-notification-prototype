@@ -2,7 +2,7 @@
   @include euiTitle('xs');
   display: flex;
 
-  &--isSeen {
+  &--isRead {
     color: $euiColorDarkShade !important;
   }
 }

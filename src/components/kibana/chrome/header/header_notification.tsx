@@ -20,38 +20,28 @@ export const KibanaHeaderNotification: FunctionComponent = () => {
 
   const button = (
     <EuiHeaderSectionItemButton
-      aria-controls="headerNotificationCenter"
+      aria-controls="headerNotification"
       aria-expanded={isFlyoutVisible}
       aria-haspopup="true"
-      aria-label="Notification Center"
+      aria-label="Notification"
       notification={showNotification ? '•' : undefined}
       onClick={toggleFlyout}>
       <EuiIcon type="bell" size="m" />
     </EuiHeaderSectionItemButton>
   );
 
-  let flyout;
-  if (isFlyoutVisible) {
-    flyout = (
-      <EuiNotificationFlyout
-        id="headerNotificationCenter"
-        alerts={updates}
-        version="Version 8.0"
-        onClose={closeFlyout}
-      />
-    );
-  }
+  const flyout = isFlyoutVisible && (
+    <EuiNotificationFlyout
+      id="headerNotification"
+      alerts={updates}
+      onClose={closeFlyout}
+    />
+  );
 
   return (
     <Fragment>
       {button}
-      {/* {flyout} */}
-
-      <EuiNotificationFlyout
-        id="headerNotificationCenter"
-        version="Version 8.0"
-        onClose={closeFlyout}
-      />
+      {flyout}
     </Fragment>
   );
 };

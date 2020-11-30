@@ -1,0 +1,39 @@
+.euiNotificationFlyoutMessageMeta {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  > div > * + * {
+    margin-left: $euiSizeS;
+  }
+
+  &__readState {
+ 
+    &--isUnread svg {
+      fill: $euiColorPrimary;
+    }
+  
+    &--isRead svg {
+      fill: transparent;
+      stroke-width: 1px;
+      stroke: $euiBorderColor;
+    }
+  }
+
+  &__time {
+    font-size: $euiFontSizeXS;
+    color: $euiColorDarkShade;
+  }
+
+
+  // &__secondaryAction {
+  //   display: none;
+  // }
+
+  // &:hover {
+  //   .euiNotificationFlyoutMessage__secondaryAction {
+  //     display: block;
+  //   }
+  // }
+}

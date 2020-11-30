@@ -16,8 +16,6 @@ import {
   EuiIcon,
   EuiCollapsibleNavGroup,
   EuiHeaderSectionItemButton,
-  EuiShowFor,
-  EuiListGroupItem,
   EuiHorizontalRule,
   EuiCollapsibleNav,
   EuiPinnableListGroupItemProps,

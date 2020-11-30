@@ -13,7 +13,7 @@ export const EuiNotificationFlyoutMessageLink: FunctionComponent<EuiNotification
   ...rest
 }) => {
   const classes = classNames('euiNotificationFlyoutMessageLink', {
-    'euiNotificationFlyoutMessageLink--isSeen': visited,
+    'euiNotificationFlyoutMessageLink--isRead': visited,
   });
 
   return (

@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import { EuiButtonIcon, EuiIcon, EuiBadge, EuiIconProps } from '@elastic/eui';
+import { EuiButtonIcon, EuiIcon, EuiBadge } from '@elastic/eui';
 import classNames from 'classnames';
 
-type EuiNotificationFlyoutMessageHealthStatus = {
+type euiNotificationFlyoutMessageMetaHealthStatus = {
   title: string;
   type: 'success' | 'warning' | 'danger';
 };
@@ -15,17 +15,19 @@ export type EuiNotificationFlyoutMessageMetaProps = {
   /**
    * readState
    */
-  isRead: boolean;
+  isRead: boolean | undefined;
 
   /**
    * healthStatus
    */
-  healthStatus?: EuiNotificationFlyoutMessageHealthStatus;
+  healthStatus?: euiNotificationFlyoutMessageMetaHealthStatus;
 
   /**
    * The icon used to visually represent this data type. Accepts any `EuiIcon IconType`.
    */
   iconType?: string;
+
+  onRead?: () => void;
 };
 
 export const EuiNotificationFlyoutMessageMeta: FunctionComponent<EuiNotificationFlyoutMessageMetaProps> = ({
@@ -33,19 +35,32 @@ export const EuiNotificationFlyoutMessageMeta: FunctionComponent<EuiNotification
   iconType,
   type,
   healthStatus,
+  onRead,
 }) => {
   const classesReadState = classNames(
-    'euiNotificationFlyoutMessage__readState',
+    'euiNotificationFlyoutMessageMeta__readState',
     {
-      'euiNotificationFlyoutMessage__readState--isSeen': isRead,
-      'euiNotificationFlyoutMessage__readState--isUnseen': !isRead,
+      'euiNotificationFlyoutMessageMeta__readState--isRead': isRead === true,
+      'euiNotificationFlyoutMessageMeta__readState--isUnread': isRead === false,
     }
   );
 
   return (
-    <div className="euiNotificationFlyoutMessage__meta">
+    <div className="euiNotificationFlyoutMessageMeta">
       <div>
-        <EuiIcon type="dot" className={classesReadState} />
+        {typeof isRead === 'boolean' && (
+          <EuiButtonIcon
+            iconType="dot"
+            className={classesReadState}
+            disabled={isRead}
+            onClick={() => {
+              if (onRead) {
+                onRead();
+              }
+            }}
+          />
+        )}
+
         {iconType && <EuiIcon type={iconType} />}
         <EuiBadge color="hollow">{type}</EuiBadge>
 
@@ -55,11 +70,13 @@ export const EuiNotificationFlyoutMessageMeta: FunctionComponent<EuiNotification
       </div>
 
       <div>
-        <span>12 min ago</span>
+        <span className="euiNotificationFlyoutMessageMeta__time">
+          12 min ago
+        </span>
         <EuiButtonIcon
           iconType="boxesVertical"
           color="subdued"
-          className="euiNotificationFlyoutMessage__secondaryAction"
+          className="euiNotificationFlyoutMessageMeta__secondaryAction"
         />
       </div>
     </div>

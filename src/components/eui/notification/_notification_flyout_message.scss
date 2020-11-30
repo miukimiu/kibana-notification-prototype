@@ -6,45 +6,15 @@
     border-bottom: none;
   }
 
-  // &__secondaryAction {
-  //   display: none;
-  // }
-
-  // &:hover {
-  //   .euiNotificationFlyoutMessage__secondaryAction {
-  //     display: block;
-  //   }
-  // }
+  &--withReadState {
+    .euiNotificationFlyoutMessage__content {
+      padding-left: $euiSizeL;
+    }
+  }
 }
 
 .euiNotificationFlyoutMessage__content {
-  padding-left: $euiSizeL;
-  
   > * { 
     margin-top: $euiSizeS;
-  }
-}
-
-.euiNotificationFlyoutMessage__meta {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-
-  > div > * + * {
-    margin-left: $euiSizeS;
-  }
-}
-
-.euiNotificationFlyoutMessage__readState {
- 
-  &--isUnseen {
-    fill: $euiColorPrimary;
-  }
-
-  &--isSeen {
-    fill: transparent;
-    stroke-width: 1px;
-    stroke: $euiBorderColor;
   }
 }
