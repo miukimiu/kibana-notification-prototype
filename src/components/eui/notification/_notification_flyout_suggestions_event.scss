@@ -1,0 +1,17 @@
+.euiNotificationFlyoutSuggestionsEvent {
+  display: flex;
+
+  &__icon {
+    margin-top: $euiSizeXS;
+    margin-right: $euiSizeM;
+  }
+
+  &__content {
+    flex: 1;
+
+    p {
+      color: $euiColorDarkShade;
+      font-size: $euiFontSizeS;
+    }
+  }
+}

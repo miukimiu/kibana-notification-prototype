@@ -16,10 +16,12 @@ import {
 
 import { navigate } from 'gatsby';
 
-import {
-  EuiNotificationFlyoutHeader,
-  EuiNotificationFlyoutMessage,
-} from './index';
+import { EuiNotificationFlyoutHeader } from './index';
+
+import { EuiNotificationFlyoutEvents } from './notification_flyout_events';
+
+import { EuiNotificationFlyoutSuggestions } from './notification_flyout_suggestions';
+
 export type EuiNotificationFlyoutProps = {
   alerts?: EuiHeaderAlertProps[];
   title?: string;
@@ -37,7 +39,7 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
   const createId = htmlIdGenerator('euiHeaderAlertFlyout');
   const headerId = `${createId()}__header`;
 
-  const multipleMessages = [
+  const multipleNotifications = [
     <p>The request completed at 12:32:33 GMT+4</p>,
     <p>The request completed at 12:32:33 GMT+4</p>,
     <p>A background request started at 12:32:33 GMT+4</p>,
@@ -62,70 +64,77 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
           }
         />
       </EuiFlyoutHeader>
-
       <EuiFlyoutBody>
-        <EuiNotificationFlyoutMessage
-          meta={{
-            type: 'Alert',
-            iconType: 'logoCloud',
-          }}
-          link={{
-            title: '[APM 500 Server errors] is now active',
-            href: '#',
-          }}
-          button={{
-            href: 'http://www.elastic.co',
-            label: 'View',
-          }}
-          messages={[<p>The request completed at 12:32:33 GMT+4</p>]}
+        <EuiNotificationFlyoutSuggestions
+          suggestions={[
+            {
+              id: 'a',
+              title: 'Connect Nginx!',
+              description:
+                'We’ve noticed several of your agents detected Nginx on your hosts.',
+              iconType: 'logoNginx',
+              onAdd: () => console.log('onAdd'),
+              onDismiss: () => console.log('onDismiss'),
+            },
+            {
+              id: 'b',
+              title: 'Connect workplace sources',
+              description:
+                'Create a single place to search through documents and data across your entire organization.',
+              iconType: 'logoWorkplaceSearch',
+              onAdd: () => console.log('onAdd'),
+              onDismiss: () => console.log('onDismiss'),
+            },
+            {
+              id: 'c',
+              title: 'Explore Elastic Security',
+              description:
+                'With the data you’ve already ingested into Elastic, you could protect what looks like your entire network. ',
+              iconType: 'logoSecurity',
+              onAdd: () => console.log('onAdd'),
+              onDismiss: () => console.log('onDismiss'),
+            },
+          ]}
         />
-        <EuiNotificationFlyoutMessage
-          meta={{
-            type: 'Alert',
-            healthStatus: { type: 'danger', title: 'critical' },
-          }}
-          link={{
-            title: '[APM 500 Server errors] is now active',
-            href: '#',
-          }}
-          isRead={isRead}
-          onRead={onRead}
-          messages={multipleMessages}
-        />
-        <EuiNotificationFlyoutMessage
-          meta={{
-            type: 'Alert',
-            healthStatus: { type: 'warning', title: 'Entering boundary' },
-            iconType: 'logoMaps',
-          }}
-          link={{
-            title: '[APM 500 Server errors] is now active',
-            href: '#',
-          }}
-          isRead={true}
-          button={{
-            href: 'http://www.elastic.co',
-            iconType: 'download',
-            label: 'Download',
-          }}
-          messages={[<p>The request completed at 11:35:24 GMT+4</p>]}
-        />
-        <EuiNotificationFlyoutMessage
-          meta={{
-            type: 'Alert',
-          }}
-          link={{
-            title: '[APM 500 Server errors] is now active',
-            href: '#',
-          }}
-          isRead={false}
-          button={{
-            href: 'http://www.elastic.co',
-            iconType: 'popout',
-            label: 'Read more on the blog',
-            iconSide: 'right',
-          }}
-          messages={[<p>The request completed at 10:21:12 GMT+4</p>]}
+        <EuiNotificationFlyoutEvents
+          events={[
+            {
+              id: 'a',
+              meta: {
+                type: 'Alert',
+                iconType: 'logoCloud',
+              },
+              name: {
+                title: '[APM 500 Server errors] is now active',
+                href: '#',
+              },
+              primaryAction: {
+                href: 'http://www.elastic.co',
+                label: 'View',
+              },
+              notifications: [<p>The request completed at 12:32:33 GMT+4</p>],
+              onRead: onRead,
+              isRead: isRead,
+            },
+            {
+              id: 'a',
+              meta: {
+                type: 'Alert',
+                healthStatus: { type: 'warning', title: 'Entering boundary' },
+                iconType: 'logoMaps',
+              },
+              name: {
+                title: '[Maps] Geo Alert',
+                href: '#',
+              },
+              primaryAction: {
+                href: 'http://www.elastic.co',
+                iconType: 'download',
+                label: 'Download',
+              },
+              notifications: multipleNotifications,
+            },
+          ]}
         />
       </EuiFlyoutBody>
       <EuiFlyoutFooter>

@@ -1,0 +1,22 @@
+.euiNotificationFlyoutEvent {
+  padding: $euiSizeM $euiSizeS $euiSizeM $euiSize;
+  border-bottom: $euiBorderThin;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &--withReadState {
+    padding: $euiSizeM $euiSizeM;
+
+    .euiNotificationFlyoutEvent__content {
+      padding-left: $euiSizeL;
+    }
+  }
+}
+
+.euiNotificationFlyoutEvent__content {
+  > * { 
+    margin-top: $euiSizeS;
+  }
+}
