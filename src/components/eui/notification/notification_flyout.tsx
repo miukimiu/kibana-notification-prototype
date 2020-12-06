@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useState, useEffect } from 'react';
 
 import {
   EuiFlyout,
@@ -12,15 +12,18 @@ import {
   htmlIdGenerator,
   EuiButton,
   EuiButtonEmpty,
+  EuiContextMenuPanel,
+  EuiContextMenuItem,
 } from '@elastic/eui';
 
 import { navigate } from 'gatsby';
 
-import { EuiNotificationFlyoutHeader } from './index';
-
+import { EuiNotificationFlyoutHeader } from './notification_flyout_header';
+import { EuiNotificationFlyoutHeaderFilters } from './notification_flyout_header_filters';
 import { EuiNotificationFlyoutEvents } from './notification_flyout_events';
-
 import { EuiNotificationFlyoutSuggestions } from './notification_flyout_suggestions';
+
+import { notificationsData } from './notifications_data';
 
 export type EuiNotificationFlyoutProps = {
   alerts?: EuiHeaderAlertProps[];
@@ -35,23 +38,34 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
   version,
   ...rest
 }) => {
-  const [isRead, setIsRead] = useState(false);
   const createId = htmlIdGenerator('euiHeaderAlertFlyout');
   const headerId = `${createId()}__header`;
+  const [notifications, setNotifications] = useState(notificationsData);
 
-  const multipleNotifications = [
-    <p>The request completed at 12:32:33 GMT+4</p>,
-    <p>The request completed at 12:32:33 GMT+4</p>,
-    <p>A background request started at 12:32:33 GMT+4</p>,
-  ];
+  const onRead = (id: string, isRead: boolean) => {
+    const nextState = notifications.map((item) =>
+      item.id === id ? { ...item, isRead: isRead } : item
+    );
 
-  const onRead = () => setIsRead(true);
+    console.log('nextState', nextState);
+
+    setNotifications(nextState);
+  };
+
+  const onDismissAllSuggestions = () => {
+    console.log('onDismissAllSuggestions');
+  };
+
+  const onDisableAllSuggestions = () => {
+    console.log('onDisableAllSuggestions');
+  };
 
   return (
     <EuiFlyout
       className="euiNotificationFlyout"
       onClose={onClose}
-      size="s"
+      size="m"
+      maxWidth="540px"
       aria-labelledby={headerId}
       {...rest}>
       <EuiFlyoutHeader hasBorder>
@@ -59,13 +73,20 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
           title={title}
           actions={
             <>
-              <span>Filters</span> <span>Mark all as read</span>
+              <EuiButtonEmpty size="s" onClick={() => {}}>
+                <EuiNotificationFlyoutHeaderFilters />
+              </EuiButtonEmpty>{' '}
+              <EuiButtonEmpty size="s" onClick={() => {}}>
+                Mark all as read
+              </EuiButtonEmpty>
             </>
           }
         />
       </EuiFlyoutHeader>
       <EuiFlyoutBody>
         <EuiNotificationFlyoutSuggestions
+          onDismissAll={onDismissAllSuggestions}
+          onDisableAll={onDisableAllSuggestions}
           suggestions={[
             {
               id: 'a',
@@ -96,46 +117,7 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
             },
           ]}
         />
-        <EuiNotificationFlyoutEvents
-          events={[
-            {
-              id: 'a',
-              meta: {
-                type: 'Alert',
-                iconType: 'logoCloud',
-              },
-              name: {
-                title: '[APM 500 Server errors] is now active',
-                href: '#',
-              },
-              primaryAction: {
-                href: 'http://www.elastic.co',
-                label: 'View',
-              },
-              notifications: [<p>The request completed at 12:32:33 GMT+4</p>],
-              onRead: onRead,
-              isRead: isRead,
-            },
-            {
-              id: 'a',
-              meta: {
-                type: 'Alert',
-                healthStatus: { type: 'warning', title: 'Entering boundary' },
-                iconType: 'logoMaps',
-              },
-              name: {
-                title: '[Maps] Geo Alert',
-                href: '#',
-              },
-              primaryAction: {
-                href: 'http://www.elastic.co',
-                iconType: 'download',
-                label: 'Download',
-              },
-              notifications: multipleNotifications,
-            },
-          ]}
-        />
+        <EuiNotificationFlyoutEvents events={notifications} onRead={onRead} />
       </EuiFlyoutBody>
       <EuiFlyoutFooter>
         <EuiFlexGroup

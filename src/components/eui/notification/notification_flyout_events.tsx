@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import classNames from 'classnames';
 import {
   EuiNotificationFlyoutEventName,
@@ -16,14 +16,12 @@ import {
   EuiNotificationFlyoutEventPrimaryActionProps,
 } from './notification_flyout_event_primary_action';
 
-type metaProps = Omit<EuiNotificationFlyoutEventMetaProps, 'isRead'>;
-
 export type EuiNotificationFlyoutEventProps = {
   id: string;
   /**
    * The title of the
    */
-  meta: metaProps;
+  meta: EuiNotificationFlyoutEventMetaProps;
   /**
    * The title of the
    */
@@ -33,8 +31,6 @@ export type EuiNotificationFlyoutEventProps = {
    */
   isRead?: boolean | undefined;
 
-  onRead?: () => void;
-
   /**
    * Button ...
    */
@@ -42,7 +38,11 @@ export type EuiNotificationFlyoutEventProps = {
   /**
    * A string or an array of strings.
    */
-  notifications: ReactElement[];
+  notifications: [];
+
+  onRead?: () => void;
+  onViewSimilarMessages?: () => void;
+  onIgnoreNotify?: () => void;
 };
 
 export type EuiNotificationFlyoutEventsProps = {
@@ -54,6 +54,7 @@ export type EuiNotificationFlyoutEventsProps = {
 
 export const EuiNotificationFlyoutEvents: FunctionComponent<EuiNotificationFlyoutEventsProps> = ({
   events,
+  onRead,
 }) => {
   const notificationFlyoutEvents = events.map((event) => {
     const classes = classNames('euiNotificationFlyoutEvent', {
@@ -61,25 +62,28 @@ export const EuiNotificationFlyoutEvents: FunctionComponent<EuiNotificationFlyou
         typeof event.isRead === 'boolean',
     });
 
+    const [isRead, setIsRead] = useState(event.isRead && event.isRead);
+
+    const onHandleRead = () => {
+      setIsRead(true);
+
+      onRead(event.id, true);
+    };
+
     return (
       <div className={classes} key={event.id}>
         <EuiNotificationFlyoutEventMeta
           iconType={event.meta.iconType}
           type={event.meta.type}
           healthStatus={event.meta.healthStatus}
-          isRead={event.isRead}
-          onRead={() => {
-            if (event.onRead) {
-              event.onRead();
-            }
-          }}
+          isRead={isRead}
+          onRead={onHandleRead}
+          onViewSimilarMessages={event.onViewSimilarMessages}
+          onIgnoreNotify={event.onIgnoreNotify}
         />
 
         <div className="euiNotificationFlyoutEvent__content">
-          <EuiNotificationFlyoutEventName
-            {...event.name}
-            isRead={event.isRead}
-          />
+          <EuiNotificationFlyoutEventName {...event.name} isRead={isRead} />
 
           <EuiNotificationFlyoutEventNotifications
             notifications={event.notifications}

@@ -1,5 +1,12 @@
 import React, { FunctionComponent, useState } from 'react';
-import { EuiButtonIcon, EuiButtonEmpty, EuiHorizontalRule } from '@elastic/eui';
+import {
+  EuiButtonIcon,
+  EuiButtonEmpty,
+  EuiHorizontalRule,
+  EuiPopover,
+  EuiContextMenuPanel,
+  EuiContextMenuItem,
+} from '@elastic/eui';
 import {
   EuiNotificationFlyoutSuggestionsEvent,
   EuiNotificationFlyoutSuggestionsEventProps,
@@ -7,10 +14,14 @@ import {
 
 export type EuiNotificationFlyoutSuggestionsProps = {
   suggestions: EuiNotificationFlyoutSuggestionsEventProps[];
+  onDismissAll: () => void;
+  onDisableAll: () => void;
 };
 
 export const EuiNotificationFlyoutSuggestions: FunctionComponent<EuiNotificationFlyoutSuggestionsProps> = ({
   suggestions,
+  onDismissAll,
+  onDisableAll,
 }) => {
   const notificationFlyoutSuggestions = suggestions.map((suggestion) => {
     return (
@@ -27,17 +38,48 @@ export const EuiNotificationFlyoutSuggestions: FunctionComponent<EuiNotification
 
   const hasMoreSuggestions = notificationFlyoutSuggestions.length > 1;
   const [isOpenMoreSuggestions, setOpenMoreSuggestions] = useState(false);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
+  const onClickDismissAll = () => {
+    onDismissAll();
+    setIsPopoverOpen(false);
+  };
+
+  const onClickDisableAll = () => {
+    onDisableAll();
+    setIsPopoverOpen(false);
+  };
 
   return (
     <div className="euiNotificationFlyoutSuggestions">
       <div className="euiNotificationFlyoutSuggestions__inner">
         <div className="euiNotificationFlyoutSuggestions__mainActions">
-          <p>You have 3 new suggestions</p>
-          <EuiButtonIcon
-            iconType="boxesVertical"
-            color="primary"
-            className="euiNotificationFlyoutSuggestions__primaryAction"
-          />
+          <p>You have {notificationFlyoutSuggestions.length} new suggestions</p>
+          <EuiPopover
+            isOpen={isPopoverOpen}
+            panelPaddingSize="s"
+            anchorPosition="upCenter"
+            button={
+              <EuiButtonIcon
+                iconType="boxesVertical"
+                color="subdued"
+                className="euiNotificationFlyoutSuggestions__primaryAction"
+                onClick={() => setIsPopoverOpen(!isPopoverOpen)}
+              />
+            }
+            closePopover={() => setIsPopoverOpen(false)}
+            ownFocus={true}>
+            <EuiContextMenuPanel
+              items={[
+                <EuiContextMenuItem key="A" onClick={onClickDismissAll}>
+                  Dismiss all
+                </EuiContextMenuItem>,
+                <EuiContextMenuItem key="B" onClick={onClickDisableAll}>
+                  Disable suggestions
+                </EuiContextMenuItem>,
+              ]}
+            />
+          </EuiPopover>
         </div>
         <div>{notificationFlyoutSuggestions[0]}</div>
         {hasMoreSuggestions && !isOpenMoreSuggestions && (

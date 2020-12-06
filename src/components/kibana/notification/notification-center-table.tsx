@@ -55,49 +55,11 @@ export const KibanaNotificationCenterTable: FunctionComponent = () => {
     sortDirection
   );
 
-  const actions = [
-    {
-      name: 'Open',
-      description: 'View this report',
-      icon: 'inspect',
-      type: 'icon',
-      isPrimary: true,
-      onClick: () => {},
-      'data-test-subj': 'action-open',
-    },
-    {
-      name: 'Download',
-      description: 'Download this report',
-      icon: 'download',
-      type: 'icon',
-      isPrimary: true,
-      onClick: () => {},
-      'data-test-subj': 'action-download',
-    },
-    {
-      name: 'Save',
-      description: 'save this report',
-      icon: 'save',
-      onClick: () => {},
-      'data-test-subj': 'action-save',
-    },
-  ];
-
   const columns = [
     {
       field: 'messages',
       name: 'Messages',
       truncateText: true,
-      sortable: true,
-    },
-    {
-      field: 'github',
-      name: 'Github',
-      render: (username) => (
-        <EuiLink href={`https://github.com/${username}`} target="_blank">
-          {username}
-        </EuiLink>
-      ),
     },
     {
       field: 'dateOfBirth',
@@ -105,14 +67,6 @@ export const KibanaNotificationCenterTable: FunctionComponent = () => {
       dataType: 'date',
       render: (date) => formatDate(date, 'dobLong'),
       sortable: true,
-    },
-    {
-      field: 'nationality',
-      name: 'Nationality',
-      render: (countryCode) => {
-        const country = store.getCountry(countryCode);
-        return `${country.flag} ${country.name}`;
-      },
     },
     {
       field: 'readState',
@@ -124,10 +78,6 @@ export const KibanaNotificationCenterTable: FunctionComponent = () => {
         return <EuiHealth color={color}>{label}</EuiHealth>;
       },
       sortable: true,
-    },
-    {
-      name: 'Actions',
-      actions,
     },
   ];
 
@@ -145,13 +95,6 @@ export const KibanaNotificationCenterTable: FunctionComponent = () => {
     },
   };
 
-  const selection = {
-    selectable: (user) => user.readState,
-    selectableMessage: (selectable) =>
-      !selectable ? 'User is currently offline' : undefined,
-    onSelectionChange: onSelectionChange,
-  };
-
   return (
     <EuiBasicTable
       items={pageOfItems}
@@ -159,7 +102,6 @@ export const KibanaNotificationCenterTable: FunctionComponent = () => {
       columns={columns}
       pagination={pagination}
       sorting={sorting}
-      selection={selection}
       isSelectable={true}
       hasActions={true}
       responsive={true}

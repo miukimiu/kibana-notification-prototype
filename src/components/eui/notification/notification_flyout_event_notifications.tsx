@@ -22,7 +22,9 @@ export const EuiNotificationFlyoutEventNotifications: FunctionComponent<EuiNotif
           buttonContent={`+ ${notifications.length} notifications`}
           arrowDisplay="none">
           <div className="euiNotificationFlyoutEventNotifications__accordionContent">
-            {notifications}
+            {notifications.map((notification) => (
+              <p>{notification}</p>
+            ))}
           </div>
         </EuiAccordion>
       )}

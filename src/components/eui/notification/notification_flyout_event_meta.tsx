@@ -1,5 +1,12 @@
-import React, { FunctionComponent } from 'react';
-import { EuiButtonIcon, EuiIcon, EuiBadge } from '@elastic/eui';
+import React, { FunctionComponent, useState } from 'react';
+import {
+  EuiButtonIcon,
+  EuiIcon,
+  EuiBadge,
+  EuiPopover,
+  EuiContextMenuPanel,
+  EuiContextMenuItem,
+} from '@elastic/eui';
 import classNames from 'classnames';
 
 type euiNotificationFlyoutEventMetaHealthStatus = {
@@ -28,6 +35,9 @@ export type EuiNotificationFlyoutEventMetaProps = {
   iconType?: string;
 
   onRead?: () => void;
+  onMarkAsRead?: () => void;
+  onViewSimilarMessages?: () => void;
+  onIgnoreNotify?: () => void;
 };
 
 export const EuiNotificationFlyoutEventMeta: FunctionComponent<EuiNotificationFlyoutEventMetaProps> = ({
@@ -36,6 +46,9 @@ export const EuiNotificationFlyoutEventMeta: FunctionComponent<EuiNotificationFl
   type,
   healthStatus,
   onRead,
+  onMarkAsRead,
+  onViewSimilarMessages,
+  onIgnoreNotify,
 }) => {
   const classesReadState = classNames(
     'euiNotificationFlyoutEventMeta__readState',
@@ -45,6 +58,29 @@ export const EuiNotificationFlyoutEventMeta: FunctionComponent<EuiNotificationFl
     }
   );
 
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
+  const markAsRead = () => {
+    if (onRead) {
+      onRead();
+    }
+  };
+
+  const onPopoverMarkAsRead = () => {
+    if (onRead) {
+      onRead();
+    }
+    setIsPopoverOpen(false);
+  };
+
+  const onPopoverViewSimilarMessages = () => {
+    setIsPopoverOpen(false);
+  };
+
+  const onPopoverNoNotify = () => {
+    setIsPopoverOpen(false);
+  };
+
   return (
     <div className="euiNotificationFlyoutEventMeta">
       <div>
@@ -53,11 +89,7 @@ export const EuiNotificationFlyoutEventMeta: FunctionComponent<EuiNotificationFl
             iconType="dot"
             className={classesReadState}
             disabled={isRead}
-            onClick={() => {
-              if (onRead) {
-                onRead();
-              }
-            }}
+            onClick={markAsRead}
           />
         )}
 
@@ -71,11 +103,46 @@ export const EuiNotificationFlyoutEventMeta: FunctionComponent<EuiNotificationFl
 
       <div>
         <span className="euiNotificationFlyoutEventMeta__time">12 min ago</span>
-        <EuiButtonIcon
-          iconType="boxesVertical"
-          color="subdued"
-          className="euiNotificationFlyoutEventMeta__secondaryAction"
-        />
+
+        {onPopoverMarkAsRead && (
+          <EuiPopover
+            isOpen={isPopoverOpen}
+            panelPaddingSize="s"
+            anchorPosition="upCenter"
+            button={
+              <EuiButtonIcon
+                iconType="boxesVertical"
+                color="subdued"
+                className="euiNotificationFlyoutEventMeta__secondaryAction"
+                onClick={() => setIsPopoverOpen(!isPopoverOpen)}
+              />
+            }
+            closePopover={() => setIsPopoverOpen(false)}
+            ownFocus={true}>
+            <EuiContextMenuPanel
+              items={[
+                <EuiContextMenuItem
+                  key="A"
+                  icon="dot"
+                  onClick={onPopoverMarkAsRead}>
+                  Mark as read
+                </EuiContextMenuItem>,
+                <EuiContextMenuItem
+                  key="B"
+                  icon="filter"
+                  onClick={onPopoverViewSimilarMessages}>
+                  View messages like this
+                </EuiContextMenuItem>,
+                <EuiContextMenuItem
+                  key="C"
+                  icon="eyeClosed"
+                  onClick={onPopoverNoNotify}>
+                  Don’t notify me about this
+                </EuiContextMenuItem>,
+              ]}
+            />
+          </EuiPopover>
+        )}
       </div>
     </div>
   );

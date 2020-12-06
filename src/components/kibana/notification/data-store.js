@@ -59,17 +59,13 @@ const github = [
 
 const dob = new Date(1980, 1, 1);
 
-const createUsers = (countries) => {
+const createUsers = () => {
   return times(20, (index) => {
     return {
       id: index,
-      firstName: index < 10 ? messages[index] : messages[index - 10],
+      messagse: index < 10 ? messages[index] : messages[index - 10],
       github: index < 10 ? github[index] : github[index - 10],
       dateOfBirth: dob,
-      nationality: random.oneToOne(
-        countries.map((country) => country.code),
-        index
-      ),
       online: index % 2 === 0,
     };
   });
@@ -77,7 +73,7 @@ const createUsers = (countries) => {
 
 export const createDataStore = () => {
   const countries = createCountries();
-  const users = createUsers(countries);
+  const users = createUsers();
 
   return {
     countries,
@@ -113,24 +109,5 @@ export const createDataStore = () => {
         totalItemCount: items.length,
       };
     },
-
-    deleteUsers: (...ids) => {
-      ids.forEach((id) => {
-        const index = users.findIndex((user) => user.id === id);
-        if (index >= 0) {
-          users.splice(index, 1);
-        }
-      });
-    },
-
-    cloneUser: (id) => {
-      const index = users.findIndex((user) => user.id === id);
-      if (index >= 0) {
-        const user = users[index];
-        users.splice(index, 0, { ...user, id: users.length });
-      }
-    },
-
-    getCountry: (code) => countries.find((country) => country.code === code),
   };
 };
