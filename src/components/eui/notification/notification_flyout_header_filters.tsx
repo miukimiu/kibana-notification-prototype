@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode, useState } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import {
   EuiPopover,
   EuiSelectable,
@@ -6,29 +6,43 @@ import {
   EuiPopoverTitle,
   EuiPopoverFooter,
   EuiButton,
+  EuiSelectableOption,
 } from '@elastic/eui';
-// @ts-ignore
-import { Comparators } from '@elastic/eui/es/services/sort';
 
-import { Options } from './filters_data';
+export type EuiNotificationFlyoutHeaderFiltersProps = {
+  filters: EuiSelectableOption[];
+  onFiltersChange: (filters: Array<string>) => void;
+};
 
-export const EuiNotificationFlyoutHeaderFilters: FunctionComponent<EuiNotificationFlyoutHeaderFiltersProps> = ({}) => {
-  const [options, setOptions] = useState(Options);
+export const EuiNotificationFlyoutHeaderFilters: FunctionComponent<EuiNotificationFlyoutHeaderFiltersProps> = ({
+  filters,
+  onFiltersChange,
+}) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const closePopover = () => setIsPopoverOpen(false);
 
   const onButtonClick = () => {
-    setOptions(options.slice().sort(Comparators.property('checked')));
     setIsPopoverOpen(!isPopoverOpen);
   };
 
-  const onChange = (options) => {
-    setOptions(options);
+  const onChange = (newOptions: any) => {
+    onFiltersChange(newOptions);
   };
 
+  const numberOfActiveFilters = filters.filter((item) => item.checked === 'on')
+    .length;
+
   const FilterButton = (
-    <EuiButtonEmpty size="s" onClick={onButtonClick}>
-      Filters
+    <EuiButtonEmpty
+      size="s"
+      className="euiNotificationFlyoutHeaderFilters__button"
+      onClick={onButtonClick}
+      iconType="arrowDown"
+      iconSide="right">
+      <span className="euiNotificationFlyoutHeaderFilters__text">Filters</span>
+      <span className="euiNotificationFlyoutHeaderFilters__buttonNumber">
+        {numberOfActiveFilters}
+      </span>
     </EuiButtonEmpty>
   );
 
@@ -45,7 +59,7 @@ export const EuiNotificationFlyoutHeaderFilters: FunctionComponent<EuiNotificati
           placeholder: 'Filter list',
           compressed: true,
         }}
-        options={options}
+        options={filters}
         onChange={onChange}>
         {(list, search) => (
           <div style={{ width: 240 }}>

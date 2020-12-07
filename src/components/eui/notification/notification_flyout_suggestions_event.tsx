@@ -12,7 +12,6 @@ export type EuiNotificationFlyoutSuggestionsEventProps = {
 };
 
 export const EuiNotificationFlyoutSuggestionsEvent: FunctionComponent<EuiNotificationFlyoutSuggestionsEventProps> = ({
-  id,
   title,
   description,
   onAdd,
@@ -24,7 +23,7 @@ export const EuiNotificationFlyoutSuggestionsEvent: FunctionComponent<EuiNotific
   });
 
   return (
-    <div className={classes} key={id}>
+    <div className={classes}>
       {iconType && (
         <div className="euiNotificationFlyoutSuggestionsEvent__icon">
           <EuiIcon type={iconType} />

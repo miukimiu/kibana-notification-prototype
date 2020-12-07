@@ -1,0 +1,15 @@
+.euiNotificationFlyoutHeaderFilters__button {
+  text-decoration: none !important;
+
+  &:hover .euiNotificationFlyoutHeaderFilters__text {
+    text-decoration: underline;
+  }
+}
+
+.euiNotificationFlyoutHeaderFilters__buttonNumber {
+  padding: $euiSizeXS/2 $euiSizeS;
+  border-radius: $euiBorderRadiusSmall;
+  margin-left: $euiSizeXS;
+  color: makeHighContrastColor($euiColorEmptyShade, $euiColorAccent);
+  background: $euiColorAccent;
+}

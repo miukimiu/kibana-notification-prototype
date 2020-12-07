@@ -16,22 +16,35 @@ export type EuiNotificationFlyoutSuggestionsProps = {
   suggestions: EuiNotificationFlyoutSuggestionsEventProps[];
   onDismissAll: () => void;
   onDisableAll: () => void;
+  onDismiss: (id: string) => void;
+  onAdd: (id: string) => void;
 };
 
 export const EuiNotificationFlyoutSuggestions: FunctionComponent<EuiNotificationFlyoutSuggestionsProps> = ({
   suggestions,
   onDismissAll,
   onDisableAll,
+  onDismiss,
+  onAdd,
 }) => {
   const notificationFlyoutSuggestions = suggestions.map((suggestion) => {
+    const onHandleDismiss = () => {
+      onDismiss(suggestion.id);
+    };
+
+    const onHandleAdd = () => {
+      onAdd(suggestion.id);
+    };
+
     return (
       <EuiNotificationFlyoutSuggestionsEvent
+        key={suggestion.id}
         id={suggestion.id}
         title={suggestion.title}
         description={suggestion.description}
         iconType={suggestion.iconType}
-        onAdd={suggestion.onAdd}
-        onDismiss={suggestion.onDismiss}
+        onAdd={onHandleAdd}
+        onDismiss={onHandleDismiss}
       />
     );
   });
@@ -50,6 +63,8 @@ export const EuiNotificationFlyoutSuggestions: FunctionComponent<EuiNotification
     setIsPopoverOpen(false);
   };
 
+  if (notificationFlyoutSuggestions.length === 0) return null;
+
   return (
     <div className="euiNotificationFlyoutSuggestions">
       <div className="euiNotificationFlyoutSuggestions__inner">
@@ -63,7 +78,7 @@ export const EuiNotificationFlyoutSuggestions: FunctionComponent<EuiNotification
             anchorPosition="upCenter"
             button={
               <EuiButtonIcon
-                aria-label="open actions"
+                aria-label="Open actions"
                 iconType="boxesVertical"
                 color="subdued"
                 className="euiNotificationFlyoutSuggestions__primaryAction"

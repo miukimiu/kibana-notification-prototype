@@ -5,25 +5,27 @@ import {
   EuiFlyoutBody,
   EuiFlyoutHeader,
   EuiFlyoutFooter,
-  EuiFlexGroup,
-  EuiFlexItem,
   EuiFlyoutProps,
   EuiHeaderAlertProps,
   htmlIdGenerator,
   EuiButton,
   EuiButtonEmpty,
-  EuiContextMenuPanel,
-  EuiContextMenuItem,
+  EuiSelectableOption,
 } from '@elastic/eui';
 
 import { navigate } from 'gatsby';
 
+import { EuiNotificationFlyoutFooter } from './notification_flyout_footer';
 import { EuiNotificationFlyoutHeader } from './notification_flyout_header';
 import { EuiNotificationFlyoutHeaderFilters } from './notification_flyout_header_filters';
 import { EuiNotificationFlyoutEvents } from './notification_flyout_events';
 import { EuiNotificationFlyoutSuggestions } from './notification_flyout_suggestions';
 
-import { notificationsData } from './notifications_data';
+import {
+  notificationsEventsData,
+  notificationsSuggestionsData,
+  filtersData,
+} from './notifications_data';
 
 export type EuiNotificationFlyoutProps = {
   alerts?: EuiHeaderAlertProps[];
@@ -40,7 +42,19 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
 }) => {
   const createId = htmlIdGenerator('euiHeaderAlertFlyout');
   const headerId = `${createId()}__header`;
-  const [notifications, setNotifications] = useState(notificationsData);
+
+  const [currentFilters, setCurrentFilters] = useState(filtersData);
+  const [notifications, setNotifications] = useState(notificationsEventsData);
+  const [suggestions, setSuggestions] = useState(notificationsSuggestionsData);
+  const [newEvents, setNewEvents] = useState(false);
+
+  const activeFilters = currentFilters
+    .filter((item) => item.checked === 'on')
+    .map((item) => item.label);
+
+  const onFiltersChange = (filters: EuiSelectableOption[]) => {
+    setCurrentFilters(filters);
+  };
 
   const onRead = (id: string, isRead: boolean) => {
     const nextState = notifications.map((item) =>
@@ -58,6 +72,18 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
     }, 200);
   };
 
+  const onDismissSuggestion = (id: string) => {
+    const nextState = suggestions.filter((item) => item.id !== id);
+
+    setSuggestions(nextState);
+  };
+
+  const onAddSuggestion = (id: string) => {
+    const nextState = suggestions.filter((item) => item.id !== id);
+
+    setSuggestions(nextState);
+  };
+
   const onMarkAllAsRead = () => {
     const nextState = notifications.map((item) => {
       return { ...item, isRead: true };
@@ -66,16 +92,29 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
     setNotifications(nextState);
   };
 
-  const onRefresh = () => {
-    setNotifications(notificationsData);
-  };
-
   const onDismissAllSuggestions = () => {
-    console.log('onDismissAllSuggestions');
+    setSuggestions([]);
   };
 
   const onDisableAllSuggestions = () => {
-    console.log('onDisableAllSuggestions');
+    setSuggestions([]);
+  };
+
+  const onRefresh = () => {
+    setNotifications(notificationsEventsData);
+    setSuggestions(notificationsSuggestionsData);
+    setCurrentFilters(filtersData);
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setNewEvents(true);
+    }, 30000);
+  });
+
+  const goToNotificationCenter = () => {
+    navigate('notification/center');
+    onClose();
   };
 
   return (
@@ -92,7 +131,10 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
           title={title}
           actions={
             <>
-              <EuiNotificationFlyoutHeaderFilters />
+              <EuiNotificationFlyoutHeaderFilters
+                filters={currentFilters}
+                onFiltersChange={onFiltersChange}
+              />
               <EuiButtonEmpty size="s" onClick={onMarkAllAsRead}>
                 Mark all as read
               </EuiButtonEmpty>
@@ -102,63 +144,38 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
       </EuiFlyoutHeader>
       <EuiFlyoutBody>
         <EuiNotificationFlyoutSuggestions
+          suggestions={suggestions}
+          onDismiss={onDismissSuggestion}
+          onAdd={onAddSuggestion}
           onDismissAll={onDismissAllSuggestions}
           onDisableAll={onDisableAllSuggestions}
-          suggestions={[
-            {
-              id: 'a',
-              title: 'Connect Nginx!',
-              description:
-                'We’ve noticed several of your agents detected Nginx on your hosts.',
-              iconType: 'logoNginx',
-              onAdd: () => console.log('onAdd'),
-              onDismiss: () => console.log('onDismiss'),
-            },
-            {
-              id: 'b',
-              title: 'Connect workplace sources',
-              description:
-                'Create a single place to search through documents and data across your entire organization.',
-              iconType: 'logoWorkplaceSearch',
-              onAdd: () => console.log('onAdd'),
-              onDismiss: () => console.log('onDismiss'),
-            },
-            {
-              id: 'c',
-              title: 'Explore Elastic Security',
-              description:
-                'With the data you’ve already ingested into Elastic, you could protect what looks like your entire network. ',
-              iconType: 'logoSecurity',
-              onAdd: () => console.log('onAdd'),
-              onDismiss: () => console.log('onDismiss'),
-            },
-          ]}
         />
         <EuiNotificationFlyoutEvents
           events={notifications}
           onRead={onRead}
           onViewSimilarMessages={onViewSimilarMessages}
+          activeFilters={activeFilters}
+          emptyStateAction={
+            <EuiButton onClick={goToNotificationCenter}>
+              Open Notification Center
+            </EuiButton>
+          }
         />
       </EuiFlyoutBody>
       <EuiFlyoutFooter>
-        <EuiFlexGroup
-          justifyContent="spaceBetween"
-          alignItems="center"
-          responsive={false}>
-          <EuiFlexItem grow={false}>
-            <EuiButtonEmpty
-              onClick={() => {
-                navigate('notification/center');
-              }}>
+        <EuiNotificationFlyoutFooter
+          mainAction={
+            <EuiButtonEmpty onClick={goToNotificationCenter}>
               Open notification center
             </EuiButtonEmpty>
-          </EuiFlexItem>
-          <EuiFlexItem grow={false}>
+          }
+          hasNewEvents={newEvents}
+          secondaryAction={
             <EuiButton size="s" onClick={onRefresh}>
               Refresh
             </EuiButton>
-          </EuiFlexItem>
-        </EuiFlexGroup>
+          }
+        />
       </EuiFlyoutFooter>
     </EuiFlyout>
   );

@@ -1,8 +1,12 @@
-@import './notification_flyout_header';
-@import './notification_flyout_event';
+@import './notification_flyout_events';
 @import './notification_flyout_event_name';
 @import './notification_flyout_event_meta';
 @import './notification_flyout_event_notifications';
+@import './notification_flyout_footer';
+@import './notification_flyout_header';
+@import './notification_flyout_header_filters';
 @import './notification_flyout_suggestions';
 @import './notification_flyout_suggestions_event';
+
+// overrides for .euiFlyout
 @import './overrides';

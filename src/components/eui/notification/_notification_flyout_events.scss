@@ -1,4 +1,4 @@
-.euiNotificationFlyoutEvent {
+.euiNotificationFlyoutEvents {
   padding: $euiSizeM $euiSizeS $euiSizeM $euiSize;
   border-bottom: $euiBorderThin;
 
@@ -9,13 +9,23 @@
   &--withReadState {
     padding: $euiSizeM $euiSizeM;
 
-    .euiNotificationFlyoutEvent__content {
+    .euiNotificationFlyoutEvents__content {
       padding-left: $euiSizeL;
+    }
+  }
+
+  &--emptyState {
+    text-align: center;
+    justify-content: center;
+    padding-top: $euiSizeXXL * 2;
+
+    > * { 
+      margin-top: $euiSizeL;
     }
   }
 }
 
-.euiNotificationFlyoutEvent__content {
+.euiNotificationFlyoutEvents__content {
   > * { 
     margin-top: $euiSizeS;
   }

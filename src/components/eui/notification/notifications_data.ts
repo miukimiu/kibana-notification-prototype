@@ -1,4 +1,6 @@
-export const notificationsData = [
+import { EuiSelectableOption } from '@elastic/eui';
+
+export const notificationsEventsData = [
   {
     id: 'notificationA',
     meta: {
@@ -106,5 +108,50 @@ export const notificationsData = [
     },
     notifications: ['The request completed at 10:23:45 GMT+4'],
     isRead: false,
+  },
+];
+
+export const notificationsSuggestionsData = [
+  {
+    id: 'a',
+    title: 'Connect Nginx!',
+    description:
+      'We’ve noticed several of your agents detected Nginx on your hosts.',
+    iconType: 'logoNginx',
+    isDismissed: false,
+    href: '#',
+  },
+  {
+    id: 'b',
+    title: 'Connect workplace sources',
+    description:
+      'Create a single place to search through documents and data across your entire organization.',
+    iconType: 'logoWorkplaceSearch',
+    isDismissed: false,
+    href: '#',
+  },
+  {
+    id: 'c',
+    title: 'Explore Elastic Security',
+    description:
+      'With the data you’ve already ingested into Elastic, you could protect what looks like your entire network. ',
+    iconType: 'logoSecurity',
+    isDismissed: false,
+    href: '#',
+  },
+];
+
+export const filtersData: EuiSelectableOption[] = [
+  {
+    label: 'Alert',
+    checked: 'on',
+  },
+  {
+    label: 'Report',
+    checked: 'on',
+  },
+  {
+    label: 'Cloud',
+    checked: 'on',
   },
 ];

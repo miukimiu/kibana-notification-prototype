@@ -4,7 +4,7 @@
   align-items: center;
   padding: $euiSize $euiSizeM;
 
-  &__actions:after {
-
+  &__actions {
+    margin-left: $euiSize;
   }
 }

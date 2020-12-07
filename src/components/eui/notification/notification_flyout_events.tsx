@@ -1,5 +1,6 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import classNames from 'classnames';
+import { EuiTitle } from '@elastic/eui';
 import {
   EuiNotificationFlyoutEventName,
   EuiNotificationFlyoutEventNameProps,
@@ -47,6 +48,10 @@ export type EuiNotificationFlyoutEventsProps = {
    */
   events: EuiNotificationFlyoutEventProps[];
 
+  activeFilters: Array<string>;
+
+  emptyStateAction: ReactNode;
+
   onRead?: (id: string, isRead: boolean) => void;
   onViewSimilarMessages?: (type: string) => void;
 };
@@ -55,47 +60,67 @@ export const EuiNotificationFlyoutEvents: FunctionComponent<EuiNotificationFlyou
   events,
   onRead,
   onViewSimilarMessages,
+  activeFilters,
+  emptyStateAction,
 }) => {
-  const notificationFlyoutEvents = events.map((event) => {
-    const classes = classNames('euiNotificationFlyoutEvent', {
-      'euiNotificationFlyoutEvent--withReadState':
-        typeof event.isRead === 'boolean',
-    });
+  const notificationFlyoutEventsFiltered = events.filter((item) =>
+    activeFilters.includes(item.meta.type)
+  );
 
-    const onHandleRead = () => {
-      onRead!(event.id, true);
-    };
-
-    const onHandleViewSimilarMessages = () => {
-      onViewSimilarMessages!(event.meta.type);
-    };
-
+  if (notificationFlyoutEventsFiltered.length === 0 || events.length === 0) {
     return (
-      <div className={classes} key={event.id}>
-        <EuiNotificationFlyoutEventMeta
-          iconType={event.meta.iconType}
-          type={event.meta.type}
-          healthStatus={event.meta.healthStatus}
-          isRead={event.isRead}
-          onRead={onHandleRead}
-          onViewSimilarMessages={onHandleViewSimilarMessages}
-        />
+      <div className="euiNotificationFlyoutEvents euiNotificationFlyoutEvents--emptyState">
+        <EuiTitle size="s">
+          <h3>There are no new messages</h3>
+        </EuiTitle>
 
-        <div className="euiNotificationFlyoutEvent__content">
-          <EuiNotificationFlyoutEventName
-            {...event.name}
-            isRead={event.isRead}
-          />
-
-          <EuiNotificationFlyoutEventNotifications
-            notifications={event.notifications}
-          />
-
-          <EuiNotificationFlyoutEventPrimaryAction {...event.primaryAction} />
-        </div>
+        {emptyStateAction && emptyStateAction}
       </div>
     );
-  });
+  }
+
+  const notificationFlyoutEvents = notificationFlyoutEventsFiltered.map(
+    (event) => {
+      const classes = classNames('euiNotificationFlyoutEvents', {
+        'euiNotificationFlyoutEvents--withReadState':
+          typeof event.isRead === 'boolean',
+      });
+
+      const onHandleRead = () => {
+        onRead!(event.id, true);
+      };
+
+      const onHandleViewSimilarMessages = () => {
+        onViewSimilarMessages!(event.meta.type);
+      };
+
+      return (
+        <div className={classes} key={event.id}>
+          <EuiNotificationFlyoutEventMeta
+            iconType={event.meta.iconType}
+            type={event.meta.type}
+            healthStatus={event.meta.healthStatus}
+            isRead={event.isRead}
+            onRead={onHandleRead}
+            onViewSimilarMessages={onHandleViewSimilarMessages}
+          />
+
+          <div className="euiNotificationFlyoutEvents__content">
+            <EuiNotificationFlyoutEventName
+              {...event.name}
+              isRead={event.isRead}
+            />
+
+            <EuiNotificationFlyoutEventNotifications
+              notifications={event.notifications}
+            />
+
+            <EuiNotificationFlyoutEventPrimaryAction {...event.primaryAction} />
+          </div>
+        </div>
+      );
+    }
+  );
 
   return <>{notificationFlyoutEvents}</>;
 };

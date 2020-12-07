@@ -7,7 +7,7 @@ import {
   EuiContextMenuPanel,
   EuiContextMenuItem,
 } from '@elastic/eui';
-import classNames from 'classnames';
+import { EuiNotificationFlyoutReadButton } from './notification_flyout_read_button';
 
 type euiNotificationFlyoutEventMetaHealthStatus = {
   title: string;
@@ -47,14 +47,6 @@ export const EuiNotificationFlyoutEventMeta: FunctionComponent<EuiNotificationFl
   onRead,
   onViewSimilarMessages,
 }) => {
-  const classesReadState = classNames(
-    'euiNotificationFlyoutEventMeta__readState',
-    {
-      'euiNotificationFlyoutEventMeta__readState--isRead': isRead === true,
-      'euiNotificationFlyoutEventMeta__readState--isUnread': isRead === false,
-    }
-  );
-
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const markAsRead = () => {
@@ -74,15 +66,12 @@ export const EuiNotificationFlyoutEventMeta: FunctionComponent<EuiNotificationFl
 
   const contextMenuItems = [
     onRead && (
-      <EuiContextMenuItem key="A" icon="dot" onClick={onPopoverMarkAsRead}>
+      <EuiContextMenuItem key="A" onClick={onPopoverMarkAsRead}>
         Mark as read
       </EuiContextMenuItem>
     ),
     onViewSimilarMessages && (
-      <EuiContextMenuItem
-        key="B"
-        icon="filter"
-        onClick={onPopoverViewSimilarMessages}>
+      <EuiContextMenuItem key="B" onClick={onPopoverViewSimilarMessages}>
         View messages like this
       </EuiContextMenuItem>
     ),
@@ -92,12 +81,9 @@ export const EuiNotificationFlyoutEventMeta: FunctionComponent<EuiNotificationFl
     <div className="euiNotificationFlyoutEventMeta">
       <div>
         {typeof isRead === 'boolean' && (
-          <EuiButtonIcon
-            aria-label="mark as read"
-            iconType="dot"
-            className={classesReadState}
-            disabled={isRead}
-            onClick={markAsRead}
+          <EuiNotificationFlyoutReadButton
+            isRead={isRead}
+            markAsRead={markAsRead}
           />
         )}
 
@@ -121,6 +107,7 @@ export const EuiNotificationFlyoutEventMeta: FunctionComponent<EuiNotificationFl
             anchorPosition="upCenter"
             button={
               <EuiButtonIcon
+                aria-label="Open actions"
                 iconType="boxesVertical"
                 color="subdued"
                 className="euiNotificationFlyoutEventMeta__secondaryAction"
