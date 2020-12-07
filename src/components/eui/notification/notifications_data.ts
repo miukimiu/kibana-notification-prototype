@@ -36,7 +36,7 @@ export const notificationsData = [
       'The request completed at 12:32:33 GMT+4',
       'A background request started at 12:32:33 GMT+4',
     ],
-    isRead: true,
+    isRead: false,
   },
   {
     id: 'notificationC',

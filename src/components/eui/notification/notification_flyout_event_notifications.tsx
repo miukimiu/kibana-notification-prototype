@@ -22,8 +22,8 @@ export const EuiNotificationFlyoutEventNotifications: FunctionComponent<EuiNotif
           buttonContent={`+ ${notifications.length} notifications`}
           arrowDisplay="none">
           <div className="euiNotificationFlyoutEventNotifications__accordionContent">
-            {notifications.map((notification) => (
-              <p>{notification}</p>
+            {notifications.map((notification, index) => (
+              <p key={index}>{notification}</p>
             ))}
           </div>
         </EuiAccordion>

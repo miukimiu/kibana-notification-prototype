@@ -47,9 +47,27 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
       item.id === id ? { ...item, isRead: isRead } : item
     );
 
-    console.log('nextState', nextState);
+    setNotifications(nextState);
+  };
+
+  const onViewSimilarMessages = (type: string) => {
+    const nextState = notifications.filter((item) => item.meta.type === type);
+
+    setTimeout(() => {
+      setNotifications(nextState);
+    }, 200);
+  };
+
+  const onMarkAllAsRead = () => {
+    const nextState = notifications.map((item) => {
+      return { ...item, isRead: true };
+    });
 
     setNotifications(nextState);
+  };
+
+  const onRefresh = () => {
+    setNotifications(notificationsData);
   };
 
   const onDismissAllSuggestions = () => {
@@ -62,6 +80,7 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
 
   return (
     <EuiFlyout
+      ownFocus
       className="euiNotificationFlyout"
       onClose={onClose}
       size="m"
@@ -73,10 +92,8 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
           title={title}
           actions={
             <>
-              <EuiButtonEmpty size="s" onClick={() => {}}>
-                <EuiNotificationFlyoutHeaderFilters />
-              </EuiButtonEmpty>{' '}
-              <EuiButtonEmpty size="s" onClick={() => {}}>
+              <EuiNotificationFlyoutHeaderFilters />
+              <EuiButtonEmpty size="s" onClick={onMarkAllAsRead}>
                 Mark all as read
               </EuiButtonEmpty>
             </>
@@ -117,7 +134,11 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
             },
           ]}
         />
-        <EuiNotificationFlyoutEvents events={notifications} onRead={onRead} />
+        <EuiNotificationFlyoutEvents
+          events={notifications}
+          onRead={onRead}
+          onViewSimilarMessages={onViewSimilarMessages}
+        />
       </EuiFlyoutBody>
       <EuiFlyoutFooter>
         <EuiFlexGroup
@@ -133,7 +154,9 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
             </EuiButtonEmpty>
           </EuiFlexItem>
           <EuiFlexItem grow={false}>
-            <EuiButton size="s">Refresh</EuiButton>
+            <EuiButton size="s" onClick={onRefresh}>
+              Refresh
+            </EuiButton>
           </EuiFlexItem>
         </EuiFlexGroup>
       </EuiFlyoutFooter>

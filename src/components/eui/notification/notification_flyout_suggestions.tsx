@@ -56,19 +56,21 @@ export const EuiNotificationFlyoutSuggestions: FunctionComponent<EuiNotification
         <div className="euiNotificationFlyoutSuggestions__mainActions">
           <p>You have {notificationFlyoutSuggestions.length} new suggestions</p>
           <EuiPopover
+            ownFocus
+            repositionOnScroll
             isOpen={isPopoverOpen}
             panelPaddingSize="s"
             anchorPosition="upCenter"
             button={
               <EuiButtonIcon
+                aria-label="open actions"
                 iconType="boxesVertical"
                 color="subdued"
                 className="euiNotificationFlyoutSuggestions__primaryAction"
                 onClick={() => setIsPopoverOpen(!isPopoverOpen)}
               />
             }
-            closePopover={() => setIsPopoverOpen(false)}
-            ownFocus={true}>
+            closePopover={() => setIsPopoverOpen(false)}>
             <EuiContextMenuPanel
               items={[
                 <EuiContextMenuItem key="A" onClick={onClickDismissAll}>
