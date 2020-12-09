@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useEffect } from 'react';
+import React, { FunctionComponent, useState, useContext } from 'react';
 
 import {
   EuiFlyout,
@@ -21,11 +21,9 @@ import { EuiNotificationFlyoutHeaderFilters } from '../../eui/notification/notif
 import { EuiNotificationEvents } from '../../eui/notification/notification_events';
 import { EuiNotificationFlyoutSuggestions } from '../../eui/notification/notification_flyout_suggestions';
 
-import {
-  notificationsEventsData,
-  notificationsSuggestionsData,
-  filtersData,
-} from './notifications_data';
+import { filtersData } from './notification_data';
+
+import { NotificationContext } from '../../../context/notification_context';
 
 export type EuiNotificationFlyoutProps = {
   alerts?: EuiHeaderAlertProps[];
@@ -40,13 +38,23 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
   version,
   ...rest
 }) => {
+  const {
+    notifications,
+    suggestions,
+    hasNewEvents,
+    onReadEvents,
+    onViewSimilarMessages,
+    onDismissSuggestion,
+    onAddSuggestion,
+    onMarkAllAsRead,
+    onDismissAllSuggestions,
+    onDisableAllSuggestions,
+    onRefresh,
+  } = useContext(NotificationContext);
+
   const createId = htmlIdGenerator('euiHeaderAlertFlyout');
   const headerId = `${createId()}__header`;
-
   const [currentFilters, setCurrentFilters] = useState(filtersData);
-  const [notifications, setNotifications] = useState(notificationsEventsData);
-  const [suggestions, setSuggestions] = useState(notificationsSuggestionsData);
-  const [newEvents, setNewEvents] = useState(false);
 
   const activeFilters = currentFilters
     .filter((item) => item.checked === 'on')
@@ -55,62 +63,6 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
   const onFiltersChange = (filters: EuiSelectableOption[]) => {
     setCurrentFilters(filters);
   };
-
-  const onRead = (id: string, isRead: boolean) => {
-    const nextState = notifications.map((item) =>
-      item.id === id ? { ...item, isRead: isRead } : item
-    );
-
-    setNotifications(nextState);
-  };
-
-  const onViewSimilarMessages = (type: string) => {
-    const nextState = notifications.filter((item) => item.meta.type === type);
-
-    setTimeout(() => {
-      setNotifications(nextState);
-    }, 200);
-  };
-
-  const onDismissSuggestion = (id: string) => {
-    const nextState = suggestions.filter((item) => item.id !== id);
-
-    setSuggestions(nextState);
-  };
-
-  const onAddSuggestion = (id: string) => {
-    const nextState = suggestions.filter((item) => item.id !== id);
-
-    setSuggestions(nextState);
-  };
-
-  const onMarkAllAsRead = () => {
-    const nextState = notifications.map((item) => {
-      return { ...item, isRead: true };
-    });
-
-    setNotifications(nextState);
-  };
-
-  const onDismissAllSuggestions = () => {
-    setSuggestions([]);
-  };
-
-  const onDisableAllSuggestions = () => {
-    setSuggestions([]);
-  };
-
-  const onRefresh = () => {
-    setNotifications(notificationsEventsData);
-    setSuggestions(notificationsSuggestionsData);
-    setCurrentFilters(filtersData);
-  };
-
-  useEffect(() => {
-    setTimeout(() => {
-      setNewEvents(true);
-    }, 30000);
-  });
 
   const goToNotificationCenter = () => {
     navigate('notification/center');
@@ -152,7 +104,7 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
         />
         <EuiNotificationEvents
           events={notifications}
-          onRead={onRead}
+          onRead={onReadEvents}
           onViewSimilarMessages={onViewSimilarMessages}
           activeFilters={activeFilters}
           emptyStateAction={
@@ -169,7 +121,7 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
               Open notification center
             </EuiButtonEmpty>
           }
-          hasNewEvents={newEvents}
+          hasNewEvents={hasNewEvents}
           secondaryAction={
             <EuiButton size="s" onClick={onRefresh}>
               Refresh

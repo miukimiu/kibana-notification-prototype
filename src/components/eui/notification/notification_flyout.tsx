@@ -22,10 +22,10 @@ import { EuiNotificationEvents } from './notification_events';
 import { EuiNotificationFlyoutSuggestions } from './notification_flyout_suggestions';
 
 import {
-  notificationsEventsData,
-  notificationsSuggestionsData,
+  notificationEventsData,
+  notificationSuggestionsData,
   filtersData,
-} from '../../kibana/notification/notifications_data';
+} from '../../kibana/notification/notification_data';
 
 export type EuiNotificationFlyoutProps = {
   alerts?: EuiHeaderAlertProps[];
@@ -44,8 +44,8 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
   const headerId = `${createId()}__header`;
 
   const [currentFilters, setCurrentFilters] = useState(filtersData);
-  const [notifications, setNotifications] = useState(notificationsEventsData);
-  const [suggestions, setSuggestions] = useState(notificationsSuggestionsData);
+  const [notifications, setNotifications] = useState(notificationEventsData);
+  const [suggestions, setSuggestions] = useState(notificationSuggestionsData);
   const [newEvents, setNewEvents] = useState(false);
 
   const activeFilters = currentFilters
@@ -101,8 +101,8 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
   };
 
   const onRefresh = () => {
-    setNotifications(notificationsEventsData);
-    setSuggestions(notificationsSuggestionsData);
+    setNotifications(notificationEventsData);
+    setSuggestions(notificationSuggestionsData);
     setCurrentFilters(filtersData);
   };
 

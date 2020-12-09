@@ -112,7 +112,14 @@ export const EuiNotificationEvents: FunctionComponent<EuiNotificationEventsProps
               notifications={event.notifications}
             />
 
-            <EuiNotificationEventPrimaryAction {...event.primaryAction} />
+            {event.primaryAction && (
+              <EuiNotificationEventPrimaryAction
+                primaryAction={{
+                  label: event.primaryAction.label,
+                  ...event.primaryAction,
+                }}
+              />
+            )}
           </div>
         </div>
       );

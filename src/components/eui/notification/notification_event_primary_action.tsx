@@ -7,10 +7,7 @@ export interface EuiNotificationEventButtonProps
 }
 
 export type EuiNotificationEventPrimaryActionProps = {
-  /**
-   * Button ...
-   */
-  primaryAction?: EuiNotificationEventButtonProps;
+  primaryAction: EuiNotificationEventButtonProps;
 };
 
 export const EuiNotificationEventPrimaryAction: FunctionComponent<EuiNotificationEventPrimaryActionProps> = ({
@@ -18,14 +15,9 @@ export const EuiNotificationEventPrimaryAction: FunctionComponent<EuiNotificatio
 }) => {
   return (
     <div className="euiNotificationEvent__primaryAction">
-      {primaryAction && (
-        <EuiButtonEmpty
-          flush="left"
-          size="s"
-          {...(primaryAction as EuiButtonEmptyProps)}>
-          {primaryAction.label}
-        </EuiButtonEmpty>
-      )}
+      <EuiButtonEmpty flush="left" size="s" href={primaryAction.href}>
+        {primaryAction.label}
+      </EuiButtonEmpty>
     </div>
   );
 };

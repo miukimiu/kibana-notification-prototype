@@ -1,16 +1,9 @@
-import React, {
-  FunctionComponent,
-  Fragment,
-  useState,
-  useEffect,
-  useContext,
-} from 'react';
+import React, { FunctionComponent, Fragment, useContext } from 'react';
 
 import {
   EuiNotificationFlyout,
   EuiNotificationHeaderButton,
 } from '../../../eui/notification';
-import { updates } from '../data';
 import { NotificationContext } from '../../../../context/notification_context';
 
 export const KibanaHeaderNotification: FunctionComponent = () => {
@@ -34,11 +27,7 @@ export const KibanaHeaderNotification: FunctionComponent = () => {
   );
 
   const flyout = isFlyoutVisible && (
-    <EuiNotificationFlyout
-      id="headerNotification"
-      alerts={updates}
-      onClose={closeFlyout}
-    />
+    <EuiNotificationFlyout id="headerNotification" onClose={closeFlyout} />
   );
 
   return (

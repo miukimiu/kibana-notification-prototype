@@ -1,6 +1,6 @@
 import { EuiSelectableOption } from '@elastic/eui';
 
-export const notificationsEventsData = [
+export const notificationEventsData = [
   {
     id: 'notificationA',
     meta: {
@@ -70,7 +70,7 @@ export const notificationsEventsData = [
     },
     primaryAction: {
       href: 'http://www.elastic.co',
-      label: 'View',
+      label: 'Download',
     },
     notifications: ['The request completed at 10:23:45 GMT+4'],
     isRead: false,
@@ -84,10 +84,6 @@ export const notificationsEventsData = [
     name: {
       title: 'ILM migration complete',
       href: '#',
-    },
-    primaryAction: {
-      href: 'http://www.elastic.co',
-      label: 'View',
     },
     notifications: ['The request completed at 10:23:45 GMT+4'],
     isRead: false,
@@ -111,7 +107,7 @@ export const notificationsEventsData = [
   },
 ];
 
-export const notificationsSuggestionsData = [
+export const notificationSuggestionsData = [
   {
     id: 'a',
     title: 'Connect Nginx!',
