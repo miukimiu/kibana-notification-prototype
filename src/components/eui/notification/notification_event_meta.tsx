@@ -7,14 +7,14 @@ import {
   EuiContextMenuPanel,
   EuiContextMenuItem,
 } from '@elastic/eui';
-import { EuiNotificationFlyoutReadButton } from './notification_flyout_read_button';
+import { EuiNotificationEventReadButton } from './notification_event_read_button';
 
-type euiNotificationFlyoutEventMetaHealthStatus = {
+type euiNotificationEventMetaHealthStatus = {
   title: string;
   type: 'success' | 'warning' | 'danger';
 };
 
-export type EuiNotificationFlyoutEventMetaProps = {
+export type EuiNotificationEventMetaProps = {
   /**
    * The name of the
    */
@@ -27,7 +27,7 @@ export type EuiNotificationFlyoutEventMetaProps = {
   /**
    * healthStatus
    */
-  healthStatus?: euiNotificationFlyoutEventMetaHealthStatus;
+  healthStatus?: euiNotificationEventMetaHealthStatus;
 
   /**
    * The icon used to visually represent this data type. Accepts any `EuiIcon IconType`.
@@ -39,7 +39,7 @@ export type EuiNotificationFlyoutEventMetaProps = {
   onViewSimilarMessages?: () => void;
 };
 
-export const EuiNotificationFlyoutEventMeta: FunctionComponent<EuiNotificationFlyoutEventMetaProps> = ({
+export const EuiNotificationEventMeta: FunctionComponent<EuiNotificationEventMetaProps> = ({
   isRead,
   iconType,
   type,
@@ -78,10 +78,10 @@ export const EuiNotificationFlyoutEventMeta: FunctionComponent<EuiNotificationFl
   ];
 
   return (
-    <div className="euiNotificationFlyoutEventMeta">
+    <div className="euiNotificationEventMeta">
       <div>
         {typeof isRead === 'boolean' && (
-          <EuiNotificationFlyoutReadButton
+          <EuiNotificationEventReadButton
             isRead={isRead}
             markAsRead={markAsRead}
           />
@@ -96,7 +96,7 @@ export const EuiNotificationFlyoutEventMeta: FunctionComponent<EuiNotificationFl
       </div>
 
       <div>
-        <span className="euiNotificationFlyoutEventMeta__time">12 min ago</span>
+        <span className="euiNotificationEventMeta__time">12 min ago</span>
 
         {contextMenuItems.length > 0 && (
           <EuiPopover
@@ -110,7 +110,7 @@ export const EuiNotificationFlyoutEventMeta: FunctionComponent<EuiNotificationFl
                 aria-label="Open actions"
                 iconType="boxesVertical"
                 color="subdued"
-                className="euiNotificationFlyoutEventMeta__secondaryAction"
+                className="euiNotificationEventMeta__secondaryAction"
                 onClick={() => setIsPopoverOpen(!isPopoverOpen)}
               />
             }

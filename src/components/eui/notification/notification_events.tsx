@@ -2,31 +2,31 @@ import React, { FunctionComponent, ReactNode } from 'react';
 import classNames from 'classnames';
 import { EuiTitle } from '@elastic/eui';
 import {
-  EuiNotificationFlyoutEventName,
-  EuiNotificationFlyoutEventNameProps,
-} from './notification_flyout_event_name';
+  EuiNotificationEventName,
+  EuiNotificationEventNameProps,
+} from './notification_event_name';
 import {
-  EuiNotificationFlyoutEventMeta,
-  EuiNotificationFlyoutEventMetaProps,
-} from './notification_flyout_event_meta';
+  EuiNotificationEventMeta,
+  EuiNotificationEventMetaProps,
+} from './notification_event_meta';
 
-import { EuiNotificationFlyoutEventNotifications } from './notification_flyout_event_notifications';
+import { EuiNotificationEventNotifications } from './notification_event_notifications';
 
 import {
-  EuiNotificationFlyoutEventPrimaryAction,
-  EuiNotificationFlyoutEventPrimaryActionProps,
-} from './notification_flyout_event_primary_action';
+  EuiNotificationEventPrimaryAction,
+  EuiNotificationEventPrimaryActionProps,
+} from './notification_event_primary_action';
 
-export type EuiNotificationFlyoutEventProps = {
+export type EuiNotificationEventProps = {
   id: string;
   /**
    * The title of the
    */
-  meta: EuiNotificationFlyoutEventMetaProps;
+  meta: EuiNotificationEventMetaProps;
   /**
    * The title of the
    */
-  name: EuiNotificationFlyoutEventNameProps;
+  name: EuiNotificationEventNameProps;
   /**
    * If readState exists an icon appears.
    */
@@ -35,18 +35,18 @@ export type EuiNotificationFlyoutEventProps = {
   /**
    * Button ...
    */
-  primaryAction?: EuiNotificationFlyoutEventPrimaryActionProps;
+  primaryAction?: EuiNotificationEventPrimaryActionProps;
   /**
    * A string or an array of strings.
    */
   notifications: [];
 };
 
-export type EuiNotificationFlyoutEventsProps = {
+export type EuiNotificationEventsProps = {
   /**
    * The title of the
    */
-  events: EuiNotificationFlyoutEventProps[];
+  events: EuiNotificationEventProps[];
 
   activeFilters: Array<string>;
 
@@ -56,7 +56,7 @@ export type EuiNotificationFlyoutEventsProps = {
   onViewSimilarMessages?: (type: string) => void;
 };
 
-export const EuiNotificationFlyoutEvents: FunctionComponent<EuiNotificationFlyoutEventsProps> = ({
+export const EuiNotificationEvents: FunctionComponent<EuiNotificationEventsProps> = ({
   events,
   onRead,
   onViewSimilarMessages,
@@ -69,7 +69,7 @@ export const EuiNotificationFlyoutEvents: FunctionComponent<EuiNotificationFlyou
 
   if (notificationFlyoutEventsFiltered.length === 0 || events.length === 0) {
     return (
-      <div className="euiNotificationFlyoutEvents euiNotificationFlyoutEvents--emptyState">
+      <div className="euiNotificationEvents euiNotificationEvents--emptyState">
         <EuiTitle size="s">
           <h3>There are no new messages</h3>
         </EuiTitle>
@@ -81,8 +81,8 @@ export const EuiNotificationFlyoutEvents: FunctionComponent<EuiNotificationFlyou
 
   const notificationFlyoutEvents = notificationFlyoutEventsFiltered.map(
     (event) => {
-      const classes = classNames('euiNotificationFlyoutEvents', {
-        'euiNotificationFlyoutEvents--withReadState':
+      const classes = classNames('euiNotificationEvents', {
+        'euiNotificationEvents--withReadState':
           typeof event.isRead === 'boolean',
       });
 
@@ -96,7 +96,7 @@ export const EuiNotificationFlyoutEvents: FunctionComponent<EuiNotificationFlyou
 
       return (
         <div className={classes} key={event.id}>
-          <EuiNotificationFlyoutEventMeta
+          <EuiNotificationEventMeta
             iconType={event.meta.iconType}
             type={event.meta.type}
             healthStatus={event.meta.healthStatus}
@@ -105,17 +105,14 @@ export const EuiNotificationFlyoutEvents: FunctionComponent<EuiNotificationFlyou
             onViewSimilarMessages={onHandleViewSimilarMessages}
           />
 
-          <div className="euiNotificationFlyoutEvents__content">
-            <EuiNotificationFlyoutEventName
-              {...event.name}
-              isRead={event.isRead}
-            />
+          <div className="euiNotificationEvents__content">
+            <EuiNotificationEventName {...event.name} isRead={event.isRead} />
 
-            <EuiNotificationFlyoutEventNotifications
+            <EuiNotificationEventNotifications
               notifications={event.notifications}
             />
 
-            <EuiNotificationFlyoutEventPrimaryAction {...event.primaryAction} />
+            <EuiNotificationEventPrimaryAction {...event.primaryAction} />
           </div>
         </div>
       );

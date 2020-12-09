@@ -1,4 +1,4 @@
-.euiNotificationFlyoutEvents {
+.euiNotificationEvents {
   padding: $euiSizeM $euiSizeS $euiSizeM $euiSize;
   border-bottom: $euiBorderThin;
 
@@ -9,7 +9,7 @@
   &--withReadState {
     padding: $euiSizeM $euiSizeM;
 
-    .euiNotificationFlyoutEvents__content {
+    .euiNotificationEvents__content {
       padding-left: $euiSizeL;
     }
   }
@@ -25,7 +25,7 @@
   }
 }
 
-.euiNotificationFlyoutEvents__content {
+.euiNotificationEvents__content {
   > * { 
     margin-top: $euiSizeS;
   }

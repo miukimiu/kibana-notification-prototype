@@ -1,14 +1,6 @@
 import React, { useState, useRef, FunctionComponent } from 'react';
 
-import {
-  EuiBasicTable,
-  EuiLink,
-  EuiHealth,
-  EuiButton,
-  EuiFlexGroup,
-  EuiFlexItem,
-  EuiSpacer,
-} from '@elastic/eui';
+import { EuiBasicTable, EuiHealth } from '@elastic/eui';
 
 // @ts-ignore
 import { formatDate } from '@elastic/eui/es/services/format';

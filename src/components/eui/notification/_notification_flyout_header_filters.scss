@@ -10,6 +10,8 @@
   padding: $euiSizeXS/2 $euiSizeS;
   border-radius: $euiBorderRadiusSmall;
   margin-left: $euiSizeXS;
-  color: makeHighContrastColor($euiColorEmptyShade, $euiColorAccent);
+  color: $euiColorEmptyShade;
   background: $euiColorAccent;
+  min-width: $euiSizeXL;
+  font-size: $euiFontSizeS;
 }

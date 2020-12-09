@@ -1,23 +1,23 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { EuiButtonEmpty, EuiButtonEmptyProps } from '@elastic/eui';
 
-export interface EuiNotificationFlyoutEventButtonProps
+export interface EuiNotificationEventButtonProps
   extends Omit<EuiButtonEmptyProps, 'size' | 'flush'> {
   label: ReactNode;
 }
 
-export type EuiNotificationFlyoutEventPrimaryActionProps = {
+export type EuiNotificationEventPrimaryActionProps = {
   /**
    * Button ...
    */
-  primaryAction?: EuiNotificationFlyoutEventButtonProps;
+  primaryAction?: EuiNotificationEventButtonProps;
 };
 
-export const EuiNotificationFlyoutEventPrimaryAction: FunctionComponent<EuiNotificationFlyoutEventPrimaryActionProps> = ({
+export const EuiNotificationEventPrimaryAction: FunctionComponent<EuiNotificationEventPrimaryActionProps> = ({
   primaryAction,
 }) => {
   return (
-    <div className="euiNotificationFlyoutEvent__primaryAction">
+    <div className="euiNotificationEvent__primaryAction">
       {primaryAction && (
         <EuiButtonEmpty
           flush="left"

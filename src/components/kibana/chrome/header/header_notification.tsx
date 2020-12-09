@@ -1,33 +1,36 @@
-import React, { FunctionComponent, Fragment, useState } from 'react';
+import React, {
+  FunctionComponent,
+  Fragment,
+  useState,
+  useEffect,
+  useContext,
+} from 'react';
 
-import { EuiIcon, EuiHeaderSectionItemButton } from '@elastic/eui';
-
-import { EuiNotificationFlyout } from '../../../eui/notification';
+import {
+  EuiNotificationFlyout,
+  EuiNotificationHeaderButton,
+} from '../../../eui/notification';
 import { updates } from '../data';
+import { NotificationContext } from '../../../../context/notification_context';
 
 export const KibanaHeaderNotification: FunctionComponent = () => {
-  const [isFlyoutVisible, setIsFlyoutVisible] = useState(false);
-  const [showNotification, setShowNotification] = useState(true);
-
-  const closeFlyout = () => {
-    setIsFlyoutVisible(false);
-  };
-
-  const toggleFlyout = () => {
-    setIsFlyoutVisible(!isFlyoutVisible);
-    setShowNotification(false);
-  };
+  const {
+    showNotification,
+    isFlyoutVisible,
+    toggleFlyout,
+    closeFlyout,
+  } = useContext(NotificationContext);
 
   const button = (
-    <EuiHeaderSectionItemButton
+    <EuiNotificationHeaderButton
+      isFlyoutVisible={isFlyoutVisible}
       aria-controls="headerNotification"
       aria-expanded={isFlyoutVisible}
       aria-haspopup="true"
       aria-label="Notification"
-      notification={showNotification ? '•' : undefined}
-      onClick={toggleFlyout}>
-      <EuiIcon type="bell" size="m" />
-    </EuiHeaderSectionItemButton>
+      toggleFlyout={toggleFlyout}
+      showNotification={showNotification}
+    />
   );
 
   const flyout = isFlyoutVisible && (

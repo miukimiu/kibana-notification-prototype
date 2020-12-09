@@ -2,18 +2,18 @@ import React, { FunctionComponent } from 'react';
 import { EuiLink, EuiLinkProps } from '@elastic/eui';
 import classNames from 'classnames';
 
-export type EuiNotificationFlyoutEventNameProps = EuiLinkProps & {
+export type EuiNotificationEventNameProps = EuiLinkProps & {
   title: string;
   isRead?: boolean;
 };
 
-export const EuiNotificationFlyoutEventName: FunctionComponent<EuiNotificationFlyoutEventNameProps> = ({
+export const EuiNotificationEventName: FunctionComponent<EuiNotificationEventNameProps> = ({
   title,
   isRead,
   ...rest
 }) => {
-  const classes = classNames('euiNotificationFlyoutEventName', {
-    'euiNotificationFlyoutEventName--isRead': isRead,
+  const classes = classNames('euiNotificationEventName', {
+    'euiNotificationEventName--isRead': isRead,
   });
 
   return (

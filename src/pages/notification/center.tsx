@@ -12,8 +12,8 @@ import {
   EuiFlexItem,
 } from '@elastic/eui';
 import { KibanaPage } from '../../components/kibana/page/page';
-import { KibanaNotificationCenterTable } from '../../components/kibana/notification/notification-center-table';
-import { KibanaNotificationCenterFilters } from '../../components/kibana/notification/notification-center-filters';
+import { KibanaNotificationCenterTable } from '../../components/kibana/notification/notification_center_table';
+import { KibanaNotificationCenterFilters } from '../../components/kibana/notification/notification_center_filters';
 
 const PAGE_TITLE = 'Notifications';
 

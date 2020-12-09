@@ -1,27 +1,27 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { EuiAccordion, htmlIdGenerator } from '@elastic/eui';
 
-export type EuiNotificationFlyoutEventNotificationsProps = {
+export type EuiNotificationEventNotificationsProps = {
   /**
    * A string or an array of strings.
    */
   notifications: ReactElement[];
 };
 
-export const EuiNotificationFlyoutEventNotifications: FunctionComponent<EuiNotificationFlyoutEventNotificationsProps> = ({
+export const EuiNotificationEventNotifications: FunctionComponent<EuiNotificationEventNotificationsProps> = ({
   notifications,
 }) => {
   return (
-    <div className="euiNotificationFlyoutEventNotifications">
+    <div className="euiNotificationEventNotifications">
       {notifications && notifications.length === 1 ? (
         notifications
       ) : (
         <EuiAccordion
           id={htmlIdGenerator()()}
-          className="euiNotificationFlyoutEventNotifications__accordion"
+          className="euiNotificationEventNotifications__accordion"
           buttonContent={`+ ${notifications.length} notifications`}
           arrowDisplay="none">
-          <div className="euiNotificationFlyoutEventNotifications__accordionContent">
+          <div className="euiNotificationEventNotifications__accordionContent">
             {notifications.map((notification, index) => (
               <p key={index}>{notification}</p>
             ))}

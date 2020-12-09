@@ -15,17 +15,17 @@ import {
 
 import { navigate } from 'gatsby';
 
-import { EuiNotificationFlyoutFooter } from './notification_flyout_footer';
-import { EuiNotificationFlyoutHeader } from './notification_flyout_header';
-import { EuiNotificationFlyoutHeaderFilters } from './notification_flyout_header_filters';
-import { EuiNotificationEvents } from './notification_events';
-import { EuiNotificationFlyoutSuggestions } from './notification_flyout_suggestions';
+import { EuiNotificationFlyoutFooter } from '../../eui/notification/notification_flyout_footer';
+import { EuiNotificationFlyoutHeader } from '../../eui/notification/notification_flyout_header';
+import { EuiNotificationFlyoutHeaderFilters } from '../../eui/notification/notification_flyout_header_filters';
+import { EuiNotificationEvents } from '../../eui/notification/notification_events';
+import { EuiNotificationFlyoutSuggestions } from '../../eui/notification/notification_flyout_suggestions';
 
 import {
   notificationsEventsData,
   notificationsSuggestionsData,
   filtersData,
-} from '../../kibana/notification/notifications_data';
+} from './notifications_data';
 
 export type EuiNotificationFlyoutProps = {
   alerts?: EuiHeaderAlertProps[];
