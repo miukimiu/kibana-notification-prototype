@@ -20,8 +20,6 @@ export const KibanaNotificationCenterTable: FunctionComponent = () => {
 
   const { notifications } = useContext(NotificationContext);
 
-  console.log('notifications', notifications);
-
   const createMessages = () => {
     return times(6, (index) => {
       return {

@@ -32,6 +32,8 @@ type NotificationContext = {
   currentFilters: EuiSelectableOption[];
   onNotificationCenterFiltersChange: (filters: EuiSelectableOption[]) => void;
   notificationCenterFilters: EuiSelectableOption[];
+  toastIsVisible: boolean;
+  closeToast: () => void;
 };
 
 export const NotificationContext = createContext<NotificationContext>({});
@@ -307,37 +309,9 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
         currentFilters,
         onNotificationCenterFiltersChange,
         notificationCenterFilters,
+        toastIsVisible,
+        closeToast,
       }}>
-      {toastIsVisible && (
-        <EuiToast
-          onClose={closeToast}
-          title="Test notification"
-          style={{
-            position: 'fixed',
-            zIndex: 99999,
-            width: 260,
-            margin: 24,
-          }}>
-          <p>Click the button to pretend there are new notifications.</p>
-          <p>
-            In case you close this toast, refresh the page to make it visible
-            again.
-          </p>
-          <EuiFlexGroup justifyContent="flexEnd" gutterSize="s">
-            <EuiFlexItem grow={false}>
-              <EuiButtonEmpty size="s" onClick={closeToast}>
-                Close
-              </EuiButtonEmpty>
-            </EuiFlexItem>
-            <EuiFlexItem grow={false}>
-              <EuiButton size="s" onClick={onShowNotification}>
-                Notify
-              </EuiButton>
-            </EuiFlexItem>
-          </EuiFlexGroup>
-        </EuiToast>
-      )}
-
       {children}
     </NotificationContext.Provider>
   );
