@@ -23,12 +23,10 @@ export const KibanaNotificationCenterTable: FunctionComponent = () => {
   console.log('notifications', notifications);
 
   const createMessages = () => {
-    return times(10, (index) => {
+    return times(6, (index) => {
       return {
         id: index,
-        messages: notifications[index]
-          ? notifications[index].name.title
-          : 'test',
+        messages: notifications && notifications[index].name.title,
 
         dateCreated: dob,
         readState: index % 2 === 0,
