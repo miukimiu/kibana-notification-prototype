@@ -102,7 +102,9 @@ export const EuiNotificationFlyoutSuggestions: FunctionComponent<EuiNotification
         {hasMoreSuggestions && !isOpenMoreSuggestions && (
           <div className="euiNotificationFlyoutSuggestions__moreButtonSection">
             <EuiHorizontalRule margin="xs" />
-            <EuiButtonEmpty onClick={() => setOpenMoreSuggestions(true)}>{`+ ${
+            <EuiButtonEmpty
+              size="s"
+              onClick={() => setOpenMoreSuggestions(true)}>{`+ ${
               notificationFlyoutSuggestions.length - 1
             } more`}</EuiButtonEmpty>
           </div>

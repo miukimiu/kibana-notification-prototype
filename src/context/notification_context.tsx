@@ -1,22 +1,22 @@
-import React, {
-  createContext,
-  FunctionComponent,
-  useState,
-  useEffect,
-} from 'react';
+import React, { createContext, FunctionComponent, useState } from 'react';
 
 import {
-  notificationEventsData,
-  notificationSuggestionsData,
-  filtersData,
-} from '../components/kibana/notification/notification_data';
+  EuiSelectableOption,
+  EuiToast,
+  EuiFlexGroup,
+  EuiFlexItem,
+  EuiButton,
+  EuiButtonEmpty,
+} from '@elastic/eui';
+
+import { navigate } from 'gatsby';
 
 type NotificationContext = {
-  showNotification: boolean;
   isFlyoutVisible: boolean;
   notifications: Array<any>;
   suggestions: Array<any>;
-  hasNewEvents: boolean;
+  showNotification: boolean;
+  onShowNotification: () => void;
   closeFlyout: () => void;
   toggleFlyout: () => void;
   onReadEvents: (id: string, isRead: boolean) => void;
@@ -27,16 +27,194 @@ type NotificationContext = {
   onDismissAllSuggestions: () => void;
   onDisableAllSuggestions: () => void;
   onRefresh: () => void;
+  onFiltersChange: (filters: EuiSelectableOption[]) => void;
+  activeFilters: string[];
+  currentFilters: EuiSelectableOption[];
+  onNotificationCenterFiltersChange: (filters: EuiSelectableOption[]) => void;
+  notificationCenterFilters: EuiSelectableOption[];
 };
 
 export const NotificationContext = createContext<NotificationContext>({});
 
 export const NotificationProvider: FunctionComponent = ({ children }) => {
-  const [showNotification, setShowNotification] = useState(false);
+  const notificationEventsData = [
+    {
+      id: 'notificationA',
+      meta: {
+        type: 'Alert',
+        iconType: 'logoObservability',
+      },
+      name: {
+        title: '[APM 500 Server errors] is now active',
+        href: '#',
+      },
+      primaryAction: {
+        onClick: () => {
+          console.log('clicked');
+          navigate('notification/center');
+        },
+        label: 'View and go',
+      },
+      notifications: [
+        'The request completed at 12:32:33 GMT+4',
+        'The request completed at 12:32:33 GMT+4',
+        'A background request started at 12:32:33 GMT+4',
+      ],
+      isRead: false,
+    },
+    {
+      id: 'notificationB',
+      meta: {
+        type: 'Alert',
+        healthStatus: { type: 'warning', title: 'Entering boundary' },
+        iconType: 'logoMaps',
+      },
+      name: {
+        title: '[Maps] Geo Alert',
+        href: '#',
+      },
+      notifications: [
+        'The request completed at 12:32:33 GMT+4',
+        'The request completed at 12:32:33 GMT+4',
+        'A background request started at 12:32:33 GMT+4',
+      ],
+      isRead: false,
+    },
+    {
+      id: 'notificationC',
+      meta: {
+        type: 'Report',
+        iconType: 'logoKibana',
+      },
+      name: {
+        title: '[Error Monitoring Report] is generated',
+        href: '#',
+      },
+      primaryAction: {
+        href: 'http://www.elastic.co',
+        iconType: 'download',
+        label: 'Download',
+      },
+      notifications: ['The reported was generated at 17:12:16 GMT+4'],
+      isRead: false,
+    },
+    {
+      id: 'notificationD',
+      meta: {
+        type: 'Report',
+        iconType: 'logoKibana',
+      },
+      name: {
+        title: '2020 Global Marketing Analysis',
+        href: '#',
+      },
+      primaryAction: {
+        href: 'http://www.elastic.co',
+        label: 'Download',
+      },
+      notifications: ['The request completed at 10:23:45 GMT+4'],
+      isRead: false,
+    },
+    {
+      id: 'notificationE',
+      meta: {
+        type: 'Cloud',
+        iconType: 'logoCloud',
+      },
+      name: {
+        title: 'ILM migration complete',
+        href: '#',
+      },
+      notifications: ['The request completed at 10:23:45 GMT+4'],
+      isRead: false,
+    },
+    {
+      id: 'notificationF',
+      meta: {
+        type: 'Cloud',
+        iconType: 'logoCloud',
+      },
+      name: {
+        title: 'Your deployment has a critical error',
+        href: '#',
+      },
+      primaryAction: {
+        href: 'http://www.elastic.co',
+        label: 'View',
+      },
+      notifications: ['The request completed at 10:23:45 GMT+4'],
+      isRead: false,
+    },
+  ];
+
+  const notificationSuggestionsData = [
+    {
+      id: 'a',
+      title: 'Connect Nginx!',
+      description:
+        'We’ve noticed several of your agents detected Nginx on your hosts.',
+      iconType: 'logoNginx',
+      isDismissed: false,
+      href: '#',
+    },
+    {
+      id: 'b',
+      title: 'Connect workplace sources',
+      description:
+        'Create a single place to search through documents and data across your entire organization.',
+      iconType: 'logoWorkplaceSearch',
+      isDismissed: false,
+      href: '#',
+    },
+    {
+      id: 'c',
+      title: 'Explore Elastic Security',
+      description:
+        'With the data you’ve already ingested into Elastic, you could protect what looks like your entire network. ',
+      iconType: 'logoSecurity',
+      isDismissed: false,
+      href: '#',
+    },
+  ];
+
+  const filtersData: EuiSelectableOption[] = [
+    {
+      label: 'Alert',
+      checked: 'on',
+    },
+    {
+      label: 'Report',
+      checked: 'on',
+    },
+    {
+      label: 'Cloud',
+      checked: 'on',
+    },
+  ];
+
   const [isFlyoutVisible, setIsFlyoutVisible] = useState(false);
   const [notifications, setNotifications] = useState(notificationEventsData);
   const [suggestions, setSuggestions] = useState(notificationSuggestionsData);
-  const [hasNewEvents, setHasNewEvents] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
+  const [currentFilters, setCurrentFilters] = useState(filtersData);
+  const [toastIsVisible, setToastIsVisible] = useState(true);
+  const [notificationCenterFilters, setNotificationCenterFilters] = useState(
+    filtersData
+  );
+
+  const activeFilters = currentFilters
+    .filter((item) => item.checked === 'on')
+    .map((item) => item.label);
+
+  const onFiltersChange = (filters: EuiSelectableOption[]) => {
+    setCurrentFilters(filters);
+  };
+
+  const onNotificationCenterFiltersChange = (
+    filters: EuiSelectableOption[]
+  ) => {
+    setNotificationCenterFilters(filters);
+  };
 
   const onReadEvents = (id: string, isRead: boolean) => {
     const nextState = notifications.map((item) =>
@@ -88,14 +266,9 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
     setCurrentFilters(filtersData);
   };
 
-  useEffect(() => {
-    setTimeout(() => {
-      setHasNewEvents(true);
-    }, 30000);
-  });
-
   const closeFlyout = () => {
     setIsFlyoutVisible(false);
+    setShowNotification(false);
   };
 
   const toggleFlyout = () => {
@@ -103,25 +276,22 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
     setShowNotification(false);
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setShowNotification(true);
+  const onShowNotification = () => {
+    setShowNotification(true);
+  };
 
-      // after 6 seconds we remove the class
-      const timer = setTimeout(() => setShowNotification(false), 6000);
-      return () => clearTimeout(timer);
-    }, 15000);
-    return () => clearInterval(interval);
-  }, []);
+  const closeToast = () => {
+    setToastIsVisible(false);
+  };
 
   return (
     <NotificationContext.Provider
       value={{
-        showNotification,
         isFlyoutVisible,
         notifications,
         suggestions,
-        hasNewEvents,
+        showNotification,
+        onShowNotification,
         closeFlyout,
         toggleFlyout,
         onReadEvents,
@@ -132,7 +302,42 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
         onDismissAllSuggestions,
         onDisableAllSuggestions,
         onRefresh,
+        activeFilters,
+        onFiltersChange,
+        currentFilters,
+        onNotificationCenterFiltersChange,
+        notificationCenterFilters,
       }}>
+      {toastIsVisible && (
+        <EuiToast
+          onClose={closeToast}
+          title="Test notification"
+          style={{
+            position: 'fixed',
+            zIndex: 99999,
+            width: 260,
+            margin: 24,
+          }}>
+          <p>Click the button to pretend there are new notifications.</p>
+          <p>
+            In case you close this toast, refresh the page to make it visible
+            again.
+          </p>
+          <EuiFlexGroup justifyContent="flexEnd" gutterSize="s">
+            <EuiFlexItem grow={false}>
+              <EuiButtonEmpty size="s" onClick={closeToast}>
+                Close
+              </EuiButtonEmpty>
+            </EuiFlexItem>
+            <EuiFlexItem grow={false}>
+              <EuiButton size="s" onClick={onShowNotification}>
+                Notify
+              </EuiButton>
+            </EuiFlexItem>
+          </EuiFlexGroup>
+        </EuiToast>
+      )}
+
       {children}
     </NotificationContext.Provider>
   );

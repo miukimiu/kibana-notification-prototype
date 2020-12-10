@@ -1,13 +1,14 @@
-import React, { useState, useRef, FunctionComponent } from 'react';
+import React, { useState, useContext, FunctionComponent } from 'react';
 
 import { EuiBasicTable, EuiHealth } from '@elastic/eui';
+import { Comparators } from '@elastic/eui/es/services/sort';
+import { times } from '@elastic/eui/es/services/utils';
 
 // @ts-ignore
 import { formatDate } from '@elastic/eui/es/services/format';
 // @ts-ignore
-import { createDataStore } from './data-store';
 
-const store = createDataStore();
+import { NotificationContext } from '../../../context/notification_context';
 
 export const KibanaNotificationCenterTable: FunctionComponent = () => {
   const [pageIndex, setPageIndex] = useState(0);
@@ -16,6 +17,70 @@ export const KibanaNotificationCenterTable: FunctionComponent = () => {
   const [sortDirection, setSortDirection] = useState('asc');
   const [selectedItems, setSelectedItems] = useState([]);
   const [customHeader, setCustomHeader] = useState(true);
+
+  const { notifications } = useContext(NotificationContext);
+
+  console.log('notifications', notifications);
+
+  const createMessages = () => {
+    return times(10, (index) => {
+      return {
+        id: index,
+        messages: notifications[index]
+          ? notifications[index].name.title
+          : 'test',
+
+        dateCreated: dob,
+        readState: index % 2 === 0,
+      };
+    });
+  };
+
+  const dob = new Date(2020, 1, 12);
+
+  const createDataStore = () => {
+    const messages = createMessages();
+
+    return {
+      messages,
+
+      findMessages: (pageIndex, pageSize, sortField, sortDirection) => {
+        let items;
+
+        if (sortField) {
+          items = messages
+            .slice(0)
+            .sort(
+              Comparators.property(
+                sortField,
+                Comparators.default(sortDirection)
+              )
+            );
+        } else {
+          items = messages;
+        }
+
+        let pageOfItems;
+
+        if (!pageIndex && !pageSize) {
+          pageOfItems = items;
+        } else {
+          const startIndex = pageIndex * pageSize;
+          pageOfItems = items.slice(
+            startIndex,
+            Math.min(startIndex + pageSize, items.length)
+          );
+        }
+
+        return {
+          pageOfItems,
+          totalItemCount: items.length,
+        };
+      },
+    };
+  };
+
+  const store = createDataStore();
 
   const onTableChange = ({ page = {}, sort = {} }) => {
     const { index: pageIndex, size: pageSize } = page;
@@ -32,15 +97,7 @@ export const KibanaNotificationCenterTable: FunctionComponent = () => {
     setSelectedItems(selectedItems);
   };
 
-  const toggleHeader = () => {
-    setCustomHeader(!customHeader);
-  };
-
-  const toggleResponsive = () => {
-    setIsResponsive(!isResponsive);
-  };
-
-  const { pageOfItems, totalItemCount } = store.findUsers(
+  const { pageOfItems, totalItemCount } = store.findMessages(
     pageIndex,
     pageSize,
     sortField,
@@ -54,8 +111,8 @@ export const KibanaNotificationCenterTable: FunctionComponent = () => {
       truncateText: true,
     },
     {
-      field: 'dateOfBirth',
-      name: 'Date of Birth',
+      field: 'dateCreated',
+      name: 'Date Created',
       dataType: 'date',
       render: (date) => formatDate(date, 'dobLong'),
       sortable: true,

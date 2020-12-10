@@ -1,9 +1,7 @@
 import React, { FunctionComponent, Fragment, useContext } from 'react';
 
-import {
-  EuiNotificationFlyout,
-  EuiNotificationHeaderButton,
-} from '../../../eui/notification';
+import { EuiNotificationHeaderButton } from '../../../eui/notification';
+import { EuiNotificationFlyout } from '../../notification/notification_flyout';
 import { NotificationContext } from '../../../../context/notification_context';
 
 export const KibanaHeaderNotification: FunctionComponent = () => {

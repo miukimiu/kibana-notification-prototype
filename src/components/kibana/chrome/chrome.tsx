@@ -7,7 +7,6 @@ import {
   EuiHeader,
 } from '@elastic/eui';
 import theme from '@elastic/eui/dist/eui_theme_light.json';
-import { NotificationProvider } from '../../../context/notification_context';
 import { user } from './data';
 
 import {
@@ -37,7 +36,7 @@ export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
   }
 
   return (
-    <NotificationProvider>
+    <>
       <EuiHeader
         position="fixed"
         theme="dark"
@@ -87,6 +86,6 @@ export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
           },
         ]}
       />
-    </NotificationProvider>
+    </>
   );
 };

@@ -15,7 +15,7 @@ export const EuiNotificationEventPrimaryAction: FunctionComponent<EuiNotificatio
 }) => {
   return (
     <div className="euiNotificationEvent__primaryAction">
-      <EuiButtonEmpty flush="left" size="s" href={primaryAction.href}>
+      <EuiButtonEmpty flush="left" size="s" {...primaryAction}>
         {primaryAction.label}
       </EuiButtonEmpty>
     </div>

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useContext } from 'react';
+import React, { FunctionComponent, useContext } from 'react';
 
 import {
   EuiFlyout,
@@ -10,7 +10,6 @@ import {
   htmlIdGenerator,
   EuiButton,
   EuiButtonEmpty,
-  EuiSelectableOption,
 } from '@elastic/eui';
 
 import { navigate } from 'gatsby';
@@ -20,8 +19,6 @@ import { EuiNotificationFlyoutHeader } from '../../eui/notification/notification
 import { EuiNotificationFlyoutHeaderFilters } from '../../eui/notification/notification_flyout_header_filters';
 import { EuiNotificationEvents } from '../../eui/notification/notification_events';
 import { EuiNotificationFlyoutSuggestions } from '../../eui/notification/notification_flyout_suggestions';
-
-import { filtersData } from './notification_data';
 
 import { NotificationContext } from '../../../context/notification_context';
 
@@ -41,7 +38,7 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
   const {
     notifications,
     suggestions,
-    hasNewEvents,
+    showNotification,
     onReadEvents,
     onViewSimilarMessages,
     onDismissSuggestion,
@@ -50,19 +47,13 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
     onDismissAllSuggestions,
     onDisableAllSuggestions,
     onRefresh,
+    onFiltersChange,
+    activeFilters,
+    currentFilters,
   } = useContext(NotificationContext);
 
   const createId = htmlIdGenerator('euiHeaderAlertFlyout');
   const headerId = `${createId()}__header`;
-  const [currentFilters, setCurrentFilters] = useState(filtersData);
-
-  const activeFilters = currentFilters
-    .filter((item) => item.checked === 'on')
-    .map((item) => item.label);
-
-  const onFiltersChange = (filters: EuiSelectableOption[]) => {
-    setCurrentFilters(filters);
-  };
 
   const goToNotificationCenter = () => {
     navigate('notification/center');
@@ -121,7 +112,7 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
               Open notification center
             </EuiButtonEmpty>
           }
-          hasNewEvents={hasNewEvents}
+          hasNewEvents={showNotification}
           secondaryAction={
             <EuiButton size="s" onClick={onRefresh}>
               Refresh
