@@ -9,6 +9,16 @@ module.exports = {
     author: '@cchaos',
   },
   plugins: [
+    {
+      resolve: 'gatsby-plugin-gtag',
+      options: {
+        // The property ID; the tracking code won't be generated without it
+        trackingId: 'G-Y6YR974H26',
+        // Defines where to place the tracking script - `true` in the head and `false` in the body
+        head: true,
+        anonymize: true,
+      },
+    },
     'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-source-filesystem',
@@ -31,15 +41,6 @@ module.exports = {
         theme_color: '#006DE4',
         display: 'minimal-ui',
         icon: 'src/images/logo_elastic.png', // This path is relative to the root of the site.
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-google-analytics',
-      options: {
-        // The property ID; the tracking code won't be generated without it
-        trackingId: 'G-Y6YR974H26',
-        // Defines where to place the tracking script - `true` in the head and `false` in the body
-        head: false,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
