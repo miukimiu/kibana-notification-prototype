@@ -10,9 +10,6 @@ import {
   htmlIdGenerator,
   EuiButton,
   EuiButtonEmpty,
-  EuiToast,
-  EuiFlexGroup,
-  EuiFlexItem,
 } from '@elastic/eui';
 
 import { navigate } from 'gatsby';

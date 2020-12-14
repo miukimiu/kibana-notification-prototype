@@ -1,13 +1,6 @@
 import React, { createContext, FunctionComponent, useState } from 'react';
 
-import {
-  EuiSelectableOption,
-  EuiToast,
-  EuiFlexGroup,
-  EuiFlexItem,
-  EuiButton,
-  EuiButtonEmpty,
-} from '@elastic/eui';
+import { EuiSelectableOption } from '@elastic/eui';
 
 import { navigate } from 'gatsby';
 
@@ -52,7 +45,6 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
       },
       primaryAction: {
         onClick: () => {
-          console.log('clicked');
           navigate('notification/center');
         },
         label: 'View and go',
@@ -68,7 +60,7 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
       id: 'notificationB',
       meta: {
         type: 'Alert',
-        healthStatus: { type: 'warning', title: 'Entering boundary' },
+        healthStatus: 'warning',
         iconType: 'logoMaps',
       },
       name: {
@@ -134,6 +126,7 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
       id: 'notificationF',
       meta: {
         type: 'Cloud',
+        healthStatus: 'danger',
         iconType: 'logoCloud',
       },
       name: {

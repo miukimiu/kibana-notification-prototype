@@ -9,11 +9,6 @@ import {
 } from '@elastic/eui';
 import { EuiNotificationEventReadButton } from './notification_event_read_button';
 
-type euiNotificationEventMetaHealthStatus = {
-  title: string;
-  type: 'success' | 'warning' | 'danger';
-};
-
 export type EuiNotificationEventMetaProps = {
   /**
    * The name of the
@@ -27,12 +22,14 @@ export type EuiNotificationEventMetaProps = {
   /**
    * healthStatus
    */
-  healthStatus?: euiNotificationEventMetaHealthStatus;
+  healthStatus?: 'success' | 'warning' | 'danger';
 
   /**
    * The icon used to visually represent this data type. Accepts any `EuiIcon IconType`.
    */
   iconType?: string;
+
+  badge?: euiNotificationEventMetaBadge;
 
   onRead?: () => void;
   onMarkAsRead?: () => void;
@@ -88,10 +85,11 @@ export const EuiNotificationEventMeta: FunctionComponent<EuiNotificationEventMet
         )}
 
         {iconType && <EuiIcon type={iconType} />}
-        <EuiBadge color="hollow">{type}</EuiBadge>
 
-        {healthStatus && (
-          <EuiBadge color={healthStatus.type}>{healthStatus.title}</EuiBadge>
+        {type && (
+          <EuiBadge color={healthStatus ? healthStatus : 'hollow'}>
+            {type}
+          </EuiBadge>
         )}
       </div>
 
