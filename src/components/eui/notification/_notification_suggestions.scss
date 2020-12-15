@@ -1,4 +1,4 @@
-.euiNotificationFlyoutSuggestions {
+.euiNotificationSuggestions {
   padding: $euiSize;
   border-bottom: $euiBorderThin;
   
@@ -21,7 +21,7 @@
   }
 
   &__moreEvents {
-    .euiNotificationFlyoutSuggestionsEvent {
+    .euiNotificationSuggestionsEvent {
       padding-top: $euiSizeM;
     }
   }

@@ -2,9 +2,6 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { EuiAccordion, htmlIdGenerator } from '@elastic/eui';
 
 export type EuiNotificationEventNotificationsProps = {
-  /**
-   * A string or an array of strings.
-   */
   notifications: ReactElement[];
 };
 

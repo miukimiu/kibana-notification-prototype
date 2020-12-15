@@ -18,19 +18,19 @@ export const EuiNotificationSuggestionsEvent: FunctionComponent<EuiNotificationS
   onDismiss,
   iconType,
 }) => {
-  const classes = classNames('euiNotificationFlyoutSuggestionsEvent', {
-    'euiNotificationFlyoutSuggestionsEvent--hasIcon': iconType,
+  const classes = classNames('euiNotificationSuggestionsEvent', {
+    'euiNotificationSuggestionsEvent--hasIcon': iconType,
   });
 
   return (
     <div className={classes}>
       {iconType && (
-        <div className="euiNotificationFlyoutSuggestionsEvent__icon">
+        <div className="euiNotificationSuggestionsEvent__icon">
           <EuiIcon type={iconType} />
         </div>
       )}
 
-      <div className="euiNotificationFlyoutSuggestionsEvent__content">
+      <div className="euiNotificationSuggestionsEvent__content">
         <EuiTitle size="xxs">
           <h3>{title}</h3>
         </EuiTitle>

@@ -10,7 +10,10 @@ import {
   EuiNotificationEventMetaProps,
 } from './notification_event_meta';
 
-import { EuiNotificationEventNotifications } from './notification_event_notifications';
+import {
+  EuiNotificationEventNotifications,
+  EuiNotificationEventNotificationsProps,
+} from './notification_event_notifications';
 
 import {
   EuiNotificationEventPrimaryAction,
@@ -19,33 +22,14 @@ import {
 
 export type EuiNotificationEventProps = {
   id: string;
-  /**
-   * The title of the
-   */
   meta: EuiNotificationEventMetaProps;
-  /**
-   * The title of the
-   */
   name: EuiNotificationEventNameProps;
-  /**
-   * If readState exists an icon appears.
-   */
   isRead?: boolean | undefined;
-
-  /**
-   * Button ...
-   */
   primaryAction?: EuiNotificationEventPrimaryActionProps;
-  /**
-   * A string or an array of strings.
-   */
   notifications: [];
 };
 
 export type EuiNotificationEventsProps = {
-  /**
-   * The title of the
-   */
   events: EuiNotificationEventProps[];
 
   activeFilters: Array<string>;

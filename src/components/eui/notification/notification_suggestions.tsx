@@ -66,9 +66,9 @@ export const EuiNotificationSuggestions: FunctionComponent<EuiNotificationSugges
   if (notificationFlyoutSuggestions.length === 0) return null;
 
   return (
-    <div className="euiNotificationFlyoutSuggestions">
-      <div className="euiNotificationFlyoutSuggestions__inner">
-        <div className="euiNotificationFlyoutSuggestions__mainActions">
+    <div className="euiNotificationSuggestions">
+      <div className="euiNotificationSuggestions__inner">
+        <div className="euiNotificationSuggestions__mainActions">
           <p>You have {notificationFlyoutSuggestions.length} new suggestions</p>
           <EuiPopover
             ownFocus
@@ -81,7 +81,7 @@ export const EuiNotificationSuggestions: FunctionComponent<EuiNotificationSugges
                 aria-label="Open actions"
                 iconType="boxesVertical"
                 color="subdued"
-                className="euiNotificationFlyoutSuggestions__primaryAction"
+                className="euiNotificationSuggestions__primaryAction"
                 onClick={() => setIsPopoverOpen(!isPopoverOpen)}
               />
             }
@@ -100,7 +100,7 @@ export const EuiNotificationSuggestions: FunctionComponent<EuiNotificationSugges
         </div>
         <div>{notificationFlyoutSuggestions[0]}</div>
         {hasMoreSuggestions && !isOpenMoreSuggestions && (
-          <div className="euiNotificationFlyoutSuggestions__moreButtonSection">
+          <div className="euiNotificationSuggestions__moreButtonSection">
             <EuiHorizontalRule margin="xs" />
             <EuiButtonEmpty
               size="s"
@@ -110,7 +110,7 @@ export const EuiNotificationSuggestions: FunctionComponent<EuiNotificationSugges
           </div>
         )}
         {isOpenMoreSuggestions && (
-          <div className="euiNotificationFlyoutSuggestions__moreEvents">
+          <div className="euiNotificationSuggestions__moreEvents">
             {notificationFlyoutSuggestions.slice(
               1,
               notificationFlyoutSuggestions.length
