@@ -55,9 +55,15 @@ const headerLinks: ReactNode = (
 );
 
 export default () => {
-  const { toastIsVisible, closeToast, onShowNotification } = useContext(
-    NotificationContext
-  );
+  const {
+    toastIsVisible,
+    closeToast,
+    onShowStandardNotification,
+    headerNotificationPopoverIsVisible,
+    onAddCriticalNotification,
+    onCloseHeaderNotificationPopover,
+    onRefresh,
+  } = useContext(NotificationContext);
 
   return (
     <KibanaPage
@@ -70,6 +76,26 @@ export default () => {
       }}>
       <EuiPageContent className="euiPageContent--restrictWidth">
         <EuiPageContentBody>
+          {/* {headerNotificationPopoverIsVisible && (
+            <EuiToast
+              title="Your deployment has a critical error"
+              color="danger"
+              iconType="alert"
+              onClose={onCloseHeaderNotificationPopover}
+              style={{
+                position: 'fixed',
+                top: 64,
+                right: 64,
+                zIndex: 99999,
+                width: 260,
+              }}>
+              <p>Your deployment has a critical error</p>
+              <EuiButton size="s" onClick={onRefresh} color="danger">
+                Refresh
+              </EuiButton>
+            </EuiToast>
+          )} */}
+
           {toastIsVisible && (
             <EuiToast
               onClose={closeToast}
@@ -87,14 +113,19 @@ export default () => {
                 visible again.
               </p>
               <EuiFlexGroup justifyContent="flexEnd" gutterSize="s">
-                <EuiFlexItem grow={false}>
-                  <EuiButtonEmpty size="s" onClick={closeToast}>
-                    Close
-                  </EuiButtonEmpty>
+                <EuiFlexItem>
+                  <EuiButton size="s" onClick={onShowStandardNotification}>
+                    Standard Notification
+                  </EuiButton>
                 </EuiFlexItem>
-                <EuiFlexItem grow={false}>
-                  <EuiButton size="s" onClick={onShowNotification}>
-                    Notify
+              </EuiFlexGroup>
+              <EuiFlexGroup>
+                <EuiFlexItem>
+                  <EuiButton
+                    size="s"
+                    onClick={onAddCriticalNotification}
+                    color="danger">
+                    Critical Notification
                   </EuiButton>
                 </EuiFlexItem>
               </EuiFlexGroup>

@@ -9,11 +9,12 @@ type NotificationContext = {
   notifications: Array<any>;
   suggestions: Array<any>;
   showNotification: boolean;
-  onShowNotification: () => void;
+  onShowStandardNotification: () => void;
   closeFlyout: () => void;
   toggleFlyout: () => void;
   onReadEvents: (id: string, isRead: boolean) => void;
   onViewSimilarMessages: (type: string) => void;
+  onDisableNotifications: (type: string) => void;
   onDismissSuggestion: (id: string) => void;
   onAddSuggestion: (id: string) => void;
   onMarkAllAsRead: () => void;
@@ -27,6 +28,11 @@ type NotificationContext = {
   notificationCenterFilters: EuiSelectableOption[];
   toastIsVisible: boolean;
   closeToast: () => void;
+  headerNotificationPopoverIsVisible: boolean;
+  isCriticalNotification: boolean;
+  onAddCriticalNotification: () => void;
+  onCloseHeaderNotificationPopover: () => void;
+  onCriticalNotificationRefresh: () => void;
 };
 
 export const NotificationContext = createContext<NotificationContext>({});
@@ -193,6 +199,11 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
   const [showNotification, setShowNotification] = useState(false);
   const [currentFilters, setCurrentFilters] = useState(filtersData);
   const [toastIsVisible, setToastIsVisible] = useState(true);
+  const [isCriticalNotification, setIsCriticalNotification] = useState(false);
+  const [
+    headerNotificationPopoverIsVisible,
+    setHeaderNotificationPopoverIsVisible,
+  ] = useState(false);
   const [notificationCenterFilters, setNotificationCenterFilters] = useState(
     filtersData
   );
@@ -221,6 +232,14 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
 
   const onViewSimilarMessages = (type: string) => {
     const nextState = notifications.filter((item) => item.meta.type === type);
+
+    setTimeout(() => {
+      setNotifications(nextState);
+    }, 200);
+  };
+
+  const onDisableNotifications = (type: string) => {
+    const nextState = notifications.filter((item) => item.meta.type !== type);
 
     setTimeout(() => {
       setNotifications(nextState);
@@ -269,14 +288,37 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
   const toggleFlyout = () => {
     setIsFlyoutVisible(!isFlyoutVisible);
     setShowNotification(false);
+    setHeaderNotificationPopoverIsVisible(false);
   };
 
-  const onShowNotification = () => {
+  const onShowStandardNotification = () => {
     setShowNotification(true);
+
+    if (isFlyoutVisible) {
+      setHeaderNotificationPopoverIsVisible(true);
+    }
   };
 
   const closeToast = () => {
     setToastIsVisible(false);
+  };
+
+  const onAddCriticalNotification = () => {
+    setShowNotification(true);
+    setHeaderNotificationPopoverIsVisible(true);
+    setIsCriticalNotification(true);
+  };
+
+  const onCloseHeaderNotificationPopover = () => {
+    setShowNotification(false);
+    setHeaderNotificationPopoverIsVisible(false);
+    setIsCriticalNotification(false);
+  };
+
+  const onCriticalNotificationRefresh = () => {
+    setHeaderNotificationPopoverIsVisible(false);
+    setShowNotification(false);
+    onRefresh();
   };
 
   return (
@@ -286,11 +328,12 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
         notifications,
         suggestions,
         showNotification,
-        onShowNotification,
+        onShowStandardNotification,
         closeFlyout,
         toggleFlyout,
         onReadEvents,
         onViewSimilarMessages,
+        onDisableNotifications,
         onDismissSuggestion,
         onAddSuggestion,
         onMarkAllAsRead,
@@ -304,6 +347,11 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
         notificationCenterFilters,
         toastIsVisible,
         closeToast,
+        headerNotificationPopoverIsVisible,
+        onAddCriticalNotification,
+        onCloseHeaderNotificationPopover,
+        onCriticalNotificationRefresh,
+        isCriticalNotification,
       }}>
       {children}
     </NotificationContext.Provider>

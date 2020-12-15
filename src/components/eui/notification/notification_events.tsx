@@ -54,12 +54,18 @@ export type EuiNotificationEventsProps = {
 
   onRead?: (id: string, isRead: boolean) => void;
   onViewSimilarMessages?: (type: string) => void;
+
+  /*
+  TODO need to know how this feature is going to work. Is it just passing the `type` of notification enough? 
+  */
+  onDisableNotifications?: (type: string) => void;
 };
 
 export const EuiNotificationEvents: FunctionComponent<EuiNotificationEventsProps> = ({
   events,
   onRead,
   onViewSimilarMessages,
+  onDisableNotifications,
   activeFilters,
   emptyStateAction,
 }) => {
@@ -94,6 +100,10 @@ export const EuiNotificationEvents: FunctionComponent<EuiNotificationEventsProps
         onViewSimilarMessages!(event.meta.type);
       };
 
+      const onHandleDisableNotifications = () => {
+        onDisableNotifications!(event.meta.type);
+      };
+
       return (
         <div className={classes} key={event.id}>
           <EuiNotificationEventMeta
@@ -103,6 +113,7 @@ export const EuiNotificationEvents: FunctionComponent<EuiNotificationEventsProps
             isRead={event.isRead}
             onRead={onHandleRead}
             onViewSimilarMessages={onHandleViewSimilarMessages}
+            onDisableNotifications={onHandleDisableNotifications}
           />
 
           <div className="euiNotificationEvents__content">

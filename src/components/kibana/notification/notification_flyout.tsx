@@ -41,6 +41,7 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
     showNotification,
     onReadEvents,
     onViewSimilarMessages,
+    onDisableNotifications,
     onDismissSuggestion,
     onAddSuggestion,
     onMarkAllAsRead,
@@ -97,6 +98,7 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
           events={notifications}
           onRead={onReadEvents}
           onViewSimilarMessages={onViewSimilarMessages}
+          onDisableNotifications={onDisableNotifications}
           activeFilters={activeFilters}
           emptyStateAction={
             <EuiButton onClick={goToNotificationCenter}>
@@ -108,14 +110,8 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
       <EuiFlyoutFooter>
         <EuiNotificationFlyoutFooter
           mainAction={
-            <EuiButtonEmpty onClick={goToNotificationCenter}>
+            <EuiButton size="s" onClick={goToNotificationCenter}>
               Open notification center
-            </EuiButtonEmpty>
-          }
-          hasNewEvents={showNotification}
-          secondaryAction={
-            <EuiButton size="s" onClick={onRefresh}>
-              Refresh
             </EuiButton>
           }
         />

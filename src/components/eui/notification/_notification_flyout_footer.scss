@@ -3,14 +3,5 @@
   flex-direction: row;
   align-items: center;
   padding: $euiSize $euiSizeM;
-  justify-content: space-between;;
-
-  &__secondaryActions {
-    display: flex;
-    align-items: center;
-
-    p {
-      margin-right: $euiSize;
-    }
-  }
+  justify-content: flex-end
 }
