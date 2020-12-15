@@ -14,11 +14,13 @@ import {
 
 import { navigate } from 'gatsby';
 
-import { EuiNotificationFlyoutFooter } from '../../eui/notification/notification_flyout_footer';
-import { EuiNotificationFlyoutHeader } from '../../eui/notification/notification_flyout_header';
-import { EuiNotificationFlyoutHeaderFilters } from '../../eui/notification/notification_flyout_header_filters';
-import { EuiNotificationEvents } from '../../eui/notification/notification_events';
-import { EuiNotificationFlyoutSuggestions } from '../../eui/notification/notification_flyout_suggestions';
+import {
+  EuiNotificationFlyoutHeader,
+  EuiNotificationFlyoutFooter,
+  EuiNotificationFlyoutHeaderFilters,
+  EuiNotificationEvents,
+  EuiNotificationSuggestions,
+} from '../../eui/notification/';
 
 import { NotificationContext } from '../../../context/notification_context';
 
@@ -38,7 +40,6 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
   const {
     notifications,
     suggestions,
-    showNotification,
     onReadEvents,
     onViewSimilarMessages,
     onDisableNotifications,
@@ -47,7 +48,6 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
     onMarkAllAsRead,
     onDismissAllSuggestions,
     onDisableAllSuggestions,
-    onRefresh,
     onFiltersChange,
     activeFilters,
     currentFilters,
@@ -87,7 +87,7 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
         />
       </EuiFlyoutHeader>
       <EuiFlyoutBody>
-        <EuiNotificationFlyoutSuggestions
+        <EuiNotificationSuggestions
           suggestions={suggestions}
           onDismiss={onDismissSuggestion}
           onAdd={onAddSuggestion}

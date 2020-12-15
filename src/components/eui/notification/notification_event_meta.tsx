@@ -29,8 +29,6 @@ export type EuiNotificationEventMetaProps = {
    */
   iconType?: string;
 
-  badge?: euiNotificationEventMetaBadge;
-
   onRead?: () => void;
   onMarkAsRead?: () => void;
   onViewSimilarMessages?: () => void;

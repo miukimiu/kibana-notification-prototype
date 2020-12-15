@@ -15,8 +15,6 @@ export const KibanaNotificationCenterTable: FunctionComponent = () => {
   const [pageSize, setPageSize] = useState(5);
   const [sortField, setSortField] = useState('message');
   const [sortDirection, setSortDirection] = useState('asc');
-  const [selectedItems, setSelectedItems] = useState([]);
-  const [customHeader, setCustomHeader] = useState(true);
 
   const { notifications } = useContext(NotificationContext);
 
@@ -87,10 +85,6 @@ export const KibanaNotificationCenterTable: FunctionComponent = () => {
     setPageSize(pageSize);
     setSortField(sortField);
     setSortDirection(sortDirection);
-  };
-
-  const onSelectionChange = (selectedItems) => {
-    setSelectedItems(selectedItems);
   };
 
   const { pageOfItems, totalItemCount } = store.findMessages(

@@ -13,7 +13,7 @@ export const EuiNotificationFlyoutHeader: FunctionComponent<EuiNotificationFlyou
   return (
     <div className="euiNotificationFlyoutHeader">
       <EuiTitle size="s">
-        <h2 id="my_id">{title}</h2>
+        <h2>{title}</h2>
       </EuiTitle>
       <div className="euiNotificationFlyoutHeader__actions">{actions}</div>
     </div>

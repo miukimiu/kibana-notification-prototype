@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { EuiTitle, EuiButtonEmpty, EuiIcon } from '@elastic/eui';
 import classNames from 'classnames';
 
-export type EuiNotificationFlyoutSuggestionsEventProps = {
+export type EuiNotificationSuggestionsEventProps = {
   id: string;
   title: string;
   description: string;
@@ -11,7 +11,7 @@ export type EuiNotificationFlyoutSuggestionsEventProps = {
   onDismiss: () => void;
 };
 
-export const EuiNotificationFlyoutSuggestionsEvent: FunctionComponent<EuiNotificationFlyoutSuggestionsEventProps> = ({
+export const EuiNotificationSuggestionsEvent: FunctionComponent<EuiNotificationSuggestionsEventProps> = ({
   title,
   description,
   onAdd,

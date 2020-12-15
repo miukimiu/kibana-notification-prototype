@@ -1,2 +1,12 @@
+export { EuiNotificationEventMeta } from './notification_event_meta';
+export { EuiNotificationEventName } from './notification_event_name';
+export { EuiNotificationEventNotifications } from './notification_event_notifications';
+export { EuiNotificationEventPrimaryAction } from './notification_event_primary_action';
+export { EuiNotificationEventReadButton } from './notification_event_read_button';
+export { EuiNotificationEvents } from './notification_events';
+export { EuiNotificationFlyoutFooter } from './notification_flyout_footer';
+export { EuiNotificationFlyoutHeaderFilters } from './notification_flyout_header_filters';
 export { EuiNotificationFlyoutHeader } from './notification_flyout_header';
 export { EuiNotificationHeaderButton } from './notification_header_button';
+export { EuiNotificationSuggestionsEvent } from './notification_suggestions_event';
+export { EuiNotificationSuggestions } from './notification_suggestions';

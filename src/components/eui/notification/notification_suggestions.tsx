@@ -8,19 +8,19 @@ import {
   EuiContextMenuItem,
 } from '@elastic/eui';
 import {
-  EuiNotificationFlyoutSuggestionsEvent,
-  EuiNotificationFlyoutSuggestionsEventProps,
-} from './notification_flyout_suggestions_event';
+  EuiNotificationSuggestionsEvent,
+  EuiNotificationSuggestionsEventProps,
+} from './notification_suggestions_event';
 
-export type EuiNotificationFlyoutSuggestionsProps = {
-  suggestions: EuiNotificationFlyoutSuggestionsEventProps[];
+export type EuiNotificationSuggestionsProps = {
+  suggestions: EuiNotificationSuggestionsEventProps[];
   onDismissAll: () => void;
   onDisableAll: () => void;
   onDismiss: (id: string) => void;
   onAdd: (id: string) => void;
 };
 
-export const EuiNotificationFlyoutSuggestions: FunctionComponent<EuiNotificationFlyoutSuggestionsProps> = ({
+export const EuiNotificationSuggestions: FunctionComponent<EuiNotificationSuggestionsProps> = ({
   suggestions,
   onDismissAll,
   onDisableAll,
@@ -37,7 +37,7 @@ export const EuiNotificationFlyoutSuggestions: FunctionComponent<EuiNotification
     };
 
     return (
-      <EuiNotificationFlyoutSuggestionsEvent
+      <EuiNotificationSuggestionsEvent
         key={suggestion.id}
         id={suggestion.id}
         title={suggestion.title}
