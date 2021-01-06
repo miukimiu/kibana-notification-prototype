@@ -1,10 +1,5 @@
 import React, { useContext } from 'react';
-import {
-  EuiFacetGroup,
-  EuiFacetButton,
-  EuiTitle,
-  EuiSelectable,
-} from '@elastic/eui';
+import { EuiTitle, EuiSelectable } from '@elastic/eui';
 
 import { NotificationContext } from '../../../context/notification_context';
 
@@ -13,8 +8,6 @@ export const KibanaNotificationCenterFilters = () => {
     onNotificationCenterFiltersChange,
     notificationCenterFilters,
   } = useContext(NotificationContext);
-
-  console.log('notificationsCenterFilters', notificationCenterFilters);
 
   return (
     <div style={{ maxWidth: 200 }}>

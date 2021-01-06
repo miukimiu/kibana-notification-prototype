@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactNode } from 'react';
-import { EuiTitle } from '@elastic/eui';
+import { EuiFlyoutHeader, EuiTitle } from '@elastic/eui';
 
 export type EuiNotificationFlyoutHeaderProps = {
   title: string;
@@ -11,11 +11,13 @@ export const EuiNotificationFlyoutHeader: FunctionComponent<EuiNotificationFlyou
   title,
 }) => {
   return (
-    <div className="euiNotificationFlyoutHeader">
-      <EuiTitle size="s">
-        <h2>{title}</h2>
-      </EuiTitle>
-      <div className="euiNotificationFlyoutHeader__actions">{actions}</div>
-    </div>
+    <EuiFlyoutHeader hasBorder>
+      <div className="euiNotificationFlyoutHeader">
+        <EuiTitle size="s">
+          <h2>{title}</h2>
+        </EuiTitle>
+        <div className="euiNotificationFlyoutHeader__actions">{actions}</div>
+      </div>
+    </EuiFlyoutHeader>
   );
 };

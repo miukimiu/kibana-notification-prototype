@@ -4,6 +4,8 @@ export { EuiNotificationEventNotifications } from './notification_event_notifica
 export { EuiNotificationEventPrimaryAction } from './notification_event_primary_action';
 export { EuiNotificationEventReadButton } from './notification_event_read_button';
 export { EuiNotificationEvents } from './notification_events';
+export { EuiNotificationFlyout } from './notification_flyout';
+export { EuiNotificationFlyoutBody } from './notification_flyout_body';
 export { EuiNotificationFlyoutFooter } from './notification_flyout_footer';
 export { EuiNotificationFlyoutHeaderFilters } from './notification_flyout_header_filters';
 export { EuiNotificationFlyoutHeader } from './notification_flyout_header';

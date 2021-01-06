@@ -1,10 +1,6 @@
 import React, { FunctionComponent, useContext } from 'react';
 
 import {
-  EuiFlyout,
-  EuiFlyoutBody,
-  EuiFlyoutHeader,
-  EuiFlyoutFooter,
   EuiFlyoutProps,
   EuiHeaderAlertProps,
   htmlIdGenerator,
@@ -15,6 +11,8 @@ import {
 import { navigate } from 'gatsby';
 
 import {
+  EuiNotificationFlyout,
+  EuiNotificationFlyoutBody,
   EuiNotificationFlyoutHeader,
   EuiNotificationFlyoutFooter,
   EuiNotificationFlyoutHeaderFilters,
@@ -24,13 +22,13 @@ import {
 
 import { NotificationContext } from '../../../context/notification_context';
 
-export type EuiNotificationFlyoutProps = {
+export type KibanaNotificationFlyoutProps = {
   alerts?: EuiHeaderAlertProps[];
   title?: string;
   version?: string;
 } & EuiFlyoutProps;
 
-export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps> = ({
+export const KibanaNotificationFlyout: FunctionComponent<KibanaNotificationFlyoutProps> = ({
   onClose,
   alerts,
   title = 'Notifications',
@@ -62,31 +60,25 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
   };
 
   return (
-    <EuiFlyout
-      ownFocus
-      className="euiNotificationFlyout"
+    <EuiNotificationFlyout
       onClose={onClose}
-      size="m"
-      maxWidth="540px"
       aria-labelledby={headerId}
       {...rest}>
-      <EuiFlyoutHeader hasBorder>
-        <EuiNotificationFlyoutHeader
-          title={title}
-          actions={
-            <>
-              <EuiNotificationFlyoutHeaderFilters
-                filters={currentFilters}
-                onFiltersChange={onFiltersChange}
-              />
-              <EuiButtonEmpty size="s" onClick={onMarkAllAsRead}>
-                Mark all as read
-              </EuiButtonEmpty>
-            </>
-          }
-        />
-      </EuiFlyoutHeader>
-      <EuiFlyoutBody>
+      <EuiNotificationFlyoutHeader
+        title={title}
+        actions={
+          <>
+            <EuiNotificationFlyoutHeaderFilters
+              filters={currentFilters}
+              onFiltersChange={onFiltersChange}
+            />
+            <EuiButtonEmpty size="s" onClick={onMarkAllAsRead}>
+              Mark all as read
+            </EuiButtonEmpty>
+          </>
+        }
+      />
+      <EuiNotificationFlyoutBody>
         <EuiNotificationSuggestions
           suggestions={suggestions}
           onDismiss={onDismissSuggestion}
@@ -106,16 +98,15 @@ export const EuiNotificationFlyout: FunctionComponent<EuiNotificationFlyoutProps
             </EuiButton>
           }
         />
-      </EuiFlyoutBody>
-      <EuiFlyoutFooter>
-        <EuiNotificationFlyoutFooter
-          mainAction={
-            <EuiButton size="s" onClick={goToNotificationCenter}>
-              Open notification center
-            </EuiButton>
-          }
-        />
-      </EuiFlyoutFooter>
-    </EuiFlyout>
+      </EuiNotificationFlyoutBody>
+
+      <EuiNotificationFlyoutFooter
+        mainAction={
+          <EuiButton size="s" onClick={goToNotificationCenter}>
+            Open notification center
+          </EuiButton>
+        }
+      />
+    </EuiNotificationFlyout>
   );
 };

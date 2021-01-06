@@ -1,4 +1,5 @@
 import React, { FunctionComponent, ReactNode } from 'react';
+import { EuiFlyoutFooter } from '@elastic/eui';
 
 export type EuiNotificationFlyoutFooterProps = {
   mainAction?: ReactNode;
@@ -8,8 +9,10 @@ export const EuiNotificationFlyoutFooter: FunctionComponent<EuiNotificationFlyou
   mainAction,
 }) => {
   return (
-    <div className="euiNotificationFlyoutFooter">
-      {mainAction && mainAction}
-    </div>
+    <EuiFlyoutFooter>
+      <div className="euiNotificationFlyoutFooter">
+        {mainAction && mainAction}
+      </div>
+    </EuiFlyoutFooter>
   );
 };

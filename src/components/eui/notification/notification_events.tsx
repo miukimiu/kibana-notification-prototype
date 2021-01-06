@@ -10,10 +10,7 @@ import {
   EuiNotificationEventMetaProps,
 } from './notification_event_meta';
 
-import {
-  EuiNotificationEventNotifications,
-  EuiNotificationEventNotificationsProps,
-} from './notification_event_notifications';
+import { EuiNotificationEventNotifications } from './notification_event_notifications';
 
 import {
   EuiNotificationEventPrimaryAction,

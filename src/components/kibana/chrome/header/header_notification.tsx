@@ -1,15 +1,7 @@
 import React, { FunctionComponent, Fragment, useContext } from 'react';
-import {
-  EuiPopover,
-  EuiButton,
-  EuiFlexItem,
-  EuiFlexGroup,
-  EuiTitle,
-  EuiText,
-  EuiSpacer,
-} from '@elastic/eui';
+import { EuiPopover, EuiButton, EuiFlexItem, EuiFlexGroup } from '@elastic/eui';
 import { EuiNotificationHeaderButton } from '../../../eui/notification';
-import { EuiNotificationFlyout } from '../../notification/notification_flyout';
+import { KibanaNotificationFlyout } from '../../notification/notification_flyout';
 import { NotificationContext } from '../../../../context/notification_context';
 
 export const KibanaHeaderNotification: FunctionComponent = () => {
@@ -37,7 +29,7 @@ export const KibanaHeaderNotification: FunctionComponent = () => {
   );
 
   const flyout = isFlyoutVisible && (
-    <EuiNotificationFlyout id="headerNotification" onClose={closeFlyout} />
+    <KibanaNotificationFlyout id="headerNotification" onClose={closeFlyout} />
   );
 
   return (
