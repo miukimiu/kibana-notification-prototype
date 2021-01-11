@@ -29,7 +29,7 @@ export type EuiNotificationEventProps = {
 export type EuiNotificationEventsProps = {
   events: EuiNotificationEventProps[];
 
-  activeFilters: Array<string>;
+  activeFilters?: Array<string>;
 
   emptyStateAction: ReactNode;
 
@@ -50,9 +50,10 @@ export const EuiNotificationEvents: FunctionComponent<EuiNotificationEventsProps
   activeFilters,
   emptyStateAction,
 }) => {
-  const notificationFlyoutEventsFiltered = events.filter((item) =>
-    activeFilters.includes(item.meta.type)
-  );
+  // if activeFilters prop exists else just show all events
+  const notificationFlyoutEventsFiltered = activeFilters
+    ? events.filter((item) => activeFilters.includes(item.meta.type))
+    : events;
 
   if (notificationFlyoutEventsFiltered.length === 0 || events.length === 0) {
     return (
@@ -92,9 +93,13 @@ export const EuiNotificationEvents: FunctionComponent<EuiNotificationEventsProps
             type={event.meta.type}
             healthStatus={event.meta.healthStatus}
             isRead={event.isRead}
-            onRead={onHandleRead}
-            onViewSimilarMessages={onHandleViewSimilarMessages}
-            onDisableNotifications={onHandleDisableNotifications}
+            onRead={onRead && onHandleRead}
+            onViewSimilarMessages={
+              onViewSimilarMessages && onHandleViewSimilarMessages
+            }
+            onDisableNotifications={
+              onDisableNotifications && onHandleDisableNotifications
+            }
           />
 
           <div className="euiNotificationEvents__content">

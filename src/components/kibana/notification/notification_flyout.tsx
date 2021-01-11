@@ -64,20 +64,7 @@ export const KibanaNotificationFlyout: FunctionComponent<KibanaNotificationFlyou
       onClose={onClose}
       aria-labelledby={headerId}
       {...rest}>
-      <EuiNotificationFlyoutHeader
-        title={title}
-        actions={
-          <>
-            <EuiNotificationFlyoutHeaderFilters
-              filters={currentFilters}
-              onFiltersChange={onFiltersChange}
-            />
-            <EuiButtonEmpty size="s" onClick={onMarkAllAsRead}>
-              Mark all as read
-            </EuiButtonEmpty>
-          </>
-        }
-      />
+      <EuiNotificationFlyoutHeader title={title} />
       <EuiNotificationFlyoutBody>
         <EuiNotificationSuggestions
           suggestions={suggestions}
@@ -88,10 +75,10 @@ export const KibanaNotificationFlyout: FunctionComponent<KibanaNotificationFlyou
         />
         <EuiNotificationEvents
           events={notifications}
-          onRead={onReadEvents}
-          onViewSimilarMessages={onViewSimilarMessages}
-          onDisableNotifications={onDisableNotifications}
-          activeFilters={activeFilters}
+          // onRead={onReadEvents}
+          // onViewSimilarMessages={onViewSimilarMessages}
+          // onDisableNotifications={onDisableNotifications}
+          // activeFilters={activeFilters}
           emptyStateAction={
             <EuiButton onClick={goToNotificationCenter}>
               Open Notification Center
@@ -100,13 +87,13 @@ export const KibanaNotificationFlyout: FunctionComponent<KibanaNotificationFlyou
         />
       </EuiNotificationFlyoutBody>
 
-      <EuiNotificationFlyoutFooter
+      {/* <EuiNotificationFlyoutFooter
         mainAction={
           <EuiButton size="s" onClick={goToNotificationCenter}>
             Open notification center
           </EuiButton>
         }
-      />
+      /> */}
     </EuiNotificationFlyout>
   );
 };

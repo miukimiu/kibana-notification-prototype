@@ -17,7 +17,7 @@ export type EuiNotificationEventMetaProps = {
   /**
    * readState
    */
-  isRead: boolean | undefined;
+  isRead?: boolean | undefined;
 
   /**
    * healthStatus
@@ -66,23 +66,31 @@ export const EuiNotificationEventMeta: FunctionComponent<EuiNotificationEventMet
     setIsPopoverOpen(false);
   };
 
-  const contextMenuItems = [
-    onRead && (
+  const contextMenuItems = [];
+
+  if (onRead) {
+    contextMenuItems.push(
       <EuiContextMenuItem key="A" onClick={onPopoverMarkAsRead}>
         Mark as read
       </EuiContextMenuItem>
-    ),
-    onViewSimilarMessages && (
+    );
+  }
+
+  if (onViewSimilarMessages) {
+    contextMenuItems.push(
       <EuiContextMenuItem key="B" onClick={onPopoverViewSimilarMessages}>
         View messages like this
       </EuiContextMenuItem>
-    ),
-    onDisableNotifications && (
+    );
+  }
+
+  if (onDisableNotifications) {
+    contextMenuItems.push(
       <EuiContextMenuItem key="B" onClick={onPopoverDisableNotifications}>
         Don’t notify me about this
       </EuiContextMenuItem>
-    ),
-  ];
+    );
+  }
 
   return (
     <div className="euiNotificationEventMeta">

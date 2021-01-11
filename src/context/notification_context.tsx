@@ -60,7 +60,7 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
         'The request completed at 12:32:33 GMT+4',
         'A background request started at 12:32:33 GMT+4',
       ],
-      isRead: false,
+      // isRead: false,
     },
     {
       id: 'notificationB',
@@ -78,7 +78,7 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
         'The request completed at 12:32:33 GMT+4',
         'A background request started at 12:32:33 GMT+4',
       ],
-      isRead: false,
+      // isRead: false,
     },
     {
       id: 'notificationC',
@@ -96,7 +96,7 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
         label: 'Download',
       },
       notifications: ['The reported was generated at 17:12:16 GMT+4'],
-      isRead: false,
+      // isRead: false,
     },
     {
       id: 'notificationD',
@@ -113,7 +113,7 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
         label: 'Download',
       },
       notifications: ['The request completed at 10:23:45 GMT+4'],
-      isRead: false,
+      // isRead: false,
     },
     {
       id: 'notificationE',
@@ -126,7 +126,7 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
         href: '#',
       },
       notifications: ['The request completed at 10:23:45 GMT+4'],
-      isRead: false,
+      // isRead: false,
     },
     {
       id: 'notificationF',
@@ -144,7 +144,7 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
         label: 'View',
       },
       notifications: ['The request completed at 10:23:45 GMT+4'],
-      isRead: false,
+      // isRead: false,
     },
   ];
 
