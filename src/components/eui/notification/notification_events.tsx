@@ -91,6 +91,7 @@ export const EuiNotificationEvents: FunctionComponent<EuiNotificationEventsProps
           <EuiNotificationEventMeta
             iconType={event.meta.iconType}
             type={event.meta.type}
+            time={event.meta.time}
             healthStatus={event.meta.healthStatus}
             isRead={event.isRead}
             onRead={onRead && onHandleRead}

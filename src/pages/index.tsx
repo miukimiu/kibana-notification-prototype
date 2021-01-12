@@ -55,15 +55,9 @@ const headerLinks: ReactNode = (
 );
 
 export default () => {
-  const {
-    toastIsVisible,
-    closeToast,
-    onShowStandardNotification,
-    headerNotificationPopoverIsVisible,
-    onAddCriticalNotification,
-    onCloseHeaderNotificationPopover,
-    onRefresh,
-  } = useContext(NotificationContext);
+  const { toastIsVisible, closeToast, onShowStandardNotification } = useContext(
+    NotificationContext
+  );
 
   return (
     <KibanaPage
@@ -96,16 +90,6 @@ export default () => {
                 <EuiFlexItem>
                   <EuiButton size="s" onClick={onShowStandardNotification}>
                     Standard Notification
-                  </EuiButton>
-                </EuiFlexItem>
-              </EuiFlexGroup>
-              <EuiFlexGroup>
-                <EuiFlexItem>
-                  <EuiButton
-                    size="s"
-                    onClick={onAddCriticalNotification}
-                    color="danger">
-                    Critical Notification
                   </EuiButton>
                 </EuiFlexItem>
               </EuiFlexGroup>

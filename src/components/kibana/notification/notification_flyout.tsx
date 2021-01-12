@@ -14,8 +14,6 @@ import {
   EuiNotificationFlyout,
   EuiNotificationFlyoutBody,
   EuiNotificationFlyoutHeader,
-  EuiNotificationFlyoutFooter,
-  EuiNotificationFlyoutHeaderFilters,
   EuiNotificationEvents,
   EuiNotificationSuggestions,
 } from '../../eui/notification/';
@@ -38,17 +36,12 @@ export const KibanaNotificationFlyout: FunctionComponent<KibanaNotificationFlyou
   const {
     notifications,
     suggestions,
-    onReadEvents,
-    onViewSimilarMessages,
-    onDisableNotifications,
     onDismissSuggestion,
     onAddSuggestion,
-    onMarkAllAsRead,
     onDismissAllSuggestions,
     onDisableAllSuggestions,
-    onFiltersChange,
-    activeFilters,
-    currentFilters,
+    onAddNewNotification,
+    flyoutShowNewNotification,
   } = useContext(NotificationContext);
 
   const createId = htmlIdGenerator('euiHeaderAlertFlyout');
@@ -87,7 +80,19 @@ export const KibanaNotificationFlyout: FunctionComponent<KibanaNotificationFlyou
         />
       </EuiNotificationFlyoutBody>
 
-      {/* <EuiNotificationFlyoutFooter
+      {flyoutShowNewNotification && (
+        <EuiButton
+          className="euiNotificationRefreshButton"
+          iconSide="right"
+          size="s"
+          onClick={onAddNewNotification}
+          iconType="refresh">
+          You have 1 new message
+        </EuiButton>
+      )}
+
+      {/* 
+      <EuiNotificationFlyoutFooter
         mainAction={
           <EuiButton size="s" onClick={goToNotificationCenter}>
             Open notification center

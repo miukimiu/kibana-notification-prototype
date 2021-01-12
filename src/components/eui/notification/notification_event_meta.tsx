@@ -29,6 +29,8 @@ export type EuiNotificationEventMetaProps = {
    */
   iconType?: string;
 
+  time: string;
+
   onRead?: () => void;
   onMarkAsRead?: () => void;
   onViewSimilarMessages?: () => void;
@@ -39,6 +41,7 @@ export const EuiNotificationEventMeta: FunctionComponent<EuiNotificationEventMet
   isRead,
   iconType,
   type,
+  time,
   healthStatus,
   onRead,
   onViewSimilarMessages,
@@ -112,7 +115,7 @@ export const EuiNotificationEventMeta: FunctionComponent<EuiNotificationEventMet
       </div>
 
       <div>
-        <span className="euiNotificationEventMeta__time">12 min ago</span>
+        <span className="euiNotificationEventMeta__time">{time}</span>
 
         {contextMenuItems.length > 0 && (
           <EuiPopover

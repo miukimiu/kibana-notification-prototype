@@ -29,10 +29,9 @@ type NotificationContext = {
   toastIsVisible: boolean;
   closeToast: () => void;
   headerNotificationPopoverIsVisible: boolean;
-  isCriticalNotification: boolean;
-  onAddCriticalNotification: () => void;
   onCloseHeaderNotificationPopover: () => void;
-  onCriticalNotificationRefresh: () => void;
+  flyoutShowNewNotification: boolean;
+  onAddNewNotification: () => void;
 };
 
 export const NotificationContext = createContext<NotificationContext>({});
@@ -44,6 +43,7 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
       meta: {
         type: 'Alert',
         iconType: 'logoObservability',
+        time: '3 min ago',
       },
       name: {
         title: '[APM 500 Server errors] is now active',
@@ -60,7 +60,6 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
         'The request completed at 12:32:33 GMT+4',
         'A background request started at 12:32:33 GMT+4',
       ],
-      // isRead: false,
     },
     {
       id: 'notificationB',
@@ -68,6 +67,7 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
         type: 'Alert',
         healthStatus: 'warning',
         iconType: 'logoMaps',
+        time: '5 min ago',
       },
       name: {
         title: '[Maps] Geo Alert',
@@ -78,13 +78,13 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
         'The request completed at 12:32:33 GMT+4',
         'A background request started at 12:32:33 GMT+4',
       ],
-      // isRead: false,
     },
     {
       id: 'notificationC',
       meta: {
         type: 'Report',
         iconType: 'logoKibana',
+        time: '7 min ago',
       },
       name: {
         title: '[Error Monitoring Report] is generated',
@@ -96,13 +96,13 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
         label: 'Download',
       },
       notifications: ['The reported was generated at 17:12:16 GMT+4'],
-      // isRead: false,
     },
     {
       id: 'notificationD',
       meta: {
         type: 'Report',
         iconType: 'logoKibana',
+        time: '10 min ago',
       },
       name: {
         title: '2020 Global Marketing Analysis',
@@ -113,20 +113,19 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
         label: 'Download',
       },
       notifications: ['The request completed at 10:23:45 GMT+4'],
-      // isRead: false,
     },
     {
       id: 'notificationE',
       meta: {
         type: 'Cloud',
         iconType: 'logoCloud',
+        time: '22 min ago',
       },
       name: {
         title: 'ILM migration complete',
         href: '#',
       },
       notifications: ['The request completed at 10:23:45 GMT+4'],
-      // isRead: false,
     },
     {
       id: 'notificationF',
@@ -134,6 +133,7 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
         type: 'Cloud',
         healthStatus: 'danger',
         iconType: 'logoCloud',
+        time: '22 min ago',
       },
       name: {
         title: 'Your deployment has a critical error',
@@ -144,7 +144,6 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
         label: 'View',
       },
       notifications: ['The request completed at 10:23:45 GMT+4'],
-      // isRead: false,
     },
   ];
 
@@ -197,9 +196,11 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
   const [notifications, setNotifications] = useState(notificationEventsData);
   const [suggestions, setSuggestions] = useState(notificationSuggestionsData);
   const [showNotification, setShowNotification] = useState(false);
+  const [flyoutShowNewNotification, setFlyoutShowNewNotification] = useState(
+    false
+  );
   const [currentFilters, setCurrentFilters] = useState(filtersData);
   const [toastIsVisible, setToastIsVisible] = useState(true);
-  const [isCriticalNotification, setIsCriticalNotification] = useState(false);
   const [
     headerNotificationPopoverIsVisible,
     setHeaderNotificationPopoverIsVisible,
@@ -296,6 +297,7 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
 
     if (isFlyoutVisible) {
       setHeaderNotificationPopoverIsVisible(true);
+      setFlyoutShowNewNotification(true);
     }
   };
 
@@ -303,22 +305,30 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
     setToastIsVisible(false);
   };
 
-  const onAddCriticalNotification = () => {
-    setShowNotification(true);
-    setHeaderNotificationPopoverIsVisible(true);
-    setIsCriticalNotification(true);
-  };
+  const onAddNewNotification = () => {
+    const newNotification = {
+      id: 'notificationX',
+      meta: {
+        type: 'Cloud',
+        iconType: 'logoCloud',
+        healthStatus: 'danger',
+        time: '1 min ago',
+      },
+      name: {
+        title: '[APM 500 Server errors] is now active',
+        href: '#',
+      },
+      primaryAction: {
+        onClick: () => {
+          console.log('ops');
+        },
+        label: 'Go to notification',
+      },
+      notifications: ['The request completed at 12:32:33 GMT+4'],
+    };
 
-  const onCloseHeaderNotificationPopover = () => {
-    setShowNotification(false);
-    setHeaderNotificationPopoverIsVisible(false);
-    setIsCriticalNotification(false);
-  };
-
-  const onCriticalNotificationRefresh = () => {
-    setHeaderNotificationPopoverIsVisible(false);
-    setShowNotification(false);
-    onRefresh();
+    setFlyoutShowNewNotification(!flyoutShowNewNotification);
+    setNotifications([newNotification, ...notifications]);
   };
 
   return (
@@ -348,10 +358,8 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
         toastIsVisible,
         closeToast,
         headerNotificationPopoverIsVisible,
-        onAddCriticalNotification,
-        onCloseHeaderNotificationPopover,
-        onCriticalNotificationRefresh,
-        isCriticalNotification,
+        flyoutShowNewNotification,
+        onAddNewNotification,
       }}>
       {children}
     </NotificationContext.Provider>
