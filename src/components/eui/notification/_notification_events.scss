@@ -1,0 +1,32 @@
+.euiNotificationEvents {
+  padding: $euiSizeM $euiSizeS $euiSizeM $euiSize;
+  border-bottom: $euiBorderThin;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &--withReadState {
+    padding: $euiSizeM $euiSizeM;
+
+    .euiNotificationEvents__content {
+      padding-left: $euiSizeL;
+    }
+  }
+
+  &--emptyState {
+    text-align: center;
+    justify-content: center;
+    padding-top: $euiSizeXXL * 2;
+
+    > * { 
+      margin-top: $euiSizeL;
+    }
+  }
+}
+
+.euiNotificationEvents__content {
+  > * { 
+    margin-top: $euiSizeS;
+  }
+}

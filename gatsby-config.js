@@ -9,6 +9,16 @@ module.exports = {
     author: '@cchaos',
   },
   plugins: [
+    {
+      resolve: 'gatsby-plugin-gtag',
+      options: {
+        // The property ID; the tracking code won't be generated without it
+        trackingId: 'G-Y6YR974H26',
+        // Defines where to place the tracking script - `true` in the head and `false` in the body
+        head: true,
+        anonymize: true,
+      },
+    },
     'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-source-filesystem',

@@ -6,6 +6,7 @@ import React, {
 } from 'react';
 
 import { KibanaChrome, KibanaChromeProps } from './kibana/chrome/chrome';
+import { NotificationProvider } from '../context/notification_context';
 
 const localStorageIsDefined: boolean = typeof localStorage !== 'undefined';
 
@@ -50,10 +51,12 @@ const Layout: FunctionComponent<{
     <KibanaChromeContext.Provider
       // @ts-ignore
       value={{ chrome: chromeOptions, setChrome: setChromeOptions }}>
-      <div>
-        <KibanaChrome {...chromeOptions} />
-        <div className="chrWrap">{children}</div>
-      </div>
+      <NotificationProvider>
+        <div>
+          <KibanaChrome {...chromeOptions} />
+          <div className="chrWrap">{children}</div>
+        </div>
+      </NotificationProvider>
     </KibanaChromeContext.Provider>
   );
 };

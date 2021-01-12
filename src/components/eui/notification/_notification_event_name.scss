@@ -1,0 +1,8 @@
+.euiNotificationEventName {
+  @include euiTitle('xs');
+  display: flex;
+
+  &--isRead {
+    color: $euiColorDarkShade !important;
+  }
+}

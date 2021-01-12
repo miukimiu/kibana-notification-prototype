@@ -16,8 +16,6 @@ import {
   EuiIcon,
   EuiCollapsibleNavGroup,
   EuiHeaderSectionItemButton,
-  EuiShowFor,
-  EuiListGroupItem,
   EuiHorizontalRule,
   EuiCollapsibleNav,
   EuiPinnableListGroupItemProps,
@@ -32,8 +30,6 @@ import {
   KibanaNavLinksLast,
   KibanaNavTopLinks,
 } from '../data/nav_links';
-
-import ThemeContext from '../../../../themes/ThemeContext';
 
 interface Props
   extends Omit<EuiFlyoutProps, 'onClose'>,
@@ -55,8 +51,8 @@ export type ChromeNavGroupProps = {
 export const KibanaNav: FunctionComponent<Props> = ({
   currentRoute = 'Home',
 }) => {
-  const context = React.useContext(ThemeContext);
-  const [navIsOpen, setNavIsOpen] = useState(context.navIsDocked);
+  // for this prototype we don't want to have the main navigation
+  const [navIsOpen, setNavIsOpen] = useState(false);
 
   const [pinnedItems, setPinnedItems] = useState<
     EuiPinnableListGroupItemProps[]
@@ -168,7 +164,9 @@ export const KibanaNav: FunctionComponent<Props> = ({
       button={
         <EuiHeaderSectionItemButton
           aria-label="Toggle main navigation"
-          onClick={() => setNavIsOpen(!navIsOpen)}>
+          // for this prototype we don't want to have the main navigation
+          // onClick={() => setNavIsOpen(!navIsOpen)}
+        >
           <EuiIcon type={'menu'} size="m" aria-hidden="true" />
         </EuiHeaderSectionItemButton>
       }

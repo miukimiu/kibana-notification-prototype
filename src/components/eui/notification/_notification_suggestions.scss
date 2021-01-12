@@ -1,0 +1,28 @@
+.euiNotificationSuggestions {
+  padding: $euiSize;
+  border-bottom: $euiBorderThin;
+  
+  &__inner {
+    background-color: euiCallOutColor('primary', 'background');
+    padding: $euiSize;
+    border-radius: $euiBorderRadius;;
+  }
+
+  &__mainActions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $euiSizeXS;
+  }
+
+  &__moreButtonSection {
+    text-align: center;
+  }
+
+  &__moreEvents {
+    .euiNotificationSuggestionsEvent {
+      padding-top: $euiSizeM;
+    }
+  }
+}
