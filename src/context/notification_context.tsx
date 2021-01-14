@@ -66,6 +66,7 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
       meta: {
         type: 'Alert',
         healthStatus: 'warning',
+        severity: 'Moderate',
         iconType: 'logoMaps',
         time: '5 min ago',
       },
@@ -132,6 +133,7 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
       meta: {
         type: 'Cloud',
         healthStatus: 'danger',
+        severity: 'Critical',
         iconType: 'logoCloud',
         time: '22 min ago',
       },
@@ -310,8 +312,9 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
       id: 'notificationX',
       meta: {
         type: 'Cloud',
-        iconType: 'logoCloud',
         healthStatus: 'danger',
+        severity: 'Critical',
+        iconType: 'logoCloud',
         time: '1 min ago',
       },
       name: {

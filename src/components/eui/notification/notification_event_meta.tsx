@@ -10,10 +10,9 @@ import {
 import { EuiNotificationEventReadButton } from './notification_event_read_button';
 
 export type EuiNotificationEventMetaProps = {
-  /**
-   * The name of the
-   */
   type: string;
+
+  severity?: string;
   /**
    * readState
    */
@@ -46,6 +45,7 @@ export const EuiNotificationEventMeta: FunctionComponent<EuiNotificationEventMet
   onRead,
   onViewSimilarMessages,
   onDisableNotifications,
+  severity,
 }) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
@@ -109,7 +109,7 @@ export const EuiNotificationEventMeta: FunctionComponent<EuiNotificationEventMet
 
         {type && (
           <EuiBadge color={healthStatus ? healthStatus : 'hollow'}>
-            {type}
+            {severity ? `${type}: ${severity}` : type}
           </EuiBadge>
         )}
       </div>
