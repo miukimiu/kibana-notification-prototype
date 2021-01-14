@@ -58,13 +58,13 @@ export const KibanaNotificationFlyout: FunctionComponent<KibanaNotificationFlyou
       {...rest}>
       <EuiNotificationFlyoutHeader title={title} />
       <EuiNotificationFlyoutBody>
-        <EuiNotificationSuggestions
+        {/* <EuiNotificationSuggestions
           suggestions={suggestions}
           onDismiss={onDismissSuggestion}
           onAdd={onAddSuggestion}
           onDismissAll={onDismissAllSuggestions}
           onDisableAll={onDisableAllSuggestions}
-        />
+        /> */}
         <EuiNotificationEvents
           events={notifications}
           // onRead={onReadEvents}
