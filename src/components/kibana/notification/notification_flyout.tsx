@@ -5,7 +5,6 @@ import {
   EuiHeaderAlertProps,
   htmlIdGenerator,
   EuiButton,
-  EuiButtonEmpty,
 } from '@elastic/eui';
 
 import { navigate } from 'gatsby';

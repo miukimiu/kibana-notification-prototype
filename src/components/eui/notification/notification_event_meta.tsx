@@ -21,7 +21,7 @@ export type EuiNotificationEventMetaProps = {
   /**
    * healthStatus
    */
-  healthStatus?: 'success' | 'warning' | 'danger';
+  healthStatus?: 'secondary' | 'warning' | 'danger';
 
   /**
    * The icon used to visually represent this data type. Accepts any `EuiIcon IconType`.

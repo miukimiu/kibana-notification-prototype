@@ -1,6 +1,6 @@
 import React, { createContext, FunctionComponent, useState } from 'react';
 
-import { EuiSelectableOption } from '@elastic/eui';
+import { EuiSelectableOption, htmlIdGenerator } from '@elastic/eui';
 
 import { navigate } from 'gatsby';
 
@@ -103,7 +103,7 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
       meta: {
         type: 'Report',
         iconType: 'logoKibana',
-        time: '10 min ago',
+        time: '1 min ago',
       },
       name: {
         title: '2020 Global Marketing Analysis',
@@ -117,19 +117,6 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
     },
     {
       id: 'notificationE',
-      meta: {
-        type: 'Cloud',
-        iconType: 'logoCloud',
-        time: '22 min ago',
-      },
-      name: {
-        title: 'ILM migration complete',
-        href: '#',
-      },
-      notifications: ['The request completed at 10:23:45 GMT+4'],
-    },
-    {
-      id: 'notificationF',
       meta: {
         type: 'Cloud',
         healthStatus: 'danger',
@@ -146,6 +133,69 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
         label: 'View',
       },
       notifications: ['The request completed at 10:23:45 GMT+4'],
+    },
+  ];
+
+  const randomNotification = [
+    {
+      id: 'notificationF',
+      meta: {
+        type: 'Cloud',
+        iconType: 'logoCloud',
+        time: '1 min ago',
+      },
+      name: {
+        title: '[APM] is now active',
+        href: '#',
+      },
+      primaryAction: {
+        onClick: () => {
+          console.log('ops');
+        },
+        label: 'Go to notification',
+      },
+      notifications: ['The request completed at 12:32:33 GMT+4'],
+    },
+    {
+      id: 'notificationG',
+      meta: {
+        type: 'Report',
+        healthStatus: 'danger',
+        severity: 'Critical',
+        iconType: 'logoKibana',
+        time: '1 min ago',
+      },
+      name: {
+        title: '[Error Monitoring Report] is generated',
+        href: '#',
+      },
+      primaryAction: {
+        href: 'http://www.elastic.co',
+        iconType: 'download',
+        label: 'Download',
+      },
+      notifications: ['The reported was generated at 17:12:16 GMT+4'],
+    },
+    {
+      id: 'notificationH',
+      meta: {
+        type: 'Cloud',
+        healthStatus: 'secondary',
+        severity: 'Healthy',
+        iconType: 'logoCloud',
+        time: '1 min ago',
+      },
+      name: {
+        title: '[ac22346d] Deployment status',
+        href: '#',
+      },
+      primaryAction: {
+        onClick: () => {
+          console.log('ops');
+        },
+        label: 'Go to notification',
+      },
+      notifications: ['The request completed at 12:32:33 GMT+4'],
     },
   ];
 
@@ -308,30 +358,18 @@ export const NotificationProvider: FunctionComponent = ({ children }) => {
   };
 
   const onAddNewNotification = () => {
-    const newNotification = {
-      id: 'notificationX',
-      meta: {
-        type: 'Cloud',
-        healthStatus: 'danger',
-        severity: 'Critical',
-        iconType: 'logoCloud',
-        time: '1 min ago',
-      },
-      name: {
-        title: '[APM 500 Server errors] is now active',
-        href: '#',
-      },
-      primaryAction: {
-        onClick: () => {
-          console.log('ops');
-        },
-        label: 'Go to notification',
-      },
-      notifications: ['The request completed at 12:32:33 GMT+4'],
+    const newNotification =
+      randomNotification[Math.floor(Math.random() * randomNotification.length)];
+
+    const newIdNotification = {
+      ...newNotification,
+      id: htmlIdGenerator()(),
     };
 
+    const newArr = [newIdNotification, ...notifications];
+
     setFlyoutShowNewNotification(!flyoutShowNewNotification);
-    setNotifications([newNotification, ...notifications]);
+    setNotifications(newArr);
   };
 
   return (
