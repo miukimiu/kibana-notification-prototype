@@ -89,7 +89,7 @@ export default () => {
               <EuiFlexGroup justifyContent="flexEnd" gutterSize="s">
                 <EuiFlexItem>
                   <EuiButton size="s" onClick={onShowStandardNotification}>
-                    Standard Notification
+                    Add Notification
                   </EuiButton>
                 </EuiFlexItem>
               </EuiFlexGroup>
