@@ -14,7 +14,7 @@ import {
   EuiNotificationFlyoutBody,
   EuiNotificationFlyoutHeader,
   EuiNotificationEvents,
-  EuiNotificationSuggestions,
+  EuiNotificationFlyoutFooter,
 } from '../../eui/notification/';
 
 import { NotificationContext } from '../../../context/notification_context';
@@ -34,11 +34,6 @@ export const KibanaNotificationFlyout: FunctionComponent<KibanaNotificationFlyou
 }) => {
   const {
     notifications,
-    suggestions,
-    onDismissSuggestion,
-    onAddSuggestion,
-    onDismissAllSuggestions,
-    onDisableAllSuggestions,
     onAddNewNotification,
     flyoutShowNewNotification,
   } = useContext(NotificationContext);
@@ -58,19 +53,8 @@ export const KibanaNotificationFlyout: FunctionComponent<KibanaNotificationFlyou
       {...rest}>
       <EuiNotificationFlyoutHeader title={title} />
       <EuiNotificationFlyoutBody>
-        {/* <EuiNotificationSuggestions
-          suggestions={suggestions}
-          onDismiss={onDismissSuggestion}
-          onAdd={onAddSuggestion}
-          onDismissAll={onDismissAllSuggestions}
-          onDisableAll={onDisableAllSuggestions}
-        /> */}
         <EuiNotificationEvents
           events={notifications}
-          // onRead={onReadEvents}
-          // onViewSimilarMessages={onViewSimilarMessages}
-          // onDisableNotifications={onDisableNotifications}
-          // activeFilters={activeFilters}
           emptyStateAction={
             <EuiButton onClick={goToNotificationCenter}>
               Open Notification Center
@@ -78,26 +62,19 @@ export const KibanaNotificationFlyout: FunctionComponent<KibanaNotificationFlyou
           }
         />
       </EuiNotificationFlyoutBody>
-
-      {flyoutShowNewNotification && (
-        <EuiButton
-          className="euiNotificationRefreshButton"
-          iconSide="right"
-          size="s"
-          onClick={onAddNewNotification}
-          iconType="refresh">
-          You have 1 new message
-        </EuiButton>
-      )}
-
-      {/* 
       <EuiNotificationFlyoutFooter
         mainAction={
-          <EuiButton size="s" onClick={goToNotificationCenter}>
-            Open notification center
+          <EuiButton
+            size="s"
+            onClick={onAddNewNotification}
+            disabled={!flyoutShowNewNotification}>
+            Refresh
           </EuiButton>
         }
-      /> */}
+        secondaryAction={
+          flyoutShowNewNotification && <p> You have 1 new message</p>
+        }
+      />
     </EuiNotificationFlyout>
   );
 };
