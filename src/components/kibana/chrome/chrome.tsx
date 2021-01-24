@@ -7,17 +7,15 @@ import {
   EuiHeader,
 } from '@elastic/eui';
 import theme from '@elastic/eui/dist/eui_theme_light.json';
-
 import { user } from './data';
 
 import {
-  KibanaHeaderUpdates,
   KibanaHeaderUserMenu,
+  KibanaHeaderNotification,
   KibanaHeaderSpacesMenu,
 } from './header';
 
 import { KibanaNav } from './nav';
-import { KibanaChromeSearch } from './search';
 import { KibanaHeaderHelpMenu } from './header/header_help_menu';
 
 export type KibanaChromeProps = {
@@ -60,7 +58,7 @@ export const KibanaChrome: React.FunctionComponent<KibanaChromeProps> = ({
                 Production logs
               </EuiBadge>,
               <KibanaHeaderHelpMenu />,
-              <KibanaHeaderUpdates />,
+              <KibanaHeaderNotification />,
               <KibanaHeaderUserMenu {...user} />,
             ],
             borders: 'none',

@@ -4,6 +4,7 @@
 
 @import './fixed/index';
 @import './padding/index';
+@import './notification/index';
 
 .euiButtonContent > * + * {
   &:empty {
